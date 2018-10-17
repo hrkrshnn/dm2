@@ -1,0 +1,12 @@
+* <2018-10-17 Wed>
+
+** Review
+   Algorithm A
+
+   Input class I
+
+   $T(A, I)$: time algorithm $A$, input $I$. 
+
+   The worst case time complexity of $A$ on $I$ is $\max_{I\in \mathscr{I}} (A, I) = T_(n)$. 
+
+   The worst case complexity of $I = \min_{A} T_A(n) = T_{I}(n)$. A function that grows with $n$.
