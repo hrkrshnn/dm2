@@ -5,6 +5,7 @@
 #+LATEX_HEADER: \def\Z{\mathbb{Z}}
 #+LATEX_HEADER: \def\P{\mathscr{P}}
 #+LATEX_HEADER: \def\NP{\mathscr{N}\mathscr{P}}
+#+LATEX_HEADER: \def\coNP{\textup{co-}\mathscr{N}\mathscr{P}}
 #+LATEX_HEADER: \def\min{\operatorname{min}}
 #+LATEX_HEADER: \def\dist{\operatorname{dist}}
 #+LATEX_HEADER: \def\prev{\operatorname{prev}}
@@ -265,7 +266,89 @@
    | 100000 | 17 min   | 20 sec        | 2450 min   | $>10^100$ years |                 |
 * Lecture 4 <2018-10-24 Wed>
 ** Decision problems
-   
+   Problems that output yes or no
+*** Example
+    - Is there a spanning tree of weight $\le 42$. (Kruskal algorithm.)
+    - Is there a path of weight $\le 405$ from $u$ to $v$? (Djistra's algorithm.)    
+** Class P
+   The set of all decision problems with a polynomial time algorithm. 
+** Traveling salesman problem
+   We don't know if the problem is in $\P$. 
+
+   As a decision problem: There is a graph $G = (V, E)$ and $w\colon E
+   \rightarrow \R_{\ge 0}$., You ask what is the smallest weight Hamiltonian cycle. [fn:3]
+*** Approximation algorithm
+    *Definition*: An $\alpha$ approximation of TSP is an algorithm that turns a
+     Hamiltonian cycle whose weight is within $\alpha$-fraction of the min
+     weight Hamiltonian cycle.[fn:4]
+*** Extra conditions
+    Triangle inequality: the weight function satisfies the triangle inequality
+    if every two vertices of the graph, the weight $w(xy) \le w(xz) + w(zy)$.
+
+    Examples: The usual Euclidean distance satisfies this. 
+    A non-example is Airfare cost.
+** Approximation algorithm for TSP
+*** Algorithm
+    *Input*: a weight function $w\colon E(K_n) \rightarrow \R_{\ge 0}$ with
+    triangle inequality. (We assume that it is a complete graph.)
+
+    *Output*: Hamiltonian cycle $C$.
+
+    *Algorithm*:
+    1. Find the minimum weight spanning tree (Kruskal algorithm.)
+    2. From the spanning tree, we create a closed walk spanning all vertices by
+       traversing each edge of $T$ twice in both directions.
+    3. Traverse $W$, when hitting a vertex that was used before, we do a short
+       cut. (Go instead to next vertex $W$) Do this iteratively. 
+    4 *Termination*: when all vertices are traversed, output $C$. 
+
+    We know that $w(W) = 2w(T)$ and $w(C) \ge w(W)$. 
+
+    $C^{*}$ is a minimum weight Hamilton cycle. How does this compare to the
+    weight of the spanning tree. We know that $w(C^{*}) \ge w(T)$. and thus
+    $w(C) \le 2 w(C^{*})$.
+*** Running time
+    1. Kruskal: $O(n^2\log n)$
+    2. Closed walk $W$, $O(n)$.
+    3. short cutting: $O(n)$. 
+** Hall's theorem
+   If $G = (A \cap B, E)$ a bipartite graph, then $G$ has a matching $A$ if and
+   only if for every subset $S \subset A$, $\vert N(S) \vert \ge \vert S \vert$.
+
+   The non-trivial direction implies that when there is no matching saturating
+   $A$, then there is an $S \subset A$, $\vert N(S) \vert < \vert S \vert$.
+** Class $\NP$
+   A decision problem is in class $\NP$ if the YES answer can be verified
+   efficiently (within time that is polynomial in variable size.) (In other
+   words, there is a polynomial size certificate.)
+
+   The perfect matching problem is in NP. [fn:5]
+
+   Opposite of perfect matching: Does $G$ has a $PM$? We can use Hall's
+   condition as a certificate. Hence the problem is in NP.
+** Class $\coNP$
+   Means that the problem is in $NP$ and the negation of the problem is also in
+   $NP$.
+** About Hamilton path
+   The Hamilton path problem is in $NP$. 
+
+   But the negation of the HAM is not known to be in $NP$. In other words, we
+   don't know if HAM is $\coNP$.[fn:6]
+** Problem reduction
+   Maximum weight spanning tree problem can be reduced to a minimum weight
+   spanning tree. (You can solve the minimum weight spanning tree problem by
+   inverting the sign of the edges.) Furthermore, it is a polynomial time
+   reduction.
+
+   A problem is called $\NP$ hard if any problem in $\NP$ class can be reduced
+   by the problem.
+
+   If furthermore, the problem is in $\NP$, then we call it $\NP$-complete.
+
+   Example: 3-SAT is $\NP$ hard and also $\NP$-complete. 
+
+   Karp came up with $21$ natural $\NP$-complete problems, all of them are $\NP$
+   complete.
 * Tutorial
 
   [[http://discretemath.imp.fu-berlin.de/DMII-2018-19/][link]]
@@ -275,6 +358,15 @@
 *** Problem 2
     Each step reduces the number of components by at most $4$. After $5$ steps, at least $5$ components are left. 
 * Footnotes
+
+[fn:6] The belief is that this is not true. This is one of the Millennium problems.
+
+[fn:5] Input is a graph $G$ and the question is whether there is a perfect matching. 
+
+[fn:4] In general we don't know how to approximate the TSP, but we can do it with some extra conditions
+
+[fn:3] "and the decision problem version ("given the costs and a number x, decide
+whether there is a round-trip route cheaper than x") is NP-complete."-Wikipedia
 
 [fn:2] Otherwise you can explore the components. 
 
