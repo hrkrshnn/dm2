@@ -1,6 +1,21 @@
-* <2018-10-17 Wed>
+#+TITLE: Discrete Math II 
+#+LATEX_HEADER: \usepackage[left=2cm, right=2cm, bottom=2cm, top=2cm]{geometry}
+#+LATEX_HEADER: \usepackage{parskip}
+#+LATEX_HEADER: \def\R{\mathbb{R}}
+#+LATEX_HEADER: \def\Z{\mathbb{Z}}
+#+LATEX_HEADER: \def\P{\mathscr{P}}
+#+LATEX_HEADER: \def\NP{\mathscr{N}\mathscr{P}}
+#+LATEX_HEADER: \def\min{\operatorname{min}}
+#+LATEX_HEADER: \def\dist{\operatorname{dist}}
+#+LATEX_HEADER: \def\prev{\operatorname{prev}}
+#+LATEX_HEADER: \def\pos{\operatorname{pos}}
+#+LATEX_HEADER: \def\conv{\operatorname{Conv}}
+#+LATEX_HEADER: \usepackage[T1]{fontenc}
+
+* Lecture 2<2018-10-17 Wed>
 
 ** Review
+*** Random stuff about algorithms
    Algorithm A
 
    Input class I
@@ -10,3 +25,257 @@
    The worst case time complexity of $A$ on $I$ is $\max_{I\in \mathscr{I}} (A, I) = T_(n)$. 
 
    The worst case complexity of $I = \min_{A} T_A(n) = T_{I}(n)$. A function that grows with $n$.
+
+    Average case complexity $\mathbb{E}(T(A, I))$.
+*** Sorting
+    Sorting algorithm $A$, $T(A, \pi) =$ number of comparisons that $A$ makes to find $\pi.$
+
+    Yesterday, we proved that for insertion sort (the stupid algorithm), the
+    worst case running time was $\binom{n}{2}$.
+
+    Binary insertion:  $T(n) \le n log_2{n}$.
+
+    Merges sort: $T_M(n) =le n\log_2{n}.$
+*** Theorem about lower-bound of sorting
+    If $A$ is a sorting algorithm (correctly sort $n$ numbers)
+
+    Then $T_A(n) \ge \log_2(n!)$.
+
+    In particular, using the stirling's formula, $T_A(n) \ge n\log_n$.
+**** Proof
+     The algorithm runs on the permutations on the set of $n$ numbers. Define
+     $\forall \kappa \in \N$ blah blah.
+
+     $S_n \superset S_n{\alpha, \kappa} = \{\pi \in S_n \colon \textup{where A
+     receives input $\pi$ there, it receives $\alpha$ as the sequence of the
+     list of first $k$ answerers.
+**** Observation
+     Everything is determined if we run it.
+
+     $S^n_{\alpha, k) \cap S^n_{\beta, k} = \emptyset \forall \alpha \neq \beta$
+
+     $\cap S^{n}_{\alpha, k} = S_n$.
+
+     Suppose, $T_A(n) < \log_2(n!)$.
+
+     $S_n = \cap S^n_{\alpha, k}$ partition into $2^k$ sets.
+
+     $2^k < n!$ implies that there exist $\beta$ such that there exist $\pi_1
+     \neq \pi_2 \in S_{\beta, r}$.
+
+     Run $A$ on $\pi_1$, we receive the answers $\beta$ implies that $A$ outputs
+     $\pi_^{*} \in S_n$.
+
+     + Case 1: $\pi^* \neq \pi_1$, a contradiction to the correctness of $A$.
+
+     + Case 2: $\pi = \pi_1$. Run $A$ on $\pi_2$ implies $\beta$ is the answer.
+       $A$ outputs $\pi_{*}$, this is a contradiction that $\pi_{*} \neq \pi_2$.
+       Contradicts the correctness of $A$.
+
+       Called the *information theoretical lower bound*.
+** Graph algorithms
+*** Connectedness of graph
+    A graph $G$ is connected if for every two vertices $u$ and $v$, there exists
+    a $uv$ path in $G$.
+
+    This induces an *equivalence* relation where $u$ is equivalent to $v$ if
+    there exists a path that connects $u$ and $v$. Create equivalence classes,
+    which are called the *connected components* of $G$.
+
+    Observation: There is no edge between different connected components.
+*** How do you decide whether a graph is connected?
+    Take a vertex $v$. We maintain a list of all vertices that are visited. We
+    redo the same thing for every other vertex. We repeat this until we saw all
+    the vertices in the graph.
+
+    Algorithm (Comp (V))
+    #+BEGIN_VERSE
+    Initialize: Queue Q = v; and W = empty
+    for all $i \ge 1$
+    step i: v_i first vertex in Queue.
+    remove v_i from the queue  and put it in W
+    put all of $N(v_i) \W$ into $Q$.
+
+    IF Q = \empty, STOP and return $W$ as the connected component of $v$.
+    else go to step i+1
+    #+END_VERSE
+*** Theorem: Comp(v) returns $C_G(v)$
+    Suppose $u \in C_G(v) \cap W_{out}$.
+
+    Let $P$ be a vu path in $G$.
+
+    Comp(v) puts a vertex into $w$ only if all its neighbours are put into $Q$.
+    We stop only if $Q$ is empty. Also $v_f$ was in $Q$ at some point $A$. $v_f$
+    had to be moved to $w$. This is a contradiction.
+
+    Other direction: $u\in W_{out}$. Before $u$ became part of $W$, $u$ was in
+    $Q$. Why? Because there is a $u_1 \in Q$, $u \in N(u_1) \textbackslash W$.
+    (More things, I skipped.)
+*** Spanning tree
+    Suppose we run Comp(v) on a connected graph, where a vertex $w$ is put into
+    $Q$, then there is a unique edge coming with it that attaches it to $v$.
+    (the vertex that is moved from $Q$ to $W$ at the same time.)
+*** Theorem about spanning tree
+    The following are equivalent: for an $n$ vertex graph.
+
+    1. T is a tree (connected, acyclic.)
+    2. T is connected and has $n-1$ edges.
+    3. T is acyclic and has $n-1$ edges.
+    4. For every pair of vertices $u$ and $v$ in $V(T)$, there is a unique $uv$
+       path.
+**** Definition (spanning tree)
+     $T \subset G$ is a spanning tree if $T$ is a tree and $V(T) = V(G)$.
+*** Special spanning trees
+    Let $G$ be connected and run Comp(v) (don't forget the edges.)
+
+    /What if/ we always put $N(v_i) \textbackslah W$ to the top of $Q$. (We call
+    this the *depth first search* tree.) This is going to create a tree which is
+    long (?)
+
+    /What if/ if we put it to the bottom of the tree, this will create a
+    *breadth first search*. You will create which is short.
+
+    A diagram that I ignored.
+** Minimal spanning tree
+   Given a graph $G$. (can be a complete or arbitrary graph.)
+
+   We have a weight function that is assumed on the edge set to $\mathbb{R}$.
+   What we want is a spanning tree $T\subset G$ such that the cost of the sum of
+   weights on the edges is minimum (i.e., for any other spanning tree, the sum
+   of the weights on the edges would be more than the current one.)
+*** Naive algorithm
+    There is at most $n^{n-2}$ (Cayley's theorem.) spanning trees on $n$ vertices. Let's look at all
+    of them and calculate the weights and output the minimum.
+*** Kruskal's algorithm
+**** Step 1
+     Sort edges in increasing order of weights $e_1, \cdots e_m$ such that
+     $w(e_1) \le w(e_n) \le \cdots, \le w(e_n)$.
+
+     Start with an empty forest $E(F) \neq \emptyset$ for all $v \in V$, $c_v = v$.
+**** Step 2
+     For each edge $e_i = uv$. For $\forall i \ge 1$, if the forest plus the new
+     edge has a cycle, then $C_v$ remains the same.
+
+     If there is no cycle, we have a new forest, i.e., the bigger forest with
+     the extra edge added to it.
+**** The end
+     Output $F$.
+*** Theorem: Kruskal's algorithm returns the min-weight spanning tree.
+    Proved in discrete Math 1. 
+*** Running time of Kruskal
+    The first step involves sorting. This can be done in $O(|E| \log|E|)$.
+
+    There is $O(m)$ and $O(n^2)$. 
+
+    If $G$ is dense, then $O(m\log m)$ and if $G$ is sparse, then $O(n^2)$.
+* Lecture 3 <2018-10-23 Tue>
+** Spanning trees
+   Another perspective: get to one place to another in the fastest way possible.
+   Versus the minimum spanning tree. [fn:1]
+** Problem
+   Given graph $G=(V, E)$, a distance for $d\colon E \rightarrow \mathbb{R}_{\ge 0}$. 
+
+   *Goal*: Given a vertex $u\in V$, find the shortest path to any vertex $v \in V$. 
+
+   The brute force way is to find all the path and find the minimu. 
+** Idea
+   Maintain a set of vertices to where a shortest path from $u$ was found. And
+   in each step we add one vertex to $W$.
+
+   *Key observation*: If $P$ is a shortest $uv$ path, then for every $w$ on this
+    path, $P[u, w]$, this is also the shortest path. ($P[u, w]$ represents the
+    path from $u$ to $w$ through $P$.)
+** Dijkstra's algorithm
+   *Input* is a graph $G = (V, E)$ which is connected. [fn:2] We have a distance
+   $d\colon E \rightarrow \mathbb{R}_{\ge 0}$.
+
+   *Output*: For every vertex $u \in V$, the distance from $u$ and also a
+   shortest path.
+*** Algorithm
+    *Initialization*: dist[u] = 0
+
+    For every other vertex $v$, I set $d[v] = \infty$. $prev[v] =
+    \textup{null}$. Maintain the set $W = \emptyset$. 
+
+    *Iteration*: Choose a vertex $v_0 = \min{\dist[v]\colon v  \in V \textbackslash W\}$
+
+    Update $W = W \cap \{v_0\}$.
+
+    $\forall v \in V \textbackslash W$ if $\dist[v] > \dist[v_0] + d(v_0, v)$
+    then $\dist[v] = \dist[v_0] + d(v_0, v)$ and $\prev[v] = v_0$. 
+
+    *Termination*: If $W = V$, then STOP and output $\dist[v]$ search head of
+    $\prev$ for a $uv$ path.
+
+    An example was done. [[https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm][Wikipedia]]. 
+*** Analysis 
+**** Correctness 
+     *Claim*: At the time $v_0$ is put into $W$, $\dist[v_0]$ is the distance of
+      $v_0$ to $u$. 
+
+      (This would prove the correctness, because $dist$ does not change after
+      vertex is in $W$.)
+
+      Proof: Induction on $\vert W\vert$.
+
+      Because $\vert w \vert = 0$ $u$ is put into $W$, $\dist[u] = 0 = d(uu)$. 
+
+      Suppose $\vert W \vert \ge 1$, we put $v_0$ into $W$. If this is the case,
+      then $\dist[v_0] = \min\{\dist[v_0]\colon v \in V \textbackslash W\}$.
+
+      Suppose $\dist[v_0] > s(uv_0)$. (here $s$ is the shortest path going
+      from one vertex to another.)
+
+      Take the shortest $uv_0$ path $P$. There will be a first vertex on $P$ not
+      in $W$, call it $v_f$ and $v_p$ be its predecessor. $\dist[v_0] > s(uv_0)
+      = s(uv_f) + s(v_fv_0) \ge s(uv_f) = s(uv_p) + s(v_pv_f) = dist[v_p] +
+      d(v_pv_f)$. (By our observation from before, both these paths are the
+      shortest.)
+
+      When we are updating after putting $v_p$ into $W$, we consider $v_f$ and
+      we will put it in $W$. This is a contradiction. 
+**** Termination
+     In each iterating step, one vertex is put into $W$ and stays there and then
+     in $n$ iterations, we are done. 
+**** Cost
+     Finding $v_0$, then $O(\vert V \vert)$.
+
+     Adding $v_0$ to $W$ is $O(1)$
+     
+     Updating $\dist$,  $O(\vert V\vert)$.
+
+     With better data structure $O(\vert E\vert + \vert V \vert log \vert V \vert)$.
+** Euro 2020 or Travelling Salesman Problem
+    Watch a game in every one of $13$ cities. We want to visit all $13$ but as
+    cheap as possible. The English football fans cannot return to the same
+    country. A $13$ vertex graph, between any two vertices, there is a price of
+    the air ticket.
+
+    We are looking for a Hamilton cycle.
+
+    Given graph $G = (V, E)$ and $w\colon E \rightarrow \R_{\ge 0}$. A cycle
+    that does not repeat.
+** Complexity classes
+   $\P$, polynomial time running problem. 
+
+   |    $n$ | $1000n$  | $1000n\log n$ | $10n^2$    | $2^n$           | $n!$            |
+   |--------+----------+---------------+------------+-----------------+-----------------|
+   |     10 | 0.01 sec | 0.0002 sec    | 0.001      | 0.0000001 sec   | 0.003 sec       |
+   |    100 | 0.1 sec  | 0.001 sec     | 000001 sec | 400000 years    | $>10^100$ years |
+   | 100000 | 17 min   | 20 sec        | 2450 min   | $>10^100$ years |                 |
+* Lecture 4 <2018-10-24 Wed>
+** Decision problems
+   
+* Tutorial
+
+  [[http://discretemath.imp.fu-berlin.de/DMII-2018-19/][link]]
+
+** Tutorial 1
+   
+*** Problem 2
+    Each step reduces the number of components by at most $4$. After $5$ steps, at least $5$ components are left. 
+* Footnotes
+
+[fn:2] Otherwise you can explore the components. 
+
+[fn:1] MST would be city-side and the fastest possible way would be consumer side. 
