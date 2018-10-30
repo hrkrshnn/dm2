@@ -352,6 +352,134 @@
 
    Karp came up with $21$ natural $\NP$-complete problems, all of them are $\NP$
    complete.
+* Lecture 5 <2018-10-30 Tue>
+** NP class
+   A yes/no problem is in class NP if the answer yes can be verified
+   efficiently.
+*** Examples
+    1. Does the bipartite graph have a perfect matching.
+    2. Does the bipartite graph have no perfect matching.
+    3. Does the graph have a Hamiltonian-cycle? 
+    4. *Don't know* Whether a problem have no hamiltonian cycle.
+** P class
+   A yes/no decision problem is in P if the answer can be found in polynomial
+   time. It is obviously true that $P \subset NP$.
+** Co-NP
+   A yes/no problem is in the class Co-NP if the no-answer can be verified
+   efficiently. Again trivially, $P \subset NP \cap no-NP$.
+*** Example of NP intersection co-NP
+    1. Perfect matching problem in bipartite graph is in the intersection.
+    2. Is this graph 2-colorable. 
+    3. Is this graph Eulerian?[fn:7] Verify that the degree of each vertex is even.
+       (polynomial time algorithm.) Another answer: The yes answer is the list
+       of edges in an Eulerian edges. For the NO answer, we will be given a
+       vertex of odd-degree.
+** Conjecture P $\neq$ NP
+** Stronger conjecture of $P \neq NP \cap co-NP$
+   Is there a factor of $n < k$. This problem is in the intersection of NP and
+   co-NP.
+
+   Is $n$ a prime. This was also a problem. But in 2002, it was proven to be
+   true. (The input size is in $\log n$.)
+
+   A problem in $NP$ and co-NP and then trying to find a good characterization
+   and then solving the problem.
+** NP completeness
+   Subtle difference between easy and hard problem.
+   1. The graph is 2-colorable? is in P[fn:8]
+   2. Is the graph 3-colorable? is in NP-complete.
+   3. Is this planar graph 3-colorable? is in NP-complete.
+   4. Is this planar graph 4-colorable? is in P. (The is in complexity class TRIVIAL)
+      The answer is always yes.
+** Hall's theorem
+   If you have a graph $G$ that is bipartite, then $G$ has a perfect matching if
+   and only if for every $S$ inside $A$, the $\vert N(S) \vert \ge \vert S
+   \vert$ and for every $S \subset B$.
+** Necessary conditions for Hamiltonianity
+   Dirac's theorem $d(G) \ge n/2 \implies G$ is hamiltonian. [[https://en.wikipedia.org/wiki/Hamiltonian_path#Bondy%E2%80%93Chv%C3%A1tal_theorem][Wikipedia]] (This is
+   a sufficient condition.) For a cycle, this fails.   
+
+   Proposition: If a graph $G$ is hamiltonian then $\forall S \subset V(G)$,
+   $C(G\setminus S) \subset \vert S \vert$. (This is a necessary condition.)[fn:9] [fn:10]
+
+   A simple example is an edge. It's probably also true for Peterson graph.
+
+   We can try to frame something like if $t C(G\setminus S) \subset \vert S
+   \vert$. For peterson graph $t = 4/3$. There is a conjecture on if we can talk
+   about a value of $t$ and do stuff.
+** Does a graph have a perfect matching? Tutte's theorem
+   The question is whether this is in NP intersection co-NP. 
+
+   The hall's theorem was for bipartite graph.
+
+   Consider $K_{2k+1}$. It has all the edges, but has no perfect matching. Odd
+   (vertices) graphs are bad obviously.
+
+   There was something about applying the necessary condition for Hamiltonian
+   cycle to the matching problem and arriving at a necessary condition (and sufficient condition.)
+
+   $G$ has a perfect matching $\implies$ $\forall S \subset V(S)$, $o(G
+   \setminus S) \subset |S|$.[fn:11]
+
+   *Proof*: Let $M$ be a perfect matching in $G$. In each odd component, there
+   is at least one edge $e_L \in M$ which has one vertex in $b$ and the other in
+   $S$. These edge $e_L$ are disjoint $\implies$ [fn:12] [fn:13]
+** Proof of Tutte's theorem
+   Let $G$ be a counter example with maximum number of edges.[fn:14]
+
+   What is a counter example? It should satisfy the following properties:
+   1. $G$ has no perfect matching
+   2. $\forall S \subset V(G)$, $o(G \setminus S) \le \vert S \vert$
+
+   Add $xy$ to $G$ and $G+xy$ is not a counter example. We claim that $\forall S
+   \subset V(G)$, $o((G+xy)\setminus S) \le \vert S \vert$. [fn:15]
+
+   I know that $o(G\setimus S) \le \vert S \vert$.
+   - If $xy \in S = \emptyset \implies \vert S \vert$ does not decrease.
+   - If $xy$ goes between even components, then nothing changes.
+   - If $xy$ goes to an odd components, the number of odd components decreases.
+     Basically do a case analysis and it checks out.
+
+   $U = \{v \in V(G) \colon d(v) = n- 1\}$
+   
+   Case 1. $G \setminus U$ is the disjoint union of cliques. There are even
+   cliques and odd cliques. Even cliques can be matching within themselves. In
+   odd cliques, you match everything but one, but we can match the extra vertex
+   to $U$. Now what happens with the vertices inside $U$ that doesn't get a pair
+   in $U$. If that part is odd, then the whole thing is not odd. But it is not
+   odd, because we have a contradiction when we put $S = \emptyset$. So after
+   everything, the number of unmatched vertices is even (otherwise we have a
+   contradiction.)
+
+   Case 2. $G \setminus U$ is not a disjoint union of cliques. The idea is from
+   two almost perfect matching of $G$, create a perfect matching of $G$ and two
+   more edges, create a perfect matching. This leads to a contradiction. 
+
+   Claim: In $G, \exists x, u, v, w$ such that $xu, xv, \in E$, $uv, vw \notin
+   V(G)$. $w$ is anything that is not in the neighbourhod of $x$ which is non
+   empty.[fn:16]
+
+   #+BEGIN_SRC artist
+  
+                        x .--------------------------- w
+                         /.
+                        /  -\                           
+                      -/     \                          
+                     /        -\                        
+                    /           -\                      
+                  -/              \                     
+                 /                 -\                   
+                /                    \                  
+               /                      -\                
+             -/                         \               
+            /                            -\             
+           /                               -\           
+         -/                                  \          
+        /                                     -\        
+     u .----------------------------------------. v
+                     
+                     
+   #+END_SRC
 * Tutorial
   [[http://discretemath.imp.fu-berlin.de/DMII-2018-19/][link]]
 ** Tutorial 1
@@ -376,6 +504,29 @@
      what is the value of $x_1, \cdots, x_k$, there is a literal where the or is
      zero and that literal is present in it.
 * Footnotes
+
+[fn:16] I think I missed some parts to the explanation.
+
+[fn:15] Here $xy$ is an edge that is not already in $G$.
+
+[fn:14] Why can we do this? We fix the number of vertices, so this it actually
+makes sense.
+
+[fn:13] [[https://en.wikipedia.org/wiki/Tutte_theorem][Tutte's theorem]]
+
+[fn:12] My condition 
+
+[fn:11] Here $o$ is the number of components of odd size.
+
+[fn:10] Peterson graphs can be used to make a lot of counter examples. This was
+taught in discrete math 1.
+
+[fn:9] Here $C$ is the number of connected components in the graph.
+
+[fn:8] Apparently there is a characterization that a graph is 2 colorable if and
+only if it has no cycle.
+
+[fn:7] I think it's about going through each edge once.
 
 [fn:6] The belief is that this is not true. This is one of the Millennium problems.
 
