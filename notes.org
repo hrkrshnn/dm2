@@ -1,11 +1,14 @@
 #+TITLE: Discrete Math II 
 #+LATEX_HEADER: \usepackage[left=2cm, right=2cm, bottom=2cm, top=2cm]{geometry}
 #+LATEX_HEADER: \usepackage{parskip}
+#+LATEX_HEADER: \usepackage{amsmath}
+#+LATEX_HEADER: \usepackage{amssymb}
 #+LATEX_HEADER: \def\R{\mathbb{R}}
 #+LATEX_HEADER: \def\Z{\mathbb{Z}}
-#+LATEX_HEADER: \def\P{\mathscr{P}}
-#+LATEX_HEADER: \def\NP{\mathscr{N}\mathscr{P}}
-#+LATEX_HEADER: \def\coNP{\textup{co-}\mathscr{N}\mathscr{P}}
+#+LATEX_HEADER: \def\N{\mathbb{N}}
+#+LATEX_HEADER: \def\P{\textup{P}}
+#+LATEX_HEADER: \def\NP{\textup{NP}}
+#+LATEX_HEADER: \def\coNP{\textup{co-NP}}
 #+LATEX_HEADER: \def\min{\operatorname{min}}
 #+LATEX_HEADER: \def\dist{\operatorname{dist}}
 #+LATEX_HEADER: \def\prev{\operatorname{prev}}
@@ -55,7 +58,7 @@
 
      $S^n_{\alpha, k) \cap S^n_{\beta, k} = \emptyset \forall \alpha \neq \beta$
 
-     $\cap S^{n}_{\alpha, k} = S_n$.
+     $\cap S^{n}_{\alpha, k} = S_n$
 
      Suppose, $T_A(n) < \log_2(n!)$.
 
@@ -65,7 +68,7 @@
      \neq \pi_2 \in S_{\beta, r}$.
 
      Run $A$ on $\pi_1$, we receive the answers $\beta$ implies that $A$ outputs
-     $\pi_^{*} \in S_n$.
+     $\pi_^{\asterik} \in S_n$
 
      + Case 1: $\pi^* \neq \pi_1$, a contradiction to the correctness of $A$.
 
@@ -95,7 +98,7 @@
     for all $i \ge 1$
     step i: v_i first vertex in Queue.
     remove v_i from the queue  and put it in W
-    put all of $N(v_i) \W$ into $Q$.
+    put all of $N(v_i) \setminus W$ into $Q$.
 
     IF Q = \empty, STOP and return $W$ as the connected component of $v$.
     else go to step i+1
@@ -110,7 +113,7 @@
     had to be moved to $w$. This is a contradiction.
 
     Other direction: $u\in W_{out}$. Before $u$ became part of $W$, $u$ was in
-    $Q$. Why? Because there is a $u_1 \in Q$, $u \in N(u_1) \textbackslash W$.
+    $Q$. Why? Because there is a $u_1 \in Q$, $u \in N(u_1) \setminus W$.
     (More things, I skipped.)
 *** Spanning tree
     Suppose we run Comp(v) on a connected graph, where a vertex $w$ is put into
@@ -198,11 +201,11 @@
     For every other vertex $v$, I set $d[v] = \infty$. $prev[v] =
     \textup{null}$. Maintain the set $W = \emptyset$. 
 
-    *Iteration*: Choose a vertex $v_0 = \min{\dist[v]\colon v  \in V \textbackslash W\}$
+    *Iteration*: Choose a vertex $v_0 = \min{\dist[v]\colon v  \in V \setminus W\}$
 
     Update $W = W \cap \{v_0\}$.
 
-    $\forall v \in V \textbackslash W$ if $\dist[v] > \dist[v_0] + d(v_0, v)$
+    $\forall v \in V \setminus W$ if $\dist[v] > \dist[v_0] + d(v_0, v)$
     then $\dist[v] = \dist[v_0] + d(v_0, v)$ and $\prev[v] = v_0$. 
 
     *Termination*: If $W = V$, then STOP and output $\dist[v]$ search head of
@@ -222,7 +225,7 @@
       Because $\vert w \vert = 0$ $u$ is put into $W$, $\dist[u] = 0 = d(uu)$. 
 
       Suppose $\vert W \vert \ge 1$, we put $v_0$ into $W$. If this is the case,
-      then $\dist[v_0] = \min\{\dist[v_0]\colon v \in V \textbackslash W\}$.
+      then $\dist[v_0] = \min\{\dist[v_0]\colon v \in V \setminus W\}$.
 
       Suppose $\dist[v_0] > s(uv_0)$. (here $s$ is the shortest path going
       from one vertex to another.)
@@ -350,13 +353,28 @@
    Karp came up with $21$ natural $\NP$-complete problems, all of them are $\NP$
    complete.
 * Tutorial
-
   [[http://discretemath.imp.fu-berlin.de/DMII-2018-19/][link]]
-
 ** Tutorial 1
-   
 *** Problem 2
     Each step reduces the number of components by at most $4$. After $5$ steps, at least $5$ components are left. 
+** Tutorial 2
+*** SAT
+**** Example of un-satisfiable instance of SAT
+     $f(x_1) = x_1 \wedge \neg x_1$
+     
+     No matter what the instance is, this will evaluate to zero. 
+**** About $2^k$ clauses
+     We start by proving that the statement is true for exactly $k$ variables. 
+
+     Now we induct on the number of variables, starting from $n$. If it is true
+     for $m$, then it is also true for $m+1$ because we can replace the $m+1$th
+     variable by $x_1$ and bang.
+**** Bound being strict
+     For $k$ literals, and for $2^k$, we take all possible combinations of $x_1,
+     \cdots, x_k$ such that no two literals are the same. This is not
+     satisfiable. (This should evaluate to $1$ all the time.) Because no matter
+     what is the value of $x_1, \cdots, x_k$, there is a literal where the or is
+     zero and that literal is present in it.
 * Footnotes
 
 [fn:6] The belief is that this is not true. This is one of the Millennium problems.
