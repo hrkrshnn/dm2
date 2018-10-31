@@ -480,6 +480,153 @@
                      
                      
    #+END_SRC
+* Lecture 6 <2018-10-31 Wed>
+** TODO Tutte's theorem proof
+   $\leftimplies$ $G$, a counter example with maximum number of edges.
+
+   *Claim*: $G+xy$ has a p.m. $xy\in E(G)$, $G$ has no p.m., $\forall S \in
+    V(G)$, $o(G \setminus S) \le o(\vert S \vert)$
+
+    $U = \{v \colon deg(v) = n-1\}$ and $n=\vert V(G)\vert$.
+
+    Case 1: $G \setminus U$ is the union of cliques. We are done, we use Tutte's
+    condition for empty set. 
+
+    Case 2: Otherwise, there exists the diagram that I already drew. Our claim
+    implies that there exists a perfect matching $M_1$ in $G + xw$ and also
+    there is a perfect matching in $G$ if one adds $uv$. Our goal is to find a
+    perfect matching in $M_1 \cap M_2$. Our goal is to find a perfect matching
+    in $M_1 \cap M_2 \setminus \{xw, uv\} \cap \{ux, xv\} \subset E(G)$.
+
+    $M_1 \cap M_2$ is the disjoint union of $K_2$s and even cycles[fn:19]. The degree
+    of each vertex in the union is either $1$ or $2$, because the matching is
+    perfect because there are two of them. If there is one, then the vertex
+    participates in the same edge with () matching $\implies$ $K_2$ component.
+
+    If it is $2$ $\implies$ vertex participates in a cycle component.
+
+    (cycle is even since edges of the matchings alternate.)
+
+    There was a diagram and the proof involved doing stuff on the diagrams. I
+    don't understand what he did.
+
+    The proof in the class was from bondy and murthy. [[http://www.zib.de/groetschel/teaching/WS1314/BondyMurtyGTWA.pdf][Bondy and murthy]] page 76. 
+
+    The wikipedia link seems to have the same proof.
+** Perfect matching is in NP intersection co-NP
+   Tutte's theorem tells us that the problem is in the intersection of NP and
+   co-NP. The certificate for the yes case is a matching and for the No case is
+   a case where the Tutte's theorem is false.
+
+   The problem is also in P.
+** Corollary to hall theorem (Theorem of Frobenius)
+   A $k$-regular bipartite graph has perfect matching.[fn:20] (1-factor)
+
+   A $k$-factor is a spanning $k$-regular subgraph. 
+
+   This is not true for general graphs. Example: odd cycles, they are $2$
+   regular and 1-factor. Are there examples with even number of vertices.
+   (3-regular graph with no $1$ factor.)
+   
+   
+** Theorem (peterson)
+   A $2k$ regular subgraph has a $2$-factor. 
+** Theorem (another peterson theorem)
+   Every $3$-regular graph without cut edges[fn:21] has a perfect matching. (Theorem in
+   Bondy and Murthy) [fn:22]
+*** Proof
+    The proof is component wise. Now we assume that $G$ is connected.
+
+    We will check that Tutte's condition holds. Then Tutte's theorem tells us
+    that $G$ has a perfect matching.
+
+    $S$ be an arbitrary subset.
+
+    Consider the number of edges between odd components and $S$.
+
+    Claim: For every odd component, there is at least three edges going to $S$
+    from $C$.
+
+    Proof:
+    1. $0$ edges is not possible because connected. 
+    2. $1$ edge is
+       not possible, because it would be a cut edge. 
+    3. $2$ edges are not possible
+       because the sum of the degrees of the vertices inside the component -2,
+       $\sum d(v) - 2 = 2 \cdot e(C)$. Now this is just a handshake lemma.[fn:23]
+
+    The number of edges between odd components and $S$. The number of edges
+    going is at least $3$ times the odd components. On the other hand, the
+    number of components cannot be more than $3 \vert S \vert$.
+
+    $$ 3\cdot o(G \setminus S) \le \textup{number of edges between odd components and S } \le 3 \cdot \vert S \vert$$
+
+    Thus $\cdot o(G \setminus S) \le \vert S \vert$
+** Maximum matching problem
+   In the decision problem formulation. Is there a matching of size $k$ in the
+   graph on $n$ vertices.
+
+   Is this problem in NP intersection co-NP? The problem is obviously in NP. 
+
+   For Bipartite graphs, we can provide the other verification by Konig's
+   theorem.
+** Konig's theorem
+   $G$ is bipartite, then $\alpha(G)=\beta(G)$. Here $\alhpa$ is the size of the
+   largest matching and $\beta$ is the size of smallest vertex cover.
+
+   $C \subset V(G)$, the vertex cover if $\forall e \in E(G)$, $e\cap C \neq
+   \emptyset$.
+** Konigs on Maximal matching problem
+   Suppose $\alpha(G) = 88$, then konig gives a certificate to show that there
+   exists a vertex cover of size $88$. So this means that there are no matching
+   of size more than $89$.
+** Homework: a corollary of Tutt due to Berge
+   If $G$ is a arbitrary graph, then it is true that $2\alpha'(G)$ is equal to
+   the minimum of the following sum of quantities: $\min \{ n - o(G\setminus
+   S) + \vert S \vert \colon S \subset V(G) \}$.[fn:24]
+
+   It is easy to show one direction. But this is the maximum size, which is the homework.
+
+   This example would put the problem of maximum matching into the intersection.
+** How to find maximum matchings in polynomial time?
+** Proposition about maximum matching
+   IF $M \subset E(G)$ is a maximum matching of $G$, $\iff$ there is no
+   $M$-augmenting path.
+
+   $M$-augmenting path: It's a path in which non-edges and edges follow each
+   other alternatively. One direction is easy. If $M$ is a maximum matching,
+   then there is no $M$ augmenting path.
+** A M alternating path
+   A path of $G$ where edges of $M$ alternate with non-edges of $m$.
+
+   An $M$-alternating path that starts and ends in an unsaturated vertex is
+   called $M$ augmenting. [[https://en.wikipedia.org/wiki/Saturation_(graph_theory)][Wikipedia]]
+** Using the characterization for Bipartite graph
+   [fn:25] You have a matchin and then unsaturated vertices. The idea is to
+   somehow extend the matching to the unsaturated edges.
+
+   #+BEGIN_SRC artist
+     -------------------------------------------------------------\------------------------------\---------------
+     -                                                                                                           \------
+     (                                                                                                                  )
+     \              |           |              |              .                                                  /------
+     \              |           |              |                            .                    /---------------
+     \              |           |              |                  /------------------------------
+     ---------------------------+--------------+------------------
+                     |          |              |
+                     |           \              \
+                     |           |              |
+                      \          |            --+----------------------------------------------------------------------------------------------------------------------
+            ----------+----------+-----------/  |                                                                                                                      \---------------------------------
+     ------/          |          |             .|                 .           .     .       .                                                                                                            \------------
+     (                           |                                                                                                                                                                                    )
+     ------\                                                                                                                                                                                             /------------
+            ---------------------------------\                                                                                                                         /---------------------------------
+                                              -------------------------------------------------------------------------------------------------------------------------
+
+
+
+   #+END_SRC
 * Tutorial
   [[http://discretemath.imp.fu-berlin.de/DMII-2018-19/][link]]
 ** Tutorial 1
@@ -503,7 +650,129 @@
      satisfiable. (This should evaluate to $1$ all the time.) Because no matter
      what is the value of $x_1, \cdots, x_k$, there is a literal where the or is
      zero and that literal is present in it.
+*** Problem 1 bipartite
+    We do a BFS. We have an array and it would be the distance. Now the claim is
+    that $A(u) = A(v) \mod 2$ and if there is an edge that connects these two
+    vertices, then the graph is not bipartite.
+
+    We did prove that for BFS, the distances from the root are preserved.
+
+    The proof was a bit complex. But it turned out to be something about
+    applying BFS.
+*** Problem 3 Greedy algorithm can fail
+**** part a
+     Algorithm: Sort the edges according to the weight in ascending order. $E =
+     \emptyset$. 
+     1. No vertex of degree $3$ 
+     2. No cycle of length $<$ n. 
+
+     #+BEGIN_SRC artist
+                                     1
+                            +-------------------+
+                            | \-             -/ |
+                            |   \- 2     2 -/   |
+                            |     \-    --/     |
+                            |       \--/        |1
+                            |1      -/ \-       |
+                            |    --/     \-     |
+                            |  -/          \-   |
+                            |-/     1        \- |
+                           -/------------------\+
+     #+END_SRC
+
+     Another algorithm: start with an edge, something like a lightest edge. It's
+     vague.
+
+     
+**** part b
+*** TODO Problem 2
+    The first $m$ edges are the smallest weight forest.
+
+    Induction: First edge is true. Assume it's true for $m-1$ edges are minimal
+    weight forest. Now kruskal adds an edge (it is the edge with smallest
+    weight). It does not make a cycle. We still have a forest. Now, the weight
+    the new is smaller than or equal to every other $e_i$. 
+
+    Apparently it doesn't work.
+
+    But we can do the induction backwards. Suppose that it is true for $n-1$
+    upwards.
+
+    $K_{m+1}$ is the forest that it construct in $m+1$ steps. (This doesn't work
+    either.)
+
+    Apparently, we could just repeat the proof for the Kruskal.
+
+    The problem is that there could be an edge that we didn't add because it
+    created a cycle before. This edge can create problems later.
+**** TODO Go again through the argument of Kruskal
+*** Exercise 4
+**** Counter example
+     Apparently any algorithm would fail on it because the shortest path does
+     not make any sense.
+     #+BEGIN_SRC artist
+                                         x
+                                         /-\
+                                        /   \
+                                       /     \
+                                      /       -\
+                                     /          \
+                                  1 /            -\  1       
+                                    |              \        
+                                   /                -\      
+                                  /                   \     
+                                 /                     \    
+                                /        -2             -\  
+                              b---------------------------\c
+     #+END_SRC
+**** TODO Algorithm
+     *Claim*: Right after $i$-th step of second part, $i$-th step of second
+      part, $v \in V, \dist(v) \le \min \{ \vert w\vert \vert w \textup{
+      contains } \le i \textup{ edges} \}$.
+
+      1. For $i=1$, it is trivially true.
+      2. For $i\ge 2$, $v \in V$, $w = $ shortest path $ \le i$ edges. There are
+         parts of the argument that I skipped. [fn:17]
+
+      It is not clear how the last part of the algorithm is able to detect the
+      negative weighted cycle. The claim more or less does it.
+
+      The time complexity is $O(mn)$
+*** Exercise 5 (SAT)
+**** Part a
+     It's easy
+**** Part b
+     Write $f(x_1, \dots, x_m) = c_1 \wedge c_2 \cdots c_m$, $m < 2^k$.
+
+     $c_i = \tilde{x_{i_1}} \and \tilde{x_{i_2}} \cdots$  
+
+     for $e$ or $e_i$, define the set $D_i = \{v\colon \{T, F\}^n \vert c_i(v) =
+     false\}$. $\vert D_i \vert = 2^{n-k}$, $\sum D_i = \{v \vert f(v) = F\}$.[fn:18]
 * Footnotes
+
+[fn:25] Apparently the problem for general graph is also in P. The algorithm for
+this graph was what lead to the definition of $P$.
+
+[fn:24] If the graph satisfies tutt's condition, then $\alpha$ should evaluate
+to $n/2$.
+
+[fn:23] What is a handshake lemma? 
+
+[fn:22] An example of such a graph is Peterson graph.
+
+[fn:21] What is a cut edge? A cut edge should mean that you remove an edge and
+the graph gets disconnected.
+
+[fn:20] What is regular graph? Every vertex has the same number of neighbours.
+
+[fn:19] Is the $K_2$ here an edge?
+
+[fn:18] A lower bound for Ramsey numbers was also proved in same way. Also you
+can do a probabilistic argument.
+
+[fn:17] Apparently Bellman-ford is an algorithm that is better than Djistra when
+it comes to negative edges. But it works for digraphs and not for directed
+graphs.
 
 [fn:16] I think I missed some parts to the explanation.
 
