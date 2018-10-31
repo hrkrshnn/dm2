@@ -1,0 +1,479 @@
+% Created 2018-10-24 Wed 20:18
+% Intended LaTeX compiler: pdflatex
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage[left=2cm, right=2cm, bottom=2cm, top=2cm]{geometry}
+\usepackage{parskip}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\def\R{\mathbb{R}}
+\def\Z{\mathbb{Z}}
+\def\N{\mathbb{N}}
+\def\P{\textup{P}}
+\def\NP{\textup{NP}}
+\def\coNP{\textup{co-NP}}
+\def\min{\operatorname{min}}
+\def\dist{\operatorname{dist}}
+\def\prev{\operatorname{prev}}
+\def\pos{\operatorname{pos}}
+\def\conv{\operatorname{Conv}}
+\usepackage[T1]{fontenc}
+\author{Harikrishnan Mulackal}
+\date{\today}
+\title{Discrete Math II}
+\hypersetup{
+ pdfauthor={Harikrishnan Mulackal},
+ pdftitle={Discrete Math II},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 26.1 (Org mode 9.1.13)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+
+\section{Lecture 2\textit{<2018-10-17 Wed>}}
+\label{sec:org28ccd1d}
+
+\subsection{Review}
+\label{sec:org718f227}
+\subsubsection{Random stuff about algorithms}
+\label{sec:orgc65d882}
+Algorithm A
+
+Input class I
+
+\(T(A, I)\): time algorithm \(A\), input \(I\).
+
+The worst case time complexity of \(A\) on \(I\) is \(\max_{I\in \mathscr{I}} (A, I) = T_(n)\).
+
+The worst case complexity of \(I = \min_{A} T_A(n) = T_{I}(n)\). A function that grows with \(n\).
+
+Average case complexity \(\mathbb{E}(T(A, I))\).
+\subsubsection{Sorting}
+\label{sec:org4e1d1c2}
+Sorting algorithm \(A\), \(T(A, \pi) =\) number of comparisons that \(A\) makes to find \$\(\pi\).\$
+
+Yesterday, we proved that for insertion sort (the stupid algorithm), the
+worst case running time was \(\binom{n}{2}\).
+
+Binary insertion:  \(T(n) \le n log_2{n}\).
+
+Merges sort: \$T\(_{\text{M}}\)(n) =le n\(\log_{\text{2}}\)\{n\}.\$
+\subsubsection{Theorem about lower-bound of sorting}
+\label{sec:orgec6da5e}
+If \(A\) is a sorting algorithm (correctly sort \(n\) numbers)
+
+Then \(T_A(n) \ge \log_2(n!)\).
+
+In particular, using the stirling's formula, \(T_A(n) \ge n\log_n\).
+\begin{enumerate}
+\item Proof
+\label{sec:orgf437a27}
+The algorithm runs on the permutations on the set of \(n\) numbers. Define
+\(\forall \kappa \in \N\) blah blah.
+
+\$S\(_{\text{n}}\) \superset S\(_{\text{n}}\)\{\(\alpha\), \(\kappa\)\} = $\backslash${\(\pi\) \(\in\) S\(_{\text{n}}\) \(\colon\) \textup\{where A
+receives input \(\pi\) there, it receives \(\alpha\) as the sequence of the
+list of first \(k\) answerers.
+\item Observation
+\label{sec:org0ebaad6}
+Everything is determined if we run it.
+
+\(S^n_{\alpha, k) \cap S^n_{\beta, k} = \emptyset \forall \alpha \neq \beta\)
+
+\(\cap S^{n}_{\alpha, k} = S_n\)
+
+Suppose, \(T_A(n) < \log_2(n!)\).
+
+\(S_n = \cap S^n_{\alpha, k}\) partition into \(2^k\) sets.
+
+\(2^k < n!\) implies that there exist \(\beta\) such that there exist \(\pi_1
+     \neq \pi_2 \in S_{\beta, r}\).
+
+Run \(A\) on \(\pi_1\), we receive the answers \(\beta\) implies that \(A\) outputs
+\(\pi_^{\asterik} \in S_n\)
+
+\begin{itemize}
+\item Case 1: \(\pi^* \neq \pi_1\), a contradiction to the correctness of \(A\).
+
+\item Case 2: \(\pi = \pi_1\). Run \(A\) on \(\pi_2\) implies \(\beta\) is the answer.
+\(A\) outputs \(\pi_{*}\), this is a contradiction that \(\pi_{*} \neq \pi_2\).
+Contradicts the correctness of \(A\).
+
+Called the \textbf{information theoretical lower bound}.
+\end{itemize}
+\end{enumerate}
+\subsection{Graph algorithms}
+\label{sec:org0503b44}
+\subsubsection{Connectedness of graph}
+\label{sec:org8c2a7aa}
+A graph \(G\) is connected if for every two vertices \(u\) and \(v\), there exists
+a \(uv\) path in \(G\).
+
+This induces an \textbf{equivalence} relation where \(u\) is equivalent to \(v\) if
+there exists a path that connects \(u\) and \(v\). Create equivalence classes,
+which are called the \textbf{connected components} of \(G\).
+
+Observation: There is no edge between different connected components.
+\subsubsection{How do you decide whether a graph is connected?}
+\label{sec:orgec5d19b}
+Take a vertex \(v\). We maintain a list of all vertices that are visited. We
+redo the same thing for every other vertex. We repeat this until we saw all
+the vertices in the graph.
+
+Algorithm (Comp (V))
+\begin{verse}
+Initialize: Queue Q = v; and W = empty\\
+for all \(i \ge 1\)\\
+step i: v\(_{\text{i}}\) first vertex in Queue.\\
+remove v\(_{\text{i}}\) from the queue  and put it in W\\
+put all of \(N(v_i) \setminus W\) into \(Q\).\\
+\vspace*{1em}
+IF Q = \(\empty\), STOP and return \(W\) as the connected component of \(v\).\\
+else go to step i+1\\
+\end{verse}
+\subsubsection{Theorem: Comp(v) returns \(C_G(v)\)}
+\label{sec:orga9865de}
+Suppose \(u \in C_G(v) \cap W_{out}\).
+
+Let \(P\) be a vu path in \(G\).
+
+Comp(v) puts a vertex into \(w\) only if all its neighbours are put into \(Q\).
+We stop only if \(Q\) is empty. Also \(v_f\) was in \(Q\) at some point \(A\). \(v_f\)
+had to be moved to \(w\). This is a contradiction.
+
+Other direction: \(u\in W_{out}\). Before \(u\) became part of \(W\), \(u\) was in
+\(Q\). Why? Because there is a \(u_1 \in Q\), \(u \in N(u_1) \setminus W\).
+(More things, I skipped.)
+\subsubsection{Spanning tree}
+\label{sec:org4a08496}
+Suppose we run Comp(v) on a connected graph, where a vertex \(w\) is put into
+\(Q\), then there is a unique edge coming with it that attaches it to \(v\).
+(the vertex that is moved from \(Q\) to \(W\) at the same time.)
+\subsubsection{Theorem about spanning tree}
+\label{sec:orgec0c844}
+The following are equivalent: for an \(n\) vertex graph.
+
+\begin{enumerate}
+\item T is a tree (connected, acyclic.)
+\item T is connected and has \(n-1\) edges.
+\item T is acyclic and has \(n-1\) edges.
+\item For every pair of vertices \(u\) and \(v\) in \(V(T)\), there is a unique \(uv\)
+path.
+\end{enumerate}
+\begin{enumerate}
+\item Definition (spanning tree)
+\label{sec:org01b7a6a}
+\(T \subset G\) is a spanning tree if \(T\) is a tree and \(V(T) = V(G)\).
+\end{enumerate}
+\subsubsection{Special spanning trees}
+\label{sec:org4226c93}
+Let \(G\) be connected and run Comp(v) (don't forget the edges.)
+
+\emph{What if} we always put \(N(v_i) \textbackslah W\) to the top of \(Q\). (We call
+this the \textbf{depth first search} tree.) This is going to create a tree which is
+long (?)
+
+\emph{What if} if we put it to the bottom of the tree, this will create a
+\textbf{breadth first search}. You will create which is short.
+
+A diagram that I ignored.
+\subsection{Minimal spanning tree}
+\label{sec:org6bc5080}
+Given a graph \(G\). (can be a complete or arbitrary graph.)
+
+We have a weight function that is assumed on the edge set to \(\mathbb{R}\).
+What we want is a spanning tree \(T\subset G\) such that the cost of the sum of
+weights on the edges is minimum (i.e., for any other spanning tree, the sum
+of the weights on the edges would be more than the current one.)
+\subsubsection{Naive algorithm}
+\label{sec:orgb874e4b}
+There is at most \(n^{n-2}\) (Cayley's theorem.) spanning trees on \(n\) vertices. Let's look at all
+of them and calculate the weights and output the minimum.
+\subsubsection{Kruskal's algorithm}
+\label{sec:org33d967d}
+\begin{enumerate}
+\item Step 1
+\label{sec:org4cb7698}
+Sort edges in increasing order of weights \(e_1, \cdots e_m\) such that
+\(w(e_1) \le w(e_n) \le \cdots, \le w(e_n)\).
+
+Start with an empty forest \(E(F) \neq \emptyset\) for all \(v \in V\), \(c_v = v\).
+\item Step 2
+\label{sec:org6b48649}
+For each edge \(e_i = uv\). For \(\forall i \ge 1\), if the forest plus the new
+edge has a cycle, then \(C_v\) remains the same.
+
+If there is no cycle, we have a new forest, i.e., the bigger forest with
+the extra edge added to it.
+\item The end
+\label{sec:org31ad75a}
+Output \(F\).
+\end{enumerate}
+\subsubsection{Theorem: Kruskal's algorithm returns the min-weight spanning tree.}
+\label{sec:orga4ad107}
+Proved in discrete Math 1. 
+\subsubsection{Running time of Kruskal}
+\label{sec:org23f3378}
+The first step involves sorting. This can be done in \(O(|E| \log|E|)\).
+
+There is \(O(m)\) and \(O(n^2)\). 
+
+If \(G\) is dense, then \(O(m\log m)\) and if \(G\) is sparse, then \(O(n^2)\).
+\section{Lecture 3 \textit{<2018-10-23 Tue>}}
+\label{sec:org32bae7c}
+\subsection{Spanning trees}
+\label{sec:org81fcff3}
+Another perspective: get to one place to another in the fastest way possible.
+Versus the minimum spanning tree. \footnote{MST would be city-side and the fastest possible way would be consumer side.}
+\subsection{Problem}
+\label{sec:org8d53309}
+Given graph \(G=(V, E)\), a distance for \(d\colon E \rightarrow \mathbb{R}_{\ge 0}\). 
+
+\textbf{Goal}: Given a vertex \(u\in V\), find the shortest path to any vertex \(v \in V\). 
+
+The brute force way is to find all the path and find the minimu. 
+\subsection{Idea}
+\label{sec:org41d5061}
+Maintain a set of vertices to where a shortest path from \(u\) was found. And
+in each step we add one vertex to \(W\).
+
+\textbf{Key observation}: If \(P\) is a shortest \(uv\) path, then for every \(w\) on this
+ path, \(P[u, w]\), this is also the shortest path. (\(P[u, w]\) represents the
+ path from \(u\) to \(w\) through \(P\).)
+\subsection{Dijkstra's algorithm}
+\label{sec:org919adae}
+\textbf{Input} is a graph \(G = (V, E)\) which is connected. \footnote{Otherwise you can explore the components.} We have a distance
+\(d\colon E \rightarrow \mathbb{R}_{\ge 0}\).
+
+\textbf{Output}: For every vertex \(u \in V\), the distance from \(u\) and also a
+shortest path.
+\subsubsection{Algorithm}
+\label{sec:org56211b4}
+\textbf{Initialization}: dist[u] = 0
+
+For every other vertex \(v\), I set \(d[v] = \infty\). \(prev[v] =
+    \textup{null}\). Maintain the set \(W = \emptyset\). 
+
+\textbf{Iteration}: Choose a vertex \(v_0 = \min{\dist[v]\colon v  \in V \setminus W\}\)
+
+Update \(W = W \cap \{v_0\}\).
+
+\(\forall v \in V \setminus W\) if \(\dist[v] > \dist[v_0] + d(v_0, v)\)
+then \(\dist[v] = \dist[v_0] + d(v_0, v)\) and \(\prev[v] = v_0\). 
+
+\textbf{Termination}: If \(W = V\), then STOP and output \(\dist[v]\) search head of
+\(\prev\) for a \(uv\) path.
+
+An example was done. \href{https://en.wikipedia.org/wiki/Dijkstra\%27s\_algorithm}{Wikipedia}. 
+\subsubsection{Analysis}
+\label{sec:orgd789292}
+\begin{enumerate}
+\item Correctness
+\label{sec:orgd6e8057}
+\textbf{Claim}: At the time \(v_0\) is put into \(W\), \(\dist[v_0]\) is the distance of
+ \(v_0\) to \(u\). 
+
+(This would prove the correctness, because \(dist\) does not change after
+vertex is in \(W\).)
+
+Proof: Induction on \(\vert W\vert\).
+
+Because \(\vert w \vert = 0\) \(u\) is put into \(W\), \(\dist[u] = 0 = d(uu)\). 
+
+Suppose \(\vert W \vert \ge 1\), we put \(v_0\) into \(W\). If this is the case,
+then \(\dist[v_0] = \min\{\dist[v_0]\colon v \in V \setminus W\}\).
+
+Suppose \(\dist[v_0] > s(uv_0)\). (here \(s\) is the shortest path going
+from one vertex to another.)
+
+Take the shortest \(uv_0\) path \(P\). There will be a first vertex on \(P\) not
+in \(W\), call it \(v_f\) and \(v_p\) be its predecessor. \(\dist[v_0] > s(uv_0)
+      = s(uv_f) + s(v_fv_0) \ge s(uv_f) = s(uv_p) + s(v_pv_f) = dist[v_p] +
+      d(v_pv_f)\). (By our observation from before, both these paths are the
+shortest.)
+
+When we are updating after putting \(v_p\) into \(W\), we consider \(v_f\) and
+we will put it in \(W\). This is a contradiction. 
+\item Termination
+\label{sec:org5e27414}
+In each iterating step, one vertex is put into \(W\) and stays there and then
+in \(n\) iterations, we are done. 
+\item Cost
+\label{sec:org2dcc950}
+Finding \(v_0\), then \(O(\vert V \vert)\).
+
+Adding \(v_0\) to \(W\) is \(O(1)\)
+
+Updating \(\dist\),  \(O(\vert V\vert)\).
+
+With better data structure \(O(\vert E\vert + \vert V \vert log \vert V \vert)\).
+\end{enumerate}
+\subsection{Euro 2020 or Travelling Salesman Problem}
+\label{sec:org8f8d730}
+Watch a game in every one of \(13\) cities. We want to visit all \(13\) but as
+cheap as possible. The English football fans cannot return to the same
+country. A \(13\) vertex graph, between any two vertices, there is a price of
+the air ticket.
+
+We are looking for a Hamilton cycle.
+
+Given graph \(G = (V, E)\) and \(w\colon E \rightarrow \R_{\ge 0}\). A cycle
+that does not repeat.
+\subsection{Complexity classes}
+\label{sec:org564e17c}
+\(\P\), polynomial time running problem. 
+
+\begin{center}
+\begin{tabular}{rlllll}
+\(n\) & \(1000n\) & \(1000n\log n\) & \(10n^2\) & \(2^n\) & \(n!\)\\
+\hline
+10 & 0.01 sec & 0.0002 sec & 0.001 & 0.0000001 sec & 0.003 sec\\
+100 & 0.1 sec & 0.001 sec & 000001 sec & 400000 years & \(>10^100\) years\\
+100000 & 17 min & 20 sec & 2450 min & \(>10^100\) years & \\
+\end{tabular}
+\end{center}
+\section{Lecture 4 \textit{<2018-10-24 Wed>}}
+\label{sec:org12ada80}
+\subsection{Decision problems}
+\label{sec:orga3d91cc}
+Problems that output yes or no
+\subsubsection{Example}
+\label{sec:orgd0a90f7}
+\begin{itemize}
+\item Is there a spanning tree of weight \(\le 42\). (Kruskal algorithm.)
+\item Is there a path of weight \(\le 405\) from \(u\) to \(v\)? (Djistra's algorithm.)
+\end{itemize}
+\subsection{Class P}
+\label{sec:orgf5613d2}
+The set of all decision problems with a polynomial time algorithm. 
+\subsection{Traveling salesman problem}
+\label{sec:orgd353128}
+We don't know if the problem is in \(\P\). 
+
+As a decision problem: There is a graph \(G = (V, E)\) and \(w\colon E
+   \rightarrow \R_{\ge 0}\)., You ask what is the smallest weight Hamiltonian cycle. \footnote{"and the decision problem version ("given the costs and a number x, decide
+whether there is a round-trip route cheaper than x") is NP-complete."-Wikipedia}
+\subsubsection{Approximation algorithm}
+\label{sec:orgbe62735}
+\textbf{Definition}: An \(\alpha\) approximation of TSP is an algorithm that turns a
+ Hamiltonian cycle whose weight is within \$\(\alpha\)\$-fraction of the min
+ weight Hamiltonian cycle.\footnote{In general we don't know how to approximate the TSP, but we can do it with some extra conditions}
+\subsubsection{Extra conditions}
+\label{sec:orgf386a79}
+Triangle inequality: the weight function satisfies the triangle inequality
+if every two vertices of the graph, the weight \(w(xy) \le w(xz) + w(zy)\).
+
+Examples: The usual Euclidean distance satisfies this. 
+A non-example is Airfare cost.
+\subsection{Approximation algorithm for TSP}
+\label{sec:orgd219e66}
+\subsubsection{Algorithm}
+\label{sec:org6006546}
+\textbf{Input}: a weight function \(w\colon E(K_n) \rightarrow \R_{\ge 0}\) with
+triangle inequality. (We assume that it is a complete graph.)
+
+\textbf{Output}: Hamiltonian cycle \(C\).
+
+\textbf{Algorithm}:
+\begin{enumerate}
+\item Find the minimum weight spanning tree (Kruskal algorithm.)
+\item From the spanning tree, we create a closed walk spanning all vertices by
+traversing each edge of \(T\) twice in both directions.
+\item Traverse \(W\), when hitting a vertex that was used before, we do a short
+cut. (Go instead to next vertex \(W\)) Do this iteratively.
+\end{enumerate}
+4 \textbf{Termination}: when all vertices are traversed, output \(C\). 
+
+We know that \(w(W) = 2w(T)\) and \(w(C) \ge w(W)\). 
+
+\(C^{*}\) is a minimum weight Hamilton cycle. How does this compare to the
+weight of the spanning tree. We know that \(w(C^{*}) \ge w(T)\). and thus
+\(w(C) \le 2 w(C^{*})\).
+\subsubsection{Running time}
+\label{sec:orgab93c67}
+\begin{enumerate}
+\item Kruskal: \(O(n^2\log n)\)
+\item Closed walk \(W\), \(O(n)\).
+\item short cutting: \(O(n)\).
+\end{enumerate}
+\subsection{Hall's theorem}
+\label{sec:org002f8f3}
+If \(G = (A \cap B, E)\) a bipartite graph, then \(G\) has a matching \(A\) if and
+only if for every subset \(S \subset A\), \(\vert N(S) \vert \ge \vert S \vert\).
+
+The non-trivial direction implies that when there is no matching saturating
+\(A\), then there is an \(S \subset A\), \(\vert N(S) \vert < \vert S \vert\).
+\subsection{Class \(\NP\)}
+\label{sec:org9e6adbe}
+A decision problem is in class \(\NP\) if the YES answer can be verified
+efficiently (within time that is polynomial in variable size.) (In other
+words, there is a polynomial size certificate.)
+
+The perfect matching problem is in NP. \footnote{Input is a graph \(G\) and the question is whether there is a perfect matching.}
+
+Opposite of perfect matching: Does \(G\) has a \(PM\)? We can use Hall's
+condition as a certificate. Hence the problem is in NP.
+\subsection{Class \(\coNP\)}
+\label{sec:org6849469}
+Means that the problem is in \(NP\) and the negation of the problem is also in
+\(NP\).
+\subsection{About Hamilton path}
+\label{sec:org5d87d63}
+The Hamilton path problem is in \(NP\). 
+
+But the negation of the HAM is not known to be in \(NP\). In other words, we
+don't know if HAM is \(\coNP\).\footnote{The belief is that this is not true. This is one of the Millennium problems.}
+\subsection{Problem reduction}
+\label{sec:orgdcabc53}
+Maximum weight spanning tree problem can be reduced to a minimum weight
+spanning tree. (You can solve the minimum weight spanning tree problem by
+inverting the sign of the edges.) Furthermore, it is a polynomial time
+reduction.
+
+A problem is called \(\NP\) hard if any problem in \(\NP\) class can be reduced
+by the problem.
+
+If furthermore, the problem is in \(\NP\), then we call it \$\NP\$-complete.
+
+Example: 3-SAT is \(\NP\) hard and also \$\NP\$-complete. 
+
+Karp came up with \(21\) natural \$\NP\$-complete problems, all of them are \(\NP\)
+complete.
+\section{Tutorial}
+\label{sec:orgb79e171}
+
+\href{http://discretemath.imp.fu-berlin.de/DMII-2018-19/}{link}
+
+\subsection{Tutorial 1}
+\label{sec:org906f58b}
+\subsubsection{Problem 2}
+\label{sec:orgba30164}
+Each step reduces the number of components by at most \(4\). After \(5\) steps, at least \(5\) components are left. 
+\subsection{Tutorial 2}
+\label{sec:orgad49cf8}
+\subsubsection{SAT}
+\label{sec:orgd6f1717}
+\begin{enumerate}
+\item Example of un-satisfiable instance of SAT
+\label{sec:orgb3761c4}
+\(f(x_1) = x_1 \wedge \neg x_1\)
+
+No matter what the instance is, this will evaluate to zero.
+\end{enumerate}
+\end{document}
