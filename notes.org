@@ -1,4 +1,5 @@
 #+TITLE: Discrete Math II 
+#+author: Hari
 #+LATEX_HEADER: \usepackage[left=2cm, right=2cm, bottom=2cm, top=2cm]{geometry}
 #+LATEX_HEADER: \usepackage{parskip}
 #+LATEX_HEADER: \usepackage{amsmath}
@@ -6,6 +7,7 @@
 #+LATEX_HEADER: \def\R{\mathbb{R}}
 #+LATEX_HEADER: \def\Z{\mathbb{Z}}
 #+LATEX_HEADER: \def\N{\mathbb{N}}
+#+LATEX_HEADER: \def\max{\operatorname{max}}
 #+LATEX_HEADER: \def\P{\textup{P}}
 #+LATEX_HEADER: \def\NP{\textup{NP}}
 #+LATEX_HEADER: \def\coNP{\textup{co-NP}}
@@ -20,15 +22,15 @@
 
 ** Review
 *** Random stuff about algorithms
-   Algorithm A
+    Algorithm A
 
-   Input class I
+    Input class I
 
-   $T(A, I)$: time algorithm $A$, input $I$. 
+    $T(A, I)$: time algorithm $A$, input $I$.
 
-   The worst case time complexity of $A$ on $I$ is $\max_{I\in \mathscr{I}} (A, I) = T_(n)$. 
+    The worst case time complexity of $A$ on $I$ is $\max_{I\in \mathbb{I}} (A, I) = T_(n)$.
 
-   The worst case complexity of $I = \min_{A} T_A(n) = T_{I}(n)$. A function that grows with $n$.
+    The worst case complexity of $I = \min_{A} T_A(n) = T_{I}(n)$. A function that grows with $n$.
 
     Average case complexity $\mathbb{E}(T(A, I))$.
 *** Sorting
@@ -50,13 +52,13 @@
      The algorithm runs on the permutations on the set of $n$ numbers. Define
      $\forall \kappa \in \N$ blah blah.
 
-     $S_n \superset S_n{\alpha, \kappa} = \{\pi \in S_n \colon \textup{where A
+     $S_n \subset S_n{\alpha, \kappa} = \{\pi \in S_n \colon \textup{where A
      receives input $\pi$ there, it receives $\alpha$ as the sequence of the
-     list of first $k$ answerers.
+     list of first $k$ answerers}\}$
 **** Observation
      Everything is determined if we run it.
 
-     $S^n_{\alpha, k) \cap S^n_{\beta, k} = \emptyset \forall \alpha \neq \beta$
+     $S^n_(\alpha, k) \cap S^n_{\beta, k} = \emptyset \forall \alpha \neq \beta$
 
      $\cap S^{n}_{\alpha, k} = S_n$
 
@@ -68,7 +70,7 @@
      \neq \pi_2 \in S_{\beta, r}$.
 
      Run $A$ on $\pi_1$, we receive the answers $\beta$ implies that $A$ outputs
-     $\pi_^{\asterik} \in S_n$
+     $\pi^{*} \in S_n$
 
      + Case 1: $\pi^* \neq \pi_1$, a contradiction to the correctness of $A$.
 
@@ -132,7 +134,7 @@
 *** Special spanning trees
     Let $G$ be connected and run Comp(v) (don't forget the edges.)
 
-    /What if/ we always put $N(v_i) \textbackslah W$ to the top of $Q$. (We call
+    /What if/ we always put $N(v_i) \setminus W$ to the top of $Q$. (We call
     this the *depth first search* tree.) This is going to create a tree which is
     long (?)
 
@@ -201,7 +203,7 @@
     For every other vertex $v$, I set $d[v] = \infty$. $prev[v] =
     \textup{null}$. Maintain the set $W = \emptyset$. 
 
-    *Iteration*: Choose a vertex $v_0 = \min{\dist[v]\colon v  \in V \setminus W\}$
+    *Iteration*: Choose a vertex $v_0 = \min\{\dist[v]\colon v  \in V \setminus W\}$
 
     Update $W = W \cap \{v_0\}$.
 
@@ -571,7 +573,7 @@
    For Bipartite graphs, we can provide the other verification by Konig's
    theorem.
 ** Konig's theorem
-   $G$ is bipartite, then $\alpha(G)=\beta(G)$. Here $\alhpa$ is the size of the
+   $G$ is bipartite, then $\alpha(G)=\beta(G)$. Here $\alpha$ is the size of the
    largest matching and $\beta$ is the size of smallest vertex cover.
 
    $C \subset V(G)$, the vertex cover if $\forall e \in E(G)$, $e\cap C \neq
@@ -748,6 +750,49 @@
 
      for $e$ or $e_i$, define the set $D_i = \{v\colon \{T, F\}^n \vert c_i(v) =
      false\}$. $\vert D_i \vert = 2^{n-k}$, $\sum D_i = \{v \vert f(v) = F\}$.[fn:18]
+** Tutorial 3
+*** Problem 1
+    We draw the graph, and remove the edges 2, 4, 8, 12. Now there are 6 odd
+    number of components. There is a characterization about the maximal matching
+    being the minimum of $\{n - o(G\setminus S) + \vert S\vert\colon \forall S
+    \subset V(G)\}$. Now, this is $n-2$, which means if there is a matching with
+    $n-2$, it will be maximal.
+
+    Easy solution: Show that there is no maximal matching. The number of
+    vertices is 18. There cannot be a matching on 17, because odd. Thus, the
+    matching on 16 has to be the maximal matching.
+**** Old solution
+     #+BEGIN_SRC latex
+       % To find the maximal matching, we use a corollary to Tutte's theorem which was mentioned in the lecture.
+
+       % \begin{corollary}[Berge]
+       %   If $G$ is an arbitrary graph, then it is true that $2\alpha'(G)$ is equal to the minimum: $\min \{ n - o(G\setminus S) + \vert S \vert \colon S \subset V(G) \}$. Here $n$ is the number of vertices in the graph.
+       % \end{corollary}
+
+       % \begin{proof}
+       %   For the purpose of this exercise, we'll only prove a part of the corollary, i.e., if there is a subset $S$ of vertices such that $o(G\setminus G) > \vert S \vert$, then the maximal matching can have at most $n - (o(G\setminus S)-\vert S \vert) $ vertices. 
+
+       %   Let $M$ be any matching in the graph. The odd components cannot be entirely matched within themselves, i.e., there will always be at least one vertex that is unmatched from within the component. We can match this vertex if there is an edge between the vertex and $S$. But since $o(G \setminus S) > \vert S \vert$, we can match at most $\vert S \vert$ number of vertices inside the odd-components of $G \setminus S$. Thus any matching (in particular the Maximal matching) in $G$ can match at most $n - (o(G\setminus S) - \vert S \vert)$. \footnote{We have not shown the existence of a match, but merely an upper bound.}
+       % \end{proof}
+
+       % For the above example, this evaluates to $18 - 6 + 4 = 16$. The maximal matching may connect, at most, $16$ vertices. We are done if we define a matching on $16$ vertices.
+
+       % The following is a (maximal) matching on $16$ vertices.
+       % \begin{figure}[H]
+       %   \centering
+       %   \includegraphics[scale=0.4]{maximalMatching.png}
+       %   \caption{Matching on $16$ vertices; also maximal. Here $11$ and $7$ do not have a matching.}
+       %   \label{fig:maximalMatching}
+       % \end{figure}
+     #+END_SRC
+*** Problem 3
+**** Part a
+**** Part b
+     The graph from the graph theory book
+**** part c
+     If $k$ is even, we can think about a clique on $k+1$ vertices.
+
+     If $k$ is odd, then we can do a similar construction as $b$. 
 * Footnotes
 
 [fn:25] Apparently the problem for general graph is also in P. The algorithm for
