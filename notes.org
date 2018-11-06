@@ -377,7 +377,7 @@
        of edges in an Eulerian edges. For the NO answer, we will be given a
        vertex of odd-degree.
 ** Conjecture P $\neq$ NP
-** Stronger conjecture of $P \neq NP \cap co-NP$
+** Stronger conjecture of $P \neq$ $NP$ intersection $co-NP$
    Is there a factor of $n < k$. This problem is in the intersection of NP and
    co-NP.
 
@@ -436,7 +436,7 @@
    Add $xy$ to $G$ and $G+xy$ is not a counter example. We claim that $\forall S
    \subset V(G)$, $o((G+xy)\setminus S) \le \vert S \vert$. [fn:15]
 
-   I know that $o(G\setimus S) \le \vert S \vert$.
+   I know that $o(G\setminus S) \le \vert S \vert$.
    - If $xy \in S = \emptyset \implies \vert S \vert$ does not decrease.
    - If $xy$ goes between even components, then nothing changes.
    - If $xy$ goes to an odd components, the number of odd components decreases.
@@ -629,6 +629,113 @@
 
 
    #+END_SRC
+* Lecture 7 <2018-11-06 Tue>
+** Maximum matching is in P 
+*** Proposition
+    $M \subset E(G)$ is a matching in $G$.
+
+    $M$ is a maximum $\iff$ there is no $M$-augmenting path in $G$. (is
+    $M$-alternating if it starts and ends at an unsaturated vertex.)
+*** Augmenting path algorithm
+    Input: Bipartite graph $G = (X \cap Y, E)$, a matching $M \subset E$.
+    Output: Either an $M$-augmenting path or a cover of size $\vert M \vert$.
+
+    Initialization: $S = U$, $Q = \emptyset$, $T = \emptyset$
+
+    Iteration: If $Q = S$ STOP and return $M$ (as maximal matching), $TU(x
+    \setminus S)$ (as min cover of size $\vert M \vert$) Else select $x \in S
+    \setminus Q$, $\forall y \in N(x)$ with $xy\in M$, DO if $y$ is unsaturated,
+    then stop return a $M$-augmenting path from $U$ to $y$. Else $\exists w \in
+    X$, $yw \in M$ update, $T = T \cap \{y\}$ and $S = S \cup \{w\}$. Update $Q
+    = Q \cup \{x\}$. [fn:26]
+*** Proposition
+    $G$ graph, $M \subset E(G)$ is a matching. $C \subset V(G) \implis \vert M
+    \vert \le \vert C \vert$. Here $C$ is the cover.
+
+    The idea is that every cover has to be bigger than the matching.
+*** TODO Proof of correctness
+    Stopping the algorithm: The algorithm can either stop with a $M$-augmenting
+    path or it can stop with a maximum matching or a cover.
+
+    Proof of correctness: If the algorithm terminates with a matching $M$ and a
+    cover $T \cap (X \setmius S)$, we terminate at $Q = S$, which means that we
+    have explored all the neighbours of $S$ and they are all in $T$. We want to
+    conclude that there exists no edge between $S$ and $Y-T$. (Because if there
+    is no edge between $T$ and $Y-T$, then $T$ together $S-T$ is a cover.)
+
+    If there is an edge from $S$ to an unsaturated vertex $y \in T$, then we
+    would have immediately put this vertex into $T$. These two cases are not
+    possible.
+*** Comments
+    $\vert M \vert = \vert T \vert + \vert X \setminus S\vert$. By the selection
+    of $S$ and $T$, vertices of $T$ are put into $T$ where their $M$-partner is
+    put into $S$.
+
+    $\implies$, $S = U \cap M$ partners of vertices in $T$.
+** Theorem
+    Repeatedly applying APA to bipartite graph produces a maximal matching and
+    minimal cover. The running time is $O(V(G) \cdot e(G))$
+
+    If we repeat APA $\le n/2$ times. One running of APA considers each edge
+    $\le 1$, implies $O(e(G))$.
+** Matching with weights
+   We have a weight function on the edges. $w\colon E(K_{n, n}) \rightarrow \R$.
+
+   The goal is to find a perfect matching $M$ such that the weight of the
+   matching which is the sum $\sum w(e)$ is maximum.[fn:27]
+
+   In general, we say that the weighted cover $W$ is $u_0, \cdots, u_n, v_1,
+   \cdot, v_n$ such that $u_i+v_j \ge w_{ij}$ for all $i, j = 1, \cdots, n$. The
+   cost of $(u, v)$, $c(u, v) = \sum u_i + \sum v_j$. (*The minimum weighted
+   cover problem* is to find a cover of minimum weight.)
+
+   The interesting part is that these two problems can be solved together.
+** Duality lemma
+   For all perfect matching $M$ and cover $(u, v)$ in a weighted bipartite graph
+   $G$, $C(u, v) \ge w(M)$ (*Home work*)
+
+*** Corollary
+    If $C(u, v) = w(M)$, then $(u, v)$ is a min-cost cover and $M$ is a maximum
+    weight matching.
+** Algorithm for Maximal weighted matching
+   Equality: Subgraph $G_{u, v} \subset K_{n, n}$, a spanning subgraph which has
+   the same vertex set and the edges at those $x$ and $y$ where $w_{i, j} =
+   u_i+u_j$.
+** Hungarian algorithm
+   Input: A matrix $w_{i, j}$ of weights of the edges of $K_{n, n}$ with points
+   $X = \{x_1, \cdots, x_n\}$, $Y=\{y_1, \cdots, y_n\}$.
+   
+   Idea: Iteratively adjust a cover $(u, v)$ until $G_{u, v}$ has a perfect
+   matching.
+
+   if $G_{u, v}$ has a perfect matching, then $(u, v)$ and $M$ are both optimal.
+   Initial $u_i = \max \{W_{i, j}\colon j=\{1, \cdots, n\}\}$ and $v_i =0$. Note
+   that this is a cover and $u_i + v_j \ge w_{i, j}$ for all $i, j$. 
+
+   Iteration: Create $G_{u, v}$, using APA and find a maximal matching $M$ and a
+   minimum vertex cover $Q$ and $Q$ will be equal to $T \cup R$ (where $T = Y
+   \cap Q$ and $R = X \cup Q$)
+
+   If $M$ is a perfect matching, then we are done. (By corollary of the duality
+   lemma.)
+
+   Else $\varepsilon = \min\{u_i + v_i -w_{i, j}\colon x_i \in X \setminus R,
+   y_j \colon Y\setminus T\}$ (all elements are positive here.)
+
+   We update as follows: $u_i = u_i - \varepsilon$ if $x \in X \setminus R$ and
+   $V_j = v_j+\varepsilon$ if $y \in T$. Now you iterate.
+
+   Why is the update $(u, v)$ still a cover? It involves 4 cases depending of
+   where the pair $(i, j)$ goes to.
+
+   1. If $x_i \in R$ and $y_j \in Y \setmius T$.
+      $u_i, v_j$ are unchanged.
+   2. $x_i \in R, y_j \in T$ implies that $u_i + v_j$ grew by $\varepsilon$ which
+      is okay.
+   3. $x_i \in X \setminus R$, $y_j \in T$, $u_i - \varepsilon, v_j +
+      \varepsilon = u_i + v_j$
+   4. x_i \in X \setminus R, y_j \in Y \setminus T$. So $u_i + v_j \ge w_{i,
+      j}$.
 * Tutorial
   [[http://discretemath.imp.fu-berlin.de/DMII-2018-19/][link]]
 ** Tutorial 1
@@ -785,15 +892,89 @@
        %   \label{fig:maximalMatching}
        % \end{figure}
      #+END_SRC
+*** Problem 2
+**** part a
+     It is clear that $\vert V \vert = \sum \textup{vertices in even components
+     of G\S} + \sum \textup{vertices in odd components of G \ S} + \vert S \vert$
+
+     The above sum $\mod 2$ evaluates to $\vert V \vert \mod 2= o(G\setminus S) +
+     \vert S \vert$. This is same as $\vert S \vert - o(G \setminus S \mod 2$.
+**** part b
+     The idea is something like this.
+
+     For each $S$ such that the number of odd components in the complement of
+     $S$ is greater than $S$, introduce a $K_d$, where it's the clique on $d$
+     vertices. What should be the value chosen for $d$? Each value of $d$ should
+     be equal to the the difference for that set $S$.
+
+     Now this should satisfy Tutte's theorem (maybe we can do this inductively
+     as well.) There is a maximal matching. We need to show that in the maximal
+     matching contains no edge in the clique. Now, we can arrive at a matching
+     on the original graph $G$ and things should be okay?
+     
+     I've omitted details in the steps. 
+     
 *** Problem 3
 **** Part a
+     This is kinda similar to the proof of the theorem about $3$-regular graph
+     without any cut edges having a perfect matching. 
+
+     First notice that every three regular graph must have even number of
+     vertices.
+
+     Given $S$ and $G\setminus S$, we think about the the degrees of elements
+     inside any disconnected component of $G \setminus S$. They cannot be $0$
+     because then, it means that there are three cut edges. They may be $1$ and
+     they maybe $2$ at most $2$ times.
+
+     If it is $2$ exactly 0 times, there are no cut edges and we are done (the
+     idea is that the sum of the degrees of each vertex have to be even, but the
+     degrees are either 1 or 3, so there has to be an even number of vertices.)
+     
+     If it is $2$ exactly 1 times, then there can be at most $1$ odd component,
+     and $\vert S\vert > 0$, now, Tutte's theorem!
+
+     If it is $2$ exactly $2$ times, then we know that $\vert S \vert -
+     o(G\setminus S)$ has to have parity same as $\vert V\vert$, but this means
+     that $\vert S\vert$ is a non-zero multiple of $2$, and $o(G \setminus S)$
+     is exactly equal to $2$. Now, Tutte's theorem.     
 **** Part b
      The graph from the graph theory book
 **** part c
      If $k$ is even, we can think about a clique on $k+1$ vertices.
 
      If $k$ is odd, then we can do a similar construction as $b$. 
+*** Problem 5
+    Let $M$ be a maximal matching on $G$. Let $2\alpha$ be the number of
+    vertices here. Let $2\alpha'$ be the number of vertices that gets connected
+    in $2\alpha'$, we are supposed to show that $\alpha' > 1/2 \alpha$.
+
+    Let the edges in the matching be $\{e_{i_1}, \cdots, e_{i_n}\}$. Where $i_1
+    \le \cdots, i_n$. So when the algorithm is at the step $i_k$, either it gets
+    added to $M_{t-1}$ or gets rejected. Let $x$ number of them get's rejected
+    and $y$ number of them gets added.
+
+    When does an edge gets rejected? If one of the vertex in $e_{i_k}$ is
+    already in $M_{t}$. Let us now count the number of vertices in $M_t$ at the
+    end.
+
+    $M_t \ge x + 2y \ge x+y = (\alpha)$.
+
+    Strictness: Consider the following graph and ordering of vertices:
+    #+BEGIN_SRC artist
+      o----------------o----------------o----------------o
+             e2              e1                 e3       
+    #+END_SRC
+
+    The maximal matching is $\{e2, e_3\}$, whereas the algorithm generates
+    $\{e_1\}$.
 * Footnotes
+
+[fn:27] Practical example: There is a company which has factories and corn
+farms, the edges represent the profit the factory makes by producing corn from a
+certain farm. There is more to this story. But I missed it.
+
+[fn:26] I missed a lot of details here.
 
 [fn:25] Apparently the problem for general graph is also in P. The algorithm for
 this graph was what lead to the definition of $P$.

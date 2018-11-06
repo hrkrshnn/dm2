@@ -1,4 +1,4 @@
-% Created 2018-11-04 Sun 20:22
+% Created 2018-11-05 Mon 15:41
 % Intended LaTeX compiler: pdflatex
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
@@ -48,12 +48,12 @@
 
 
 \section{Lecture 2\textit{<2018-10-17 Wed>}}
-\label{sec:org98df5d2}
+\label{sec:org394dd13}
 
 \subsection{Review}
-\label{sec:orga9e316e}
+\label{sec:orgbea9a8a}
 \subsubsection{Random stuff about algorithms}
-\label{sec:org0126a6f}
+\label{sec:org90f8b73}
 Algorithm A
 
 Input class I
@@ -66,7 +66,7 @@ The worst case complexity of \(I = \min_{A} T_A(n) = T_{I}(n)\). A function that
 
 Average case complexity \(\mathbb{E}(T(A, I))\).
 \subsubsection{Sorting}
-\label{sec:orge6e99b8}
+\label{sec:org18a0ddc}
 Sorting algorithm \(A\), \(T(A, \pi) =\) number of comparisons that \(A\) makes to find \$\(\pi\).\$
 
 Yesterday, we proved that for insertion sort (the stupid algorithm), the
@@ -76,7 +76,7 @@ Binary insertion:  \(T(n) \le n log_2{n}\).
 
 Merges sort: \$T\(_{\text{M}}\)(n) =le n\(\log_{\text{2}}\)\{n\}.\$
 \subsubsection{Theorem about lower-bound of sorting}
-\label{sec:org665f0b7}
+\label{sec:orgb4d05d9}
 If \(A\) is a sorting algorithm (correctly sort \(n\) numbers)
 
 Then \(T_A(n) \ge \log_2(n!)\).
@@ -84,7 +84,7 @@ Then \(T_A(n) \ge \log_2(n!)\).
 In particular, using the stirling's formula, \(T_A(n) \ge n\log_n\).
 \begin{enumerate}
 \item Proof
-\label{sec:orgc6f7c9b}
+\label{sec:org570f9b7}
 The algorithm runs on the permutations on the set of \(n\) numbers. Define
 \(\forall \kappa \in \N\) blah blah.
 
@@ -92,7 +92,7 @@ The algorithm runs on the permutations on the set of \(n\) numbers. Define
 receives input \(\pi\) there, it receives \(\alpha\) as the sequence of the
 list of first \(k\) answerers\}$\backslash$}\$
 \item Observation
-\label{sec:org07806f2}
+\label{sec:org35033df}
 Everything is determined if we run it.
 
 \(S^n_(\alpha, k) \cap S^n_{\beta, k} = \emptyset \forall \alpha \neq \beta\)
@@ -120,9 +120,9 @@ Called the \textbf{information theoretical lower bound}.
 \end{itemize}
 \end{enumerate}
 \subsection{Graph algorithms}
-\label{sec:org83a9a2b}
+\label{sec:org5c0351e}
 \subsubsection{Connectedness of graph}
-\label{sec:org710763b}
+\label{sec:org1bc4393}
 A graph \(G\) is connected if for every two vertices \(u\) and \(v\), there exists
 a \(uv\) path in \(G\).
 
@@ -132,7 +132,7 @@ which are called the \textbf{connected components} of \(G\).
 
 Observation: There is no edge between different connected components.
 \subsubsection{How do you decide whether a graph is connected?}
-\label{sec:org318e33e}
+\label{sec:org93e52ab}
 Take a vertex \(v\). We maintain a list of all vertices that are visited. We
 redo the same thing for every other vertex. We repeat this until we saw all
 the vertices in the graph.
@@ -149,7 +149,7 @@ IF Q = \(\empty\), STOP and return \(W\) as the connected component of \(v\).\\
 else go to step i+1\\
 \end{verse}
 \subsubsection{Theorem: Comp(v) returns \(C_G(v)\)}
-\label{sec:orgcaa4968}
+\label{sec:orgaa222ba}
 Suppose \(u \in C_G(v) \cap W_{out}\).
 
 Let \(P\) be a vu path in \(G\).
@@ -162,12 +162,12 @@ Other direction: \(u\in W_{out}\). Before \(u\) became part of \(W\), \(u\) was 
 \(Q\). Why? Because there is a \(u_1 \in Q\), \(u \in N(u_1) \setminus W\).
 (More things, I skipped.)
 \subsubsection{Spanning tree}
-\label{sec:org718bca7}
+\label{sec:orgdcc192c}
 Suppose we run Comp(v) on a connected graph, where a vertex \(w\) is put into
 \(Q\), then there is a unique edge coming with it that attaches it to \(v\).
 (the vertex that is moved from \(Q\) to \(W\) at the same time.)
 \subsubsection{Theorem about spanning tree}
-\label{sec:orgcb840f6}
+\label{sec:orge8f04b4}
 The following are equivalent: for an \(n\) vertex graph.
 
 \begin{enumerate}
@@ -179,11 +179,11 @@ path.
 \end{enumerate}
 \begin{enumerate}
 \item Definition (spanning tree)
-\label{sec:org0e18cba}
+\label{sec:org34055a2}
 \(T \subset G\) is a spanning tree if \(T\) is a tree and \(V(T) = V(G)\).
 \end{enumerate}
 \subsubsection{Special spanning trees}
-\label{sec:orgdf88571}
+\label{sec:org4b9fb20}
 Let \(G\) be connected and run Comp(v) (don't forget the edges.)
 
 \emph{What if} we always put \(N(v_i) \setminus W\) to the top of \(Q\). (We call
@@ -195,7 +195,7 @@ long (?)
 
 A diagram that I ignored.
 \subsection{Minimal spanning tree}
-\label{sec:org61ba738}
+\label{sec:org9c37041}
 Given a graph \(G\). (can be a complete or arbitrary graph.)
 
 We have a weight function that is assumed on the edge set to \(\mathbb{R}\).
@@ -203,54 +203,54 @@ What we want is a spanning tree \(T\subset G\) such that the cost of the sum of
 weights on the edges is minimum (i.e., for any other spanning tree, the sum
 of the weights on the edges would be more than the current one.)
 \subsubsection{Naive algorithm}
-\label{sec:org0d34c0d}
+\label{sec:org97dc097}
 There is at most \(n^{n-2}\) (Cayley's theorem.) spanning trees on \(n\) vertices. Let's look at all
 of them and calculate the weights and output the minimum.
 \subsubsection{Kruskal's algorithm}
-\label{sec:orgd66557d}
+\label{sec:orgbac73f6}
 \begin{enumerate}
 \item Step 1
-\label{sec:org74496e4}
+\label{sec:org2884cb4}
 Sort edges in increasing order of weights \(e_1, \cdots e_m\) such that
 \(w(e_1) \le w(e_n) \le \cdots, \le w(e_n)\).
 
 Start with an empty forest \(E(F) \neq \emptyset\) for all \(v \in V\), \(c_v = v\).
 \item Step 2
-\label{sec:org5162f4b}
+\label{sec:org1af9be5}
 For each edge \(e_i = uv\). For \(\forall i \ge 1\), if the forest plus the new
 edge has a cycle, then \(C_v\) remains the same.
 
 If there is no cycle, we have a new forest, i.e., the bigger forest with
 the extra edge added to it.
 \item The end
-\label{sec:orgf25970e}
+\label{sec:org608fefd}
 Output \(F\).
 \end{enumerate}
 \subsubsection{Theorem: Kruskal's algorithm returns the min-weight spanning tree.}
-\label{sec:orgfffb0c4}
+\label{sec:org128d245}
 Proved in discrete Math 1. 
 \subsubsection{Running time of Kruskal}
-\label{sec:org6c513eb}
+\label{sec:org8dcde0d}
 The first step involves sorting. This can be done in \(O(|E| \log|E|)\).
 
 There is \(O(m)\) and \(O(n^2)\). 
 
 If \(G\) is dense, then \(O(m\log m)\) and if \(G\) is sparse, then \(O(n^2)\).
 \section{Lecture 3 \textit{<2018-10-23 Tue>}}
-\label{sec:org6b84e8f}
+\label{sec:org51a05cb}
 \subsection{Spanning trees}
-\label{sec:org044102b}
+\label{sec:org1ee9b68}
 Another perspective: get to one place to another in the fastest way possible.
 Versus the minimum spanning tree. \footnote{MST would be city-side and the fastest possible way would be consumer side.}
 \subsection{Problem}
-\label{sec:org3431ee4}
+\label{sec:org7837239}
 Given graph \(G=(V, E)\), a distance for \(d\colon E \rightarrow \mathbb{R}_{\ge 0}\). 
 
 \textbf{Goal}: Given a vertex \(u\in V\), find the shortest path to any vertex \(v \in V\). 
 
 The brute force way is to find all the path and find the minimu. 
 \subsection{Idea}
-\label{sec:org60db914}
+\label{sec:org1e198ee}
 Maintain a set of vertices to where a shortest path from \(u\) was found. And
 in each step we add one vertex to \(W\).
 
@@ -258,14 +258,14 @@ in each step we add one vertex to \(W\).
  path, \(P[u, w]\), this is also the shortest path. (\(P[u, w]\) represents the
  path from \(u\) to \(w\) through \(P\).)
 \subsection{Dijkstra's algorithm}
-\label{sec:orgbbc8415}
+\label{sec:orgb69f1d2}
 \textbf{Input} is a graph \(G = (V, E)\) which is connected. \footnote{Otherwise you can explore the components.} We have a distance
 \(d\colon E \rightarrow \mathbb{R}_{\ge 0}\).
 
 \textbf{Output}: For every vertex \(u \in V\), the distance from \(u\) and also a
 shortest path.
 \subsubsection{Algorithm}
-\label{sec:orgf261494}
+\label{sec:orga64abf5}
 \textbf{Initialization}: dist[u] = 0
 
 For every other vertex \(v\), I set \(d[v] = \infty\). \(prev[v] =
@@ -283,10 +283,10 @@ then \(\dist[v] = \dist[v_0] + d(v_0, v)\) and \(\prev[v] = v_0\).
 
 An example was done. \href{https://en.wikipedia.org/wiki/Dijkstra\%27s\_algorithm}{Wikipedia}. 
 \subsubsection{Analysis}
-\label{sec:orga13f43f}
+\label{sec:org9f5e26a}
 \begin{enumerate}
 \item Correctness
-\label{sec:org814a273}
+\label{sec:orgef9dc4c}
 \textbf{Claim}: At the time \(v_0\) is put into \(W\), \(\dist[v_0]\) is the distance of
  \(v_0\) to \(u\). 
 
@@ -312,11 +312,11 @@ shortest.)
 When we are updating after putting \(v_p\) into \(W\), we consider \(v_f\) and
 we will put it in \(W\). This is a contradiction. 
 \item Termination
-\label{sec:org38691e4}
+\label{sec:org0ed3309}
 In each iterating step, one vertex is put into \(W\) and stays there and then
 in \(n\) iterations, we are done. 
 \item Cost
-\label{sec:org3ec7edf}
+\label{sec:org1478f38}
 Finding \(v_0\), then \(O(\vert V \vert)\).
 
 Adding \(v_0\) to \(W\) is \(O(1)\)
@@ -326,7 +326,7 @@ Updating \(\dist\),  \(O(\vert V\vert)\).
 With better data structure \(O(\vert E\vert + \vert V \vert log \vert V \vert)\).
 \end{enumerate}
 \subsection{Euro 2020 or Travelling Salesman Problem}
-\label{sec:orgeb51715}
+\label{sec:org956e2b9}
 Watch a game in every one of \(13\) cities. We want to visit all \(13\) but as
 cheap as possible. The English football fans cannot return to the same
 country. A \(13\) vertex graph, between any two vertices, there is a price of
@@ -337,7 +337,7 @@ We are looking for a Hamilton cycle.
 Given graph \(G = (V, E)\) and \(w\colon E \rightarrow \R_{\ge 0}\). A cycle
 that does not repeat.
 \subsection{Complexity classes}
-\label{sec:org2bf958f}
+\label{sec:org3a3ab97}
 \(\P\), polynomial time running problem. 
 
 \begin{center}
@@ -350,42 +350,42 @@ that does not repeat.
 \end{tabular}
 \end{center}
 \section{Lecture 4 \textit{<2018-10-24 Wed>}}
-\label{sec:orgc792986}
+\label{sec:org013b20a}
 \subsection{Decision problems}
-\label{sec:orgf193d35}
+\label{sec:orgfda2939}
 Problems that output yes or no
 \subsubsection{Example}
-\label{sec:org39d30bf}
+\label{sec:org31639ab}
 \begin{itemize}
 \item Is there a spanning tree of weight \(\le 42\). (Kruskal algorithm.)
 \item Is there a path of weight \(\le 405\) from \(u\) to \(v\)? (Djistra's algorithm.)
 \end{itemize}
 \subsection{Class P}
-\label{sec:org0760c69}
+\label{sec:org5622a94}
 The set of all decision problems with a polynomial time algorithm. 
 \subsection{Traveling salesman problem}
-\label{sec:org5c01773}
+\label{sec:orge0dc603}
 We don't know if the problem is in \(\P\). 
 
 As a decision problem: There is a graph \(G = (V, E)\) and \(w\colon E
    \rightarrow \R_{\ge 0}\)., You ask what is the smallest weight Hamiltonian cycle. \footnote{"and the decision problem version ("given the costs and a number x, decide
 whether there is a round-trip route cheaper than x") is NP-complete."-Wikipedia}
 \subsubsection{Approximation algorithm}
-\label{sec:org6c9d789}
+\label{sec:org23f0467}
 \textbf{Definition}: An \(\alpha\) approximation of TSP is an algorithm that turns a
  Hamiltonian cycle whose weight is within \$\(\alpha\)\$-fraction of the min
  weight Hamiltonian cycle.\footnote{In general we don't know how to approximate the TSP, but we can do it with some extra conditions}
 \subsubsection{Extra conditions}
-\label{sec:orge2c3ebc}
+\label{sec:org7517993}
 Triangle inequality: the weight function satisfies the triangle inequality
 if every two vertices of the graph, the weight \(w(xy) \le w(xz) + w(zy)\).
 
 Examples: The usual Euclidean distance satisfies this. 
 A non-example is Airfare cost.
 \subsection{Approximation algorithm for TSP}
-\label{sec:orgce86715}
+\label{sec:org8faca43}
 \subsubsection{Algorithm}
-\label{sec:org810c24d}
+\label{sec:org39acce1}
 \textbf{Input}: a weight function \(w\colon E(K_n) \rightarrow \R_{\ge 0}\) with
 triangle inequality. (We assume that it is a complete graph.)
 
@@ -407,21 +407,21 @@ We know that \(w(W) = 2w(T)\) and \(w(C) \ge w(W)\).
 weight of the spanning tree. We know that \(w(C^{*}) \ge w(T)\). and thus
 \(w(C) \le 2 w(C^{*})\).
 \subsubsection{Running time}
-\label{sec:org9baf595}
+\label{sec:org3e86c65}
 \begin{enumerate}
 \item Kruskal: \(O(n^2\log n)\)
 \item Closed walk \(W\), \(O(n)\).
 \item short cutting: \(O(n)\).
 \end{enumerate}
 \subsection{Hall's theorem}
-\label{sec:org2376f6d}
+\label{sec:org4d7f3da}
 If \(G = (A \cap B, E)\) a bipartite graph, then \(G\) has a matching \(A\) if and
 only if for every subset \(S \subset A\), \(\vert N(S) \vert \ge \vert S \vert\).
 
 The non-trivial direction implies that when there is no matching saturating
 \(A\), then there is an \(S \subset A\), \(\vert N(S) \vert < \vert S \vert\).
 \subsection{Class \(\NP\)}
-\label{sec:org04d9c6d}
+\label{sec:orgb76e2b9}
 A decision problem is in class \(\NP\) if the YES answer can be verified
 efficiently (within time that is polynomial in variable size.) (In other
 words, there is a polynomial size certificate.)
@@ -431,17 +431,17 @@ The perfect matching problem is in NP. \footnote{Input is a graph \(G\) and the 
 Opposite of perfect matching: Does \(G\) has a \(PM\)? We can use Hall's
 condition as a certificate. Hence the problem is in NP.
 \subsection{Class \(\coNP\)}
-\label{sec:orgeddc6db}
+\label{sec:orgc73b197}
 Means that the problem is in \(NP\) and the negation of the problem is also in
 \(NP\).
 \subsection{About Hamilton path}
-\label{sec:org4d98169}
+\label{sec:org34c80a1}
 The Hamilton path problem is in \(NP\). 
 
 But the negation of the HAM is not known to be in \(NP\). In other words, we
 don't know if HAM is \(\coNP\).\footnote{The belief is that this is not true. This is one of the Millennium problems.}
 \subsection{Problem reduction}
-\label{sec:org6bfcb90}
+\label{sec:orgc7f547f}
 Maximum weight spanning tree problem can be reduced to a minimum weight
 spanning tree. (You can solve the minimum weight spanning tree problem by
 inverting the sign of the edges.) Furthermore, it is a polynomial time
@@ -457,13 +457,13 @@ Example: 3-SAT is \(\NP\) hard and also \$\NP\$-complete.
 Karp came up with \(21\) natural \$\NP\$-complete problems, all of them are \(\NP\)
 complete.
 \section{Lecture 5 \textit{<2018-10-30 Tue>}}
-\label{sec:org05f1065}
+\label{sec:org624a71d}
 \subsection{NP class}
-\label{sec:orgb944b59}
+\label{sec:org4354c76}
 A yes/no problem is in class NP if the answer yes can be verified
 efficiently.
 \subsubsection{Examples}
-\label{sec:orga4e619e}
+\label{sec:org9f16b42}
 \begin{enumerate}
 \item Does the bipartite graph have a perfect matching.
 \item Does the bipartite graph have no perfect matching.
@@ -471,15 +471,15 @@ efficiently.
 \item \textbf{Don't know} Whether a problem have no hamiltonian cycle.
 \end{enumerate}
 \subsection{P class}
-\label{sec:orge51bb20}
+\label{sec:orga101ead}
 A yes/no decision problem is in P if the answer can be found in polynomial
 time. It is obviously true that \(P \subset NP\).
 \subsection{Co-NP}
-\label{sec:orgb0f7e60}
+\label{sec:org71b95e5}
 A yes/no problem is in the class Co-NP if the no-answer can be verified
 efficiently. Again trivially, \(P \subset NP \cap no-NP\).
 \subsubsection{Example of NP intersection co-NP}
-\label{sec:org9fe2af9}
+\label{sec:org4b56d12}
 \begin{enumerate}
 \item Perfect matching problem in bipartite graph is in the intersection.
 \item Is this graph 2-colorable.
@@ -489,9 +489,9 @@ of edges in an Eulerian edges. For the NO answer, we will be given a
 vertex of odd-degree.
 \end{enumerate}
 \subsection{Conjecture P \(\neq\) NP}
-\label{sec:org742ca97}
-\subsection{Stronger conjecture of \(P \neq NP \cap co-NP\)}
-\label{sec:org6dd8adc}
+\label{sec:org78268e3}
+\subsection{Stronger conjecture of \(P \neq\) \(NP\) intersection \(co-NP\)}
+\label{sec:org41fe89c}
 Is there a factor of \(n < k\). This problem is in the intersection of NP and
 co-NP.
 
@@ -501,7 +501,7 @@ true. (The input size is in \(\log n\).)
 A problem in \(NP\) and co-NP and then trying to find a good characterization
 and then solving the problem.
 \subsection{NP completeness}
-\label{sec:orgeef1bec}
+\label{sec:org70ab7f0}
 Subtle difference between easy and hard problem.
 \begin{enumerate}
 \item The graph is 2-colorable? is in P\footnote{Apparently there is a characterization that a graph is 2 colorable if and
@@ -512,12 +512,12 @@ only if it has no cycle.}
 The answer is always yes.
 \end{enumerate}
 \subsection{Hall's theorem}
-\label{sec:org2d853a5}
+\label{sec:org445de0b}
 If you have a graph \(G\) that is bipartite, then \(G\) has a perfect matching if
 and only if for every \(S\) inside \(A\), the \(\vert N(S) \vert \ge \vert S
    \vert\) and for every \(S \subset B\).
 \subsection{Necessary conditions for Hamiltonianity}
-\label{sec:orgb1292da}
+\label{sec:org4f92816}
 Dirac's theorem \(d(G) \ge n/2 \implies G\) is hamiltonian. \href{https://en.wikipedia.org/wiki/Hamiltonian\_path\#Bondy\%E2\%80\%93Chv\%C3\%A1tal\_theorem}{Wikipedia} (This is
 a sufficient condition.) For a cycle, this fails.   
 
@@ -531,7 +531,7 @@ We can try to frame something like if \(t C(G\setminus S) \subset \vert S
    \vert\). For peterson graph \(t = 4/3\). There is a conjecture on if we can talk
 about a value of \(t\) and do stuff.
 \subsection{Does a graph have a perfect matching? Tutte's theorem}
-\label{sec:org623ba73}
+\label{sec:orgce0025e}
 The question is whether this is in NP intersection co-NP. 
 
 The hall's theorem was for bipartite graph.
@@ -549,7 +549,7 @@ cycle to the matching problem and arriving at a necessary condition (and suffici
 is at least one edge \(e_L \in M\) which has one vertex in \(b\) and the other in
 \(S\). These edge \(e_L\) are disjoint \(\implies\) \footnote{My condition} \textsuperscript{,}\,\footnote{\href{https://en.wikipedia.org/wiki/Tutte\_theorem}{Tutte's theorem}}
 \subsection{Proof of Tutte's theorem}
-\label{sec:orgc773fb8}
+\label{sec:orgeb1ac5e}
 Let \(G\) be a counter example with maximum number of edges.\footnote{Why can we do this? We fix the number of vertices, so this it actually
 makes sense.}
 
@@ -562,7 +562,7 @@ What is a counter example? It should satisfy the following properties:
 Add \(xy\) to \(G\) and \(G+xy\) is not a counter example. We claim that \(\forall S
    \subset V(G)\), \(o((G+xy)\setminus S) \le \vert S \vert\). \footnote{Here \(xy\) is an edge that is not already in \(G\).}
 
-I know that \(o(G\setimus S) \le \vert S \vert\).
+I know that \(o(G\setminus S) \le \vert S \vert\).
 \begin{itemize}
 \item If \(xy \in S = \emptyset \implies \vert S \vert\) does not decrease.
 \item If \(xy\) goes between even components, then nothing changes.
@@ -611,9 +611,9 @@ u .----------------------------------------. v
 
 \end{verbatim}
 \section{Lecture 6 \textit{<2018-10-31 Wed>}}
-\label{sec:org263d16c}
+\label{sec:org43d9e18}
 \subsection{{\bfseries\sffamily TODO} Tutte's theorem proof}
-\label{sec:org70593e0}
+\label{sec:org6947a41}
 \(\leftimplies\) \(G\), a counter example with maximum number of edges.
 
 \textbf{Claim}: \(G+xy\) has a p.m. \(xy\in E(G)\), \(G\) has no p.m., \(\forall S \in
@@ -646,14 +646,14 @@ The proof in the class was from bondy and murthy. \href{http://www.zib.de/groets
 
 The wikipedia link seems to have the same proof.
 \subsection{Perfect matching is in NP intersection co-NP}
-\label{sec:org13d4ca2}
+\label{sec:org0e4d2cf}
 Tutte's theorem tells us that the problem is in the intersection of NP and
 co-NP. The certificate for the yes case is a matching and for the No case is
 a case where the Tutte's theorem is false.
 
 The problem is also in P.
 \subsection{Corollary to hall theorem (Theorem of Frobenius)}
-\label{sec:org96c32c3}
+\label{sec:orge5b1441}
 A \$k\$-regular bipartite graph has perfect matching.\footnote{What is regular graph? Every vertex has the same number of neighbours.} (1-factor)
 
 A \$k\$-factor is a spanning \$k\$-regular subgraph. 
@@ -664,15 +664,15 @@ regular and 1-factor. Are there examples with even number of vertices.
 
 
 \subsection{Theorem (peterson)}
-\label{sec:org13edee7}
+\label{sec:org715ceeb}
 A \(2k\) regular subgraph has a \$2\$-factor. 
 \subsection{Theorem (another peterson theorem)}
-\label{sec:org4311f31}
+\label{sec:org965f977}
 Every \$3\$-regular graph without cut edges\footnote{What is a cut edge? A cut edge should mean that you remove an edge and
 the graph gets disconnected.} has a perfect matching. (Theorem in
 Bondy and Murthy) \footnote{An example of such a graph is Peterson graph.}
 \subsubsection{Proof}
-\label{sec:org2a6f36e}
+\label{sec:org42dde4e}
 The proof is component wise. Now we assume that \(G\) is connected.
 
 We will check that Tutte's condition holds. Then Tutte's theorem tells us
@@ -703,7 +703,7 @@ $$ 3\cdot o(G \setminus S) \le \textup{number of edges between odd components an
 
 Thus \(\cdot o(G \setminus S) \le \vert S \vert\)
 \subsection{Maximum matching problem}
-\label{sec:org5082a3d}
+\label{sec:org8bdd5e8}
 In the decision problem formulation. Is there a matching of size \(k\) in the
 graph on \(n\) vertices.
 
@@ -712,19 +712,19 @@ Is this problem in NP intersection co-NP? The problem is obviously in NP.
 For Bipartite graphs, we can provide the other verification by Konig's
 theorem.
 \subsection{Konig's theorem}
-\label{sec:orgd5cec62}
+\label{sec:orgf78d3a9}
 \(G\) is bipartite, then \(\alpha(G)=\beta(G)\). Here \(\alpha\) is the size of the
 largest matching and \(\beta\) is the size of smallest vertex cover.
 
 \(C \subset V(G)\), the vertex cover if \(\forall e \in E(G)\), \(e\cap C \neq
    \emptyset\).
 \subsection{Konigs on Maximal matching problem}
-\label{sec:org5ca5817}
+\label{sec:org7865e53}
 Suppose \(\alpha(G) = 88\), then konig gives a certificate to show that there
 exists a vertex cover of size \(88\). So this means that there are no matching
 of size more than \(89\).
 \subsection{Homework: a corollary of Tutt due to Berge}
-\label{sec:org317658a}
+\label{sec:orgefa25b6}
 If \(G\) is a arbitrary graph, then it is true that \(2\alpha'(G)\) is equal to
 the minimum of the following sum of quantities: \(\min \{ n - o(G\setminus
    S) + \vert S \vert \colon S \subset V(G) \}\).\footnote{If the graph satisfies tutt's condition, then \(\alpha\) should evaluate
@@ -734,9 +734,9 @@ It is easy to show one direction. But this is the maximum size, which is the hom
 
 This example would put the problem of maximum matching into the intersection.
 \subsection{How to find maximum matchings in polynomial time?}
-\label{sec:org0746afa}
+\label{sec:org706fbe6}
 \subsection{Proposition about maximum matching}
-\label{sec:org359c099}
+\label{sec:org2f450bb}
 IF \(M \subset E(G)\) is a maximum matching of \(G\), \(\iff\) there is no
 \$M\$-augmenting path.
 
@@ -744,13 +744,13 @@ IF \(M \subset E(G)\) is a maximum matching of \(G\), \(\iff\) there is no
 other alternatively. One direction is easy. If \(M\) is a maximum matching,
 then there is no \(M\) augmenting path.
 \subsection{A M alternating path}
-\label{sec:org21ef251}
+\label{sec:orga23c807}
 A path of \(G\) where edges of \(M\) alternate with non-edges of \(m\).
 
 An \$M\$-alternating path that starts and ends in an unsaturated vertex is
 called \(M\) augmenting. \href{https://en.wikipedia.org/wiki/Saturation\_(graph\_theory)}{Wikipedia}
 \subsection{Using the characterization for Bipartite graph}
-\label{sec:org9f6646b}
+\label{sec:orgb5bd30e}
 \footnote{Apparently the problem for general graph is also in P. The algorithm for
 this graph was what lead to the definition of \(P\).} You have a matchin and then unsaturated vertices. The idea is to
 somehow extend the matching to the unsaturated edges.
@@ -778,32 +778,32 @@ somehow extend the matching to the unsaturated edges.
 
 \end{verbatim}
 \section{Tutorial}
-\label{sec:org354b0fb}
+\label{sec:orgb3b2247}
 \href{http://discretemath.imp.fu-berlin.de/DMII-2018-19/}{link}
 \subsection{Tutorial 1}
-\label{sec:orgfbc71d8}
+\label{sec:org072c98a}
 \subsubsection{Problem 2}
-\label{sec:org5b03334}
+\label{sec:org51d1af8}
 Each step reduces the number of components by at most \(4\). After \(5\) steps, at least \(5\) components are left. 
 \subsection{Tutorial 2}
-\label{sec:orgcd6ed45}
+\label{sec:org2f1d992}
 \subsubsection{SAT}
-\label{sec:org4187d21}
+\label{sec:orga00e695}
 \begin{enumerate}
 \item Example of un-satisfiable instance of SAT
-\label{sec:org976dc56}
+\label{sec:orgbf9f2a5}
 \(f(x_1) = x_1 \wedge \neg x_1\)
 
 No matter what the instance is, this will evaluate to zero. 
 \item About \(2^k\) clauses
-\label{sec:org5d7bc67}
+\label{sec:orgaa36248}
 We start by proving that the statement is true for exactly \(k\) variables. 
 
 Now we induct on the number of variables, starting from \(n\). If it is true
 for \(m\), then it is also true for \(m+1\) because we can replace the \$m+1\$th
 variable by \(x_1\) and bang.
 \item Bound being strict
-\label{sec:org17440cc}
+\label{sec:org69a4884}
 For \(k\) literals, and for \(2^k\), we take all possible combinations of \(x_1,
      \cdots, x_k\) such that no two literals are the same. This is not
 satisfiable. (This should evaluate to \(1\) all the time.) Because no matter
@@ -811,7 +811,7 @@ what is the value of \(x_1, \cdots, x_k\), there is a literal where the or is
 zero and that literal is present in it.
 \end{enumerate}
 \subsubsection{Problem 1 bipartite}
-\label{sec:orgdd7461c}
+\label{sec:org26b7238}
 We do a BFS. We have an array and it would be the distance. Now the claim is
 that \(A(u) = A(v) \mod 2\) and if there is an edge that connects these two
 vertices, then the graph is not bipartite.
@@ -821,10 +821,10 @@ We did prove that for BFS, the distances from the root are preserved.
 The proof was a bit complex. But it turned out to be something about
 applying BFS.
 \subsubsection{Problem 3 Greedy algorithm can fail}
-\label{sec:orgc6883f8}
+\label{sec:org33b215f}
 \begin{enumerate}
 \item part a
-\label{sec:orgb8fde84}
+\label{sec:org7268965}
 Algorithm: Sort the edges according to the weight in ascending order. \(E =
      \emptyset\). 
 \begin{enumerate}
@@ -851,10 +851,10 @@ vague.
 
 
 \item part b
-\label{sec:org36b1066}
+\label{sec:org7fb327a}
 \end{enumerate}
 \subsubsection{{\bfseries\sffamily TODO} Problem 2}
-\label{sec:org6bb9262}
+\label{sec:org33de39d}
 The first \(m\) edges are the smallest weight forest.
 
 Induction: First edge is true. Assume it's true for \(m-1\) edges are minimal
@@ -876,13 +876,13 @@ The problem is that there could be an edge that we didn't add because it
 created a cycle before. This edge can create problems later.
 \begin{enumerate}
 \item {\bfseries\sffamily TODO} Go again through the argument of Kruskal
-\label{sec:org150484a}
+\label{sec:org015167e}
 \end{enumerate}
 \subsubsection{Exercise 4}
-\label{sec:org02c63b4}
+\label{sec:orge6a931a}
 \begin{enumerate}
 \item Counter example
-\label{sec:org74b9a05}
+\label{sec:org45e55b5}
 Apparently any algorithm would fail on it because the shortest path does
 not make any sense.
 \begin{verbatim}
@@ -901,7 +901,7 @@ not make any sense.
 b---------------------------\c
 \end{verbatim}
 \item {\bfseries\sffamily TODO} Algorithm
-\label{sec:org05980b1}
+\label{sec:org5f20bc3}
 \textbf{Claim}: Right after \$i\$-th step of second part, \$i\$-th step of second
  part, \(v \in V, \dist(v) \le \min \{ \vert w\vert \vert w \textup{
       contains } \le i \textup{ edges} \}\).
@@ -920,13 +920,13 @@ negative weighted cycle. The claim more or less does it.
 The time complexity is \(O(mn)\)
 \end{enumerate}
 \subsubsection{Exercise 5 (SAT)}
-\label{sec:org34362e4}
+\label{sec:org91423c2}
 \begin{enumerate}
 \item Part a
-\label{sec:org28c6a19}
+\label{sec:org4e5ca79}
 It's easy
 \item Part b
-\label{sec:orgf0a81c1}
+\label{sec:org1597353}
 Write \(f(x_1, \dots, x_m) = c_1 \wedge c_2 \cdots c_m\), \(m < 2^k\).
 
 \(c_i = \tilde{x_{i_1}} \and \tilde{x_{i_2}} \cdots\)  
@@ -936,9 +936,9 @@ for \(e\) or \(e_i\), define the set \(D_i = \{v\colon \{T, F\}^n \vert c_i(v) =
 can do a probabilistic argument.}
 \end{enumerate}
 \subsection{Tutorial 3}
-\label{sec:org138351d}
+\label{sec:org4c5d8e0}
 \subsubsection{Problem 1}
-\label{sec:orgf8325c6}
+\label{sec:orgb588e4c}
 We draw the graph, and remove the edges 2, 4, 8, 12. Now there are 6 odd
 number of components. There is a characterization about the maximal matching
 being the minimum of \(\{n - o(G\setminus S) + \vert S\vert\colon \forall S
@@ -950,7 +950,7 @@ vertices is 18. There cannot be a matching on 17, because odd. Thus, the
 matching on 16 has to be the maximal matching.
 \begin{enumerate}
 \item Old solution
-\label{sec:org9543eec}
+\label{sec:org57f89cf}
 \begin{verbatim}
 % To find the maximal matching, we use a corollary to Tutte's theorem which was mentioned in the lecture.
 
@@ -975,18 +975,92 @@ matching on 16 has to be the maximal matching.
 % \end{figure}
 \end{verbatim}
 \end{enumerate}
+\subsubsection{Problem 2}
+\label{sec:org42623f5}
+\begin{enumerate}
+\item part a
+\label{sec:orgc110910}
+It is clear that \(\vert V \vert = \sum \textup{vertices in even components
+     of G\S} + \sum \textup{vertices in odd components of G \ S} + \vert S \vert\)
+
+The above sum \(\mod 2\) evaluates to \(\vert V \vert \mod 2= o(G\setminus S) +
+     \vert S \vert\). This is same as \(\vert S \vert - o(G \setminus S \mod 2\).
+\item part b
+\label{sec:org16b48ca}
+The idea is something like this.
+
+For each \(S\) such that the number of odd components in the complement of
+\(S\) is greater than \(S\), introduce a \(K_d\), where it's the clique on \(d\)
+vertices. What should be the value chosen for \(d\)? Each value of \(d\) should
+be equal to the the difference for that set \(S\).
+
+Now this should satisfy Tutte's theorem (maybe we can do this inductively
+as well.) There is a maximal matching. We need to show that in the maximal
+matching contains no edge in the clique. Now, we can arrive at a matching
+on the original graph \(G\) and things should be okay?
+
+I've omitted details in the steps.
+\end{enumerate}
+
 \subsubsection{Problem 3}
-\label{sec:org5ff90e8}
+\label{sec:org9093e54}
 \begin{enumerate}
 \item Part a
-\label{sec:org8507207}
+\label{sec:org81b4a26}
+This is kinda similar to the proof of the theorem about \$3\$-regular graph
+without any cut edges having a perfect matching. 
+
+First notice that every three regular graph must have even number of
+vertices.
+
+Given \(S\) and \(G\setminus S\), we think about the the degrees of elements
+inside any disconnected component of \(G \setminus S\). They cannot be \(0\)
+because then, it means that there are three cut edges. They may be \(1\) and
+they maybe \(2\) at most \(2\) times.
+
+If it is \(2\) exactly 0 times, there are no cut edges and we are done (the
+idea is that the sum of the degrees of each vertex have to be even, but the
+degrees are either 1 or 3, so there has to be an even number of vertices.)
+
+If it is \(2\) exactly 1 times, then there can be at most \(1\) odd component,
+and \(\vert S\vert > 0\), now, Tutte's theorem!
+
+If it is \(2\) exactly \(2\) times, then we know that \(\vert S \vert -
+     o(G\setminus S)\) has to have parity same as \(\vert V\vert\), but this means
+that \(\vert S\vert\) is a non-zero multiple of \(2\), and \(o(G \setminus S)\)
+is exactly equal to \(2\). Now, Tutte's theorem.     
 \item Part b
-\label{sec:org17bfee6}
+\label{sec:org2facee0}
 The graph from the graph theory book
 \item part c
-\label{sec:orgb8204c4}
+\label{sec:orga7bb8ff}
 If \(k\) is even, we can think about a clique on \(k+1\) vertices.
 
 If \(k\) is odd, then we can do a similar construction as \(b\).
 \end{enumerate}
+\subsubsection{Problem 5}
+\label{sec:orgc40c668}
+Let \(M\) be a maximal matching on \(G\). Let \(2\alpha\) be the number of
+vertices here. Let \(2\alpha'\) be the number of vertices that gets connected
+in \(2\alpha'\), we are supposed to show that \(\alpha' > 1/2 \alpha\).
+
+Let the edges in the matching be \(\{e_{i_1}, \cdots, e_{i_n}\}\). Where \(i_1
+    \le \cdots, i_n\). So when the algorithm is at the step \(i_k\), either it gets
+added to \(M_{t-1}\) or gets rejected. Let \(x\) number of them get's rejected
+and \(y\) number of them gets added.
+
+When does an edge gets rejected? If one of the vertex in \(e_{i_k}\) is
+already in \(M_{t}\). Let us now count the number of vertices in \(M_t\) at the
+end.
+
+\(M_t \ge x + 2y \ge x+y = (\alpha)\).
+
+Strictness: Consider the following graph and ordering of vertices:
+\begin{verbatim}
+o----------------o----------------o----------------o
+       e2              e1                 e3       
+\end{verbatim}
+
+The maximal matching is \(\{e2, e_3\}\), whereas the algorithm generates
+\(\{e_1\}\).
 \end{document}
