@@ -736,6 +736,140 @@
       \varepsilon = u_i + v_j$
    4. x_i \in X \setminus R, y_j \in Y \setminus T$. So $u_i + v_j \ge w_{i,
       j}$.
+* Lecture 8 <2018-11-06 Tue> 
+  *Input*: $(w_{i, j})_{i, j =1}^n$ weights or $E(K_{n, n})$, $X = \{x, \cdots,
+   y_n\}$, $Y = \{y, \cdots, y_n\}$
+
+   *Initialization*: $u_i = \max_{w_{i, j}, j\cdots n\}$, $v_j = 0$
+
+   *Iteration*: For $m$, $G_{u, v}$, $V(G_{u, v} = V(K_{n, n}), E(G_{u, v}) =
+    \{x_iy_j \colon w_ij = u_i + v_j\}$
+    
+    Find a maximal matching $M \subset G_{u, v}$ and min vertex case $Q = T \cup
+    R$.
+
+    If $M$ is perfect matching, then return (as max weighted is perfect
+    matching.), $R = X \cap Q, T = Y \cap Q$. $(u, v)$ as a minimum cost cover.
+
+    Else $\epsilon = \min\{u_i + v_j - w_{ij}\colon x_i \in X \setminus R, y_j
+    \in Y \setminus T \}$ Update $u_i = u_i - \epsilon$ if $x_i \in X \setminus
+    R$ and $v_j = v_j + \epsilon$ if $y_j \in T$.
+
+    *Remark*: $G$ is bipartite, define $w_{i, j} \iff w_{i, j} = 1 \iff x_iy_j
+     \in E(G)$ vertex cover $G$ implies $u, v$ characteristic $(011)$ vectors of
+     $C$, implies cover of $w_{ij}$, $w_{i, j} \le u_i + v_j$. True since if
+     $w_{i, j} = 1$ then $x_iy_j \in E(G)$, then $x_i$ or $y_j \in C$, then
+     $u_i$ or $v_j =1$.
+     
+   | x | 0 | 0 | 0 | 0 | 0 |
+   |---+---+---+---+---+---|
+   | 5 | 1 | 2 | 3 | 4 | 5 |
+   | 8 | 6 | 7 | 8 | 7 | 2 |
+   | 5 | 1 | 3 | 4 | 4 | 5 |
+   | 8 | 3 | 6 | 2 | 8 | 7 |
+   | 5 | 4 | 1 | 3 | 5 | 4 |
+
+   Excess matrix
+   | x | 0 | 0 | 0 | 0 | 0 |
+   | 5 | 4 | 3 | 2 | 1 | 0 |
+   | 8 | 2 | 1 | 0 | 1 | 6 |
+   | 5 | 4 | 2 | 1 | 1 | 0 |
+   | 8 | 5 | 2 | 6 | 0 | 1 |
+   | 5 | 1 | 4 | 2 | 0 | 1 |
+
+   Now we form the graph with $0$ edges and find a perfect matching.
+
+   | x | 0 | 0 | 1 | 1 | 1 |
+   |---+---+---+---+---+---|
+   | 4 | 3 | 2 | 2 | 1 | 0 |
+   | 7 | 1 | 0 | 0 | 1 | 6 |
+   | 4 | 3 | 1 | 1 | 1 | 0 |
+   | 7 | 4 | 1 | 6 | 0 | 1 |
+   | 4 | 0 | 3 | 2 | 0 | 1 |
+
+   | x |  1 |  0 |  1 |  2 |  2 |
+   |---+----+----+----+----+----|
+   | 3 |  3 |  1 |  1 |  1 | 0* |
+   | 7 |  2 | 0* |  0 |  2 |  7 |
+   | 3 |  3 |  0 | 0* |  1 |  0 |
+   | 6 |  4 |  0 |  5 | 0* |  1 |
+   | 3 | 0* |  2 |  1 |  0 |  1 |
+
+   Now we end up with a perfect matching in the equality subgraph. (The ones
+   labelled *)
+
+   | x |  0 |  0 |  0 |  0 |  0 |
+   |---+----+----+----+----+----|
+   |   |  1 |  2 |  3 |  4 | 5* |
+   |   |  6 | 7* |  8 |  7 |  2 |
+   |   |  1 |  3 | 4* |  4 |  5 |
+   |   |  3 |  6 |  2 | 8* |  7 |
+   |   | 4* |  1 |  3 |  5 |  4 |
+
+   The above table represents the cover in the original graph.
+
+   Perfect matching of weight $5 + 7 + 8 + 4= 28$ and $C(u, v) = 3 + 7 + 3 + 6 +
+   3+ 1 + 1 + 2 + 2 = 28$.
+** Proof
+   If we add edges at every step in the graph from which we get the matching, we
+   would be done. But we are not exactly doing it.
+
+   Observations: $\vert Q \vert = \vert M \vert$, no $M$-edge is covered twice by $Q$.
+
+   $T = \{y \in Y \colon \exists M$ alternating $(U, y)$ path $\}$.
+
+   $R = \{x \in X \colon \nexists M$ alternating $(U, Y)$ path $\}$.
+
+   where $U = \{x \in X \colon x$ is $M$-unsaturated $\}$.
+
+   For termination of the Hungarian algorithm, count for *the number of vertices
+   that are reached from $U$ on an $M$-alternating path*. This quantity grows in
+   each iteration. (or $M$-augmenting path, which implies that there is a larger
+   matching.)
+
+   The edges of $M$-alternating path starting at $U$ remain in $G_{u, v}$. Edges
+   can be lost only between $T$ and $R$. But these edges are not participating
+   in the alternating path. In $M$-alternating path, vertices of $T$ are only
+   connected to vertices in $S = X - R$.
+
+   By the choice of $\varepsilon$, there is at least one pair $x_i y_j$ such
+   that $x_i \in X \setminus R$, $y_j \in T$,such that $x_i y_j$ is a new edge
+   in the equality sub-graph.
+
+   This means that after $\le \frac{n}{2}$ iterations, or $M$ unsaturated $y\in
+   Y$ is reached via a $M$-alternating path, which means that the matching is
+   growing, and the matching can grow at most $n/2$. Thus after $\frac{n^2}{4}$
+   iterations.
+** Connectivity problem
+*** Definition (Vertex cut)
+    A vertex cut of a graph $G$ is a set of vertices such that $G-S$ is
+    disconnected.[fn:28]
+*** Definition (Connectivity of G)
+    Connectivity of $G$, denoted by $\kappa$, is the minimum size of the vertex
+    cut. If your graph is disconnected to begin with, then this is zero.
+
+    By definition, for a clique, $K(K_n) = n-1$. The empty graph is "considered"
+    to be disconnected.
+*** Examples
+    $K(K_{n, m})= \min{n, m\}$. Proof: $\le$, Given a vertex cut of size
+    $\min\{m, n\}$, smaller side
+
+    $\ge$ Now we remove $\{m, n\} - 1$, vertices of $S$, $K_\{n, m\} - S$, and
+    through them everybody else can be reached.
+*** Proposition
+    For all $G$, $K(G) \le n-1$. The clique is $K(G) = n-1 \iff G = K_n$.
+
+    $K(G) \le \delta(G)$, here $\delta$ is the min degree. This is kinda clear,
+    because we can pick a vertex with the minimum degree and remove all it's
+    neighbours.
+
+    $K(Q_d)$, the one skeleton of the $d$ dimensional cube.
+
+    $E(Q_d) = \{uv \colon}$ $u$ and $v$ differ in exactly one coordinate $\}$.
+    From the proposition, the minimum degree is $d$.
+
+    I didn't write the rest of the argument. But doesn't look so hard. The proof
+    was by induction.
 * Tutorial
   [[http://discretemath.imp.fu-berlin.de/DMII-2018-19/][link]]
 ** Tutorial 1
@@ -895,7 +1029,7 @@
 *** Problem 2
 **** part a
      It is clear that $\vert V \vert = \sum \textup{vertices in even components
-     of G\S} + \sum \textup{vertices in odd components of G \ S} + \vert S \vert$
+     of G\S} + \sum \textup{vertices in odd components of }G\setminus S + \vert S \vert$
 
      The above sum $\mod 2$ evaluates to $\vert V \vert \mod 2= o(G\setminus S) +
      \vert S \vert$. This is same as $\vert S \vert - o(G \setminus S \mod 2$.
@@ -913,7 +1047,22 @@
      on the original graph $G$ and things should be okay?
      
      I've omitted details in the steps. 
-     
+**** part b (alternate solution)
+     Observation:
+     1. For all even components, there is a matching
+     2. For each vertex in the odd components, then $C_o \setminus \{v\}$ has a
+        perfect matching.
+     3. If $M$ is a maximal matching on $G[s]$.
+
+     Proof
+     1. Using Tutte's theorem: $S' \subset V(e)$, $\tilde S= S \cap S'$, then
+        $\vert \tilde S\vert - o(G\setminus \tilde S)\ge \vert S \vert - o(G
+        \setminus S)$ Now the LHS is equal to $\vert S \vert + \vert S'\vert -
+        o(G\setminus S) - o(Ce\setminus S) \ge 0$, now we can infer that Tutte's
+        theorem is satisfied inside the even components.
+     2. $\vert S \vert + \vert S'' \vert - o(G \setminus S) - o(C_o \setminus
+        S'') + 1$ (I missed some stuff here.)
+
 *** Problem 3
 **** Part a
      This is kinda similar to the proof of the theorem about $3$-regular graph
@@ -944,6 +1093,25 @@
      If $k$ is even, we can think about a clique on $k+1$ vertices.
 
      If $k$ is odd, then we can do a similar construction as $b$. 
+*** Problem 4
+    Induction on the number of vertices of the tree.
+
+    For $2$ vertices. It has a unique perfect matching.
+
+    For $n \ge 2$, $n$ has to be even. There has to be at least one vertex that
+    is a leaf (Handshake lemma?) we picked a leaf because the edge must be in
+    the perfect matching. We delete the vertex right next to the edge. And on
+    each of the even component, we can use the induction argument? We need to
+    prove that if we delete a vertex inside the even component, there has to be
+    exactly one component is odd. 
+
+    $\vert T' \vert = \vert T' \cap C \vert (\mod 2)$
+
+    We can prove this. And apply induction hypothesis.
+*** Problem 4 (Alternate proof)
+    *Theorem*: In any tree there exist at most $1$ perfect matching. (the idea
+     is that if there are two matching, then their symmetric difference must
+     have a cycle.)
 *** Problem 5
     Let $M$ be a maximal matching on $G$. Let $2\alpha$ be the number of
     vertices here. Let $2\alpha'$ be the number of vertices that gets connected
@@ -969,6 +1137,8 @@
     The maximal matching is $\{e2, e_3\}$, whereas the algorithm generates
     $\{e_1\}$.
 * Footnotes
+
+[fn:28] In a good connected graph, you don't want a vertex set to be small.
 
 [fn:27] Practical example: There is a company which has factories and corn
 farms, the edges represent the profit the factory makes by producing corn from a
