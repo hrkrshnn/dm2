@@ -649,7 +649,7 @@
     X$, $yw \in M$ update, $T = T \cap \{y\}$ and $S = S \cup \{w\}$. Update $Q
     = Q \cup \{x\}$. [fn:26]
 *** Proposition
-    $G$ graph, $M \subset E(G)$ is a matching. $C \subset V(G) \implis \vert M
+    $G$ graph, $M \subset E(G)$ is a matching. $C \subset V(G) \implies \vert M
     \vert \le \vert C \vert$. Here $C$ is the cover.
 
     The idea is that every cover has to be bigger than the matching.
@@ -658,7 +658,7 @@
     path or it can stop with a maximum matching or a cover.
 
     Proof of correctness: If the algorithm terminates with a matching $M$ and a
-    cover $T \cap (X \setmius S)$, we terminate at $Q = S$, which means that we
+    cover $T \cap (X \setminus S)$, we terminate at $Q = S$, which means that we
     have explored all the neighbours of $S$ and they are all in $T$. We want to
     conclude that there exists no edge between $S$ and $Y-T$. (Because if there
     is no edge between $T$ and $Y-T$, then $T$ together $S-T$ is a cover.)
@@ -672,6 +672,8 @@
     put into $S$.
 
     $\implies$, $S = U \cap M$ partners of vertices in $T$.
+*** Internet reference
+    [[http://www.columbia.edu/~cs2035/courses/ieor8100.F12/lec4.pdf]]
 ** Theorem
     Repeatedly applying APA to bipartite graph produces a maximal matching and
     minimal cover. The running time is $O(V(G) \cdot e(G))$
@@ -728,7 +730,7 @@
    Why is the update $(u, v)$ still a cover? It involves 4 cases depending of
    where the pair $(i, j)$ goes to.
 
-   1. If $x_i \in R$ and $y_j \in Y \setmius T$.
+   1. If $x_i \in R$ and $y_j \in Y \setminus T$.
       $u_i, v_j$ are unchanged.
    2. $x_i \in R, y_j \in T$ implies that $u_i + v_j$ grew by $\varepsilon$ which
       is okay.
@@ -736,11 +738,11 @@
       \varepsilon = u_i + v_j$
    4. x_i \in X \setminus R, y_j \in Y \setminus T$. So $u_i + v_j \ge w_{i,
       j}$.
-* Lecture 8 <2018-11-06 Tue> 
+* Lecture 8 <2018-11-07 Wed>
   *Input*: $(w_{i, j})_{i, j =1}^n$ weights or $E(K_{n, n})$, $X = \{x, \cdots,
    y_n\}$, $Y = \{y, \cdots, y_n\}$
 
-   *Initialization*: $u_i = \max_{w_{i, j}, j\cdots n\}$, $v_j = 0$
+   *Initialization*: $u_i = \max_\{w_{i, j}, j\cdots n\}$, $v_j = 0$
 
    *Iteration*: For $m$, $G_{u, v}$, $V(G_{u, v} = V(K_{n, n}), E(G_{u, v}) =
     \{x_iy_j \colon w_ij = u_i + v_j\}$
@@ -851,7 +853,7 @@
     By definition, for a clique, $K(K_n) = n-1$. The empty graph is "considered"
     to be disconnected.
 *** Examples
-    $K(K_{n, m})= \min{n, m\}$. Proof: $\le$, Given a vertex cut of size
+    $K(K_{n, m})= \min\{n, m\}$. Proof: $\le$, Given a vertex cut of size
     $\min\{m, n\}$, smaller side
 
     $\ge$ Now we remove $\{m, n\} - 1$, vertices of $S$, $K_\{n, m\} - S$, and
@@ -865,7 +867,7 @@
 
     $K(Q_d)$, the one skeleton of the $d$ dimensional cube.
 
-    $E(Q_d) = \{uv \colon}$ $u$ and $v$ differ in exactly one coordinate $\}$.
+    $E(Q_d) = \{uv \colon$ $u$ and $v$ differ in exactly one coordinate $\}$.
     From the proposition, the minimum degree is $d$.
 
     I didn't write the rest of the argument. But doesn't look so hard. The proof
