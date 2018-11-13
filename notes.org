@@ -738,7 +738,7 @@
       \varepsilon = u_i + v_j$
    4. x_i \in X \setminus R, y_j \in Y \setminus T$. So $u_i + v_j \ge w_{i,
       j}$.
-* Lecture 8 <2018-11-07 Wed>
+* Lecture 8 <2018-10-31 Wed>
   *Input*: $(w_{i, j})_{i, j =1}^n$ weights or $E(K_{n, n})$, $X = \{x, \cdots,
    y_n\}$, $Y = \{y, \cdots, y_n\}$
 
@@ -872,6 +872,122 @@
 
     I didn't write the rest of the argument. But doesn't look so hard. The proof
     was by induction.
+* Lecture 9 <2018-11-07 Wed>
+** Connectivity of graph
+   $G \neq K_n$, then $K(G) = \min \{ \vert S \vert \colon G - S \textup{ is not
+   connected } \}$.
+
+   $G = K_n$, $K(G) = n-1$.
+** Proposition
+   $K(G) \le v(G) - 1$ and $K(G) \le \delta(G)$.
+** Extremal questions
+   Given $n$ and $k$, what is the smallest number $e$ of edges that there exists
+   as $n$ vertex $k$-connected  graph with $e$ edges.
+** Proposition
+   For all $k \ge 2$, there exists a $k$ connected graph on $n$ vertices with
+   the ceil of $(n-k)/2$ edges.
+** Theorem (Chvatal-Erdos)
+   If $G \neq K_2$ and its connectivity $K(G) \ge \alpha(G)$. $\alpha(G)$ is the
+   size of the largest independent set of vertices. And $\alpha'$ is the size of
+   the largest matching [fn:29]
+
+   Then $G$ is hamiltonian.
+*** Proof
+    Take a cycle in $C \subset G$ which is the longest. If the length of $C$ is
+    $n$, we are done. So we can assume the length of $C$ is less than $n$.
+
+    Let $H$ be a component of $G -C$.
+
+    $k \le \delta(G)$. The length of the longest cycle is at least $\delta$.
+    Take the largest path in $G$ and the end points of $P$ only have neighbours
+    on $P$, otherwise the path could be extended. The farthest neighbour of $w$
+    of $x$ on $P$ has distance at least $\delta(C)$.
+
+    This means that the segment $P[x, w] + xw$ forms a cycle of length $\ge
+    \delta(G) + 1$.
+
+    Back to $H$. Let name the vertices which have an edge to $H$ as $v_i$. There
+    exits at least $k$ vertices on $C$ which have an edge to $H$ (this is
+    because of $k$-connectedness; otherwise we could separate $C$ from $H$ by
+    the deletion of strictly less than $k$ vertices, which is a contradiction.)
+
+    Notice that two adjacent vertices in $C$ cannot have an edge to $H$,
+    otherwise, we can extend $C$ by entering $H$ and coming back. We call
+    $v_{i}^{+}$ denote the vertices that are the vertices that follows $v_i$ on
+    the cycle. We now know that all off $v_{i}^{+}$ is distinct from $v_i$. 
+
+    We can see that there cannot be two edges between $v_{i}^{+}$ and
+    $v_{j}^{+}$, one can see this by drawing an easy diagram, for one can form a
+    bigger cycle than $C$, which is a contradiction.
+
+    This implies that $\{v_i^+, \cdots, v_k^+\}$ is an independent set of size
+    $k$. This union with any vertex in $H$ is an independent set. This is a
+    contradiction because $\alpha(G) \ge k+1$, which is not what we assumed.
+** Definition (Disconnecting set of edges)
+   $F$ is a disconnecting set of edges if its removal makes the graph
+   disconnected, i.e., $G-F$ is disconnected.
+
+   $\kappa'(G) = \min\{\vert F \vert \colon F \subset E(G) \textup{ is a
+   disconnecting of edges\}$
+
+   This is the *edge connectivity* of $G$. $G$ is called $k$-edge connected,
+   $k'(G) \ge k$.
+** Definition
+   A subset $S \subset V(G)$, then an edge-cut of the Multi-Graph is an edge-set
+   of the form $[S, \bar{S}] = \{xy \colon x = S, y \in \bar{S}\}$. For some
+   subset $S, \emptyset \neq S \neq V(G)$. Here $\bar{S} = V(G)\setminus S$, the
+   set theoretic complement.
+** Observation
+   $K'(G) = \min\{[S, \bar{S}] colon S\subset V(G), S\neq \emptyset, S \neq V(G)
+   \}$
+*** Proof
+    If $F \subset E(G)$ is a disconnecting set of edges with $\vert F \vert
+    \subset K'(G)$, then let $S$ be a components of $G - F$, then $[S, \bar{S}]
+    \subset F$. Since $F$ is minimal, this implies that $F = [S, \bar{S}]$.
+** Bounds
+   1. Initial bound, $k'(G) \le \delta(G)$.
+   2. $\kappa'(G) > \kappa(G)$ is true for simple graphs.
+      
+      *Proof*: The proof is easy. Try to show that there is a vertex cut of size
+      $\kappa'(G)$ whose removal disconnects $G$.
+
+      Take an edge cut such that the size $\vert[S, \bar{S}]\vert = K'(G)$.
+
+      Case 1: $G$ contains $K_{\vert S \vert, \vert \bar{S} \vert}$ on $S$ and
+      $\bar{S}$. Then the statement is trivially true, since $K'(G) = \vert S,
+      \bar{S}\vert = \vert S \vert \vert \bar{S}\vert = \vert S \vert (n - \vert
+      S \vert) \ge n - 1\ge \kappa(G)$.
+
+      Case 2: We don't have a complete bipartite graph, so we can identify
+      vertices that we will disconnect, $x\in S$, $y\in \bar{S}$ such that $xy
+      \notin E(G)$.
+
+      $T_1$ is the set of neighbours $N(x) \cap \bar{S}$ on the other side. $T_2
+      = \{w \in S \setminus x \cap S \colon N(w) \cap \bar{S}\} \neq \emptyset$.
+      The removal of $T_1$ and $T_2$ separate $x$ and $y$. Now $\vert T_1 \cap
+      T_2 \vert \le \vert[S, \bar{S}]$. Because there is an injection from the
+      left set to the other one, given by if $w\in T_1, take xw$. $w\in T_2
+      \mapsto wu_w$.
+
+      Note $S$ is just one side that is separate from the other side.
+** Is graph $G$ $k$ connected?
+   It's definitely in co-NP. If it's not $k$ connected, we get a set a vertices,
+   and, we'll be able find it in polynomial time.
+
+   But is it in $NP$?
+   
+   $1$-connectedness if in $P$.
+
+   But $2$-connectedness is in $P$. There are only a $n^2$ number of vertices.
+   Hence polynomial.
+
+   But we want to know about $k$ connectivity, when $k$ is the function of $n$.
+** Theorem (A characterization of $2$ connectivity)
+   $G$ is $2$-connected if and only if for all $x, y \in V(G)$, they are on a
+   cycle.[fn:30]
+
+   $G$ is $2$-connected if and only if for all $x, y \in V(G)$ if there exist
+   $2$ internally disjoint $x, y$ paths. [fn:31]
 * Tutorial
   [[http://discretemath.imp.fu-berlin.de/DMII-2018-19/][link]]
 ** Tutorial 1
@@ -1138,7 +1254,25 @@
 
     The maximal matching is $\{e2, e_3\}$, whereas the algorithm generates
     $\{e_1\}$.
+** Tutorial 4 
+
+*** Problem 1
+    The inequality is super easy and just follows from the definition.
+
+    The proof is equality is also very easy. If no permutation satisfy the
+    condition, then we can easily prove that there cannot be an equality.
+*** Problem 5
+    Isn't this kinda simple? Like it is trivial when $n \ge k+2$, when $n= k+1$,
+    the sum on the RHS evaluates to $k -1/2$, since $k$ is an integer,
+    $\delta(G)$ has to be at least $k$.
 * Footnotes
+
+[fn:31] This can be generalized in a very straightforward way.
+
+[fn:30] It is true that for $k$-connectedness, any $k$ vertices are on a cycle,
+but the other direction is not true.
+
+[fn:29] We use the convention that the prime is the corresponding to edges.
 
 [fn:28] In a good connected graph, you don't want a vertex set to be small.
 
