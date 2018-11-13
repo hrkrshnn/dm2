@@ -1255,16 +1255,67 @@
     The maximal matching is $\{e2, e_3\}$, whereas the algorithm generates
     $\{e_1\}$.
 ** Tutorial 4 
-
 *** Problem 1
     The inequality is super easy and just follows from the definition.
 
     The proof is equality is also very easy. If no permutation satisfy the
     condition, then we can easily prove that there cannot be an equality.
+*** Problem 2
+    We can take the negative of all weights. And apply Hungarian algorithm.
+*** Problem 3
+    Step $i$ of the algorithm: let $M$ be the maximum matching in the equality
+    graph $G_{u, v}$ and $\vert r \vert < n$ and let $Q$ be the vertex cover
+    provided by the algorithm, then $T = Q \cap Y$ and $R = Q \cap X$ and
+    $\varepsilon = \min \{u_i + v_j - w_{ij}\vert x_i \in X \setminus R, y \in Y
+    \setminus T\}$
+
+    Let $(\bar u, \bar v)$ be the weighted cover after calculating with
+    $\varepsilon$.
+
+    We need to show that $\vert X \setminus R \vert > \vert T \vert$. This is
+    true, because if it is not true, then we have that $n = \vert R \vert +
+    \vert X \setminus R \vert \le \vert R \vert + \vert T \vert = \vert Q \vert
+    = \vert r \vert < n$.
+
+    Indeed at each step, the cost function decreases by some number.
+
+    Why does the algorithm terminate? 
+
+    $w_{ij} = \frac{p_{ij}}{q_{ij}}$, and $q = LCM(p_{ij}, q_{ij})$, then
+    $\epsilon \ge 1/\varepsilon$, then we can always finish the algorithm.
+
+    Or we can make all the weights as integers. The rational case follows
+    easily.
+*** Problem 4
+    Questions: 
+    1. Is this the unique extremal examples? The answer is yes.
+    2. What are the extremal examples?
+    3. Hypergraphs: $k$ uniform Hypergraphs. We can define the notion of perfect
+       matching in Hypergraphs. What is the maximum number? A paper in 2011
+       solved it.
 *** Problem 5
     Isn't this kinda simple? Like it is trivial when $n \ge k+2$, when $n= k+1$,
     the sum on the RHS evaluates to $k -1/2$, since $k$ is an integer,
     $\delta(G)$ has to be at least $k$.
+*** Problem 5 (proof)
+    What is the definition of $k$ connected? 
+
+    $\kappa(G) \ge k \iff G$ is $k$ connected.
+
+    $G, n \ge k+1$, $\delta(G?) \ge \frac{n+k-2}{2}$. It is sufficient to show
+    that if we subtract a set of size $k-1$, then the graph is connected.
+    $G[V(G)\setmius S]$ are either neighbours (in this case it's trivial.)
+
+    $u, v \in V(G')$. 
+
+    1. $u \in N(v)$, then we are done.
+    2. $N(v) \cap N(u) \neq \empty$. Suppose $N_G'(v) \cap N_G'(u) = \emptyset$.
+       $n+k-2 - 2(k-1) = n-k$, we should have so much vertices in $G'$ for the
+       condition to be true. But $G'$ has $n-k+1$ vertices.
+    3. Remark: $\delta \ge (n-1)/2$, then the graph is 1-connected or connected.
+       Whereas, if $\delta \ge n/2$, then the graph has a hamiltonian cycle.
+*** Problem 5 (Bonus)
+    An example where the bound in sharp.
 * Footnotes
 
 [fn:31] This can be generalized in a very straightforward way.
