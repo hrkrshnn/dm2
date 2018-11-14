@@ -14,8 +14,7 @@
 #+LATEX_HEADER: \def\min{\operatorname{min}}
 #+LATEX_HEADER: \def\dist{\operatorname{dist}}
 #+LATEX_HEADER: \def\prev{\operatorname{prev}}
-#+LATEX_HEADER: \def\pos{\operatorname{pos}}
-#+LATEX_HEADER: \def\conv{\operatorname{Conv}}
+#+LATEX_HEADER: \def\val{\operatorname{val}}
 #+LATEX_HEADER: \usepackage[T1]{fontenc}
 
 * Lecture 2<2018-10-17 Wed>
@@ -988,6 +987,122 @@
 
    $G$ is $2$-connected if and only if for all $x, y \in V(G)$ if there exist
    $2$ internally disjoint $x, y$ paths. [fn:31]
+* Lecture 10 <2018-11-14 Wed>
+** Menger's theorem (VMT)
+   A graph $G$ is $k$-connected if and only if for all pairs of vertices $x, y
+   \in V(G)$, there exits $K$ pairwise internally disjoint paths.
+*** Remarks
+    1. This implies that $k$ connectivity is in $NP$ intersection co-NP. It
+       takes $O(kn)$ to check that they are internally disjoint. There are
+       $O(n^2)$ pairs to check
+    2. For $k=2$, the VMT says that $G$ is $2$ connected if and only if for
+       every $x, y \in U(G)$ is a cycle.
+*** Proof of ($\Leftarrow$) VMT
+    Suppose for a contradiction that there are $k$ internally disjoint vertices
+    between every vertices, and $\kappa(G) \le k-1$. Let $S$ be a such a
+    separating set. 
+
+    Let $S$ be such a separating set which separates $x$ from $y$, then every
+    $xy$ path passes through $S$, and pigeon-hole implies that two halfs share a
+    vertex of $S$. This is a contradiction.
+*** Proof of $\implies$ of VMT for $k=2$
+    Assume $K(G) \ge 2$, need a cycle containing $x, y \forall$ pairs $x, y \in
+    V(G)$.
+
+    Induct on $d(x, y) = \{\vert e(P)\vert \colon P \textup{ a xy path }\}$.
+
+    *Base case*: $d(x, y) = 1$, $\kappa'(G) \ge \kappa(G) \ge 2$. Implies $G
+    \setminus \{xy\}$ is still connected $\implies xy$ path $P$ in $G\setminus
+    e$ \implies $P \cap \{e\}$ is a cycle which contains $x, y$.
+
+    *Induction step*: $d(x, y) = d$, let $P$ be a path of length $d$. Let $v$ be
+     the last vertex before $y$ on $P$. Induction says that some $C$ containing
+     $x$ and $v$.
+
+     If $y\in C$, we are done. If not, there exits a $xy$ path $Q$ in
+     $G\setminus \{v\}$ as $G$ is $2$ connected. Now, it's easy to construct a
+     cycle from $x$ to $y$.
+
+     Let $z$ be the last $v_x$ of $C$ on $Q$ if it exits. Let $D$ be $C\setminus
+     [z, v]$ such that $x \in D$. Now $C' = D \cup Q\vert[x, y] \cup \{xy\}$
+     cycle containing $x$ and $y$.
+
+     If no such $z$ exists, then it's straightforward to construct a cycle.
+** Edge Menger's theorem
+   A graph $G$ is $k$ connected if $\kappa'(G) \ge k$ if and only if for all $x,
+   y \in V(G)$, there exists pairwise edge disjoint $x-y$ paths.
+** Local version of Menger's theorem
+*** Separating set
+    1. A set $S \subset V(G)$ is an $xy$ separating set if $x$ and $y$ are in
+       different connected components of $G\setminus S$.
+    2. $\kappa(x, y) = \min\{\vert s \vert \colon S \textup{ is a xy separating set}\}$
+    3. $\lambda(x,y) = \max$ size of a family of pairwise disjoint $xy$ paths. 
+*** Local version of theorem
+    For all graphs $G$ and $x, y \in G$, we require that $x$ and $y$ are not
+    adjacent edges.
+
+    For all $x, y$, $\kappa'(x, y) = \lambda'(x, y) = \max$ size of family of
+    pid $xy$ paths. Here $\kappa'$ is the minimum $\vert F \vert$ such that $x$
+    and $y$ are in different components of $G\setminus F$.
+*** Local theorem implies Global
+    What we need to do is that for all $x, y \in G$, $\exists \ge k = \kappa(G)$
+    pid paths.
+    1. $x$ and $y$ are not adjacent (xy \neq E(G)) implies $\kappa(G) \le
+       \kappa(x, y)\le \lambda(x, y)$. The local theorem says that the last term
+       is at least $\lambda(x, y)$, implies $\ge k$ pid $xy$ paths.
+    2. For $xy = e$, $\kappa(G-e) \ge K(G) - 1$. Suppose for a contradiction
+       that $S$ separates $G-e$ and $\vert S \vert \le \kappa - 2 \le n-3$. We
+       know as $\vert s \vert < K$, $G\setminus S$ is connected implies that
+       $G\setminus S$ must have a "bridge" $e$. Meaning we have two disconnected
+       sets only connected by $e$ between $T$ and $T'$.
+
+       Without loss of generality $x \in T$, and $\vert T \vert \ge 2$. But then
+       $S \cap \{x\}$ is a separating set of $G$ of size $\le \kappa - 1$.
+    3. If $xy$ is an edge in $E$. Removing it means that $\kappa(G-e) \ge k-1$,
+       then 1 implies that $k-1$ pid $xy$ paths in $G-e$ and $e=xy$ adds another
+       path.
+** Flow networks
+*** Example
+    A graph was drawn. 
+*** Definition
+    A network is a quadruple $(D, s, t, c)$ where $D$ is a directed (multi)
+    graph. $s \in V(D)$ is the source vertex and $t$ is the sink vertex. $c
+    \colon E(D) \rightarrow \R^{+}$ is the capacity.
+
+    A flow is *feasible* if
+    1. For all $v \neq s, t$, the net flow in is equal to the net flow out, i.e,
+       for all $v\neq s, t$, $\sum f(uv) =f^{-1}(v) = f^{+}(v) = \sum(vu)$. This
+       is called the /conservation constraints/.
+    2. For all directed edges, we require that the flow on the edge is
+       non-negative and at most the capacity. This is called /capacity
+       constraint/
+
+    The *value* of of a flow is the net flow into the sink, $f^{-1}(t) -
+    f^{+}(t) = val(f)$.
+
+    A *max flow* is a feasible flow with maximum $\val(f)$.
+*** Problem
+    Given a network flow, we need to find a max value and if possible find a max
+    flow.
+*** Homework
+    For any $Q \subset V(D)$, with $s\in Q$ and $t\in \bar{Q} = V(D) \setminus
+    Q$, $\val(f) = \sum_{e\in [Q, \bar{Q}]} f(e) - \sum_{e\in [\bar{Q}, Q]}
+    f(e)$
+*** Definition
+    Given $Q \subset V(D)$, $\bar{Q} = V \setminus Q$, with $s\in Q, t\in
+    \bar{Q}$, the capacity of the cut is capacity $\cap[Q, \bar{Q}] = \sum_{e\in
+    [Q, \bar{Q}} c(e)}$
+*** Lemma
+    Weak duality: If $f$ is a feasible flow and $[Q, \bar{Q}]$ a source/sink
+    cut, then the value of the flow $\val(f) \le \cap([Q, \bar{Q}])$
+**** Proof
+     Fix $f$ and $[Q, \bar{Q}]$. $\val(f) = \sum_{[Q, \bar{Q}]} f(e) -
+     \sum_{[\bar{Q}, Q]} f(e) \le \sum_{[Q, \bar{Q}]} c(e) - 0 = \cap([Q,
+     \bar{Q}])$
+** Theorem (Ford-Fulkerson) (Max-flow min-cut theorem)
+   Let $f$ be a flow of max value and $[Q, \bar{Q}]$ a source-sink cut of
+   minimum capacity, then the $\val(f) = \cap([Q, \bar{Q}])$.
+   
 * Tutorial
   [[http://discretemath.imp.fu-berlin.de/DMII-2018-19/][link]]
 ** Tutorial 1
