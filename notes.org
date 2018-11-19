@@ -283,7 +283,7 @@
    \rightarrow \R_{\ge 0}$., You ask what is the smallest weight Hamiltonian cycle. [fn:3]
 *** Approximation algorithm
     *Definition*: An $\alpha$ approximation of TSP is an algorithm that turns a
-     Hamiltonian cycle whose weight is within $\alpha$-fraction of the min
+     Hamiltonian cycle whose weight is within $\alpha$ fraction of the min
      weight Hamiltonian cycle.[fn:4]
 *** Extra conditions
     Triangle inequality: the weight function satisfies the triangle inequality
@@ -347,11 +347,11 @@
    A problem is called $\NP$ hard if any problem in $\NP$ class can be reduced
    by the problem.
 
-   If furthermore, the problem is in $\NP$, then we call it $\NP$-complete.
+   If furthermore, the problem is in $\NP$, then we call it $\NP$ complete.
 
-   Example: 3-SAT is $\NP$ hard and also $\NP$-complete. 
+   Example: 3-SAT is $\NP$ hard and also $\NP$ complete. 
 
-   Karp came up with $21$ natural $\NP$-complete problems, all of them are $\NP$
+   Karp came up with $21$ natural $\NP$ complete problems, all of them are $\NP$
    complete.
 * Lecture 5 <2018-10-30 Tue>
 ** NP class
@@ -483,7 +483,7 @@
    #+END_SRC
 * Lecture 6 <2018-10-31 Wed>
 ** TODO Tutte's theorem proof
-   $\leftimplies$ $G$, a counter example with maximum number of edges.
+   $\Leftarrow$: G$, a counter example with maximum number of edges.
 
    *Claim*: $G+xy$ has a p.m. $xy\in E(G)$, $G$ has no p.m., $\forall S \in
     V(G)$, $o(G \setminus S) \le o(\vert S \vert)$
@@ -521,9 +521,9 @@
 
    The problem is also in P.
 ** Corollary to hall theorem (Theorem of Frobenius)
-   A $k$-regular bipartite graph has perfect matching.[fn:20] (1-factor)
+   A $k$ regular bipartite graph has perfect matching.[fn:20] (1-factor)
 
-   A $k$-factor is a spanning $k$-regular subgraph. 
+   A $k$ factor is a spanning $k$ regular subgraph. 
 
    This is not true for general graphs. Example: odd cycles, they are $2$
    regular and 1-factor. Are there examples with even number of vertices.
@@ -531,9 +531,9 @@
    
    
 ** Theorem (peterson)
-   A $2k$ regular subgraph has a $2$-factor. 
+   A $2k$ regular subgraph has a $2$ factor. 
 ** Theorem (another peterson theorem)
-   Every $3$-regular graph without cut edges[fn:21] has a perfect matching. (Theorem in
+   Every $3$ regular graph without cut edges[fn:21] has a perfect matching. (Theorem in
    Bondy and Murthy) [fn:22]
 *** Proof
     The proof is component wise. Now we assume that $G$ is connected.
@@ -592,15 +592,15 @@
 ** How to find maximum matchings in polynomial time?
 ** Proposition about maximum matching
    IF $M \subset E(G)$ is a maximum matching of $G$, $\iff$ there is no
-   $M$-augmenting path.
+   $M$ augmenting path.
 
-   $M$-augmenting path: It's a path in which non-edges and edges follow each
+   $M$ augmenting path: It's a path in which non-edges and edges follow each
    other alternatively. One direction is easy. If $M$ is a maximum matching,
    then there is no $M$ augmenting path.
 ** A M alternating path
    A path of $G$ where edges of $M$ alternate with non-edges of $m$.
 
-   An $M$-alternating path that starts and ends in an unsaturated vertex is
+   An $M$ alternating path that starts and ends in an unsaturated vertex is
    called $M$ augmenting. [[https://en.wikipedia.org/wiki/Saturation_(graph_theory)][Wikipedia]]
 ** Using the characterization for Bipartite graph
    [fn:25] You have a matchin and then unsaturated vertices. The idea is to
@@ -633,18 +633,18 @@
 *** Proposition
     $M \subset E(G)$ is a matching in $G$.
 
-    $M$ is a maximum $\iff$ there is no $M$-augmenting path in $G$. (is
-    $M$-alternating if it starts and ends at an unsaturated vertex.)
+    $M$ is a maximum $\iff$ there is no $M$ augmenting path in $G$. (is
+    $M$ alternating if it starts and ends at an unsaturated vertex.)
 *** Augmenting path algorithm
     Input: Bipartite graph $G = (X \cap Y, E)$, a matching $M \subset E$.
-    Output: Either an $M$-augmenting path or a cover of size $\vert M \vert$.
+    Output: Either an $M$ augmenting path or a cover of size $\vert M \vert$.
 
     Initialization: $S = U$, $Q = \emptyset$, $T = \emptyset$
 
     Iteration: If $Q = S$ STOP and return $M$ (as maximal matching), $TU(x
     \setminus S)$ (as min cover of size $\vert M \vert$) Else select $x \in S
     \setminus Q$, $\forall y \in N(x)$ with $xy\in M$, DO if $y$ is unsaturated,
-    then stop return a $M$-augmenting path from $U$ to $y$. Else $\exists w \in
+    then stop return a $M$ augmenting path from $U$ to $y$. Else $\exists w \in
     X$, $yw \in M$ update, $T = T \cap \{y\}$ and $S = S \cup \{w\}$. Update $Q
     = Q \cup \{x\}$. [fn:26]
 *** Proposition
@@ -653,7 +653,7 @@
 
     The idea is that every cover has to be bigger than the matching.
 *** TODO Proof of correctness
-    Stopping the algorithm: The algorithm can either stop with a $M$-augmenting
+    Stopping the algorithm: The algorithm can either stop with a $M$ augmenting
     path or it can stop with a maximum matching or a cover.
 
     Proof of correctness: If the algorithm terminates with a matching $M$ and a
@@ -667,7 +667,7 @@
     possible.
 *** Comments
     $\vert M \vert = \vert T \vert + \vert X \setminus S\vert$. By the selection
-    of $S$ and $T$, vertices of $T$ are put into $T$ where their $M$-partner is
+    of $S$ and $T$, vertices of $T$ are put into $T$ where their $M$ partner is
     put into $S$.
 
     $\implies$, $S = U \cap M$ partners of vertices in $T$.
@@ -815,22 +815,22 @@
    If we add edges at every step in the graph from which we get the matching, we
    would be done. But we are not exactly doing it.
 
-   Observations: $\vert Q \vert = \vert M \vert$, no $M$-edge is covered twice by $Q$.
+   Observations: $\vert Q \vert = \vert M \vert$, no $M$ edge is covered twice by $Q$.
 
    $T = \{y \in Y \colon \exists M$ alternating $(U, y)$ path $\}$.
 
    $R = \{x \in X \colon \nexists M$ alternating $(U, Y)$ path $\}$.
 
-   where $U = \{x \in X \colon x$ is $M$-unsaturated $\}$.
+   where $U = \{x \in X \colon x$ is $M$ unsaturated $\}$.
 
    For termination of the Hungarian algorithm, count for *the number of vertices
-   that are reached from $U$ on an $M$-alternating path*. This quantity grows in
-   each iteration. (or $M$-augmenting path, which implies that there is a larger
+   that are reached from $U$ on an $M$ alternating path*. This quantity grows in
+   each iteration. (or $M$ augmenting path, which implies that there is a larger
    matching.)
 
-   The edges of $M$-alternating path starting at $U$ remain in $G_{u, v}$. Edges
+   The edges of $M$ alternating path starting at $U$ remain in $G_{u, v}$. Edges
    can be lost only between $T$ and $R$. But these edges are not participating
-   in the alternating path. In $M$-alternating path, vertices of $T$ are only
+   in the alternating path. In $M$ alternating path, vertices of $T$ are only
    connected to vertices in $S = X - R$.
 
    By the choice of $\varepsilon$, there is at least one pair $x_i y_j$ such
@@ -838,7 +838,7 @@
    in the equality sub-graph.
 
    This means that after $\le \frac{n}{2}$ iterations, or $M$ unsaturated $y\in
-   Y$ is reached via a $M$-alternating path, which means that the matching is
+   Y$ is reached via a $M$ alternating path, which means that the matching is
    growing, and the matching can grow at most $n/2$. Thus after $\frac{n^2}{4}$
    iterations.
 ** Connectivity problem
@@ -881,7 +881,7 @@
    $K(G) \le v(G) - 1$ and $K(G) \le \delta(G)$.
 ** Extremal questions
    Given $n$ and $k$, what is the smallest number $e$ of edges that there exists
-   as $n$ vertex $k$-connected  graph with $e$ edges.
+   as $n$ vertex $k$ connected  graph with $e$ edges.
 ** Proposition
    For all $k \ge 2$, there exists a $k$ connected graph on $n$ vertices with
    the ceil of $(n-k)/2$ edges.
@@ -907,7 +907,7 @@
 
     Back to $H$. Let name the vertices which have an edge to $H$ as $v_i$. There
     exits at least $k$ vertices on $C$ which have an edge to $H$ (this is
-    because of $k$-connectedness; otherwise we could separate $C$ from $H$ by
+    because of $k$ connectedness; otherwise we could separate $C$ from $H$ by
     the deletion of strictly less than $k$ vertices, which is a contradiction.)
 
     Notice that two adjacent vertices in $C$ cannot have an edge to $H$,
@@ -927,9 +927,9 @@
    disconnected, i.e., $G-F$ is disconnected.
 
    $\kappa'(G) = \min\{\vert F \vert \colon F \subset E(G) \textup{ is a
-   disconnecting of edges\}$
+   disconnecting of edges}\}$
 
-   This is the *edge connectivity* of $G$. $G$ is called $k$-edge connected,
+   This is the *edge connectivity* of $G$. $G$ is called $k$ edge connected,
    $k'(G) \ge k$.
 ** Definition
    A subset $S \subset V(G)$, then an edge-cut of the Multi-Graph is an edge-set
@@ -975,21 +975,21 @@
 
    But is it in $NP$?
    
-   $1$-connectedness if in $P$.
+   $1$ connectedness if in $P$.
 
-   But $2$-connectedness is in $P$. There are only a $n^2$ number of vertices.
+   But $2$ connectedness is in $P$. There are only a $n^2$ number of vertices.
    Hence polynomial.
 
    But we want to know about $k$ connectivity, when $k$ is the function of $n$.
 ** Theorem (A characterization of $2$ connectivity)
-   $G$ is $2$-connected if and only if for all $x, y \in V(G)$, they are on a
+   $G$ is $2$ connected if and only if for all $x, y \in V(G)$, they are on a
    cycle.[fn:30]
 
-   $G$ is $2$-connected if and only if for all $x, y \in V(G)$ if there exist
+   $G$ is $2$ connected if and only if for all $x, y \in V(G)$ if there exist
    $2$ internally disjoint $x, y$ paths. [fn:31]
 * Lecture 10 <2018-11-14 Wed>
 ** Menger's theorem (VMT)
-   A graph $G$ is $k$-connected if and only if for all pairs of vertices $x, y
+   A graph $G$ is $k$ connected if and only if for all pairs of vertices $x, y
    \in V(G)$, there exits $K$ pairwise internally disjoint paths.
 *** Remarks
     1. This implies that $k$ connectivity is in $NP$ intersection co-NP. It
@@ -1013,7 +1013,7 @@
 
     *Base case*: $d(x, y) = 1$, $\kappa'(G) \ge \kappa(G) \ge 2$. Implies $G
     \setminus \{xy\}$ is still connected $\implies xy$ path $P$ in $G\setminus
-    e$ \implies $P \cap \{e\}$ is a cycle which contains $x, y$.
+    e \implies P \cap \{e\}$ is a cycle which contains $x, y$.
 
     *Induction step*: $d(x, y) = d$, let $P$ be a path of length $d$. Let $v$ be
      the last vertex before $y$ on $P$. Induction says that some $C$ containing
@@ -1091,7 +1091,7 @@
 *** Definition
     Given $Q \subset V(D)$, $\bar{Q} = V \setminus Q$, with $s\in Q, t\in
     \bar{Q}$, the capacity of the cut is capacity $\cap[Q, \bar{Q}] = \sum_{e\in
-    [Q, \bar{Q}} c(e)}$
+    [Q, \bar{Q}] c(e)}$
 *** Lemma
     Weak duality: If $f$ is a feasible flow and $[Q, \bar{Q}]$ a source/sink
     cut, then the value of the flow $\val(f) \le \cap([Q, \bar{Q}])$
@@ -1202,7 +1202,7 @@
                               b---------------------------\c
      #+END_SRC
 **** TODO Algorithm
-     *Claim*: Right after $i$-th step of second part, $i$-th step of second
+     *Claim*: Right after $i$ th step of second part, $i$ th step of second
       part, $v \in V, \dist(v) \le \min \{ \vert w\vert \vert w \textup{
       contains } \le i \textup{ edges} \}$.
 
@@ -1235,30 +1235,6 @@
     Easy solution: Show that there is no maximal matching. The number of
     vertices is 18. There cannot be a matching on 17, because odd. Thus, the
     matching on 16 has to be the maximal matching.
-**** Old solution
-     #+BEGIN_SRC latex
-       % To find the maximal matching, we use a corollary to Tutte's theorem which was mentioned in the lecture.
-
-       % \begin{corollary}[Berge]
-       %   If $G$ is an arbitrary graph, then it is true that $2\alpha'(G)$ is equal to the minimum: $\min \{ n - o(G\setminus S) + \vert S \vert \colon S \subset V(G) \}$. Here $n$ is the number of vertices in the graph.
-       % \end{corollary}
-
-       % \begin{proof}
-       %   For the purpose of this exercise, we'll only prove a part of the corollary, i.e., if there is a subset $S$ of vertices such that $o(G\setminus G) > \vert S \vert$, then the maximal matching can have at most $n - (o(G\setminus S)-\vert S \vert) $ vertices. 
-
-       %   Let $M$ be any matching in the graph. The odd components cannot be entirely matched within themselves, i.e., there will always be at least one vertex that is unmatched from within the component. We can match this vertex if there is an edge between the vertex and $S$. But since $o(G \setminus S) > \vert S \vert$, we can match at most $\vert S \vert$ number of vertices inside the odd-components of $G \setminus S$. Thus any matching (in particular the Maximal matching) in $G$ can match at most $n - (o(G\setminus S) - \vert S \vert)$. \footnote{We have not shown the existence of a match, but merely an upper bound.}
-       % \end{proof}
-
-       % For the above example, this evaluates to $18 - 6 + 4 = 16$. The maximal matching may connect, at most, $16$ vertices. We are done if we define a matching on $16$ vertices.
-
-       % The following is a (maximal) matching on $16$ vertices.
-       % \begin{figure}[H]
-       %   \centering
-       %   \includegraphics[scale=0.4]{maximalMatching.png}
-       %   \caption{Matching on $16$ vertices; also maximal. Here $11$ and $7$ do not have a matching.}
-       %   \label{fig:maximalMatching}
-       % \end{figure}
-     #+END_SRC
 *** Problem 2
 **** part a
      It is clear that $\vert V \vert = \sum \textup{vertices in even components
@@ -1298,7 +1274,7 @@
 
 *** Problem 3
 **** Part a
-     This is kinda similar to the proof of the theorem about $3$-regular graph
+     This is kinda similar to the proof of the theorem about $3$ regular graph
      without any cut edges having a perfect matching. 
 
      First notice that every three regular graph must have even number of
@@ -1419,7 +1395,7 @@
 
     $G, n \ge k+1$, $\delta(G?) \ge \frac{n+k-2}{2}$. It is sufficient to show
     that if we subtract a set of size $k-1$, then the graph is connected.
-    $G[V(G)\setmius S]$ are either neighbours (in this case it's trivial.)
+    $G[V(G)\setminus S]$ are either neighbours (in this case it's trivial.)
 
     $u, v \in V(G')$. 
 
@@ -1431,11 +1407,19 @@
        Whereas, if $\delta \ge n/2$, then the graph has a hamiltonian cycle.
 *** Problem 5 (Bonus)
     An example where the bound in sharp.
+** Tutorial 5
+*** Problem 4
+    We can do this in cases. 
+    
+    1. $\kappa(G) = 3$, then because $\kappa \le \kappa' \le 3$, $\kappa' =
+       \kappa = 3$.
+    2. $\kappa = 1$, then disconnecting one vertex would disconnect the graph.
+       Let $U_1$, $U_2$, $U_3$, be the at most three components that would
 * Footnotes
 
 [fn:31] This can be generalized in a very straightforward way.
 
-[fn:30] It is true that for $k$-connectedness, any $k$ vertices are on a cycle,
+[fn:30] It is true that for $k$ connectedness, any $k$ vertices are on a cycle,
 but the other direction is not true.
 
 [fn:29] We use the convention that the prime is the corresponding to edges.
