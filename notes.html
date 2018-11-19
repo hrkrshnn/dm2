@@ -1,0 +1,3931 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2018-11-19 Mon 13:58 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Discrete Math II</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Hari" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2018 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Discrete Math II</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org55e43e5">1. Lecture 2<span class="timestamp-wrapper"><span class="timestamp">&lt;2018-10-17 Wed&gt;</span></span></a>
+<ul>
+<li><a href="#orgbde6bf4">1.1. Review</a>
+<ul>
+<li><a href="#orga1d18cd">1.1.1. Random stuff about algorithms</a></li>
+<li><a href="#org4957d6e">1.1.2. Sorting</a></li>
+<li><a href="#orgbd2f008">1.1.3. Theorem about lower-bound of sorting</a></li>
+</ul>
+</li>
+<li><a href="#org1ea17a8">1.2. Graph algorithms</a>
+<ul>
+<li><a href="#org157dcfb">1.2.1. Connectedness of graph</a></li>
+<li><a href="#orgd509343">1.2.2. How do you decide whether a graph is connected?</a></li>
+<li><a href="#org6e486eb">1.2.3. Theorem: Comp(v) returns \(C_G(v)\)</a></li>
+<li><a href="#org815a659">1.2.4. Spanning tree</a></li>
+<li><a href="#org6f4a0c1">1.2.5. Theorem about spanning tree</a></li>
+<li><a href="#org46000db">1.2.6. Special spanning trees</a></li>
+</ul>
+</li>
+<li><a href="#org41ccdc7">1.3. Minimal spanning tree</a>
+<ul>
+<li><a href="#org6af816e">1.3.1. Naive algorithm</a></li>
+<li><a href="#org5bb665b">1.3.2. Kruskal's algorithm</a></li>
+<li><a href="#orga075053">1.3.3. Theorem: Kruskal's algorithm returns the min-weight spanning tree.</a></li>
+<li><a href="#org833f268">1.3.4. Running time of Kruskal</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#orgfe6a527">2. Lecture 3 <span class="timestamp-wrapper"><span class="timestamp">&lt;2018-10-23 Tue&gt;</span></span></a>
+<ul>
+<li><a href="#orgb0ad38e">2.1. Spanning trees</a></li>
+<li><a href="#orgd0d0294">2.2. Problem</a></li>
+<li><a href="#orgd7b5f2a">2.3. Idea</a></li>
+<li><a href="#org978b6f7">2.4. Dijkstra's algorithm</a>
+<ul>
+<li><a href="#orgb6c67c0">2.4.1. Algorithm</a></li>
+<li><a href="#org37950d9">2.4.2. Analysis</a></li>
+</ul>
+</li>
+<li><a href="#org713a98f">2.5. Euro 2020 or Travelling Salesman Problem</a></li>
+<li><a href="#orgba995fc">2.6. Complexity classes</a></li>
+</ul>
+</li>
+<li><a href="#org0d1d1ad">3. Lecture 4 <span class="timestamp-wrapper"><span class="timestamp">&lt;2018-10-24 Wed&gt;</span></span></a>
+<ul>
+<li><a href="#org06cf176">3.1. Decision problems</a>
+<ul>
+<li><a href="#orgd386852">3.1.1. Example</a></li>
+</ul>
+</li>
+<li><a href="#org85e5cdd">3.2. Class P</a></li>
+<li><a href="#org1345594">3.3. Traveling salesman problem</a>
+<ul>
+<li><a href="#orga56770c">3.3.1. Approximation algorithm</a></li>
+<li><a href="#org25c94fa">3.3.2. Extra conditions</a></li>
+</ul>
+</li>
+<li><a href="#org1ca8cd9">3.4. Approximation algorithm for TSP</a>
+<ul>
+<li><a href="#orga908287">3.4.1. Algorithm</a></li>
+<li><a href="#orgd006f2a">3.4.2. Running time</a></li>
+</ul>
+</li>
+<li><a href="#org8df6e62">3.5. Hall's theorem</a></li>
+<li><a href="#org7466027">3.6. Class \(\NP\)</a></li>
+<li><a href="#org3e25f04">3.7. Class \(\coNP\)</a></li>
+<li><a href="#org27d6944">3.8. About Hamilton path</a></li>
+<li><a href="#org95a1c84">3.9. Problem reduction</a></li>
+</ul>
+</li>
+<li><a href="#org55f7ca8">4. Lecture 5 <span class="timestamp-wrapper"><span class="timestamp">&lt;2018-10-30 Tue&gt;</span></span></a>
+<ul>
+<li><a href="#orgee4581e">4.1. NP class</a>
+<ul>
+<li><a href="#orga93743b">4.1.1. Examples</a></li>
+</ul>
+</li>
+<li><a href="#orgad8d594">4.2. P class</a></li>
+<li><a href="#orge105c56">4.3. Co-NP</a>
+<ul>
+<li><a href="#org0bce83c">4.3.1. Example of NP intersection co-NP</a></li>
+</ul>
+</li>
+<li><a href="#orgd3a4a97">4.4. Conjecture P \(\neq\) NP</a></li>
+<li><a href="#orgad8729e">4.5. Stronger conjecture of \(P \neq\) \(NP\) intersection \(co-NP\)</a></li>
+<li><a href="#orgfe7aa7f">4.6. NP completeness</a></li>
+<li><a href="#org1d17e87">4.7. Hall's theorem</a></li>
+<li><a href="#org31d7919">4.8. Necessary conditions for Hamiltonianity</a></li>
+<li><a href="#org9af262e">4.9. Does a graph have a perfect matching? Tutte's theorem</a></li>
+<li><a href="#orgc81e4da">4.10. Proof of Tutte's theorem</a></li>
+</ul>
+</li>
+<li><a href="#org68b2a47">5. Lecture 6 <span class="timestamp-wrapper"><span class="timestamp">&lt;2018-10-31 Wed&gt;</span></span></a>
+<ul>
+<li><a href="#org1b0d4b3">5.1. <span class="todo TODO">TODO</span> Tutte's theorem proof</a></li>
+<li><a href="#orgf7d3617">5.2. Perfect matching is in NP intersection co-NP</a></li>
+<li><a href="#org0a8d4b0">5.3. Corollary to hall theorem (Theorem of Frobenius)</a></li>
+<li><a href="#orged7dc7a">5.4. Theorem (peterson)</a></li>
+<li><a href="#org71eeec8">5.5. Theorem (another peterson theorem)</a>
+<ul>
+<li><a href="#org74c0cee">5.5.1. Proof</a></li>
+</ul>
+</li>
+<li><a href="#org62bfe4f">5.6. Maximum matching problem</a></li>
+<li><a href="#orgbdd3417">5.7. Konig's theorem</a></li>
+<li><a href="#org1ae1112">5.8. Konigs on Maximal matching problem</a></li>
+<li><a href="#org12cd947">5.9. Homework: a corollary of Tutt due to Berge</a></li>
+<li><a href="#org449fe0a">5.10. How to find maximum matchings in polynomial time?</a></li>
+<li><a href="#org1dd1fdc">5.11. Proposition about maximum matching</a></li>
+<li><a href="#org4b9bce9">5.12. A M alternating path</a></li>
+<li><a href="#orgdf6d4f5">5.13. Using the characterization for Bipartite graph</a></li>
+</ul>
+</li>
+<li><a href="#org818e18d">6. Lecture 7 <span class="timestamp-wrapper"><span class="timestamp">&lt;2018-11-06 Tue&gt;</span></span></a>
+<ul>
+<li><a href="#org4319f6b">6.1. Maximum matching is in P</a>
+<ul>
+<li><a href="#org40d44a3">6.1.1. Proposition</a></li>
+<li><a href="#org2d88048">6.1.2. Augmenting path algorithm</a></li>
+<li><a href="#orgf68e279">6.1.3. Proposition</a></li>
+<li><a href="#orgae7dafc">6.1.4. <span class="todo TODO">TODO</span> Proof of correctness</a></li>
+<li><a href="#org1ef5351">6.1.5. Comments</a></li>
+<li><a href="#org2a3f726">6.1.6. Internet reference</a></li>
+</ul>
+</li>
+<li><a href="#org57e573d">6.2. Theorem</a></li>
+<li><a href="#org47b6834">6.3. Matching with weights</a></li>
+<li><a href="#orgae834b3">6.4. Duality lemma</a>
+<ul>
+<li><a href="#orgac62372">6.4.1. Corollary</a></li>
+</ul>
+</li>
+<li><a href="#org392fdd3">6.5. Algorithm for Maximal weighted matching</a></li>
+<li><a href="#orgd4b2f1b">6.6. Hungarian algorithm</a></li>
+</ul>
+</li>
+<li><a href="#org3c686da">7. Lecture 8 <span class="timestamp-wrapper"><span class="timestamp">&lt;2018-10-31 Wed&gt;</span></span></a>
+<ul>
+<li><a href="#org9dae5ac">7.1. Proof</a></li>
+<li><a href="#orge5ad700">7.2. Connectivity problem</a>
+<ul>
+<li><a href="#orgc5e6bd9">7.2.1. Definition (Vertex cut)</a></li>
+<li><a href="#org0e3dd27">7.2.2. Definition (Connectivity of G)</a></li>
+<li><a href="#org64b3520">7.2.3. Examples</a></li>
+<li><a href="#org850aaac">7.2.4. Proposition</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#orgbbb4e67">8. Lecture 9 <span class="timestamp-wrapper"><span class="timestamp">&lt;2018-11-07 Wed&gt;</span></span></a>
+<ul>
+<li><a href="#org9f3d2f1">8.1. Connectivity of graph</a></li>
+<li><a href="#orgd1433bd">8.2. Proposition</a></li>
+<li><a href="#org1845296">8.3. Extremal questions</a></li>
+<li><a href="#orgdcdae63">8.4. Proposition</a></li>
+<li><a href="#org769b939">8.5. Theorem (Chvatal-Erdos)</a>
+<ul>
+<li><a href="#org67d27b1">8.5.1. Proof</a></li>
+</ul>
+</li>
+<li><a href="#org8bb72a1">8.6. Definition (Disconnecting set of edges)</a></li>
+<li><a href="#org552f716">8.7. Definition</a></li>
+<li><a href="#org2884ee8">8.8. Observation</a>
+<ul>
+<li><a href="#orgd957205">8.8.1. Proof</a></li>
+</ul>
+</li>
+<li><a href="#org45b78b3">8.9. Bounds</a></li>
+<li><a href="#org6120d70">8.10. Is graph \(G\) \(k\) connected?</a></li>
+<li><a href="#orga240ffc">8.11. Theorem (A characterization of \(2\) connectivity)</a></li>
+</ul>
+</li>
+<li><a href="#orgdfcd4d1">9. Lecture 10 <span class="timestamp-wrapper"><span class="timestamp">&lt;2018-11-14 Wed&gt;</span></span></a>
+<ul>
+<li><a href="#org11b9b06">9.1. Menger's theorem (VMT)</a>
+<ul>
+<li><a href="#org46f38d8">9.1.1. Remarks</a></li>
+<li><a href="#orga862813">9.1.2. Proof of (\(\Leftarrow\)) VMT</a></li>
+<li><a href="#org9ab3d9e">9.1.3. Proof of \(\implies\) of VMT for \(k=2\)</a></li>
+</ul>
+</li>
+<li><a href="#org9c000df">9.2. Edge Menger's theorem</a></li>
+<li><a href="#orgfffff4c">9.3. Local version of Menger's theorem</a>
+<ul>
+<li><a href="#orgf463275">9.3.1. Separating set</a></li>
+<li><a href="#orga914f71">9.3.2. Local version of theorem</a></li>
+<li><a href="#orgbc43eaa">9.3.3. Local theorem implies Global</a></li>
+</ul>
+</li>
+<li><a href="#org410ba71">9.4. Flow networks</a>
+<ul>
+<li><a href="#orgfd19511">9.4.1. Example</a></li>
+<li><a href="#orgb982968">9.4.2. Definition</a></li>
+<li><a href="#orgcb478ec">9.4.3. Problem</a></li>
+<li><a href="#org5aa1fb5">9.4.4. Homework</a></li>
+<li><a href="#org83e717d">9.4.5. Definition</a></li>
+<li><a href="#orgfe44070">9.4.6. Lemma</a></li>
+</ul>
+</li>
+<li><a href="#org22f8d81">9.5. Theorem (Ford-Fulkerson) (Max-flow min-cut theorem)</a></li>
+</ul>
+</li>
+<li><a href="#orgf75babc">10. Tutorial</a>
+<ul>
+<li><a href="#orgaa48bbd">10.1. Tutorial 1</a>
+<ul>
+<li><a href="#orgc89ac87">10.1.1. Problem 2</a></li>
+</ul>
+</li>
+<li><a href="#org040a1e1">10.2. Tutorial 2</a>
+<ul>
+<li><a href="#orgb959e49">10.2.1. SAT</a></li>
+<li><a href="#orgad45d53">10.2.2. Problem 1 bipartite</a></li>
+<li><a href="#orged8a428">10.2.3. Problem 3 Greedy algorithm can fail</a></li>
+<li><a href="#org17ecf42">10.2.4. <span class="todo TODO">TODO</span> Problem 2</a></li>
+<li><a href="#orgd8e1ae5">10.2.5. Exercise 4</a></li>
+<li><a href="#org0995eb4">10.2.6. Exercise 5 (SAT)</a></li>
+</ul>
+</li>
+<li><a href="#org5eb212b">10.3. Tutorial 3</a>
+<ul>
+<li><a href="#org602f890">10.3.1. Problem 1</a></li>
+<li><a href="#org7868df0">10.3.2. Problem 2</a></li>
+<li><a href="#org505758a">10.3.3. Problem 3</a></li>
+<li><a href="#org5b2e46f">10.3.4. Problem 4</a></li>
+<li><a href="#orgc924cf4">10.3.5. Problem 4 (Alternate proof)</a></li>
+<li><a href="#org8512504">10.3.6. Problem 5</a></li>
+</ul>
+</li>
+<li><a href="#org3d23594">10.4. Tutorial 4</a>
+<ul>
+<li><a href="#orge485ad3">10.4.1. Problem 1</a></li>
+<li><a href="#orgd71ab22">10.4.2. Problem 2</a></li>
+<li><a href="#orgd6fec85">10.4.3. Problem 3</a></li>
+<li><a href="#orgfc4b827">10.4.4. Problem 4</a></li>
+<li><a href="#orgb8adf42">10.4.5. Problem 5</a></li>
+<li><a href="#orgd14e073">10.4.6. Problem 5 (proof)</a></li>
+<li><a href="#org90fd2bc">10.4.7. Problem 5 (Bonus)</a></li>
+</ul>
+</li>
+<li><a href="#org12d6d93">10.5. Tutorial 5</a>
+<ul>
+<li><a href="#orgcda6d8a">10.5.1. Problem 4</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org55e43e5" class="outline-2">
+<h2 id="org55e43e5"><span class="section-number-2">1</span> Lecture 2<span class="timestamp-wrapper"><span class="timestamp">&lt;2018-10-17 Wed&gt;</span></span></h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-orgbde6bf4" class="outline-3">
+<h3 id="orgbde6bf4"><span class="section-number-3">1.1</span> Review</h3>
+<div class="outline-text-3" id="text-1-1">
+</div>
+<div id="outline-container-orga1d18cd" class="outline-4">
+<h4 id="orga1d18cd"><span class="section-number-4">1.1.1</span> Random stuff about algorithms</h4>
+<div class="outline-text-4" id="text-1-1-1">
+<p>
+Algorithm A
+</p>
+
+<p>
+Input class I
+</p>
+
+<p>
+\(T(A, I)\): time algorithm \(A\), input \(I\).
+</p>
+
+<p>
+The worst case time complexity of \(A\) on \(I\) is \(\max_{I\in \mathbb{I}} (A, I) = T_(n)\).
+</p>
+
+<p>
+The worst case complexity of \(I = \min_{A} T_A(n) = T_{I}(n)\). A function that grows with \(n\).
+</p>
+
+<p>
+Average case complexity \(\mathbb{E}(T(A, I))\).
+</p>
+</div>
+</div>
+<div id="outline-container-org4957d6e" class="outline-4">
+<h4 id="org4957d6e"><span class="section-number-4">1.1.2</span> Sorting</h4>
+<div class="outline-text-4" id="text-1-1-2">
+<p>
+Sorting algorithm \(A\), \(T(A, \pi) =\) number of comparisons that \(A\) makes to find $&pi;.$
+</p>
+
+<p>
+Yesterday, we proved that for insertion sort (the stupid algorithm), the
+worst case running time was \(\binom{n}{2}\).
+</p>
+
+<p>
+Binary insertion:  \(T(n) \le n log_2{n}\).
+</p>
+
+<p>
+Merges sort: $T<sub>M</sub>(n) =le nlog<sub>2</sub>{n}.$
+</p>
+</div>
+</div>
+<div id="outline-container-orgbd2f008" class="outline-4">
+<h4 id="orgbd2f008"><span class="section-number-4">1.1.3</span> Theorem about lower-bound of sorting</h4>
+<div class="outline-text-4" id="text-1-1-3">
+<p>
+If \(A\) is a sorting algorithm (correctly sort \(n\) numbers)
+</p>
+
+<p>
+Then \(T_A(n) \ge \log_2(n!)\).
+</p>
+
+<p>
+In particular, using the stirling's formula, \(T_A(n) \ge n\log_n\).
+</p>
+</div>
+<ol class="org-ol">
+<li><a id="orgc1c9802"></a>Proof<br />
+<div class="outline-text-5" id="text-1-1-3-1">
+<p>
+The algorithm runs on the permutations on the set of \(n\) numbers. Define
+\(\forall \kappa \in \N\) blah blah.
+</p>
+
+<p>
+$S<sub>n</sub> &sub; S<sub>n</sub>{&alpha;, &kappa;} = \{&pi; &isin; S<sub>n</sub> : \textup{where A
+receives input \(\pi\) there, it receives \(\alpha\) as the sequence of the
+list of first \(k\) answerers}\}$
+</p>
+</div>
+</li>
+<li><a id="org419f1ab"></a>Observation<br />
+<div class="outline-text-5" id="text-1-1-3-2">
+<p>
+Everything is determined if we run it.
+</p>
+
+<p>
+\(S^n_(\alpha, k) \cap S^n_{\beta, k} = \emptyset \forall \alpha \neq \beta\)
+</p>
+
+<p>
+\(\cap S^{n}_{\alpha, k} = S_n\)
+</p>
+
+<p>
+Suppose, \(T_A(n) < \log_2(n!)\).
+</p>
+
+<p>
+\(S_n = \cap S^n_{\alpha, k}\) partition into \(2^k\) sets.
+</p>
+
+<p>
+\(2^k < n!\) implies that there exist \(\beta\) such that there exist \(\pi_1
+     \neq \pi_2 \in S_{\beta, r}\).
+</p>
+
+<p>
+Run \(A\) on \(\pi_1\), we receive the answers \(\beta\) implies that \(A\) outputs
+\(\pi^{*} \in S_n\)
+</p>
+
+<ul class="org-ul">
+<li>Case 1: \(\pi^* \neq \pi_1\), a contradiction to the correctness of \(A\).</li>
+
+<li><p>
+Case 2: \(\pi = \pi_1\). Run \(A\) on \(\pi_2\) implies \(\beta\) is the answer.
+\(A\) outputs \(\pi_{*}\), this is a contradiction that \(\pi_{*} \neq \pi_2\).
+Contradicts the correctness of \(A\).
+</p>
+
+<p>
+Called the <b>information theoretical lower bound</b>.
+</p></li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org1ea17a8" class="outline-3">
+<h3 id="org1ea17a8"><span class="section-number-3">1.2</span> Graph algorithms</h3>
+<div class="outline-text-3" id="text-1-2">
+</div>
+<div id="outline-container-org157dcfb" class="outline-4">
+<h4 id="org157dcfb"><span class="section-number-4">1.2.1</span> Connectedness of graph</h4>
+<div class="outline-text-4" id="text-1-2-1">
+<p>
+A graph \(G\) is connected if for every two vertices \(u\) and \(v\), there exists
+a \(uv\) path in \(G\).
+</p>
+
+<p>
+This induces an <b>equivalence</b> relation where \(u\) is equivalent to \(v\) if
+there exists a path that connects \(u\) and \(v\). Create equivalence classes,
+which are called the <b>connected components</b> of \(G\).
+</p>
+
+<p>
+Observation: There is no edge between different connected components.
+</p>
+</div>
+</div>
+<div id="outline-container-orgd509343" class="outline-4">
+<h4 id="orgd509343"><span class="section-number-4">1.2.2</span> How do you decide whether a graph is connected?</h4>
+<div class="outline-text-4" id="text-1-2-2">
+<p>
+Take a vertex \(v\). We maintain a list of all vertices that are visited. We
+redo the same thing for every other vertex. We repeat this until we saw all
+the vertices in the graph.
+</p>
+
+<p>
+Algorithm (Comp (V))
+</p>
+<p class="verse">
+Initialize: Queue Q = v; and W = empty<br />
+for all \(i \ge 1\)<br />
+step i: v<sub>i</sub> first vertex in Queue.<br />
+remove v<sub>i</sub> from the queue  and put it in W<br />
+put all of \(N(v_i) \setminus W\) into \(Q\).<br />
+<br />
+IF Q = &empty;, STOP and return \(W\) as the connected component of \(v\).<br />
+else go to step i+1<br />
+</p>
+</div>
+</div>
+<div id="outline-container-org6e486eb" class="outline-4">
+<h4 id="org6e486eb"><span class="section-number-4">1.2.3</span> Theorem: Comp(v) returns \(C_G(v)\)</h4>
+<div class="outline-text-4" id="text-1-2-3">
+<p>
+Suppose \(u \in C_G(v) \cap W_{out}\).
+</p>
+
+<p>
+Let \(P\) be a vu path in \(G\).
+</p>
+
+<p>
+Comp(v) puts a vertex into \(w\) only if all its neighbours are put into \(Q\).
+We stop only if \(Q\) is empty. Also \(v_f\) was in \(Q\) at some point \(A\). \(v_f\)
+had to be moved to \(w\). This is a contradiction.
+</p>
+
+<p>
+Other direction: \(u\in W_{out}\). Before \(u\) became part of \(W\), \(u\) was in
+\(Q\). Why? Because there is a \(u_1 \in Q\), \(u \in N(u_1) \setminus W\).
+(More things, I skipped.)
+</p>
+</div>
+</div>
+<div id="outline-container-org815a659" class="outline-4">
+<h4 id="org815a659"><span class="section-number-4">1.2.4</span> Spanning tree</h4>
+<div class="outline-text-4" id="text-1-2-4">
+<p>
+Suppose we run Comp(v) on a connected graph, where a vertex \(w\) is put into
+\(Q\), then there is a unique edge coming with it that attaches it to \(v\).
+(the vertex that is moved from \(Q\) to \(W\) at the same time.)
+</p>
+</div>
+</div>
+<div id="outline-container-org6f4a0c1" class="outline-4">
+<h4 id="org6f4a0c1"><span class="section-number-4">1.2.5</span> Theorem about spanning tree</h4>
+<div class="outline-text-4" id="text-1-2-5">
+<p>
+The following are equivalent: for an \(n\) vertex graph.
+</p>
+
+<ol class="org-ol">
+<li>T is a tree (connected, acyclic.)</li>
+<li>T is connected and has \(n-1\) edges.</li>
+<li>T is acyclic and has \(n-1\) edges.</li>
+<li>For every pair of vertices \(u\) and \(v\) in \(V(T)\), there is a unique \(uv\)
+path.</li>
+</ol>
+</div>
+<ol class="org-ol">
+<li><a id="orgebacf48"></a>Definition (spanning tree)<br />
+<div class="outline-text-5" id="text-1-2-5-1">
+<p>
+\(T \subset G\) is a spanning tree if \(T\) is a tree and \(V(T) = V(G)\).
+</p>
+</div>
+</li>
+</ol>
+</div>
+<div id="outline-container-org46000db" class="outline-4">
+<h4 id="org46000db"><span class="section-number-4">1.2.6</span> Special spanning trees</h4>
+<div class="outline-text-4" id="text-1-2-6">
+<p>
+Let \(G\) be connected and run Comp(v) (don't forget the edges.)
+</p>
+
+<p>
+<i>What if</i> we always put \(N(v_i) \setminus W\) to the top of \(Q\). (We call
+this the <b>depth first search</b> tree.) This is going to create a tree which is
+long (?)
+</p>
+
+<p>
+<i>What if</i> if we put it to the bottom of the tree, this will create a
+<b>breadth first search</b>. You will create which is short.
+</p>
+
+<p>
+A diagram that I ignored.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org41ccdc7" class="outline-3">
+<h3 id="org41ccdc7"><span class="section-number-3">1.3</span> Minimal spanning tree</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+Given a graph \(G\). (can be a complete or arbitrary graph.)
+</p>
+
+<p>
+We have a weight function that is assumed on the edge set to \(\mathbb{R}\).
+What we want is a spanning tree \(T\subset G\) such that the cost of the sum of
+weights on the edges is minimum (i.e., for any other spanning tree, the sum
+of the weights on the edges would be more than the current one.)
+</p>
+</div>
+<div id="outline-container-org6af816e" class="outline-4">
+<h4 id="org6af816e"><span class="section-number-4">1.3.1</span> Naive algorithm</h4>
+<div class="outline-text-4" id="text-1-3-1">
+<p>
+There is at most \(n^{n-2}\) (Cayley's theorem.) spanning trees on \(n\) vertices. Let's look at all
+of them and calculate the weights and output the minimum.
+</p>
+</div>
+</div>
+<div id="outline-container-org5bb665b" class="outline-4">
+<h4 id="org5bb665b"><span class="section-number-4">1.3.2</span> Kruskal's algorithm</h4>
+<div class="outline-text-4" id="text-1-3-2">
+</div>
+<ol class="org-ol">
+<li><a id="org4d0cf2e"></a>Step 1<br />
+<div class="outline-text-5" id="text-1-3-2-1">
+<p>
+Sort edges in increasing order of weights \(e_1, \cdots e_m\) such that
+\(w(e_1) \le w(e_n) \le \cdots, \le w(e_n)\).
+</p>
+
+<p>
+Start with an empty forest \(E(F) \neq \emptyset\) for all \(v \in V\), \(c_v = v\).
+</p>
+</div>
+</li>
+<li><a id="orgde7d0b4"></a>Step 2<br />
+<div class="outline-text-5" id="text-1-3-2-2">
+<p>
+For each edge \(e_i = uv\). For \(\forall i \ge 1\), if the forest plus the new
+edge has a cycle, then \(C_v\) remains the same.
+</p>
+
+<p>
+If there is no cycle, we have a new forest, i.e., the bigger forest with
+the extra edge added to it.
+</p>
+</div>
+</li>
+<li><a id="orgd33ece3"></a>The end<br />
+<div class="outline-text-5" id="text-1-3-2-3">
+<p>
+Output \(F\).
+</p>
+</div>
+</li>
+</ol>
+</div>
+<div id="outline-container-orga075053" class="outline-4">
+<h4 id="orga075053"><span class="section-number-4">1.3.3</span> Theorem: Kruskal's algorithm returns the min-weight spanning tree.</h4>
+<div class="outline-text-4" id="text-1-3-3">
+<p>
+Proved in discrete Math 1. 
+</p>
+</div>
+</div>
+<div id="outline-container-org833f268" class="outline-4">
+<h4 id="org833f268"><span class="section-number-4">1.3.4</span> Running time of Kruskal</h4>
+<div class="outline-text-4" id="text-1-3-4">
+<p>
+The first step involves sorting. This can be done in \(O(|E| \log|E|)\).
+</p>
+
+<p>
+There is \(O(m)\) and \(O(n^2)\). 
+</p>
+
+<p>
+If \(G\) is dense, then \(O(m\log m)\) and if \(G\) is sparse, then \(O(n^2)\).
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orgfe6a527" class="outline-2">
+<h2 id="orgfe6a527"><span class="section-number-2">2</span> Lecture 3 <span class="timestamp-wrapper"><span class="timestamp">&lt;2018-10-23 Tue&gt;</span></span></h2>
+<div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-orgb0ad38e" class="outline-3">
+<h3 id="orgb0ad38e"><span class="section-number-3">2.1</span> Spanning trees</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+Another perspective: get to one place to another in the fastest way possible.
+Versus the minimum spanning tree. <sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>
+</p>
+</div>
+</div>
+<div id="outline-container-orgd0d0294" class="outline-3">
+<h3 id="orgd0d0294"><span class="section-number-3">2.2</span> Problem</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+Given graph \(G=(V, E)\), a distance for \(d\colon E \rightarrow \mathbb{R}_{\ge 0}\). 
+</p>
+
+<p>
+<b>Goal</b>: Given a vertex \(u\in V\), find the shortest path to any vertex \(v \in V\). 
+</p>
+
+<p>
+The brute force way is to find all the path and find the minimu. 
+</p>
+</div>
+</div>
+<div id="outline-container-orgd7b5f2a" class="outline-3">
+<h3 id="orgd7b5f2a"><span class="section-number-3">2.3</span> Idea</h3>
+<div class="outline-text-3" id="text-2-3">
+<p>
+Maintain a set of vertices to where a shortest path from \(u\) was found. And
+in each step we add one vertex to \(W\).
+</p>
+
+<p>
+<b>Key observation</b>: If \(P\) is a shortest \(uv\) path, then for every \(w\) on this
+ path, \(P[u, w]\), this is also the shortest path. (\(P[u, w]\) represents the
+ path from \(u\) to \(w\) through \(P\).)
+</p>
+</div>
+</div>
+<div id="outline-container-org978b6f7" class="outline-3">
+<h3 id="org978b6f7"><span class="section-number-3">2.4</span> Dijkstra's algorithm</h3>
+<div class="outline-text-3" id="text-2-4">
+<p>
+<b>Input</b> is a graph \(G = (V, E)\) which is connected. <sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup> We have a distance
+\(d\colon E \rightarrow \mathbb{R}_{\ge 0}\).
+</p>
+
+<p>
+<b>Output</b>: For every vertex \(u \in V\), the distance from \(u\) and also a
+shortest path.
+</p>
+</div>
+<div id="outline-container-orgb6c67c0" class="outline-4">
+<h4 id="orgb6c67c0"><span class="section-number-4">2.4.1</span> Algorithm</h4>
+<div class="outline-text-4" id="text-2-4-1">
+<p>
+<b>Initialization</b>: dist[u] = 0
+</p>
+
+<p>
+For every other vertex \(v\), I set \(d[v] = \infty\). \(prev[v] =
+    \textup{null}\). Maintain the set \(W = \emptyset\). 
+</p>
+
+<p>
+<b>Iteration</b>: Choose a vertex \(v_0 = \min\{\dist[v]\colon v  \in V \setminus W\}\)
+</p>
+
+<p>
+Update \(W = W \cap \{v_0\}\).
+</p>
+
+<p>
+\(\forall v \in V \setminus W\) if \(\dist[v] > \dist[v_0] + d(v_0, v)\)
+then \(\dist[v] = \dist[v_0] + d(v_0, v)\) and \(\prev[v] = v_0\). 
+</p>
+
+<p>
+<b>Termination</b>: If \(W = V\), then STOP and output \(\dist[v]\) search head of
+\(\prev\) for a \(uv\) path.
+</p>
+
+<p>
+An example was done. <a href="https://en.wikipedia.org/wiki/Dijkstra's_algorithm">Wikipedia</a>. 
+</p>
+</div>
+</div>
+<div id="outline-container-org37950d9" class="outline-4">
+<h4 id="org37950d9"><span class="section-number-4">2.4.2</span> Analysis</h4>
+<div class="outline-text-4" id="text-2-4-2">
+</div>
+<ol class="org-ol">
+<li><a id="orgd42952b"></a>Correctness<br />
+<div class="outline-text-5" id="text-2-4-2-1">
+<p>
+<b>Claim</b>: At the time \(v_0\) is put into \(W\), \(\dist[v_0]\) is the distance of
+ \(v_0\) to \(u\). 
+</p>
+
+<p>
+(This would prove the correctness, because \(dist\) does not change after
+vertex is in \(W\).)
+</p>
+
+<p>
+Proof: Induction on \(\vert W\vert\).
+</p>
+
+<p>
+Because \(\vert w \vert = 0\) \(u\) is put into \(W\), \(\dist[u] = 0 = d(uu)\). 
+</p>
+
+<p>
+Suppose \(\vert W \vert \ge 1\), we put \(v_0\) into \(W\). If this is the case,
+then \(\dist[v_0] = \min\{\dist[v_0]\colon v \in V \setminus W\}\).
+</p>
+
+<p>
+Suppose \(\dist[v_0] > s(uv_0)\). (here \(s\) is the shortest path going
+from one vertex to another.)
+</p>
+
+<p>
+Take the shortest \(uv_0\) path \(P\). There will be a first vertex on \(P\) not
+in \(W\), call it \(v_f\) and \(v_p\) be its predecessor. \(\dist[v_0] > s(uv_0)
+      = s(uv_f) + s(v_fv_0) \ge s(uv_f) = s(uv_p) + s(v_pv_f) = dist[v_p] +
+      d(v_pv_f)\). (By our observation from before, both these paths are the
+shortest.)
+</p>
+
+<p>
+When we are updating after putting \(v_p\) into \(W\), we consider \(v_f\) and
+we will put it in \(W\). This is a contradiction. 
+</p>
+</div>
+</li>
+<li><a id="orgd45fa47"></a>Termination<br />
+<div class="outline-text-5" id="text-2-4-2-2">
+<p>
+In each iterating step, one vertex is put into \(W\) and stays there and then
+in \(n\) iterations, we are done. 
+</p>
+</div>
+</li>
+<li><a id="orgce7efda"></a>Cost<br />
+<div class="outline-text-5" id="text-2-4-2-3">
+<p>
+Finding \(v_0\), then \(O(\vert V \vert)\).
+</p>
+
+<p>
+Adding \(v_0\) to \(W\) is \(O(1)\)
+</p>
+
+<p>
+Updating \(\dist\),  \(O(\vert V\vert)\).
+</p>
+
+<p>
+With better data structure \(O(\vert E\vert + \vert V \vert log \vert V \vert)\).
+</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org713a98f" class="outline-3">
+<h3 id="org713a98f"><span class="section-number-3">2.5</span> Euro 2020 or Travelling Salesman Problem</h3>
+<div class="outline-text-3" id="text-2-5">
+<p>
+Watch a game in every one of \(13\) cities. We want to visit all \(13\) but as
+cheap as possible. The English football fans cannot return to the same
+country. A \(13\) vertex graph, between any two vertices, there is a price of
+the air ticket.
+</p>
+
+<p>
+We are looking for a Hamilton cycle.
+</p>
+
+<p>
+Given graph \(G = (V, E)\) and \(w\colon E \rightarrow \R_{\ge 0}\). A cycle
+that does not repeat.
+</p>
+</div>
+</div>
+<div id="outline-container-orgba995fc" class="outline-3">
+<h3 id="orgba995fc"><span class="section-number-3">2.6</span> Complexity classes</h3>
+<div class="outline-text-3" id="text-2-6">
+<p>
+\(\P\), polynomial time running problem. 
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">\(n\)</th>
+<th scope="col" class="org-left">\(1000n\)</th>
+<th scope="col" class="org-left">\(1000n\log n\)</th>
+<th scope="col" class="org-left">\(10n^2\)</th>
+<th scope="col" class="org-left">\(2^n\)</th>
+<th scope="col" class="org-left">\(n!\)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">10</td>
+<td class="org-left">0.01 sec</td>
+<td class="org-left">0.0002 sec</td>
+<td class="org-left">0.001</td>
+<td class="org-left">0.0000001 sec</td>
+<td class="org-left">0.003 sec</td>
+</tr>
+
+<tr>
+<td class="org-right">100</td>
+<td class="org-left">0.1 sec</td>
+<td class="org-left">0.001 sec</td>
+<td class="org-left">000001 sec</td>
+<td class="org-left">400000 years</td>
+<td class="org-left">\(>10^100\) years</td>
+</tr>
+
+<tr>
+<td class="org-right">100000</td>
+<td class="org-left">17 min</td>
+<td class="org-left">20 sec</td>
+<td class="org-left">2450 min</td>
+<td class="org-left">\(>10^100\) years</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="outline-container-org0d1d1ad" class="outline-2">
+<h2 id="org0d1d1ad"><span class="section-number-2">3</span> Lecture 4 <span class="timestamp-wrapper"><span class="timestamp">&lt;2018-10-24 Wed&gt;</span></span></h2>
+<div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-org06cf176" class="outline-3">
+<h3 id="org06cf176"><span class="section-number-3">3.1</span> Decision problems</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+Problems that output yes or no
+</p>
+</div>
+<div id="outline-container-orgd386852" class="outline-4">
+<h4 id="orgd386852"><span class="section-number-4">3.1.1</span> Example</h4>
+<div class="outline-text-4" id="text-3-1-1">
+<ul class="org-ul">
+<li>Is there a spanning tree of weight \(\le 42\). (Kruskal algorithm.)</li>
+<li>Is there a path of weight \(\le 405\) from \(u\) to \(v\)? (Djistra's algorithm.)</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org85e5cdd" class="outline-3">
+<h3 id="org85e5cdd"><span class="section-number-3">3.2</span> Class P</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+The set of all decision problems with a polynomial time algorithm. 
+</p>
+</div>
+</div>
+<div id="outline-container-org1345594" class="outline-3">
+<h3 id="org1345594"><span class="section-number-3">3.3</span> Traveling salesman problem</h3>
+<div class="outline-text-3" id="text-3-3">
+<p>
+We don't know if the problem is in \(\P\). 
+</p>
+
+<p>
+As a decision problem: There is a graph \(G = (V, E)\) and \(w\colon E
+   \rightarrow \R_{\ge 0}\)., You ask what is the smallest weight Hamiltonian cycle. <sup><a id="fnr.3" class="footref" href="#fn.3">3</a></sup>
+</p>
+</div>
+<div id="outline-container-orga56770c" class="outline-4">
+<h4 id="orga56770c"><span class="section-number-4">3.3.1</span> Approximation algorithm</h4>
+<div class="outline-text-4" id="text-3-3-1">
+<p>
+<b>Definition</b>: An \(\alpha\) approximation of TSP is an algorithm that turns a
+ Hamiltonian cycle whose weight is within \(\alpha\) fraction of the min
+ weight Hamiltonian cycle.<sup><a id="fnr.4" class="footref" href="#fn.4">4</a></sup>
+</p>
+</div>
+</div>
+<div id="outline-container-org25c94fa" class="outline-4">
+<h4 id="org25c94fa"><span class="section-number-4">3.3.2</span> Extra conditions</h4>
+<div class="outline-text-4" id="text-3-3-2">
+<p>
+Triangle inequality: the weight function satisfies the triangle inequality
+if every two vertices of the graph, the weight \(w(xy) \le w(xz) + w(zy)\).
+</p>
+
+<p>
+Examples: The usual Euclidean distance satisfies this. 
+A non-example is Airfare cost.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org1ca8cd9" class="outline-3">
+<h3 id="org1ca8cd9"><span class="section-number-3">3.4</span> Approximation algorithm for TSP</h3>
+<div class="outline-text-3" id="text-3-4">
+</div>
+<div id="outline-container-orga908287" class="outline-4">
+<h4 id="orga908287"><span class="section-number-4">3.4.1</span> Algorithm</h4>
+<div class="outline-text-4" id="text-3-4-1">
+<p>
+<b>Input</b>: a weight function \(w\colon E(K_n) \rightarrow \R_{\ge 0}\) with
+triangle inequality. (We assume that it is a complete graph.)
+</p>
+
+<p>
+<b>Output</b>: Hamiltonian cycle \(C\).
+</p>
+
+<p>
+<b>Algorithm</b>:
+</p>
+<ol class="org-ol">
+<li>Find the minimum weight spanning tree (Kruskal algorithm.)</li>
+<li>From the spanning tree, we create a closed walk spanning all vertices by
+traversing each edge of \(T\) twice in both directions.</li>
+<li>Traverse \(W\), when hitting a vertex that was used before, we do a short
+cut. (Go instead to next vertex \(W\)) Do this iteratively.</li>
+</ol>
+<p>
+4 <b>Termination</b>: when all vertices are traversed, output \(C\). 
+</p>
+
+<p>
+We know that \(w(W) = 2w(T)\) and \(w(C) \ge w(W)\). 
+</p>
+
+<p>
+\(C^{*}\) is a minimum weight Hamilton cycle. How does this compare to the
+weight of the spanning tree. We know that \(w(C^{*}) \ge w(T)\). and thus
+\(w(C) \le 2 w(C^{*})\).
+</p>
+</div>
+</div>
+<div id="outline-container-orgd006f2a" class="outline-4">
+<h4 id="orgd006f2a"><span class="section-number-4">3.4.2</span> Running time</h4>
+<div class="outline-text-4" id="text-3-4-2">
+<ol class="org-ol">
+<li>Kruskal: \(O(n^2\log n)\)</li>
+<li>Closed walk \(W\), \(O(n)\).</li>
+<li>short cutting: \(O(n)\).</li>
+</ol>
+</div>
+</div>
+</div>
+<div id="outline-container-org8df6e62" class="outline-3">
+<h3 id="org8df6e62"><span class="section-number-3">3.5</span> Hall's theorem</h3>
+<div class="outline-text-3" id="text-3-5">
+<p>
+If \(G = (A \cap B, E)\) a bipartite graph, then \(G\) has a matching \(A\) if and
+only if for every subset \(S \subset A\), \(\vert N(S) \vert \ge \vert S \vert\).
+</p>
+
+<p>
+The non-trivial direction implies that when there is no matching saturating
+\(A\), then there is an \(S \subset A\), \(\vert N(S) \vert < \vert S \vert\).
+</p>
+</div>
+</div>
+<div id="outline-container-org7466027" class="outline-3">
+<h3 id="org7466027"><span class="section-number-3">3.6</span> Class \(\NP\)</h3>
+<div class="outline-text-3" id="text-3-6">
+<p>
+A decision problem is in class \(\NP\) if the YES answer can be verified
+efficiently (within time that is polynomial in variable size.) (In other
+words, there is a polynomial size certificate.)
+</p>
+
+<p>
+The perfect matching problem is in NP. <sup><a id="fnr.5" class="footref" href="#fn.5">5</a></sup>
+</p>
+
+<p>
+Opposite of perfect matching: Does \(G\) has a \(PM\)? We can use Hall's
+condition as a certificate. Hence the problem is in NP.
+</p>
+</div>
+</div>
+<div id="outline-container-org3e25f04" class="outline-3">
+<h3 id="org3e25f04"><span class="section-number-3">3.7</span> Class \(\coNP\)</h3>
+<div class="outline-text-3" id="text-3-7">
+<p>
+Means that the problem is in \(NP\) and the negation of the problem is also in
+\(NP\).
+</p>
+</div>
+</div>
+<div id="outline-container-org27d6944" class="outline-3">
+<h3 id="org27d6944"><span class="section-number-3">3.8</span> About Hamilton path</h3>
+<div class="outline-text-3" id="text-3-8">
+<p>
+The Hamilton path problem is in \(NP\). 
+</p>
+
+<p>
+But the negation of the HAM is not known to be in \(NP\). In other words, we
+don't know if HAM is \(\coNP\).<sup><a id="fnr.6" class="footref" href="#fn.6">6</a></sup>
+</p>
+</div>
+</div>
+<div id="outline-container-org95a1c84" class="outline-3">
+<h3 id="org95a1c84"><span class="section-number-3">3.9</span> Problem reduction</h3>
+<div class="outline-text-3" id="text-3-9">
+<p>
+Maximum weight spanning tree problem can be reduced to a minimum weight
+spanning tree. (You can solve the minimum weight spanning tree problem by
+inverting the sign of the edges.) Furthermore, it is a polynomial time
+reduction.
+</p>
+
+<p>
+A problem is called \(\NP\) hard if any problem in \(\NP\) class can be reduced
+by the problem.
+</p>
+
+<p>
+If furthermore, the problem is in \(\NP\), then we call it \(\NP\) complete.
+</p>
+
+<p>
+Example: 3-SAT is \(\NP\) hard and also \(\NP\) complete. 
+</p>
+
+<p>
+Karp came up with \(21\) natural \(\NP\) complete problems, all of them are \(\NP\)
+complete.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org55f7ca8" class="outline-2">
+<h2 id="org55f7ca8"><span class="section-number-2">4</span> Lecture 5 <span class="timestamp-wrapper"><span class="timestamp">&lt;2018-10-30 Tue&gt;</span></span></h2>
+<div class="outline-text-2" id="text-4">
+</div>
+<div id="outline-container-orgee4581e" class="outline-3">
+<h3 id="orgee4581e"><span class="section-number-3">4.1</span> NP class</h3>
+<div class="outline-text-3" id="text-4-1">
+<p>
+A yes/no problem is in class NP if the answer yes can be verified
+efficiently.
+</p>
+</div>
+<div id="outline-container-orga93743b" class="outline-4">
+<h4 id="orga93743b"><span class="section-number-4">4.1.1</span> Examples</h4>
+<div class="outline-text-4" id="text-4-1-1">
+<ol class="org-ol">
+<li>Does the bipartite graph have a perfect matching.</li>
+<li>Does the bipartite graph have no perfect matching.</li>
+<li>Does the graph have a Hamiltonian-cycle?</li>
+<li><b>Don't know</b> Whether a problem have no hamiltonian cycle.</li>
+</ol>
+</div>
+</div>
+</div>
+<div id="outline-container-orgad8d594" class="outline-3">
+<h3 id="orgad8d594"><span class="section-number-3">4.2</span> P class</h3>
+<div class="outline-text-3" id="text-4-2">
+<p>
+A yes/no decision problem is in P if the answer can be found in polynomial
+time. It is obviously true that \(P \subset NP\).
+</p>
+</div>
+</div>
+<div id="outline-container-orge105c56" class="outline-3">
+<h3 id="orge105c56"><span class="section-number-3">4.3</span> Co-NP</h3>
+<div class="outline-text-3" id="text-4-3">
+<p>
+A yes/no problem is in the class Co-NP if the no-answer can be verified
+efficiently. Again trivially, \(P \subset NP \cap no-NP\).
+</p>
+</div>
+<div id="outline-container-org0bce83c" class="outline-4">
+<h4 id="org0bce83c"><span class="section-number-4">4.3.1</span> Example of NP intersection co-NP</h4>
+<div class="outline-text-4" id="text-4-3-1">
+<ol class="org-ol">
+<li>Perfect matching problem in bipartite graph is in the intersection.</li>
+<li>Is this graph 2-colorable.</li>
+<li>Is this graph Eulerian?<sup><a id="fnr.7" class="footref" href="#fn.7">7</a></sup> Verify that the degree of each vertex is even.
+(polynomial time algorithm.) Another answer: The yes answer is the list
+of edges in an Eulerian edges. For the NO answer, we will be given a
+vertex of odd-degree.</li>
+</ol>
+</div>
+</div>
+</div>
+<div id="outline-container-orgd3a4a97" class="outline-3">
+<h3 id="orgd3a4a97"><span class="section-number-3">4.4</span> Conjecture P \(\neq\) NP</h3>
+</div>
+<div id="outline-container-orgad8729e" class="outline-3">
+<h3 id="orgad8729e"><span class="section-number-3">4.5</span> Stronger conjecture of \(P \neq\) \(NP\) intersection \(co-NP\)</h3>
+<div class="outline-text-3" id="text-4-5">
+<p>
+Is there a factor of \(n < k\). This problem is in the intersection of NP and
+co-NP.
+</p>
+
+<p>
+Is \(n\) a prime. This was also a problem. But in 2002, it was proven to be
+true. (The input size is in \(\log n\).)
+</p>
+
+<p>
+A problem in \(NP\) and co-NP and then trying to find a good characterization
+and then solving the problem.
+</p>
+</div>
+</div>
+<div id="outline-container-orgfe7aa7f" class="outline-3">
+<h3 id="orgfe7aa7f"><span class="section-number-3">4.6</span> NP completeness</h3>
+<div class="outline-text-3" id="text-4-6">
+<p>
+Subtle difference between easy and hard problem.
+</p>
+<ol class="org-ol">
+<li>The graph is 2-colorable? is in P<sup><a id="fnr.8" class="footref" href="#fn.8">8</a></sup></li>
+<li>Is the graph 3-colorable? is in NP-complete.</li>
+<li>Is this planar graph 3-colorable? is in NP-complete.</li>
+<li>Is this planar graph 4-colorable? is in P. (The is in complexity class TRIVIAL)
+The answer is always yes.</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org1d17e87" class="outline-3">
+<h3 id="org1d17e87"><span class="section-number-3">4.7</span> Hall's theorem</h3>
+<div class="outline-text-3" id="text-4-7">
+<p>
+If you have a graph \(G\) that is bipartite, then \(G\) has a perfect matching if
+and only if for every \(S\) inside \(A\), the \(\vert N(S) \vert \ge \vert S
+   \vert\) and for every \(S \subset B\).
+</p>
+</div>
+</div>
+<div id="outline-container-org31d7919" class="outline-3">
+<h3 id="org31d7919"><span class="section-number-3">4.8</span> Necessary conditions for Hamiltonianity</h3>
+<div class="outline-text-3" id="text-4-8">
+<p>
+Dirac's theorem \(d(G) \ge n/2 \implies G\) is hamiltonian. <a href="https://en.wikipedia.org/wiki/Hamiltonian_path#Bondy%E2%80%93Chv%C3%A1tal_theorem">Wikipedia</a> (This is
+a sufficient condition.) For a cycle, this fails.   
+</p>
+
+<p>
+Proposition: If a graph \(G\) is hamiltonian then \(\forall S \subset V(G)\),
+\(C(G\setminus S) \subset \vert S \vert\). (This is a necessary condition.)<sup><a id="fnr.9" class="footref" href="#fn.9">9</a></sup> <sup>, </sup><sup><a id="fnr.10" class="footref" href="#fn.10">10</a></sup>
+</p>
+
+<p>
+A simple example is an edge. It's probably also true for Peterson graph.
+</p>
+
+<p>
+We can try to frame something like if \(t C(G\setminus S) \subset \vert S
+   \vert\). For peterson graph \(t = 4/3\). There is a conjecture on if we can talk
+about a value of \(t\) and do stuff.
+</p>
+</div>
+</div>
+<div id="outline-container-org9af262e" class="outline-3">
+<h3 id="org9af262e"><span class="section-number-3">4.9</span> Does a graph have a perfect matching? Tutte's theorem</h3>
+<div class="outline-text-3" id="text-4-9">
+<p>
+The question is whether this is in NP intersection co-NP. 
+</p>
+
+<p>
+The hall's theorem was for bipartite graph.
+</p>
+
+<p>
+Consider \(K_{2k+1}\). It has all the edges, but has no perfect matching. Odd
+(vertices) graphs are bad obviously.
+</p>
+
+<p>
+There was something about applying the necessary condition for Hamiltonian
+cycle to the matching problem and arriving at a necessary condition (and sufficient condition.)
+</p>
+
+<p>
+\(G\) has a perfect matching \(\implies\) \(\forall S \subset V(S)\), \(o(G
+   \setminus S) \subset |S|\).<sup><a id="fnr.11" class="footref" href="#fn.11">11</a></sup>
+</p>
+
+<p>
+<b>Proof</b>: Let \(M\) be a perfect matching in \(G\). In each odd component, there
+is at least one edge \(e_L \in M\) which has one vertex in \(b\) and the other in
+\(S\). These edge \(e_L\) are disjoint \(\implies\) <sup><a id="fnr.12" class="footref" href="#fn.12">12</a></sup> <sup>, </sup><sup><a id="fnr.13" class="footref" href="#fn.13">13</a></sup>
+</p>
+</div>
+</div>
+<div id="outline-container-orgc81e4da" class="outline-3">
+<h3 id="orgc81e4da"><span class="section-number-3">4.10</span> Proof of Tutte's theorem</h3>
+<div class="outline-text-3" id="text-4-10">
+<p>
+Let \(G\) be a counter example with maximum number of edges.<sup><a id="fnr.14" class="footref" href="#fn.14">14</a></sup>
+</p>
+
+<p>
+What is a counter example? It should satisfy the following properties:
+</p>
+<ol class="org-ol">
+<li>\(G\) has no perfect matching</li>
+<li>\(\forall S \subset V(G)\), \(o(G \setminus S) \le \vert S \vert\)</li>
+</ol>
+
+<p>
+Add \(xy\) to \(G\) and \(G+xy\) is not a counter example. We claim that \(\forall S
+   \subset V(G)\), \(o((G+xy)\setminus S) \le \vert S \vert\). <sup><a id="fnr.15" class="footref" href="#fn.15">15</a></sup>
+</p>
+
+<p>
+I know that \(o(G\setminus S) \le \vert S \vert\).
+</p>
+<ul class="org-ul">
+<li>If \(xy \in S = \emptyset \implies \vert S \vert\) does not decrease.</li>
+<li>If \(xy\) goes between even components, then nothing changes.</li>
+<li>If \(xy\) goes to an odd components, the number of odd components decreases.
+Basically do a case analysis and it checks out.</li>
+</ul>
+
+<p>
+\(U = \{v \in V(G) \colon d(v) = n- 1\}\)
+</p>
+
+<p>
+Case 1. \(G \setminus U\) is the disjoint union of cliques. There are even
+cliques and odd cliques. Even cliques can be matching within themselves. In
+odd cliques, you match everything but one, but we can match the extra vertex
+to \(U\). Now what happens with the vertices inside \(U\) that doesn't get a pair
+in \(U\). If that part is odd, then the whole thing is not odd. But it is not
+odd, because we have a contradiction when we put \(S = \emptyset\). So after
+everything, the number of unmatched vertices is even (otherwise we have a
+contradiction.)
+</p>
+
+<p>
+Case 2. \(G \setminus U\) is not a disjoint union of cliques. The idea is from
+two almost perfect matching of \(G\), create a perfect matching of \(G\) and two
+more edges, create a perfect matching. This leads to a contradiction. 
+</p>
+
+<p>
+Claim: In \(G, \exists x, u, v, w\) such that \(xu, xv, \in E\), \(uv, vw \notin
+   V(G)\). \(w\) is anything that is not in the neighbourhod of \(x\) which is non
+empty.<sup><a id="fnr.16" class="footref" href="#fn.16">16</a></sup>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-artist">
+                   x .--------------------------- w
+                    /.
+                   /  -\                           
+                 -/     \                          
+                /        -\                        
+               /           -\                      
+             -/              \                     
+            /                 -\                   
+           /                    \                  
+          /                      -\                
+        -/                         \               
+       /                            -\             
+      /                               -\           
+    -/                                  \          
+   /                                     -\        
+u .----------------------------------------. v
+
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org68b2a47" class="outline-2">
+<h2 id="org68b2a47"><span class="section-number-2">5</span> Lecture 6 <span class="timestamp-wrapper"><span class="timestamp">&lt;2018-10-31 Wed&gt;</span></span></h2>
+<div class="outline-text-2" id="text-5">
+</div>
+<div id="outline-container-org1b0d4b3" class="outline-3">
+<h3 id="org1b0d4b3"><span class="section-number-3">5.1</span> <span class="todo TODO">TODO</span> Tutte's theorem proof</h3>
+<div class="outline-text-3" id="text-5-1">
+<p>
+\(\Leftarrow\): G$, a counter example with maximum number of edges.
+</p>
+
+<p>
+<b>Claim</b>: \(G+xy\) has a p.m. \(xy\in E(G)\), \(G\) has no p.m., \(\forall S \in
+    V(G)\), \(o(G \setminus S) \le o(\vert S \vert)\)
+</p>
+
+<p>
+\(U = \{v \colon deg(v) = n-1\}\) and \(n=\vert V(G)\vert\).
+</p>
+
+<p>
+Case 1: \(G \setminus U\) is the union of cliques. We are done, we use Tutte's
+condition for empty set. 
+</p>
+
+<p>
+Case 2: Otherwise, there exists the diagram that I already drew. Our claim
+implies that there exists a perfect matching \(M_1\) in \(G + xw\) and also
+there is a perfect matching in \(G\) if one adds \(uv\). Our goal is to find a
+perfect matching in \(M_1 \cap M_2\). Our goal is to find a perfect matching
+in \(M_1 \cap M_2 \setminus \{xw, uv\} \cap \{ux, xv\} \subset E(G)\).
+</p>
+
+<p>
+\(M_1 \cap M_2\) is the disjoint union of $K<sub>2</sub>$s and even cycles<sup><a id="fnr.17" class="footref" href="#fn.17">17</a></sup>. The degree
+of each vertex in the union is either \(1\) or \(2\), because the matching is
+perfect because there are two of them. If there is one, then the vertex
+participates in the same edge with () matching \(\implies\) \(K_2\) component.
+</p>
+
+<p>
+If it is \(2\) \(\implies\) vertex participates in a cycle component.
+</p>
+
+<p>
+(cycle is even since edges of the matchings alternate.)
+</p>
+
+<p>
+There was a diagram and the proof involved doing stuff on the diagrams. I
+don't understand what he did.
+</p>
+
+<p>
+The proof in the class was from bondy and murthy. <a href="http://www.zib.de/groetschel/teaching/WS1314/BondyMurtyGTWA.pdf">Bondy and murthy</a> page 76. 
+</p>
+
+<p>
+The wikipedia link seems to have the same proof.
+</p>
+</div>
+</div>
+<div id="outline-container-orgf7d3617" class="outline-3">
+<h3 id="orgf7d3617"><span class="section-number-3">5.2</span> Perfect matching is in NP intersection co-NP</h3>
+<div class="outline-text-3" id="text-5-2">
+<p>
+Tutte's theorem tells us that the problem is in the intersection of NP and
+co-NP. The certificate for the yes case is a matching and for the No case is
+a case where the Tutte's theorem is false.
+</p>
+
+<p>
+The problem is also in P.
+</p>
+</div>
+</div>
+<div id="outline-container-org0a8d4b0" class="outline-3">
+<h3 id="org0a8d4b0"><span class="section-number-3">5.3</span> Corollary to hall theorem (Theorem of Frobenius)</h3>
+<div class="outline-text-3" id="text-5-3">
+<p>
+A \(k\) regular bipartite graph has perfect matching.<sup><a id="fnr.18" class="footref" href="#fn.18">18</a></sup> (1-factor)
+</p>
+
+<p>
+A \(k\) factor is a spanning \(k\) regular subgraph. 
+</p>
+
+<p>
+This is not true for general graphs. Example: odd cycles, they are \(2\)
+regular and 1-factor. Are there examples with even number of vertices.
+(3-regular graph with no \(1\) factor.)
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-orged7dc7a" class="outline-3">
+<h3 id="orged7dc7a"><span class="section-number-3">5.4</span> Theorem (peterson)</h3>
+<div class="outline-text-3" id="text-5-4">
+<p>
+A \(2k\) regular subgraph has a \(2\) factor. 
+</p>
+</div>
+</div>
+<div id="outline-container-org71eeec8" class="outline-3">
+<h3 id="org71eeec8"><span class="section-number-3">5.5</span> Theorem (another peterson theorem)</h3>
+<div class="outline-text-3" id="text-5-5">
+<p>
+Every \(3\) regular graph without cut edges<sup><a id="fnr.19" class="footref" href="#fn.19">19</a></sup> has a perfect matching. (Theorem in
+Bondy and Murthy) <sup><a id="fnr.20" class="footref" href="#fn.20">20</a></sup>
+</p>
+</div>
+<div id="outline-container-org74c0cee" class="outline-4">
+<h4 id="org74c0cee"><span class="section-number-4">5.5.1</span> Proof</h4>
+<div class="outline-text-4" id="text-5-5-1">
+<p>
+The proof is component wise. Now we assume that \(G\) is connected.
+</p>
+
+<p>
+We will check that Tutte's condition holds. Then Tutte's theorem tells us
+that \(G\) has a perfect matching.
+</p>
+
+<p>
+\(S\) be an arbitrary subset.
+</p>
+
+<p>
+Consider the number of edges between odd components and \(S\).
+</p>
+
+<p>
+Claim: For every odd component, there is at least three edges going to \(S\)
+from \(C\).
+</p>
+
+<p>
+Proof:
+</p>
+<ol class="org-ol">
+<li>\(0\) edges is not possible because connected.</li>
+<li>\(1\) edge is
+not possible, because it would be a cut edge.</li>
+<li>\(2\) edges are not possible
+because the sum of the degrees of the vertices inside the component -2,
+\(\sum d(v) - 2 = 2 \cdot e(C)\). Now this is just a handshake lemma.<sup><a id="fnr.21" class="footref" href="#fn.21">21</a></sup></li>
+</ol>
+
+<p>
+The number of edges between odd components and \(S\). The number of edges
+going is at least \(3\) times the odd components. On the other hand, the
+number of components cannot be more than \(3 \vert S \vert\).
+</p>
+
+<p>
+\[ 3\cdot o(G \setminus S) \le \textup{number of edges between odd components and S } \le 3 \cdot \vert S \vert\]
+</p>
+
+<p>
+Thus \(\cdot o(G \setminus S) \le \vert S \vert\)
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org62bfe4f" class="outline-3">
+<h3 id="org62bfe4f"><span class="section-number-3">5.6</span> Maximum matching problem</h3>
+<div class="outline-text-3" id="text-5-6">
+<p>
+In the decision problem formulation. Is there a matching of size \(k\) in the
+graph on \(n\) vertices.
+</p>
+
+<p>
+Is this problem in NP intersection co-NP? The problem is obviously in NP. 
+</p>
+
+<p>
+For Bipartite graphs, we can provide the other verification by Konig's
+theorem.
+</p>
+</div>
+</div>
+<div id="outline-container-orgbdd3417" class="outline-3">
+<h3 id="orgbdd3417"><span class="section-number-3">5.7</span> Konig's theorem</h3>
+<div class="outline-text-3" id="text-5-7">
+<p>
+\(G\) is bipartite, then \(\alpha(G)=\beta(G)\). Here \(\alpha\) is the size of the
+largest matching and \(\beta\) is the size of smallest vertex cover.
+</p>
+
+<p>
+\(C \subset V(G)\), the vertex cover if \(\forall e \in E(G)\), \(e\cap C \neq
+   \emptyset\).
+</p>
+</div>
+</div>
+<div id="outline-container-org1ae1112" class="outline-3">
+<h3 id="org1ae1112"><span class="section-number-3">5.8</span> Konigs on Maximal matching problem</h3>
+<div class="outline-text-3" id="text-5-8">
+<p>
+Suppose \(\alpha(G) = 88\), then konig gives a certificate to show that there
+exists a vertex cover of size \(88\). So this means that there are no matching
+of size more than \(89\).
+</p>
+</div>
+</div>
+<div id="outline-container-org12cd947" class="outline-3">
+<h3 id="org12cd947"><span class="section-number-3">5.9</span> Homework: a corollary of Tutt due to Berge</h3>
+<div class="outline-text-3" id="text-5-9">
+<p>
+If \(G\) is a arbitrary graph, then it is true that \(2\alpha'(G)\) is equal to
+the minimum of the following sum of quantities: \(\min \{ n - o(G\setminus
+   S) + \vert S \vert \colon S \subset V(G) \}\).<sup><a id="fnr.22" class="footref" href="#fn.22">22</a></sup>
+</p>
+
+<p>
+It is easy to show one direction. But this is the maximum size, which is the homework.
+</p>
+
+<p>
+This example would put the problem of maximum matching into the intersection.
+</p>
+</div>
+</div>
+<div id="outline-container-org449fe0a" class="outline-3">
+<h3 id="org449fe0a"><span class="section-number-3">5.10</span> How to find maximum matchings in polynomial time?</h3>
+</div>
+<div id="outline-container-org1dd1fdc" class="outline-3">
+<h3 id="org1dd1fdc"><span class="section-number-3">5.11</span> Proposition about maximum matching</h3>
+<div class="outline-text-3" id="text-5-11">
+<p>
+IF \(M \subset E(G)\) is a maximum matching of \(G\), \(\iff\) there is no
+\(M\) augmenting path.
+</p>
+
+<p>
+\(M\) augmenting path: It's a path in which non-edges and edges follow each
+other alternatively. One direction is easy. If \(M\) is a maximum matching,
+then there is no \(M\) augmenting path.
+</p>
+</div>
+</div>
+<div id="outline-container-org4b9bce9" class="outline-3">
+<h3 id="org4b9bce9"><span class="section-number-3">5.12</span> A M alternating path</h3>
+<div class="outline-text-3" id="text-5-12">
+<p>
+A path of \(G\) where edges of \(M\) alternate with non-edges of \(m\).
+</p>
+
+<p>
+An \(M\) alternating path that starts and ends in an unsaturated vertex is
+called \(M\) augmenting. <a href="https://en.wikipedia.org/wiki/Saturation_(graph_theory)">Wikipedia</a>
+</p>
+</div>
+</div>
+<div id="outline-container-orgdf6d4f5" class="outline-3">
+<h3 id="orgdf6d4f5"><span class="section-number-3">5.13</span> Using the characterization for Bipartite graph</h3>
+<div class="outline-text-3" id="text-5-13">
+<p>
+<sup><a id="fnr.23" class="footref" href="#fn.23">23</a></sup> You have a matchin and then unsaturated vertices. The idea is to
+somehow extend the matching to the unsaturated edges.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-artist">-------------------------------------------------------------\------------------------------\---------------
+-                                                                                                           \------
+(                                                                                                                  )
+\              |           |              |              .                                                  /------
+\              |           |              |                            .                    /---------------
+\              |           |              |                  /------------------------------
+---------------------------+--------------+------------------
+                |          |              |
+                |           \              \
+                |           |              |
+                 \          |            --+----------------------------------------------------------------------------------------------------------------------
+       ----------+----------+-----------/  |                                                                                                                      \---------------------------------
+------/          |          |             .|                 .           .     .       .                                                                                                            \------------
+(                           |                                                                                                                                                                                    )
+------\                                                                                                                                                                                             /------------
+       ---------------------------------\                                                                                                                         /---------------------------------
+                                         -------------------------------------------------------------------------------------------------------------------------
+
+
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org818e18d" class="outline-2">
+<h2 id="org818e18d"><span class="section-number-2">6</span> Lecture 7 <span class="timestamp-wrapper"><span class="timestamp">&lt;2018-11-06 Tue&gt;</span></span></h2>
+<div class="outline-text-2" id="text-6">
+</div>
+<div id="outline-container-org4319f6b" class="outline-3">
+<h3 id="org4319f6b"><span class="section-number-3">6.1</span> Maximum matching is in P</h3>
+<div class="outline-text-3" id="text-6-1">
+</div>
+<div id="outline-container-org40d44a3" class="outline-4">
+<h4 id="org40d44a3"><span class="section-number-4">6.1.1</span> Proposition</h4>
+<div class="outline-text-4" id="text-6-1-1">
+<p>
+\(M \subset E(G)\) is a matching in \(G\).
+</p>
+
+<p>
+\(M\) is a maximum \(\iff\) there is no \(M\) augmenting path in \(G\). (is
+\(M\) alternating if it starts and ends at an unsaturated vertex.)
+</p>
+</div>
+</div>
+<div id="outline-container-org2d88048" class="outline-4">
+<h4 id="org2d88048"><span class="section-number-4">6.1.2</span> Augmenting path algorithm</h4>
+<div class="outline-text-4" id="text-6-1-2">
+<p>
+Input: Bipartite graph \(G = (X \cap Y, E)\), a matching \(M \subset E\).
+Output: Either an \(M\) augmenting path or a cover of size \(\vert M \vert\).
+</p>
+
+<p>
+Initialization: \(S = U\), \(Q = \emptyset\), \(T = \emptyset\)
+</p>
+
+<p>
+Iteration: If \(Q = S\) STOP and return \(M\) (as maximal matching), \(TU(x
+    \setminus S)\) (as min cover of size \(\vert M \vert\)) Else select \(x \in S
+    \setminus Q\), \(\forall y \in N(x)\) with \(xy\in M\), DO if \(y\) is unsaturated,
+then stop return a \(M\) augmenting path from \(U\) to \(y\). Else \(\exists w \in
+    X\), \(yw \in M\) update, \(T = T \cap \{y\}\) and \(S = S \cup \{w\}\). Update \(Q
+    = Q \cup \{x\}\). <sup><a id="fnr.24" class="footref" href="#fn.24">24</a></sup>
+</p>
+</div>
+</div>
+<div id="outline-container-orgf68e279" class="outline-4">
+<h4 id="orgf68e279"><span class="section-number-4">6.1.3</span> Proposition</h4>
+<div class="outline-text-4" id="text-6-1-3">
+<p>
+\(G\) graph, \(M \subset E(G)\) is a matching. \(C \subset V(G) \implies \vert M
+    \vert \le \vert C \vert\). Here \(C\) is the cover.
+</p>
+
+<p>
+The idea is that every cover has to be bigger than the matching.
+</p>
+</div>
+</div>
+<div id="outline-container-orgae7dafc" class="outline-4">
+<h4 id="orgae7dafc"><span class="section-number-4">6.1.4</span> <span class="todo TODO">TODO</span> Proof of correctness</h4>
+<div class="outline-text-4" id="text-6-1-4">
+<p>
+Stopping the algorithm: The algorithm can either stop with a \(M\) augmenting
+path or it can stop with a maximum matching or a cover.
+</p>
+
+<p>
+Proof of correctness: If the algorithm terminates with a matching \(M\) and a
+cover \(T \cap (X \setminus S)\), we terminate at \(Q = S\), which means that we
+have explored all the neighbours of \(S\) and they are all in \(T\). We want to
+conclude that there exists no edge between \(S\) and \(Y-T\). (Because if there
+is no edge between \(T\) and \(Y-T\), then \(T\) together \(S-T\) is a cover.)
+</p>
+
+<p>
+If there is an edge from \(S\) to an unsaturated vertex \(y \in T\), then we
+would have immediately put this vertex into \(T\). These two cases are not
+possible.
+</p>
+</div>
+</div>
+<div id="outline-container-org1ef5351" class="outline-4">
+<h4 id="org1ef5351"><span class="section-number-4">6.1.5</span> Comments</h4>
+<div class="outline-text-4" id="text-6-1-5">
+<p>
+\(\vert M \vert = \vert T \vert + \vert X \setminus S\vert\). By the selection
+of \(S\) and \(T\), vertices of \(T\) are put into \(T\) where their \(M\) partner is
+put into \(S\).
+</p>
+
+<p>
+\(\implies\), \(S = U \cap M\) partners of vertices in \(T\).
+</p>
+</div>
+</div>
+<div id="outline-container-org2a3f726" class="outline-4">
+<h4 id="org2a3f726"><span class="section-number-4">6.1.6</span> Internet reference</h4>
+<div class="outline-text-4" id="text-6-1-6">
+<p>
+<a href="http://www.columbia.edu/~cs2035/courses/ieor8100.F12/lec4.pdf">http://www.columbia.edu/~cs2035/courses/ieor8100.F12/lec4.pdf</a>
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org57e573d" class="outline-3">
+<h3 id="org57e573d"><span class="section-number-3">6.2</span> Theorem</h3>
+<div class="outline-text-3" id="text-6-2">
+<p>
+Repeatedly applying APA to bipartite graph produces a maximal matching and
+minimal cover. The running time is \(O(V(G) \cdot e(G))\)
+</p>
+
+<p>
+If we repeat APA \(\le n/2\) times. One running of APA considers each edge
+\(\le 1\), implies \(O(e(G))\).
+</p>
+</div>
+</div>
+<div id="outline-container-org47b6834" class="outline-3">
+<h3 id="org47b6834"><span class="section-number-3">6.3</span> Matching with weights</h3>
+<div class="outline-text-3" id="text-6-3">
+<p>
+We have a weight function on the edges. \(w\colon E(K_{n, n}) \rightarrow \R\).
+</p>
+
+<p>
+The goal is to find a perfect matching \(M\) such that the weight of the
+matching which is the sum \(\sum w(e)\) is maximum.<sup><a id="fnr.25" class="footref" href="#fn.25">25</a></sup>
+</p>
+
+<p>
+In general, we say that the weighted cover \(W\) is \(u_0, \cdots, u_n, v_1,
+   \cdot, v_n\) such that \(u_i+v_j \ge w_{ij}\) for all \(i, j = 1, \cdots, n\). The
+cost of \((u, v)\), \(c(u, v) = \sum u_i + \sum v_j\). (<b>The minimum weighted
+cover problem</b> is to find a cover of minimum weight.)
+</p>
+
+<p>
+The interesting part is that these two problems can be solved together.
+</p>
+</div>
+</div>
+<div id="outline-container-orgae834b3" class="outline-3">
+<h3 id="orgae834b3"><span class="section-number-3">6.4</span> Duality lemma</h3>
+<div class="outline-text-3" id="text-6-4">
+<p>
+For all perfect matching \(M\) and cover \((u, v)\) in a weighted bipartite graph
+\(G\), \(C(u, v) \ge w(M)\) (<b>Home work</b>)
+</p>
+</div>
+
+<div id="outline-container-orgac62372" class="outline-4">
+<h4 id="orgac62372"><span class="section-number-4">6.4.1</span> Corollary</h4>
+<div class="outline-text-4" id="text-6-4-1">
+<p>
+If \(C(u, v) = w(M)\), then \((u, v)\) is a min-cost cover and \(M\) is a maximum
+weight matching.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org392fdd3" class="outline-3">
+<h3 id="org392fdd3"><span class="section-number-3">6.5</span> Algorithm for Maximal weighted matching</h3>
+<div class="outline-text-3" id="text-6-5">
+<p>
+Equality: Subgraph \(G_{u, v} \subset K_{n, n}\), a spanning subgraph which has
+the same vertex set and the edges at those \(x\) and \(y\) where \(w_{i, j} =
+   u_i+u_j\).
+</p>
+</div>
+</div>
+<div id="outline-container-orgd4b2f1b" class="outline-3">
+<h3 id="orgd4b2f1b"><span class="section-number-3">6.6</span> Hungarian algorithm</h3>
+<div class="outline-text-3" id="text-6-6">
+<p>
+Input: A matrix \(w_{i, j}\) of weights of the edges of \(K_{n, n}\) with points
+\(X = \{x_1, \cdots, x_n\}\), \(Y=\{y_1, \cdots, y_n\}\).
+</p>
+
+<p>
+Idea: Iteratively adjust a cover \((u, v)\) until \(G_{u, v}\) has a perfect
+matching.
+</p>
+
+<p>
+if \(G_{u, v}\) has a perfect matching, then \((u, v)\) and \(M\) are both optimal.
+Initial \(u_i = \max \{W_{i, j}\colon j=\{1, \cdots, n\}\}\) and \(v_i =0\). Note
+that this is a cover and \(u_i + v_j \ge w_{i, j}\) for all \(i, j\). 
+</p>
+
+<p>
+Iteration: Create \(G_{u, v}\), using APA and find a maximal matching \(M\) and a
+minimum vertex cover \(Q\) and \(Q\) will be equal to \(T \cup R\) (where \(T = Y
+   \cap Q\) and \(R = X \cup Q\))
+</p>
+
+<p>
+If \(M\) is a perfect matching, then we are done. (By corollary of the duality
+lemma.)
+</p>
+
+<p>
+Else \(\varepsilon = \min\{u_i + v_i -w_{i, j}\colon x_i \in X \setminus R,
+   y_j \colon Y\setminus T\}\) (all elements are positive here.)
+</p>
+
+<p>
+We update as follows: \(u_i = u_i - \varepsilon\) if \(x \in X \setminus R\) and
+\(V_j = v_j+\varepsilon\) if \(y \in T\). Now you iterate.
+</p>
+
+<p>
+Why is the update \((u, v)\) still a cover? It involves 4 cases depending of
+where the pair \((i, j)\) goes to.
+</p>
+
+<ol class="org-ol">
+<li>If \(x_i \in R\) and \(y_j \in Y \setminus T\).
+\(u_i, v_j\) are unchanged.</li>
+<li>\(x_i \in R, y_j \in T\) implies that \(u_i + v_j\) grew by \(\varepsilon\) which
+is okay.</li>
+<li>\(x_i \in X \setminus R\), \(y_j \in T\), \(u_i - \varepsilon, v_j +
+      \varepsilon = u_i + v_j\)</li>
+<li>x<sub>i</sub> &isin; X &setminus; R, y<sub>j</sub> &isin; Y &setminus; T$. So \(u_i + v_j \ge w_{i,
+      j}\).</li>
+</ol>
+</div>
+</div>
+</div>
+<div id="outline-container-org3c686da" class="outline-2">
+<h2 id="org3c686da"><span class="section-number-2">7</span> Lecture 8 <span class="timestamp-wrapper"><span class="timestamp">&lt;2018-10-31 Wed&gt;</span></span></h2>
+<div class="outline-text-2" id="text-7">
+<p>
+<b>Input</b>: \((w_{i, j})_{i, j =1}^n\) weights or \(E(K_{n, n})\), \(X = \{x, \cdots,
+   y_n\}\), \(Y = \{y, \cdots, y_n\}\)
+</p>
+
+<p>
+<b>Initialization</b>: \(u_i = \max_\{w_{i, j}, j\cdots n\}\), \(v_j = 0\)
+</p>
+
+<p>
+<b>Iteration</b>: For \(m\), \(G_{u, v}\), \(V(G_{u, v} = V(K_{n, n}), E(G_{u, v}) =
+    \{x_iy_j \colon w_ij = u_i + v_j\}\)
+</p>
+
+<p>
+Find a maximal matching \(M \subset G_{u, v}\) and min vertex case \(Q = T \cup
+    R\).
+</p>
+
+<p>
+If \(M\) is perfect matching, then return (as max weighted is perfect
+matching.), \(R = X \cap Q, T = Y \cap Q\). \((u, v)\) as a minimum cost cover.
+</p>
+
+<p>
+Else \(\epsilon = \min\{u_i + v_j - w_{ij}\colon x_i \in X \setminus R, y_j
+    \in Y \setminus T \}\) Update \(u_i = u_i - \epsilon\) if \(x_i \in X \setminus
+    R\) and \(v_j = v_j + \epsilon\) if \(y_j \in T\).
+</p>
+
+<p>
+<b>Remark</b>: \(G\) is bipartite, define \(w_{i, j} \iff w_{i, j} = 1 \iff x_iy_j
+     \in E(G)\) vertex cover \(G\) implies \(u, v\) characteristic \((011)\) vectors of
+ \(C\), implies cover of \(w_{ij}\), \(w_{i, j} \le u_i + v_j\). True since if
+ \(w_{i, j} = 1\) then \(x_iy_j \in E(G)\), then \(x_i\) or \(y_j \in C\), then
+ \(u_i\) or \(v_j =1\).
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">x</th>
+<th scope="col" class="org-right">0</th>
+<th scope="col" class="org-right">0</th>
+<th scope="col" class="org-right">0</th>
+<th scope="col" class="org-right">0</th>
+<th scope="col" class="org-right">0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">5</td>
+<td class="org-right">1</td>
+<td class="org-right">2</td>
+<td class="org-right">3</td>
+<td class="org-right">4</td>
+<td class="org-right">5</td>
+</tr>
+
+<tr>
+<td class="org-right">8</td>
+<td class="org-right">6</td>
+<td class="org-right">7</td>
+<td class="org-right">8</td>
+<td class="org-right">7</td>
+<td class="org-right">2</td>
+</tr>
+
+<tr>
+<td class="org-right">5</td>
+<td class="org-right">1</td>
+<td class="org-right">3</td>
+<td class="org-right">4</td>
+<td class="org-right">4</td>
+<td class="org-right">5</td>
+</tr>
+
+<tr>
+<td class="org-right">8</td>
+<td class="org-right">3</td>
+<td class="org-right">6</td>
+<td class="org-right">2</td>
+<td class="org-right">8</td>
+<td class="org-right">7</td>
+</tr>
+
+<tr>
+<td class="org-right">5</td>
+<td class="org-right">4</td>
+<td class="org-right">1</td>
+<td class="org-right">3</td>
+<td class="org-right">5</td>
+<td class="org-right">4</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Excess matrix
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-right">x</td>
+<td class="org-right">0</td>
+<td class="org-right">0</td>
+<td class="org-right">0</td>
+<td class="org-right">0</td>
+<td class="org-right">0</td>
+</tr>
+
+<tr>
+<td class="org-right">5</td>
+<td class="org-right">4</td>
+<td class="org-right">3</td>
+<td class="org-right">2</td>
+<td class="org-right">1</td>
+<td class="org-right">0</td>
+</tr>
+
+<tr>
+<td class="org-right">8</td>
+<td class="org-right">2</td>
+<td class="org-right">1</td>
+<td class="org-right">0</td>
+<td class="org-right">1</td>
+<td class="org-right">6</td>
+</tr>
+
+<tr>
+<td class="org-right">5</td>
+<td class="org-right">4</td>
+<td class="org-right">2</td>
+<td class="org-right">1</td>
+<td class="org-right">1</td>
+<td class="org-right">0</td>
+</tr>
+
+<tr>
+<td class="org-right">8</td>
+<td class="org-right">5</td>
+<td class="org-right">2</td>
+<td class="org-right">6</td>
+<td class="org-right">0</td>
+<td class="org-right">1</td>
+</tr>
+
+<tr>
+<td class="org-right">5</td>
+<td class="org-right">1</td>
+<td class="org-right">4</td>
+<td class="org-right">2</td>
+<td class="org-right">0</td>
+<td class="org-right">1</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Now we form the graph with \(0\) edges and find a perfect matching.
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">x</th>
+<th scope="col" class="org-right">0</th>
+<th scope="col" class="org-right">0</th>
+<th scope="col" class="org-right">1</th>
+<th scope="col" class="org-right">1</th>
+<th scope="col" class="org-right">1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">4</td>
+<td class="org-right">3</td>
+<td class="org-right">2</td>
+<td class="org-right">2</td>
+<td class="org-right">1</td>
+<td class="org-right">0</td>
+</tr>
+
+<tr>
+<td class="org-right">7</td>
+<td class="org-right">1</td>
+<td class="org-right">0</td>
+<td class="org-right">0</td>
+<td class="org-right">1</td>
+<td class="org-right">6</td>
+</tr>
+
+<tr>
+<td class="org-right">4</td>
+<td class="org-right">3</td>
+<td class="org-right">1</td>
+<td class="org-right">1</td>
+<td class="org-right">1</td>
+<td class="org-right">0</td>
+</tr>
+
+<tr>
+<td class="org-right">7</td>
+<td class="org-right">4</td>
+<td class="org-right">1</td>
+<td class="org-right">6</td>
+<td class="org-right">0</td>
+<td class="org-right">1</td>
+</tr>
+
+<tr>
+<td class="org-right">4</td>
+<td class="org-right">0</td>
+<td class="org-right">3</td>
+<td class="org-right">2</td>
+<td class="org-right">0</td>
+<td class="org-right">1</td>
+</tr>
+</tbody>
+</table>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">x</th>
+<th scope="col" class="org-right">1</th>
+<th scope="col" class="org-right">0</th>
+<th scope="col" class="org-right">1</th>
+<th scope="col" class="org-right">2</th>
+<th scope="col" class="org-right">2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">3</td>
+<td class="org-right">3</td>
+<td class="org-right">1</td>
+<td class="org-right">1</td>
+<td class="org-right">1</td>
+<td class="org-right">0*</td>
+</tr>
+
+<tr>
+<td class="org-right">7</td>
+<td class="org-right">2</td>
+<td class="org-right">0*</td>
+<td class="org-right">0</td>
+<td class="org-right">2</td>
+<td class="org-right">7</td>
+</tr>
+
+<tr>
+<td class="org-right">3</td>
+<td class="org-right">3</td>
+<td class="org-right">0</td>
+<td class="org-right">0*</td>
+<td class="org-right">1</td>
+<td class="org-right">0</td>
+</tr>
+
+<tr>
+<td class="org-right">6</td>
+<td class="org-right">4</td>
+<td class="org-right">0</td>
+<td class="org-right">5</td>
+<td class="org-right">0*</td>
+<td class="org-right">1</td>
+</tr>
+
+<tr>
+<td class="org-right">3</td>
+<td class="org-right">0*</td>
+<td class="org-right">2</td>
+<td class="org-right">1</td>
+<td class="org-right">0</td>
+<td class="org-right">1</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Now we end up with a perfect matching in the equality subgraph. (The ones
+labelled *)
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">x</th>
+<th scope="col" class="org-right">0</th>
+<th scope="col" class="org-right">0</th>
+<th scope="col" class="org-right">0</th>
+<th scope="col" class="org-right">0</th>
+<th scope="col" class="org-right">0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-right">1</td>
+<td class="org-right">2</td>
+<td class="org-right">3</td>
+<td class="org-right">4</td>
+<td class="org-right">5*</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-right">6</td>
+<td class="org-right">7*</td>
+<td class="org-right">8</td>
+<td class="org-right">7</td>
+<td class="org-right">2</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-right">1</td>
+<td class="org-right">3</td>
+<td class="org-right">4*</td>
+<td class="org-right">4</td>
+<td class="org-right">5</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-right">3</td>
+<td class="org-right">6</td>
+<td class="org-right">2</td>
+<td class="org-right">8*</td>
+<td class="org-right">7</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-right">4*</td>
+<td class="org-right">1</td>
+<td class="org-right">3</td>
+<td class="org-right">5</td>
+<td class="org-right">4</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+The above table represents the cover in the original graph.
+</p>
+
+<p>
+Perfect matching of weight \(5 + 7 + 8 + 4= 28\) and \(C(u, v) = 3 + 7 + 3 + 6 +
+   3+ 1 + 1 + 2 + 2 = 28\).
+</p>
+</div>
+<div id="outline-container-org9dae5ac" class="outline-3">
+<h3 id="org9dae5ac"><span class="section-number-3">7.1</span> Proof</h3>
+<div class="outline-text-3" id="text-7-1">
+<p>
+If we add edges at every step in the graph from which we get the matching, we
+would be done. But we are not exactly doing it.
+</p>
+
+<p>
+Observations: \(\vert Q \vert = \vert M \vert\), no \(M\) edge is covered twice by \(Q\).
+</p>
+
+<p>
+\(T = \{y \in Y \colon \exists M\) alternating \((U, y)\) path \(\}\).
+</p>
+
+<p>
+\(R = \{x \in X \colon \nexists M\) alternating \((U, Y)\) path \(\}\).
+</p>
+
+<p>
+where \(U = \{x \in X \colon x\) is \(M\) unsaturated \(\}\).
+</p>
+
+<p>
+For termination of the Hungarian algorithm, count for <b>the number of vertices
+that are reached from \(U\) on an \(M\) alternating path</b>. This quantity grows in
+each iteration. (or \(M\) augmenting path, which implies that there is a larger
+matching.)
+</p>
+
+<p>
+The edges of \(M\) alternating path starting at \(U\) remain in \(G_{u, v}\). Edges
+can be lost only between \(T\) and \(R\). But these edges are not participating
+in the alternating path. In \(M\) alternating path, vertices of \(T\) are only
+connected to vertices in \(S = X - R\).
+</p>
+
+<p>
+By the choice of \(\varepsilon\), there is at least one pair \(x_i y_j\) such
+that \(x_i \in X \setminus R\), \(y_j \in T\),such that \(x_i y_j\) is a new edge
+in the equality sub-graph.
+</p>
+
+<p>
+This means that after \(\le \frac{n}{2}\) iterations, or \(M\) unsaturated \(y\in
+   Y\) is reached via a \(M\) alternating path, which means that the matching is
+growing, and the matching can grow at most \(n/2\). Thus after \(\frac{n^2}{4}\)
+iterations.
+</p>
+</div>
+</div>
+<div id="outline-container-orge5ad700" class="outline-3">
+<h3 id="orge5ad700"><span class="section-number-3">7.2</span> Connectivity problem</h3>
+<div class="outline-text-3" id="text-7-2">
+</div>
+<div id="outline-container-orgc5e6bd9" class="outline-4">
+<h4 id="orgc5e6bd9"><span class="section-number-4">7.2.1</span> Definition (Vertex cut)</h4>
+<div class="outline-text-4" id="text-7-2-1">
+<p>
+A vertex cut of a graph \(G\) is a set of vertices such that \(G-S\) is
+disconnected.<sup><a id="fnr.26" class="footref" href="#fn.26">26</a></sup>
+</p>
+</div>
+</div>
+<div id="outline-container-org0e3dd27" class="outline-4">
+<h4 id="org0e3dd27"><span class="section-number-4">7.2.2</span> Definition (Connectivity of G)</h4>
+<div class="outline-text-4" id="text-7-2-2">
+<p>
+Connectivity of \(G\), denoted by \(\kappa\), is the minimum size of the vertex
+cut. If your graph is disconnected to begin with, then this is zero.
+</p>
+
+<p>
+By definition, for a clique, \(K(K_n) = n-1\). The empty graph is "considered"
+to be disconnected.
+</p>
+</div>
+</div>
+<div id="outline-container-org64b3520" class="outline-4">
+<h4 id="org64b3520"><span class="section-number-4">7.2.3</span> Examples</h4>
+<div class="outline-text-4" id="text-7-2-3">
+<p>
+\(K(K_{n, m})= \min\{n, m\}\). Proof: \(\le\), Given a vertex cut of size
+\(\min\{m, n\}\), smaller side
+</p>
+
+<p>
+\(\ge\) Now we remove \(\{m, n\} - 1\), vertices of \(S\), \(K_\{n, m\} - S\), and
+through them everybody else can be reached.
+</p>
+</div>
+</div>
+<div id="outline-container-org850aaac" class="outline-4">
+<h4 id="org850aaac"><span class="section-number-4">7.2.4</span> Proposition</h4>
+<div class="outline-text-4" id="text-7-2-4">
+<p>
+For all \(G\), \(K(G) \le n-1\). The clique is \(K(G) = n-1 \iff G = K_n\).
+</p>
+
+<p>
+\(K(G) \le \delta(G)\), here \(\delta\) is the min degree. This is kinda clear,
+because we can pick a vertex with the minimum degree and remove all it's
+neighbours.
+</p>
+
+<p>
+\(K(Q_d)\), the one skeleton of the \(d\) dimensional cube.
+</p>
+
+<p>
+\(E(Q_d) = \{uv \colon\) \(u\) and \(v\) differ in exactly one coordinate \(\}\).
+From the proposition, the minimum degree is \(d\).
+</p>
+
+<p>
+I didn't write the rest of the argument. But doesn't look so hard. The proof
+was by induction.
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orgbbb4e67" class="outline-2">
+<h2 id="orgbbb4e67"><span class="section-number-2">8</span> Lecture 9 <span class="timestamp-wrapper"><span class="timestamp">&lt;2018-11-07 Wed&gt;</span></span></h2>
+<div class="outline-text-2" id="text-8">
+</div>
+<div id="outline-container-org9f3d2f1" class="outline-3">
+<h3 id="org9f3d2f1"><span class="section-number-3">8.1</span> Connectivity of graph</h3>
+<div class="outline-text-3" id="text-8-1">
+<p>
+\(G \neq K_n\), then \(K(G) = \min \{ \vert S \vert \colon G - S \textup{ is not
+   connected } \}\).
+</p>
+
+<p>
+\(G = K_n\), \(K(G) = n-1\).
+</p>
+</div>
+</div>
+<div id="outline-container-orgd1433bd" class="outline-3">
+<h3 id="orgd1433bd"><span class="section-number-3">8.2</span> Proposition</h3>
+<div class="outline-text-3" id="text-8-2">
+<p>
+\(K(G) \le v(G) - 1\) and \(K(G) \le \delta(G)\).
+</p>
+</div>
+</div>
+<div id="outline-container-org1845296" class="outline-3">
+<h3 id="org1845296"><span class="section-number-3">8.3</span> Extremal questions</h3>
+<div class="outline-text-3" id="text-8-3">
+<p>
+Given \(n\) and \(k\), what is the smallest number \(e\) of edges that there exists
+as \(n\) vertex \(k\) connected  graph with \(e\) edges.
+</p>
+</div>
+</div>
+<div id="outline-container-orgdcdae63" class="outline-3">
+<h3 id="orgdcdae63"><span class="section-number-3">8.4</span> Proposition</h3>
+<div class="outline-text-3" id="text-8-4">
+<p>
+For all \(k \ge 2\), there exists a \(k\) connected graph on \(n\) vertices with
+the ceil of \((n-k)/2\) edges.
+</p>
+</div>
+</div>
+<div id="outline-container-org769b939" class="outline-3">
+<h3 id="org769b939"><span class="section-number-3">8.5</span> Theorem (Chvatal-Erdos)</h3>
+<div class="outline-text-3" id="text-8-5">
+<p>
+If \(G \neq K_2\) and its connectivity \(K(G) \ge \alpha(G)\). \(\alpha(G)\) is the
+size of the largest independent set of vertices. And \(\alpha'\) is the size of
+the largest matching <sup><a id="fnr.27" class="footref" href="#fn.27">27</a></sup>
+</p>
+
+<p>
+Then \(G\) is hamiltonian.
+</p>
+</div>
+<div id="outline-container-org67d27b1" class="outline-4">
+<h4 id="org67d27b1"><span class="section-number-4">8.5.1</span> Proof</h4>
+<div class="outline-text-4" id="text-8-5-1">
+<p>
+Take a cycle in \(C \subset G\) which is the longest. If the length of \(C\) is
+\(n\), we are done. So we can assume the length of \(C\) is less than \(n\).
+</p>
+
+<p>
+Let \(H\) be a component of \(G -C\).
+</p>
+
+<p>
+\(k \le \delta(G)\). The length of the longest cycle is at least \(\delta\).
+Take the largest path in \(G\) and the end points of \(P\) only have neighbours
+on \(P\), otherwise the path could be extended. The farthest neighbour of \(w\)
+of \(x\) on \(P\) has distance at least \(\delta(C)\).
+</p>
+
+<p>
+This means that the segment \(P[x, w] + xw\) forms a cycle of length \(\ge
+    \delta(G) + 1\).
+</p>
+
+<p>
+Back to \(H\). Let name the vertices which have an edge to \(H\) as \(v_i\). There
+exits at least \(k\) vertices on \(C\) which have an edge to \(H\) (this is
+because of \(k\) connectedness; otherwise we could separate \(C\) from \(H\) by
+the deletion of strictly less than \(k\) vertices, which is a contradiction.)
+</p>
+
+<p>
+Notice that two adjacent vertices in \(C\) cannot have an edge to \(H\),
+otherwise, we can extend \(C\) by entering \(H\) and coming back. We call
+\(v_{i}^{+}\) denote the vertices that are the vertices that follows \(v_i\) on
+the cycle. We now know that all off \(v_{i}^{+}\) is distinct from \(v_i\). 
+</p>
+
+<p>
+We can see that there cannot be two edges between \(v_{i}^{+}\) and
+\(v_{j}^{+}\), one can see this by drawing an easy diagram, for one can form a
+bigger cycle than \(C\), which is a contradiction.
+</p>
+
+<p>
+This implies that \(\{v_i^+, \cdots, v_k^+\}\) is an independent set of size
+\(k\). This union with any vertex in \(H\) is an independent set. This is a
+contradiction because \(\alpha(G) \ge k+1\), which is not what we assumed.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org8bb72a1" class="outline-3">
+<h3 id="org8bb72a1"><span class="section-number-3">8.6</span> Definition (Disconnecting set of edges)</h3>
+<div class="outline-text-3" id="text-8-6">
+<p>
+\(F\) is a disconnecting set of edges if its removal makes the graph
+disconnected, i.e., \(G-F\) is disconnected.
+</p>
+
+<p>
+\(\kappa'(G) = \min\{\vert F \vert \colon F \subset E(G) \textup{ is a
+   disconnecting of edges}\}\)
+</p>
+
+<p>
+This is the <b>edge connectivity</b> of \(G\). \(G\) is called \(k\) edge connected,
+\(k'(G) \ge k\).
+</p>
+</div>
+</div>
+<div id="outline-container-org552f716" class="outline-3">
+<h3 id="org552f716"><span class="section-number-3">8.7</span> Definition</h3>
+<div class="outline-text-3" id="text-8-7">
+<p>
+A subset \(S \subset V(G)\), then an edge-cut of the Multi-Graph is an edge-set
+of the form \([S, \bar{S}] = \{xy \colon x = S, y \in \bar{S}\}\). For some
+subset \(S, \emptyset \neq S \neq V(G)\). Here \(\bar{S} = V(G)\setminus S\), the
+set theoretic complement.
+</p>
+</div>
+</div>
+<div id="outline-container-org2884ee8" class="outline-3">
+<h3 id="org2884ee8"><span class="section-number-3">8.8</span> Observation</h3>
+<div class="outline-text-3" id="text-8-8">
+<p>
+\(K'(G) = \min\{[S, \bar{S}] colon S\subset V(G), S\neq \emptyset, S \neq V(G)
+   \}\)
+</p>
+</div>
+<div id="outline-container-orgd957205" class="outline-4">
+<h4 id="orgd957205"><span class="section-number-4">8.8.1</span> Proof</h4>
+<div class="outline-text-4" id="text-8-8-1">
+<p>
+If \(F \subset E(G)\) is a disconnecting set of edges with \(\vert F \vert
+    \subset K'(G)\), then let \(S\) be a components of \(G - F\), then \([S, \bar{S}]
+    \subset F\). Since \(F\) is minimal, this implies that \(F = [S, \bar{S}]\).
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org45b78b3" class="outline-3">
+<h3 id="org45b78b3"><span class="section-number-3">8.9</span> Bounds</h3>
+<div class="outline-text-3" id="text-8-9">
+<ol class="org-ol">
+<li>Initial bound, \(k'(G) \le \delta(G)\).</li>
+<li><p>
+\(\kappa'(G) > \kappa(G)\) is true for simple graphs.
+</p>
+
+<p>
+<b>Proof</b>: The proof is easy. Try to show that there is a vertex cut of size
+\(\kappa'(G)\) whose removal disconnects \(G\).
+</p>
+
+<p>
+Take an edge cut such that the size \(\vert[S, \bar{S}]\vert = K'(G)\).
+</p>
+
+<p>
+Case 1: \(G\) contains \(K_{\vert S \vert, \vert \bar{S} \vert}\) on \(S\) and
+\(\bar{S}\). Then the statement is trivially true, since \(K'(G) = \vert S,
+      \bar{S}\vert = \vert S \vert \vert \bar{S}\vert = \vert S \vert (n - \vert
+      S \vert) \ge n - 1\ge \kappa(G)\).
+</p>
+
+<p>
+Case 2: We don't have a complete bipartite graph, so we can identify
+vertices that we will disconnect, \(x\in S\), \(y\in \bar{S}\) such that \(xy
+      \notin E(G)\).
+</p>
+
+<p>
+\(T_1\) is the set of neighbours \(N(x) \cap \bar{S}\) on the other side. \(T_2
+      = \{w \in S \setminus x \cap S \colon N(w) \cap \bar{S}\} \neq \emptyset\).
+The removal of \(T_1\) and \(T_2\) separate \(x\) and \(y\). Now \(\vert T_1 \cap
+      T_2 \vert \le \vert[S, \bar{S}]\). Because there is an injection from the
+left set to the other one, given by if \(w\in T_1, take xw\). \(w\in T_2
+      \mapsto wu_w\).
+</p>
+
+<p>
+Note \(S\) is just one side that is separate from the other side.
+</p></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org6120d70" class="outline-3">
+<h3 id="org6120d70"><span class="section-number-3">8.10</span> Is graph \(G\) \(k\) connected?</h3>
+<div class="outline-text-3" id="text-8-10">
+<p>
+It's definitely in co-NP. If it's not \(k\) connected, we get a set a vertices,
+and, we'll be able find it in polynomial time.
+</p>
+
+<p>
+But is it in \(NP\)?
+</p>
+
+<p>
+\(1\) connectedness if in \(P\).
+</p>
+
+<p>
+But \(2\) connectedness is in \(P\). There are only a \(n^2\) number of vertices.
+Hence polynomial.
+</p>
+
+<p>
+But we want to know about \(k\) connectivity, when \(k\) is the function of \(n\).
+</p>
+</div>
+</div>
+<div id="outline-container-orga240ffc" class="outline-3">
+<h3 id="orga240ffc"><span class="section-number-3">8.11</span> Theorem (A characterization of \(2\) connectivity)</h3>
+<div class="outline-text-3" id="text-8-11">
+<p>
+\(G\) is \(2\) connected if and only if for all \(x, y \in V(G)\), they are on a
+cycle.<sup><a id="fnr.28" class="footref" href="#fn.28">28</a></sup>
+</p>
+
+<p>
+\(G\) is \(2\) connected if and only if for all \(x, y \in V(G)\) if there exist
+\(2\) internally disjoint \(x, y\) paths. <sup><a id="fnr.29" class="footref" href="#fn.29">29</a></sup>
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgdfcd4d1" class="outline-2">
+<h2 id="orgdfcd4d1"><span class="section-number-2">9</span> Lecture 10 <span class="timestamp-wrapper"><span class="timestamp">&lt;2018-11-14 Wed&gt;</span></span></h2>
+<div class="outline-text-2" id="text-9">
+</div>
+<div id="outline-container-org11b9b06" class="outline-3">
+<h3 id="org11b9b06"><span class="section-number-3">9.1</span> Menger's theorem (VMT)</h3>
+<div class="outline-text-3" id="text-9-1">
+<p>
+A graph \(G\) is \(k\) connected if and only if for all pairs of vertices \(x, y
+   \in V(G)\), there exits \(K\) pairwise internally disjoint paths.
+</p>
+</div>
+<div id="outline-container-org46f38d8" class="outline-4">
+<h4 id="org46f38d8"><span class="section-number-4">9.1.1</span> Remarks</h4>
+<div class="outline-text-4" id="text-9-1-1">
+<ol class="org-ol">
+<li>This implies that \(k\) connectivity is in \(NP\) intersection co-NP. It
+takes \(O(kn)\) to check that they are internally disjoint. There are
+\(O(n^2)\) pairs to check</li>
+<li>For \(k=2\), the VMT says that \(G\) is \(2\) connected if and only if for
+every \(x, y \in U(G)\) is a cycle.</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orga862813" class="outline-4">
+<h4 id="orga862813"><span class="section-number-4">9.1.2</span> Proof of (\(\Leftarrow\)) VMT</h4>
+<div class="outline-text-4" id="text-9-1-2">
+<p>
+Suppose for a contradiction that there are \(k\) internally disjoint vertices
+between every vertices, and \(\kappa(G) \le k-1\). Let \(S\) be a such a
+separating set. 
+</p>
+
+<p>
+Let \(S\) be such a separating set which separates \(x\) from \(y\), then every
+\(xy\) path passes through \(S\), and pigeon-hole implies that two halfs share a
+vertex of \(S\). This is a contradiction.
+</p>
+</div>
+</div>
+<div id="outline-container-org9ab3d9e" class="outline-4">
+<h4 id="org9ab3d9e"><span class="section-number-4">9.1.3</span> Proof of \(\implies\) of VMT for \(k=2\)</h4>
+<div class="outline-text-4" id="text-9-1-3">
+<p>
+Assume \(K(G) \ge 2\), need a cycle containing \(x, y \forall\) pairs \(x, y \in
+    V(G)\).
+</p>
+
+<p>
+Induct on \(d(x, y) = \{\vert e(P)\vert \colon P \textup{ a xy path }\}\).
+</p>
+
+<p>
+<b>Base case</b>: \(d(x, y) = 1\), \(\kappa'(G) \ge \kappa(G) \ge 2\). Implies \(G
+    \setminus \{xy\}\) is still connected \(\implies xy\) path \(P\) in \(G\setminus
+    e \implies P \cap \{e\}\) is a cycle which contains \(x, y\).
+</p>
+
+<p>
+<b>Induction step</b>: \(d(x, y) = d\), let \(P\) be a path of length \(d\). Let \(v\) be
+ the last vertex before \(y\) on \(P\). Induction says that some \(C\) containing
+ \(x\) and \(v\).
+</p>
+
+<p>
+If \(y\in C\), we are done. If not, there exits a \(xy\) path \(Q\) in
+\(G\setminus \{v\}\) as \(G\) is \(2\) connected. Now, it's easy to construct a
+cycle from \(x\) to \(y\).
+</p>
+
+<p>
+Let \(z\) be the last \(v_x\) of \(C\) on \(Q\) if it exits. Let \(D\) be \(C\setminus
+     [z, v]\) such that \(x \in D\). Now \(C' = D \cup Q\vert[x, y] \cup \{xy\}\)
+cycle containing \(x\) and \(y\).
+</p>
+
+<p>
+If no such \(z\) exists, then it's straightforward to construct a cycle.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org9c000df" class="outline-3">
+<h3 id="org9c000df"><span class="section-number-3">9.2</span> Edge Menger's theorem</h3>
+<div class="outline-text-3" id="text-9-2">
+<p>
+A graph \(G\) is \(k\) connected if \(\kappa'(G) \ge k\) if and only if for all \(x,
+   y \in V(G)\), there exists pairwise edge disjoint \(x-y\) paths.
+</p>
+</div>
+</div>
+<div id="outline-container-orgfffff4c" class="outline-3">
+<h3 id="orgfffff4c"><span class="section-number-3">9.3</span> Local version of Menger's theorem</h3>
+<div class="outline-text-3" id="text-9-3">
+</div>
+<div id="outline-container-orgf463275" class="outline-4">
+<h4 id="orgf463275"><span class="section-number-4">9.3.1</span> Separating set</h4>
+<div class="outline-text-4" id="text-9-3-1">
+<ol class="org-ol">
+<li>A set \(S \subset V(G)\) is an \(xy\) separating set if \(x\) and \(y\) are in
+different connected components of \(G\setminus S\).</li>
+<li>\(\kappa(x, y) = \min\{\vert s \vert \colon S \textup{ is a xy separating set}\}\)</li>
+<li>\(\lambda(x,y) = \max\) size of a family of pairwise disjoint \(xy\) paths.</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orga914f71" class="outline-4">
+<h4 id="orga914f71"><span class="section-number-4">9.3.2</span> Local version of theorem</h4>
+<div class="outline-text-4" id="text-9-3-2">
+<p>
+For all graphs \(G\) and \(x, y \in G\), we require that \(x\) and \(y\) are not
+adjacent edges.
+</p>
+
+<p>
+For all \(x, y\), \(\kappa'(x, y) = \lambda'(x, y) = \max\) size of family of
+pid \(xy\) paths. Here \(\kappa'\) is the minimum \(\vert F \vert\) such that \(x\)
+and \(y\) are in different components of \(G\setminus F\).
+</p>
+</div>
+</div>
+<div id="outline-container-orgbc43eaa" class="outline-4">
+<h4 id="orgbc43eaa"><span class="section-number-4">9.3.3</span> Local theorem implies Global</h4>
+<div class="outline-text-4" id="text-9-3-3">
+<p>
+What we need to do is that for all \(x, y \in G\), \(\exists \ge k = \kappa(G)\)
+pid paths.
+</p>
+<ol class="org-ol">
+<li>\(x\) and \(y\) are not adjacent (xy &ne; E(G)) implies \(\kappa(G) \le
+       \kappa(x, y)\le \lambda(x, y)\). The local theorem says that the last term
+is at least \(\lambda(x, y)\), implies \(\ge k\) pid \(xy\) paths.</li>
+<li><p>
+For \(xy = e\), \(\kappa(G-e) \ge K(G) - 1\). Suppose for a contradiction
+that \(S\) separates \(G-e\) and \(\vert S \vert \le \kappa - 2 \le n-3\). We
+know as \(\vert s \vert < K\), \(G\setminus S\) is connected implies that
+\(G\setminus S\) must have a "bridge" \(e\). Meaning we have two disconnected
+sets only connected by \(e\) between \(T\) and \(T'\).
+</p>
+
+<p>
+Without loss of generality \(x \in T\), and \(\vert T \vert \ge 2\). But then
+\(S \cap \{x\}\) is a separating set of \(G\) of size \(\le \kappa - 1\).
+</p></li>
+<li>If \(xy\) is an edge in \(E\). Removing it means that \(\kappa(G-e) \ge k-1\),
+then 1 implies that \(k-1\) pid \(xy\) paths in \(G-e\) and \(e=xy\) adds another
+path.</li>
+</ol>
+</div>
+</div>
+</div>
+<div id="outline-container-org410ba71" class="outline-3">
+<h3 id="org410ba71"><span class="section-number-3">9.4</span> Flow networks</h3>
+<div class="outline-text-3" id="text-9-4">
+</div>
+<div id="outline-container-orgfd19511" class="outline-4">
+<h4 id="orgfd19511"><span class="section-number-4">9.4.1</span> Example</h4>
+<div class="outline-text-4" id="text-9-4-1">
+<p>
+A graph was drawn. 
+</p>
+</div>
+</div>
+<div id="outline-container-orgb982968" class="outline-4">
+<h4 id="orgb982968"><span class="section-number-4">9.4.2</span> Definition</h4>
+<div class="outline-text-4" id="text-9-4-2">
+<p>
+A network is a quadruple \((D, s, t, c)\) where \(D\) is a directed (multi)
+graph. \(s \in V(D)\) is the source vertex and \(t\) is the sink vertex. \(c
+    \colon E(D) \rightarrow \R^{+}\) is the capacity.
+</p>
+
+<p>
+A flow is <b>feasible</b> if
+</p>
+<ol class="org-ol">
+<li>For all \(v \neq s, t\), the net flow in is equal to the net flow out, i.e,
+for all \(v\neq s, t\), \(\sum f(uv) =f^{-1}(v) = f^{+}(v) = \sum(vu)\). This
+is called the <i>conservation constraints</i>.</li>
+<li>For all directed edges, we require that the flow on the edge is
+non-negative and at most the capacity. This is called <i>capacity
+constraint</i></li>
+</ol>
+
+<p>
+The <b>value</b> of of a flow is the net flow into the sink, \(f^{-1}(t) -
+    f^{+}(t) = val(f)\).
+</p>
+
+<p>
+A <b>max flow</b> is a feasible flow with maximum \(\val(f)\).
+</p>
+</div>
+</div>
+<div id="outline-container-orgcb478ec" class="outline-4">
+<h4 id="orgcb478ec"><span class="section-number-4">9.4.3</span> Problem</h4>
+<div class="outline-text-4" id="text-9-4-3">
+<p>
+Given a network flow, we need to find a max value and if possible find a max
+flow.
+</p>
+</div>
+</div>
+<div id="outline-container-org5aa1fb5" class="outline-4">
+<h4 id="org5aa1fb5"><span class="section-number-4">9.4.4</span> Homework</h4>
+<div class="outline-text-4" id="text-9-4-4">
+<p>
+For any \(Q \subset V(D)\), with \(s\in Q\) and \(t\in \bar{Q} = V(D) \setminus
+    Q\), \(\val(f) = \sum_{e\in [Q, \bar{Q}]} f(e) - \sum_{e\in [\bar{Q}, Q]}
+    f(e)\)
+</p>
+</div>
+</div>
+<div id="outline-container-org83e717d" class="outline-4">
+<h4 id="org83e717d"><span class="section-number-4">9.4.5</span> Definition</h4>
+<div class="outline-text-4" id="text-9-4-5">
+<p>
+Given \(Q \subset V(D)\), \(\bar{Q} = V \setminus Q\), with \(s\in Q, t\in
+    \bar{Q}\), the capacity of the cut is capacity \(\cap[Q, \bar{Q}] = \sum_{e\in
+    [Q, \bar{Q}] c(e)}\)
+</p>
+</div>
+</div>
+<div id="outline-container-orgfe44070" class="outline-4">
+<h4 id="orgfe44070"><span class="section-number-4">9.4.6</span> Lemma</h4>
+<div class="outline-text-4" id="text-9-4-6">
+<p>
+Weak duality: If \(f\) is a feasible flow and \([Q, \bar{Q}]\) a source/sink
+cut, then the value of the flow \(\val(f) \le \cap([Q, \bar{Q}])\)
+</p>
+</div>
+<ol class="org-ol">
+<li><a id="org8590bad"></a>Proof<br />
+<div class="outline-text-5" id="text-9-4-6-1">
+<p>
+Fix \(f\) and \([Q, \bar{Q}]\). \(\val(f) = \sum_{[Q, \bar{Q}]} f(e) -
+     \sum_{[\bar{Q}, Q]} f(e) \le \sum_{[Q, \bar{Q}]} c(e) - 0 = \cap([Q,
+     \bar{Q}])\)
+</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org22f8d81" class="outline-3">
+<h3 id="org22f8d81"><span class="section-number-3">9.5</span> Theorem (Ford-Fulkerson) (Max-flow min-cut theorem)</h3>
+<div class="outline-text-3" id="text-9-5">
+<p>
+Let \(f\) be a flow of max value and \([Q, \bar{Q}]\) a source-sink cut of
+minimum capacity, then the \(\val(f) = \cap([Q, \bar{Q}])\).
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgf75babc" class="outline-2">
+<h2 id="orgf75babc"><span class="section-number-2">10</span> Tutorial</h2>
+<div class="outline-text-2" id="text-10">
+<p>
+<a href="http://discretemath.imp.fu-berlin.de/DMII-2018-19/">link</a>
+</p>
+</div>
+<div id="outline-container-orgaa48bbd" class="outline-3">
+<h3 id="orgaa48bbd"><span class="section-number-3">10.1</span> Tutorial 1</h3>
+<div class="outline-text-3" id="text-10-1">
+</div>
+<div id="outline-container-orgc89ac87" class="outline-4">
+<h4 id="orgc89ac87"><span class="section-number-4">10.1.1</span> Problem 2</h4>
+<div class="outline-text-4" id="text-10-1-1">
+<p>
+Each step reduces the number of components by at most \(4\). After \(5\) steps, at least \(5\) components are left. 
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org040a1e1" class="outline-3">
+<h3 id="org040a1e1"><span class="section-number-3">10.2</span> Tutorial 2</h3>
+<div class="outline-text-3" id="text-10-2">
+</div>
+<div id="outline-container-orgb959e49" class="outline-4">
+<h4 id="orgb959e49"><span class="section-number-4">10.2.1</span> SAT</h4>
+<div class="outline-text-4" id="text-10-2-1">
+</div>
+<ol class="org-ol">
+<li><a id="org988d3e3"></a>Example of un-satisfiable instance of SAT<br />
+<div class="outline-text-5" id="text-10-2-1-1">
+<p>
+\(f(x_1) = x_1 \wedge \neg x_1\)
+</p>
+
+<p>
+No matter what the instance is, this will evaluate to zero. 
+</p>
+</div>
+</li>
+<li><a id="org9c5b8bc"></a>About \(2^k\) clauses<br />
+<div class="outline-text-5" id="text-10-2-1-2">
+<p>
+We start by proving that the statement is true for exactly \(k\) variables. 
+</p>
+
+<p>
+Now we induct on the number of variables, starting from \(n\). If it is true
+for \(m\), then it is also true for \(m+1\) because we can replace the $m+1$th
+variable by \(x_1\) and bang.
+</p>
+</div>
+</li>
+<li><a id="org9840ef9"></a>Bound being strict<br />
+<div class="outline-text-5" id="text-10-2-1-3">
+<p>
+For \(k\) literals, and for \(2^k\), we take all possible combinations of \(x_1,
+     \cdots, x_k\) such that no two literals are the same. This is not
+satisfiable. (This should evaluate to \(1\) all the time.) Because no matter
+what is the value of \(x_1, \cdots, x_k\), there is a literal where the or is
+zero and that literal is present in it.
+</p>
+</div>
+</li>
+</ol>
+</div>
+<div id="outline-container-orgad45d53" class="outline-4">
+<h4 id="orgad45d53"><span class="section-number-4">10.2.2</span> Problem 1 bipartite</h4>
+<div class="outline-text-4" id="text-10-2-2">
+<p>
+We do a BFS. We have an array and it would be the distance. Now the claim is
+that \(A(u) = A(v) \mod 2\) and if there is an edge that connects these two
+vertices, then the graph is not bipartite.
+</p>
+
+<p>
+We did prove that for BFS, the distances from the root are preserved.
+</p>
+
+<p>
+The proof was a bit complex. But it turned out to be something about
+applying BFS.
+</p>
+</div>
+</div>
+<div id="outline-container-orged8a428" class="outline-4">
+<h4 id="orged8a428"><span class="section-number-4">10.2.3</span> Problem 3 Greedy algorithm can fail</h4>
+<div class="outline-text-4" id="text-10-2-3">
+</div>
+<ol class="org-ol">
+<li><a id="org7934967"></a>part a<br />
+<div class="outline-text-5" id="text-10-2-3-1">
+<p>
+Algorithm: Sort the edges according to the weight in ascending order. \(E =
+     \emptyset\). 
+</p>
+<ol class="org-ol">
+<li>No vertex of degree \(3\)</li>
+<li>No cycle of length \(<\) n.</li>
+</ol>
+
+<div class="org-src-container">
+<pre class="src src-artist">          1
+ +-------------------+
+ | \-             -/ |
+ |   \- 2     2 -/   |
+ |     \-    --/     |
+ |       \--/        |1
+ |1      -/ \-       |
+ |    --/     \-     |
+ |  -/          \-   |
+ |-/     1        \- |
+-/------------------\+
+</pre>
+</div>
+
+<p>
+Another algorithm: start with an edge, something like a lightest edge. It's
+vague.
+</p>
+</div>
+</li>
+
+
+<li><a id="org0147c90"></a>part b<br /></li>
+</ol>
+</div>
+<div id="outline-container-org17ecf42" class="outline-4">
+<h4 id="org17ecf42"><span class="section-number-4">10.2.4</span> <span class="todo TODO">TODO</span> Problem 2</h4>
+<div class="outline-text-4" id="text-10-2-4">
+<p>
+The first \(m\) edges are the smallest weight forest.
+</p>
+
+<p>
+Induction: First edge is true. Assume it's true for \(m-1\) edges are minimal
+weight forest. Now kruskal adds an edge (it is the edge with smallest
+weight). It does not make a cycle. We still have a forest. Now, the weight
+the new is smaller than or equal to every other \(e_i\). 
+</p>
+
+<p>
+Apparently it doesn't work.
+</p>
+
+<p>
+But we can do the induction backwards. Suppose that it is true for \(n-1\)
+upwards.
+</p>
+
+<p>
+\(K_{m+1}\) is the forest that it construct in \(m+1\) steps. (This doesn't work
+either.)
+</p>
+
+<p>
+Apparently, we could just repeat the proof for the Kruskal.
+</p>
+
+<p>
+The problem is that there could be an edge that we didn't add because it
+created a cycle before. This edge can create problems later.
+</p>
+</div>
+<ol class="org-ol">
+<li><a id="orgdcd1552"></a><span class="todo TODO">TODO</span> Go again through the argument of Kruskal<br /></li>
+</ol>
+</div>
+<div id="outline-container-orgd8e1ae5" class="outline-4">
+<h4 id="orgd8e1ae5"><span class="section-number-4">10.2.5</span> Exercise 4</h4>
+<div class="outline-text-4" id="text-10-2-5">
+</div>
+<ol class="org-ol">
+<li><a id="org94b67a4"></a>Counter example<br />
+<div class="outline-text-5" id="text-10-2-5-1">
+<p>
+Apparently any algorithm would fail on it because the shortest path does
+not make any sense.
+</p>
+<div class="org-src-container">
+<pre class="src src-artist">           x
+           /-\
+          /   \
+         /     \
+        /       -\
+       /          \
+    1 /            -\  1       
+      |              \        
+     /                -\      
+    /                   \     
+   /                     \    
+  /        -2             -\  
+b---------------------------\c
+</pre>
+</div>
+</div>
+</li>
+<li><a id="org19d13ac"></a><span class="todo TODO">TODO</span> Algorithm<br />
+<div class="outline-text-5" id="text-10-2-5-2">
+<p>
+<b>Claim</b>: Right after \(i\) th step of second part, \(i\) th step of second
+ part, \(v \in V, \dist(v) \le \min \{ \vert w\vert \vert w \textup{
+      contains } \le i \textup{ edges} \}\).
+</p>
+
+<ol class="org-ol">
+<li>For \(i=1\), it is trivially true.</li>
+<li>For \(i\ge 2\), \(v \in V\), $w = $ shortest path $ &le; i$ edges. There are
+parts of the argument that I skipped. <sup><a id="fnr.30" class="footref" href="#fn.30">30</a></sup></li>
+</ol>
+
+<p>
+It is not clear how the last part of the algorithm is able to detect the
+negative weighted cycle. The claim more or less does it.
+</p>
+
+<p>
+The time complexity is \(O(mn)\)
+</p>
+</div>
+</li>
+</ol>
+</div>
+<div id="outline-container-org0995eb4" class="outline-4">
+<h4 id="org0995eb4"><span class="section-number-4">10.2.6</span> Exercise 5 (SAT)</h4>
+<div class="outline-text-4" id="text-10-2-6">
+</div>
+<ol class="org-ol">
+<li><a id="orgdcad3c5"></a>Part a<br />
+<div class="outline-text-5" id="text-10-2-6-1">
+<p>
+It's easy
+</p>
+</div>
+</li>
+<li><a id="orgdcdd57b"></a>Part b<br />
+<div class="outline-text-5" id="text-10-2-6-2">
+<p>
+Write \(f(x_1, \dots, x_m) = c_1 \wedge c_2 \cdots c_m\), \(m < 2^k\).
+</p>
+
+<p>
+\(c_i = \tilde{x_{i_1}} \and \tilde{x_{i_2}} \cdots\)  
+</p>
+
+<p>
+for \(e\) or \(e_i\), define the set \(D_i = \{v\colon \{T, F\}^n \vert c_i(v) =
+     false\}\). \(\vert D_i \vert = 2^{n-k}\), \(\sum D_i = \{v \vert f(v) = F\}\).<sup><a id="fnr.31" class="footref" href="#fn.31">31</a></sup>
+</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org5eb212b" class="outline-3">
+<h3 id="org5eb212b"><span class="section-number-3">10.3</span> Tutorial 3</h3>
+<div class="outline-text-3" id="text-10-3">
+</div>
+<div id="outline-container-org602f890" class="outline-4">
+<h4 id="org602f890"><span class="section-number-4">10.3.1</span> Problem 1</h4>
+<div class="outline-text-4" id="text-10-3-1">
+<p>
+We draw the graph, and remove the edges 2, 4, 8, 12. Now there are 6 odd
+number of components. There is a characterization about the maximal matching
+being the minimum of \(\{n - o(G\setminus S) + \vert S\vert\colon \forall S
+    \subset V(G)\}\). Now, this is \(n-2\), which means if there is a matching with
+\(n-2\), it will be maximal.
+</p>
+
+<p>
+Easy solution: Show that there is no maximal matching. The number of
+vertices is 18. There cannot be a matching on 17, because odd. Thus, the
+matching on 16 has to be the maximal matching.
+</p>
+</div>
+</div>
+<div id="outline-container-org7868df0" class="outline-4">
+<h4 id="org7868df0"><span class="section-number-4">10.3.2</span> Problem 2</h4>
+<div class="outline-text-4" id="text-10-3-2">
+</div>
+<ol class="org-ol">
+<li><a id="org6d76183"></a>part a<br />
+<div class="outline-text-5" id="text-10-3-2-1">
+<p>
+It is clear that \(\vert V \vert = \sum \textup{vertices in even components
+     of G\S} + \sum \textup{vertices in odd components of }G\setminus S + \vert S \vert\)
+</p>
+
+<p>
+The above sum \(\mod 2\) evaluates to \(\vert V \vert \mod 2= o(G\setminus S) +
+     \vert S \vert\). This is same as \(\vert S \vert - o(G \setminus S \mod 2\).
+</p>
+</div>
+</li>
+<li><a id="orge6307d0"></a>part b<br />
+<div class="outline-text-5" id="text-10-3-2-2">
+<p>
+The idea is something like this.
+</p>
+
+<p>
+For each \(S\) such that the number of odd components in the complement of
+\(S\) is greater than \(S\), introduce a \(K_d\), where it's the clique on \(d\)
+vertices. What should be the value chosen for \(d\)? Each value of \(d\) should
+be equal to the the difference for that set \(S\).
+</p>
+
+<p>
+Now this should satisfy Tutte's theorem (maybe we can do this inductively
+as well.) There is a maximal matching. We need to show that in the maximal
+matching contains no edge in the clique. Now, we can arrive at a matching
+on the original graph \(G\) and things should be okay?
+</p>
+
+<p>
+I've omitted details in the steps. 
+</p>
+</div>
+</li>
+<li><a id="org9fabf6e"></a>part b (alternate solution)<br />
+<div class="outline-text-5" id="text-10-3-2-3">
+<p>
+Observation:
+</p>
+<ol class="org-ol">
+<li>For all even components, there is a matching</li>
+<li>For each vertex in the odd components, then \(C_o \setminus \{v\}\) has a
+perfect matching.</li>
+<li>If \(M\) is a maximal matching on \(G[s]\).</li>
+</ol>
+
+<p>
+Proof
+</p>
+<ol class="org-ol">
+<li>Using Tutte's theorem: \(S' \subset V(e)\), \(\tilde S= S \cap S'\), then
+\(\vert \tilde S\vert - o(G\setminus \tilde S)\ge \vert S \vert - o(G
+        \setminus S)\) Now the LHS is equal to \(\vert S \vert + \vert S'\vert -
+        o(G\setminus S) - o(Ce\setminus S) \ge 0\), now we can infer that Tutte's
+theorem is satisfied inside the even components.</li>
+<li>\(\vert S \vert + \vert S'' \vert - o(G \setminus S) - o(C_o \setminus
+        S'') + 1\) (I missed some stuff here.)</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+
+<div id="outline-container-org505758a" class="outline-4">
+<h4 id="org505758a"><span class="section-number-4">10.3.3</span> Problem 3</h4>
+<div class="outline-text-4" id="text-10-3-3">
+</div>
+<ol class="org-ol">
+<li><a id="org30caf56"></a>Part a<br />
+<div class="outline-text-5" id="text-10-3-3-1">
+<p>
+This is kinda similar to the proof of the theorem about \(3\) regular graph
+without any cut edges having a perfect matching. 
+</p>
+
+<p>
+First notice that every three regular graph must have even number of
+vertices.
+</p>
+
+<p>
+Given \(S\) and \(G\setminus S\), we think about the the degrees of elements
+inside any disconnected component of \(G \setminus S\). They cannot be \(0\)
+because then, it means that there are three cut edges. They may be \(1\) and
+they maybe \(2\) at most \(2\) times.
+</p>
+
+<p>
+If it is \(2\) exactly 0 times, there are no cut edges and we are done (the
+idea is that the sum of the degrees of each vertex have to be even, but the
+degrees are either 1 or 3, so there has to be an even number of vertices.)
+</p>
+
+<p>
+If it is \(2\) exactly 1 times, then there can be at most \(1\) odd component,
+and \(\vert S\vert > 0\), now, Tutte's theorem!
+</p>
+
+<p>
+If it is \(2\) exactly \(2\) times, then we know that \(\vert S \vert -
+     o(G\setminus S)\) has to have parity same as \(\vert V\vert\), but this means
+that \(\vert S\vert\) is a non-zero multiple of \(2\), and \(o(G \setminus S)\)
+is exactly equal to \(2\). Now, Tutte's theorem.     
+</p>
+</div>
+</li>
+<li><a id="org3850691"></a>Part b<br />
+<div class="outline-text-5" id="text-10-3-3-2">
+<p>
+The graph from the graph theory book
+</p>
+</div>
+</li>
+<li><a id="org1281281"></a>part c<br />
+<div class="outline-text-5" id="text-10-3-3-3">
+<p>
+If \(k\) is even, we can think about a clique on \(k+1\) vertices.
+</p>
+
+<p>
+If \(k\) is odd, then we can do a similar construction as \(b\). 
+</p>
+</div>
+</li>
+</ol>
+</div>
+<div id="outline-container-org5b2e46f" class="outline-4">
+<h4 id="org5b2e46f"><span class="section-number-4">10.3.4</span> Problem 4</h4>
+<div class="outline-text-4" id="text-10-3-4">
+<p>
+Induction on the number of vertices of the tree.
+</p>
+
+<p>
+For \(2\) vertices. It has a unique perfect matching.
+</p>
+
+<p>
+For \(n \ge 2\), \(n\) has to be even. There has to be at least one vertex that
+is a leaf (Handshake lemma?) we picked a leaf because the edge must be in
+the perfect matching. We delete the vertex right next to the edge. And on
+each of the even component, we can use the induction argument? We need to
+prove that if we delete a vertex inside the even component, there has to be
+exactly one component is odd. 
+</p>
+
+<p>
+\(\vert T' \vert = \vert T' \cap C \vert (\mod 2)\)
+</p>
+
+<p>
+We can prove this. And apply induction hypothesis.
+</p>
+</div>
+</div>
+<div id="outline-container-orgc924cf4" class="outline-4">
+<h4 id="orgc924cf4"><span class="section-number-4">10.3.5</span> Problem 4 (Alternate proof)</h4>
+<div class="outline-text-4" id="text-10-3-5">
+<p>
+<b>Theorem</b>: In any tree there exist at most \(1\) perfect matching. (the idea
+ is that if there are two matching, then their symmetric difference must
+ have a cycle.)
+</p>
+</div>
+</div>
+<div id="outline-container-org8512504" class="outline-4">
+<h4 id="org8512504"><span class="section-number-4">10.3.6</span> Problem 5</h4>
+<div class="outline-text-4" id="text-10-3-6">
+<p>
+Let \(M\) be a maximal matching on \(G\). Let \(2\alpha\) be the number of
+vertices here. Let \(2\alpha'\) be the number of vertices that gets connected
+in \(2\alpha'\), we are supposed to show that \(\alpha' > 1/2 \alpha\).
+</p>
+
+<p>
+Let the edges in the matching be \(\{e_{i_1}, \cdots, e_{i_n}\}\). Where \(i_1
+    \le \cdots, i_n\). So when the algorithm is at the step \(i_k\), either it gets
+added to \(M_{t-1}\) or gets rejected. Let \(x\) number of them get's rejected
+and \(y\) number of them gets added.
+</p>
+
+<p>
+When does an edge gets rejected? If one of the vertex in \(e_{i_k}\) is
+already in \(M_{t}\). Let us now count the number of vertices in \(M_t\) at the
+end.
+</p>
+
+<p>
+\(M_t \ge x + 2y \ge x+y = (\alpha)\).
+</p>
+
+<p>
+Strictness: Consider the following graph and ordering of vertices:
+</p>
+<div class="org-src-container">
+<pre class="src src-artist">o----------------o----------------o----------------o
+       e2              e1                 e3       
+</pre>
+</div>
+
+<p>
+The maximal matching is \(\{e2, e_3\}\), whereas the algorithm generates
+\(\{e_1\}\).
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org3d23594" class="outline-3">
+<h3 id="org3d23594"><span class="section-number-3">10.4</span> Tutorial 4</h3>
+<div class="outline-text-3" id="text-10-4">
+</div>
+<div id="outline-container-orge485ad3" class="outline-4">
+<h4 id="orge485ad3"><span class="section-number-4">10.4.1</span> Problem 1</h4>
+<div class="outline-text-4" id="text-10-4-1">
+<p>
+The inequality is super easy and just follows from the definition.
+</p>
+
+<p>
+The proof is equality is also very easy. If no permutation satisfy the
+condition, then we can easily prove that there cannot be an equality.
+</p>
+</div>
+</div>
+<div id="outline-container-orgd71ab22" class="outline-4">
+<h4 id="orgd71ab22"><span class="section-number-4">10.4.2</span> Problem 2</h4>
+<div class="outline-text-4" id="text-10-4-2">
+<p>
+We can take the negative of all weights. And apply Hungarian algorithm.
+</p>
+</div>
+</div>
+<div id="outline-container-orgd6fec85" class="outline-4">
+<h4 id="orgd6fec85"><span class="section-number-4">10.4.3</span> Problem 3</h4>
+<div class="outline-text-4" id="text-10-4-3">
+<p>
+Step \(i\) of the algorithm: let \(M\) be the maximum matching in the equality
+graph \(G_{u, v}\) and \(\vert r \vert < n\) and let \(Q\) be the vertex cover
+provided by the algorithm, then \(T = Q \cap Y\) and \(R = Q \cap X\) and
+\(\varepsilon = \min \{u_i + v_j - w_{ij}\vert x_i \in X \setminus R, y \in Y
+    \setminus T\}\)
+</p>
+
+<p>
+Let \((\bar u, \bar v)\) be the weighted cover after calculating with
+\(\varepsilon\).
+</p>
+
+<p>
+We need to show that \(\vert X \setminus R \vert > \vert T \vert\). This is
+true, because if it is not true, then we have that \(n = \vert R \vert +
+    \vert X \setminus R \vert \le \vert R \vert + \vert T \vert = \vert Q \vert
+    = \vert r \vert < n\).
+</p>
+
+<p>
+Indeed at each step, the cost function decreases by some number.
+</p>
+
+<p>
+Why does the algorithm terminate? 
+</p>
+
+<p>
+\(w_{ij} = \frac{p_{ij}}{q_{ij}}\), and \(q = LCM(p_{ij}, q_{ij})\), then
+\(\epsilon \ge 1/\varepsilon\), then we can always finish the algorithm.
+</p>
+
+<p>
+Or we can make all the weights as integers. The rational case follows
+easily.
+</p>
+</div>
+</div>
+<div id="outline-container-orgfc4b827" class="outline-4">
+<h4 id="orgfc4b827"><span class="section-number-4">10.4.4</span> Problem 4</h4>
+<div class="outline-text-4" id="text-10-4-4">
+<p>
+Questions: 
+</p>
+<ol class="org-ol">
+<li>Is this the unique extremal examples? The answer is yes.</li>
+<li>What are the extremal examples?</li>
+<li>Hypergraphs: \(k\) uniform Hypergraphs. We can define the notion of perfect
+matching in Hypergraphs. What is the maximum number? A paper in 2011
+solved it.</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgb8adf42" class="outline-4">
+<h4 id="orgb8adf42"><span class="section-number-4">10.4.5</span> Problem 5</h4>
+<div class="outline-text-4" id="text-10-4-5">
+<p>
+Isn't this kinda simple? Like it is trivial when \(n \ge k+2\), when \(n= k+1\),
+the sum on the RHS evaluates to \(k -1/2\), since \(k\) is an integer,
+\(\delta(G)\) has to be at least \(k\).
+</p>
+</div>
+</div>
+<div id="outline-container-orgd14e073" class="outline-4">
+<h4 id="orgd14e073"><span class="section-number-4">10.4.6</span> Problem 5 (proof)</h4>
+<div class="outline-text-4" id="text-10-4-6">
+<p>
+What is the definition of \(k\) connected? 
+</p>
+
+<p>
+\(\kappa(G) \ge k \iff G\) is \(k\) connected.
+</p>
+
+<p>
+\(G, n \ge k+1\), \(\delta(G?) \ge \frac{n+k-2}{2}\). It is sufficient to show
+that if we subtract a set of size \(k-1\), then the graph is connected.
+\(G[V(G)\setminus S]\) are either neighbours (in this case it's trivial.)
+</p>
+
+<p>
+\(u, v \in V(G')\). 
+</p>
+
+<ol class="org-ol">
+<li>\(u \in N(v)\), then we are done.</li>
+<li>\(N(v) \cap N(u) \neq \empty\). Suppose \(N_G'(v) \cap N_G'(u) = \emptyset\).
+\(n+k-2 - 2(k-1) = n-k\), we should have so much vertices in \(G'\) for the
+condition to be true. But \(G'\) has \(n-k+1\) vertices.</li>
+<li>Remark: \(\delta \ge (n-1)/2\), then the graph is 1-connected or connected.
+Whereas, if \(\delta \ge n/2\), then the graph has a hamiltonian cycle.</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org90fd2bc" class="outline-4">
+<h4 id="org90fd2bc"><span class="section-number-4">10.4.7</span> Problem 5 (Bonus)</h4>
+<div class="outline-text-4" id="text-10-4-7">
+<p>
+An example where the bound in sharp.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org12d6d93" class="outline-3">
+<h3 id="org12d6d93"><span class="section-number-3">10.5</span> Tutorial 5</h3>
+<div class="outline-text-3" id="text-10-5">
+</div>
+<div id="outline-container-orgcda6d8a" class="outline-4">
+<h4 id="orgcda6d8a"><span class="section-number-4">10.5.1</span> Problem 4</h4>
+<div class="outline-text-4" id="text-10-5-1">
+<p>
+We can do this in cases. 
+</p>
+
+<ol class="org-ol">
+<li>\(\kappa(G) = 3\), then because \(\kappa \le \kappa' \le 3\), \(\kappa' =
+       \kappa = 3\).</li>
+<li>\(\kappa = 1\), then disconnecting one vertex would disconnect the graph.
+Let \(U_1\), \(U_2\), \(U_3\), be the at most three components that would</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
+MST would be city-side and the fastest possible way would be consumer side. 
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <div class="footpara"><p class="footpara">
+Otherwise you can explore the components. 
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3">3</a></sup> <div class="footpara"><p class="footpara">
+"and the decision problem version ("given the costs and a number x, decide
+whether there is a round-trip route cheaper than x") is NP-complete."-Wikipedia
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.4" class="footnum" href="#fnr.4">4</a></sup> <div class="footpara"><p class="footpara">
+In general we don't know how to approximate the TSP, but we can do it with some extra conditions
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.5" class="footnum" href="#fnr.5">5</a></sup> <div class="footpara"><p class="footpara">
+Input is a graph \(G\) and the question is whether there is a perfect matching. 
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.6" class="footnum" href="#fnr.6">6</a></sup> <div class="footpara"><p class="footpara">
+The belief is that this is not true. This is one of the Millennium problems.
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.7" class="footnum" href="#fnr.7">7</a></sup> <div class="footpara"><p class="footpara">
+I think it's about going through each edge once.
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.8" class="footnum" href="#fnr.8">8</a></sup> <div class="footpara"><p class="footpara">
+Apparently there is a characterization that a graph is 2 colorable if and
+only if it has no cycle.
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.9" class="footnum" href="#fnr.9">9</a></sup> <div class="footpara"><p class="footpara">
+Here \(C\) is the number of connected components in the graph.
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.10" class="footnum" href="#fnr.10">10</a></sup> <div class="footpara"><p class="footpara">
+Peterson graphs can be used to make a lot of counter examples. This was
+taught in discrete math 1.
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.11" class="footnum" href="#fnr.11">11</a></sup> <div class="footpara"><p class="footpara">
+Here \(o\) is the number of components of odd size.
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.12" class="footnum" href="#fnr.12">12</a></sup> <div class="footpara"><p class="footpara">
+My condition 
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.13" class="footnum" href="#fnr.13">13</a></sup> <div class="footpara"><p class="footpara">
+<a href="https://en.wikipedia.org/wiki/Tutte_theorem">Tutte's theorem</a>
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.14" class="footnum" href="#fnr.14">14</a></sup> <div class="footpara"><p class="footpara">
+Why can we do this? We fix the number of vertices, so this it actually
+makes sense.
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.15" class="footnum" href="#fnr.15">15</a></sup> <div class="footpara"><p class="footpara">
+Here \(xy\) is an edge that is not already in \(G\).
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.16" class="footnum" href="#fnr.16">16</a></sup> <div class="footpara"><p class="footpara">
+I think I missed some parts to the explanation.
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.17" class="footnum" href="#fnr.17">17</a></sup> <div class="footpara"><p class="footpara">
+Is the \(K_2\) here an edge?
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.18" class="footnum" href="#fnr.18">18</a></sup> <div class="footpara"><p class="footpara">
+What is regular graph? Every vertex has the same number of neighbours.
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.19" class="footnum" href="#fnr.19">19</a></sup> <div class="footpara"><p class="footpara">
+What is a cut edge? A cut edge should mean that you remove an edge and
+the graph gets disconnected.
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.20" class="footnum" href="#fnr.20">20</a></sup> <div class="footpara"><p class="footpara">
+An example of such a graph is Peterson graph.
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.21" class="footnum" href="#fnr.21">21</a></sup> <div class="footpara"><p class="footpara">
+What is a handshake lemma? 
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.22" class="footnum" href="#fnr.22">22</a></sup> <div class="footpara"><p class="footpara">
+If the graph satisfies tutt's condition, then \(\alpha\) should evaluate
+to \(n/2\).
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.23" class="footnum" href="#fnr.23">23</a></sup> <div class="footpara"><p class="footpara">
+Apparently the problem for general graph is also in P. The algorithm for
+this graph was what lead to the definition of \(P\).
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.24" class="footnum" href="#fnr.24">24</a></sup> <div class="footpara"><p class="footpara">
+I missed a lot of details here.
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.25" class="footnum" href="#fnr.25">25</a></sup> <div class="footpara"><p class="footpara">
+Practical example: There is a company which has factories and corn
+farms, the edges represent the profit the factory makes by producing corn from a
+certain farm. There is more to this story. But I missed it.
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.26" class="footnum" href="#fnr.26">26</a></sup> <div class="footpara"><p class="footpara">
+In a good connected graph, you don't want a vertex set to be small.
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.27" class="footnum" href="#fnr.27">27</a></sup> <div class="footpara"><p class="footpara">
+We use the convention that the prime is the corresponding to edges.
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.28" class="footnum" href="#fnr.28">28</a></sup> <div class="footpara"><p class="footpara">
+It is true that for \(k\) connectedness, any \(k\) vertices are on a cycle,
+but the other direction is not true.
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.29" class="footnum" href="#fnr.29">29</a></sup> <div class="footpara"><p class="footpara">
+This can be generalized in a very straightforward way.
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.30" class="footnum" href="#fnr.30">30</a></sup> <div class="footpara"><p class="footpara">
+Apparently Bellman-ford is an algorithm that is better than Djistra when
+it comes to negative edges. But it works for digraphs and not for directed
+graphs.
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.31" class="footnum" href="#fnr.31">31</a></sup> <div class="footpara"><p class="footpara">
+A lower bound for Ramsey numbers was also proved in same way. Also you
+can do a probabilistic argument.
+</p></div></div>
+
+
+</div>
+</div></div>
+<div id="postamble" class="status">
+<p class="author">Author: Hari</p>
+<p class="date">Created: 2018-11-19 Mon 13:58</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
