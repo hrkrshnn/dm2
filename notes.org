@@ -1022,7 +1022,7 @@
      If $y\in C$, we are done. If not, there exits a $xy$ path $Q$ in
      $G\setminus \{v\}$ as $G$ is $2$ connected. Now, it's easy to construct a
      cycle from $x$ to $y$.
-
+     
      Let $z$ be the last $v_x$ of $C$ on $Q$ if it exits. Let $D$ be $C\setminus
      [z, v]$ such that $x \in D$. Now $C' = D \cup Q\vert[x, y] \cup \{xy\}$
      cycle containing $x$ and $y$.
@@ -1071,8 +1071,8 @@
 
     A flow is *feasible* if
     1. For all $v \neq s, t$, the net flow in is equal to the net flow out, i.e,
-       for all $v\neq s, t$, $\sum f(uv) =f^{-1}(v) = f^{+}(v) = \sum(vu)$. This
-       is called the /conservation constraints/.
+       for all $v\neq s, t$, $\sum f(uv) =f^{-}(v) = f^{+}(v) = \sum(vu)$. This
+       is called the /conservation constraints/. [fn:32]
     2. For all directed edges, we require that the flow on the edge is
        non-negative and at most the capacity. This is called /capacity
        constraint/
@@ -1102,7 +1102,221 @@
 ** Theorem (Ford-Fulkerson) (Max-flow min-cut theorem)
    Let $f$ be a flow of max value and $[Q, \bar{Q}]$ a source-sink cut of
    minimum capacity, then the $\val(f) = \cap([Q, \bar{Q}])$.
-   
+* Lecture 11 <2018-11-20 Tue>
+** Network
+   $D$ is a directed multigraph. $s = V(D)$, the source vertex and $t \in V(D)$
+   the sink vertex and $c\colon E(D) \rightarrow \R_{\ge 0}$ capacity
+   function.
+
+   *Flow* is a function $f\colon E(D) \rightarrow \R$
+
+   Flow is function $E(D) \rightarrow \R$. For feasible flow
+   1. For every $v$ that is not $s$ and $t$, $\sum_{(v,u) \in E} f(v, u) =
+      f^{+}(v)$
+   2. $\forall e \in E$, $0 \le f(e) \le c(e)$. The value of the flow is
+      whatever goes into the sink $\val(f) = f^{-}(t) - f^{+}(t)$.
+
+   The *maximum flow* is a feasible flow of maximum value.
+** Weak duality
+   For every feasible flow $f$ and source sink cut $[S, \bar{S}]$, the value of
+   the $f \le \cap(S, \bar{S})$, in particular, the equality happens if $f$ is a
+   maximum flow and $[S, \bar{S}]$ is a min-cut.
+
+   $[S, \bar{S}] = \{(u, v) \in E(D) \colon u \in S, v \in \bar{S}\}$ is a
+   source sink cut if $s\in S$ and $t\in \bar{S}$.
+
+   $[S, \bar{S}]$ is a min cut if its capacity $\cap(S, \bar{S}) = \sum_{u \in
+   S, v \in \bar{S}} c(u, v)$ is minimum among source/sink cut.
+** Max Flow Min cut theorem (Ford-Fulkerson, 1956)
+   Let $(D, s, t, c)$ be a network. Let $f_{\max}$ be a max flow on $D$ and
+   $[S_{\min}, \bar{S}_{\min}]$ a min cut, then $\val(f) = \cap (S_{\min},
+   \bar{S}_{\min})$.
+
+   [[https://en.wikipedia.org/wiki/Ford%E2%80%93Fulkerson_algorithm][Wikipedia]]
+*** Proof
+    $\le$ direction is just the weak duality.
+
+    $\ge$ direction. We will find a source sink cut such that the capacity of
+    the source sink cut is equal to the value of the maximal flow.
+
+    That is, $\cap(S, \bar{S}) = \val(f_\max)$.
+
+    $S = \{v \in V(D) \colon \exits f \textup{augmenting path from s to v}\}$
+
+    Observation $t \in \bar{S}$ and $s \in S$. This is because if there is a $f$
+    augmenting path from $s$ to $t$, then $f$ is not maximum, but we know that
+    $f$ is maximum, a contradiction.[fn:33]
+
+    $t\in \bar{S}$, $s\in S$, 
+    1. $[S, \bar{S}]$ is a source/sink cut.
+    2. $(u, v) \in [S, \bar{S}]$, $f(u,v) = c(u, v)$. $(u, v) \in [\bar{S}, S]$
+       implies that $f(u, v) = 0$. Because if not, we can add them to $S$.
+
+    Now we see that the capacity of the cut $\cap(S, \bar{S}) = \sum c(u, v) =
+    \sum_{(u, v) \in [S, \bar{S}] f(u, v) - \sum_{(u, v) \in [\bar{S}, S]} f(u,
+    v) = \val(f_\max)$ the last statement is a homework problem.
+** Augmenting path
+   An $s, t$ path $s = v_0e_1v_1e_2v_2 \cdots v_{k-1}e_k v_{k} = t$ in the
+   underlying undirected graph $G$ of a network $D$. This is called an
+   $f$-augmenting path if for every $i$, 
+   1. $f(e_i) < c(e_i)$ is true if $e_i$ is a "forward" edge.
+   2. or $f(e_i) > 0$ if $e_i$ is a backward edge.
+
+   The tolerance of a $f$ augmenting path $P$ is just the minimum of the values
+   $\min \{E(e) \colon e \in E(P)\}$ where $E(e) =$, $c(e) - f(e)$ if $e$ is
+   forwards and $f(e)$ when $e$ is backward.
+
+   If we define a $f$ augmenting path, we can improve the value of the path. You
+   can improve the value of the path by the tolerance of the path.
+** Lemma
+   Take a feasible flow and an $f$ augmenting path with tolerance $z$, then we
+   define a new flow $f'$ on the edges such that $f'(e) = f(e) + z$ if $e$ is
+   forward in $P$ and $f(e) - z$ if $e$ is a backward edge. And if the edge is
+   not on the path, you do nothing.
+
+   Then $f'$ is feasible and the $\val(f') = \val(f) + z$.
+*** Proof
+    Capacity constraints hold by the definition of $z$.
+
+    Conservation constraints holds because: if we have a vertex $v\in V(P)$,
+    then. 
+
+    We had four cases and four diagrams. Basically given a vertex, there is one
+    vertex leaves the vertex and one vertex that comes to $z$. We can argue for
+    each of these cases.
+** Corollary
+   If there exits an $f$ augmenting path implies that $f$ is not maximum.
+** Local Vertex Menger's theorem
+   For all $x, y \in V(G)$, $xy\notin E(G)$, $\kappa(x, y) = \lambda(x, y) =
+   \max\{\vert P \vert \colon P$ is a set of pairwise internally disjoint $x, y$
+   path $\}$.
+*** Proof
+    The idea is to build a network so that the Ford-Fulkerson theorem implies
+    it.
+
+    $(D, x^{+}, y^{-}, c)$, $V(D) = \{v^{-1}, v^{+}, v\in V(G)\}$, $E(D)
+    =\{(u^{+}, v^{-} \colon uv \in E(G)\} \cap \{(v^{-1}, v^{+} \colon v \in
+    V(G)\}$.
+
+    $c(v^-v^{+}) = 1$ for all $v \in V(G)$, and $c(u^{+}v^{-} = \infty$.
+
+    If there is an $xy$ separating set in $G$, this corresponds to a source sink
+    cut in $D$.
+
+    $S = \{v^-, v^{+}, v\in Q\} \cap \{u^{-1}\colon u \in C\} \subset V(D)$ and
+    $\cap (S, \bar{S}) = \vert C \vert$. If $v \in S$, there exits no
+    $v^{+}w^{-}$ edge to $w \notin S \cap Q$.
+
+    Minimum cut $S, \bar{S} \le K(x, y)$
+
+    $\ge$ take a minimum cut in $D$. There does not exist an edge $v^{+}u^{-}
+    \in [S, \bar{S}]$.
+
+    The set $C = \{u \in V(G) \colon (u^{-1}, u^{+}) \in [S, \bar{S}]\}$ is an
+    $x, y$-separating set in $G$ and the size $\vert C \vert = \cap(S,
+    \bar{S})$.
+
+    $\lambda(x, y) \le \maxval(f) = \mincap(S, \bar{S}) = \kappa(x, y).$ If you
+    have a family of internally disjoint, this in the network correspond to
+    several flows in the network. You definitely could create a flow.
+* Lecture 12 <2018-11-21 Wed>
+** LMVT proof
+   $V(D) = \{u^{+}, u^{-}, u \in V(D)\}$
+
+   $E(D) = \{u^{+}, v^{-1}, uv \in E(G)\} \cup \{(v^{-1}, v^{+}\colon v\in
+   V(G)\}$
+
+   $c(v^{-}, v^{+} =1$ for all $v \in V(D)$.
+
+   $c(u^+, v^-) = \infty$ for all $uv \in E(D)$
+
+   $(D, x^+, y^-, c)$
+
+   The maximum value of a feasible flow is the minimum capacity $(S, \bar{S}) =
+   \kappa(x, y)$.
+** Ford Fulkerson algorithm
+   *Initialization*: Network $(D, s, t, c)$. Choose an initial flow $f \eq 0$.
+
+   *Iteration*: Look for augmenting paths to improve the algorithm. Explore
+    network for $f$ augmenting paths starting from $s$ (can be done using BFS.)
+    Collect vertices reached in set $S$.
+
+    Once you're done we have two cases. You didn't have an augmenting path which
+    implies that we have reached a maximum. If there is $t\in S$, return
+    augmenting path and improve the flow.
+
+    If $t\in S$, return augmenting path and an improved flow.
+
+    else return $f$ as max flow and $[S, \bar{S}]$ as min cut with $\val(t) =
+    \cap(S, \bar{S}$
+
+*** Integrability theorem
+    If $c$ is a function from the edges to the natural numbers, then the
+    Ford-Fulkerson algorithm terminates with a flow with integer values.
+**** Proof
+     Proof is by induction on the number of times the flow has been improved.
+     And noting that the tolerance of any $f$ augmenting path is integer since
+     both are integers and hence the improved flow will also be an integer.
+
+     The algorithm hence terminates in at most maximum of the capacity steps.
+*** Corollary
+    If the capacities are integers, then there exists a maximum flow that can be
+    represented as the flow of $\val(f)$ many unit flows $f = g_1 + g_2 +
+    \cdots + g_\val(f) with $val g_i = 1$.
+*** Continuation
+    By the IT theorem there exist flows $g_1, \cdots, g_k$ from $x^+$ to $y^-$
+    each of these are the form $x^+v_{i,1}^-v_{i,1}^+v_{i, 2}^+, \cdots,
+    v_{i1,l_1}^-v_{i1,l_1}^+y^-$
+
+    Hence the $xy$ path $xv_{i, 1}v_{i, 2} \cdots v_{i, e_1}y$ in $G$ are
+    pairwise internally disjoint paths.
+** Partitioning triples
+   We want to partition $\binom{n}{3}$ triples into "perfect matchings" that are
+   pairwise disjoint. You need to have $3 \vert n$
+
+   This number will turn out to be $\frac{n}{3} \cdot \frac{(n-1)(n-3)}{2}$.
+
+   For $6$ vertices, we could take the set and the complement. Which is just
+   $\binom(6, 3)$.
+** General version of Partitioning
+   Let $k, n$ integers and $k\vert n$. Is it possible to partition the family
+   into $\binom{n}{k}$ sets into pairwise disjoint perfect matchings. Perfect
+   matching is a set of $n/k$ pairwise disjoint edges.
+
+   The answer is yes for every $k$.
+*** Definition 
+    $m = n/k$ is the number of sets in the perfect matching.
+
+    $M = \binom{n}{k}/(n/k) = \binom{n-1}{k-1}$ The number of perfect matchings needed
+
+    Given an integer $1\ le l \le n$ a $m$ partition of $[l]$ is a multi-set $r
+    = \{A_1, \cdots, A_m\}$ consisting of pairwise disjoint sets whose union is
+    $[l]$. ([fn:35])
+*** Remark
+    Restriction of a perfect matching to $[l]$ is a $m$ partition.
+*** Proposition
+    For every $l$ there exists $M$, $m$ partitions of $[l]$, called $A_1,
+    \cdots, A_2, \cdots, A_M$ such that for every subset of $[l]$, occurs in
+    exactly $\binom{n-l}{k-\vert S\vert}$ of the $m$ partitions. (The empty set is always
+    counted with multiplicity)
+*** Remarks
+    1. If $\vert S \vert > k$, the statement says it occurs $0$ times. Only $\vert
+       S \vert \le k$ occurs.
+    2. $l=n$, There exists $M$, $m$ partitions $=0$ and $1$ when $k = \vert S
+       \vert$. $M$, $m$ partitions in which every $k$ occurs exactly once and
+       nothing else. This means that there exists a partition $A_1, \cdots, A_M$
+       are perfect matchings consisting of $k$ sets that partition
+       $\binom{n}{k}$. Thus the theorem is proved.
+*** Proof of Proposition
+    When $l = 1$, $A_i = \{\{1\}, \emptyset, \emptyset, \cdots, \emptyset\}$
+    (the empty set occurs for $m-1$ number of times.)
+
+    If $s = \{1\}$, then $s$ occurs $M$ times. $\binom{n-l}{k-s} =
+    \binom{n-1}{k-1} = M$
+
+    When $s$ is the empty set. Then $S$ should occur $\binom{n-1}{k-0} =
+    \binom{n-1}(k}$. Count: $M(m-1) = \binom{n-1}{k-1}(n/k - 1)$ this is true as
+    well. I missed the rest of the proof.
 * Tutorial
   [[http://discretemath.imp.fu-berlin.de/DMII-2018-19/][link]]
 ** Tutorial 1
@@ -1345,7 +1559,7 @@
 
     The maximal matching is $\{e2, e_3\}$, whereas the algorithm generates
     $\{e_1\}$.
-** Tutorial 4 
+** Tutorial 4
 *** Problem 1
     The inequality is super easy and just follows from the definition.
 
@@ -1415,7 +1629,62 @@
        \kappa = 3$.
     2. $\kappa = 1$, then disconnecting one vertex would disconnect the graph.
        Let $U_1$, $U_2$, $U_3$, be the at most three components that would
+** Tutorial 6
+*** Problem 1
+    It is easy to see that $\kappa = 2$. It is easy to see that $\kappa' \le 4$.
+    We need to see how to ignore the other parts.
+    
+    We find two hamiltonian cycles and then two of the edges have to be on the
+    hamiltonian cycle. And the third edge cannot really disconnect the graph.
+    Remove the Hamiltonian cycles, then graph still has $\kappa' 2$. Thus the
+    original graph has $\kappa' = 4$.
+
+    *Hint*: Let $S$ be an edge cut of size $\le 3$. Then we need to show $S \ge
+    5$, and $\vert \bar{S}\vert \ge 5$. Then the induced graph has to be $K_5$. But
+    there is no $K_5$.
+*** Problem 3
+    $K_n$, $n$ is a natural number that is very large. There were two $K_n$ at
+    both the end and in the center a graph of size $k$.
+*** Problem 3
+    1. $k=d=k'$, $K_{d+1}$ would do
+    2. $k < d$ and $k'$ two $K_{d+1}$ graphs and do connections between them
+*** Problem 4
+    Something like if $\kappa' = r$, then there are $r$ edge disjoint paths. If
+    $\kappa < \kappa'$, then there is a point in the edge disjoint path that
+    doesn't blah blah.
+
+    For proving for Peterson graph: there is a theorem by Brouwer that proves
+    this.
+
+    A simple way to do it is that remove a vertex and we get a graph that has a
+    hamiltonian cycle.
+
+    $\vert S, \vert{S} \vert = \sum d(v) - 2e(G[S])$[fn:34]
+*** Problem 5
+    You make a line graph and then argue that the $\kappa'$ of the graph is same
+    as the $\kappa$ of the line graph. (There is an intermediate graph which
+    should be formed by adding extra vertices $u$ and $v$, and the edge $ux$ and
+    $yx$.)
+
+    "Vertex transitive" graph. Any two vertices are the same in Peterson graph.
+
+    Called the Harrary graph.
+*** Problem 6
+    $\val(f) = f^-(t) - f^{+}(t) = \sum_{u \in \bar{S}} (f^{-1}(w) - f^{+}(w)) =
+    \sum_{u\in \bar{S}}(\sum_{v \in V} f(vu) - \sum_{v \in V} f(uv))$ some
+    calculations and we are done.
 * Footnotes
+
+[fn:35] Repetition is allowed only for $\emptyset$. Because sets are disjoint.
+
+[fn:34] If there is an edge cut of size $2$, then there is a triangle in the
+peterson graph.
+
+[fn:33] An $f$ augmenting path by definition means from source to sink. Our
+definition here means the same definition except that the end vertex need not be
+the sink.
+
+[fn:32] I think there is a typo in the last $\sigma$ part.
 
 [fn:31] This can be generalized in a very straightforward way.
 
