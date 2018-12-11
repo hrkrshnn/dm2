@@ -16,6 +16,7 @@
 #+LATEX_HEADER: \def\prev{\operatorname{prev}}
 #+LATEX_HEADER: \def\val{\operatorname{val}}
 #+LATEX_HEADER: \usepackage[T1]{fontenc}
+#+OPTIONS: tex:dvipng
 
 * Lecture 2<2018-10-17 Wed>
 
@@ -1194,31 +1195,41 @@
     The idea is to build a network so that the Ford-Fulkerson theorem implies
     it.
 
-    $(D, x^{+}, y^{-}, c)$, $V(D) = \{v^{-1}, v^{+}, v\in V(G)\}$, $E(D)
-    =\{(u^{+}, v^{-} \colon uv \in E(G)\} \cap \{(v^{-1}, v^{+} \colon v \in
-    V(G)\}$.
+    We choose the following network: $(D, x^{+}, y^{-}, c)$,
 
-    $c(v^-v^{+}) = 1$ for all $v \in V(G)$, and $c(u^{+}v^{-} = \infty$.
+    $V(D) = \{v^{-1}, v^{+}, v\in V(G)\}$,
+
+    $E(D) =\{(u^{+}, v^{-} \colon uv \in E(G)\} \cap \{(v^{-1}, v^{+} \colon v
+    \in V(G)\}$.
+
+    $c(v^{-}, v^{+}) = 1$ for all $v \in V(G)$, and $c(u^{+}, v^{-}) = \infty$.
 
     If there is an $xy$ separating set in $G$, this corresponds to a source sink
-    cut in $D$.
+    cut in $D$. If $C$ is an $xy$ separating set, i.e., $C$ contains $x$ and
+    $\bar{C}$ contains $y$. We'll first show that the value of minimum cut is
+    exactly equal to $\kappa(x, y)$.
 
-    $S = \{v^-, v^{+}, v\in Q\} \cap \{u^{-1}\colon u \in C\} \subset V(D)$ and
-    $\cap (S, \bar{S}) = \vert C \vert$. If $v \in S$, there exits no
+    $s = \{v^-, v^{+}, v\in Q\} \cap \{u^{-1}\colon u \in C\} \subset V(D)$ and
+    $\operatorname{cap} (S, \bar{S}) = \vert C \vert$. If $v \in S$, there exits no
     $v^{+}w^{-}$ edge to $w \notin S \cap Q$.
 
-    Minimum cut $S, \bar{S} \le K(x, y)$
+    Minimum cut $[S, \bar{S}] \le K(x, y)$
 
     $\ge$ take a minimum cut in $D$. There does not exist an edge $v^{+}u^{-}
     \in [S, \bar{S}]$.
 
     The set $C = \{u \in V(G) \colon (u^{-1}, u^{+}) \in [S, \bar{S}]\}$ is an
-    $x, y$-separating set in $G$ and the size $\vert C \vert = \cap(S,
+    $x, y$ separating set in $G$ and the size $\vert C \vert = \operatorname{cap}(S,
     \bar{S})$.
 
-    $\lambda(x, y) \le \maxval(f) = \mincap(S, \bar{S}) = \kappa(x, y).$ If you
-    have a family of internally disjoint, this in the network correspond to
-    several flows in the network. You definitely could create a flow.
+    $\lambda(x, y) \le \operatorname{maxval}(f) = \mincap(S, \bar{S}) =
+    \kappa(x, y)$ If you have a family of internally disjoint, this in the
+    network correspond to several flows in the network. You definitely could
+    create a flow.
+
+    Actually this part is kinda obvious. We need to come up with an algorithm
+    that produces internally disjoint paths for max capacity. We can get this
+    from the Ford-Fulkerson algorithm.
 * Lecture 12 <2018-11-21 Wed>
 ** LMVT proof
    $V(D) = \{u^{+}, u^{-}, u \in V(D)\}$
@@ -1262,7 +1273,7 @@
 *** Corollary
     If the capacities are integers, then there exists a maximum flow that can be
     represented as the flow of $\val(f)$ many unit flows $f = g_1 + g_2 +
-    \cdots + g_\val(f) with $val g_i = 1$.
+    \cdots + g_\val(f)$ with $\val g_i = 1$.
 *** Continuation
     By the IT theorem there exist flows $g_1, \cdots, g_k$ from $x^+$ to $y^-$
     each of these are the form $x^+v_{i,1}^-v_{i,1}^+v_{i, 2}^+, \cdots,
@@ -1277,7 +1288,7 @@
    This number will turn out to be $\frac{n}{3} \cdot \frac{(n-1)(n-3)}{2}$.
 
    For $6$ vertices, we could take the set and the complement. Which is just
-   $\binom(6, 3)$.
+   $\binom63$.[fn:36]
 ** General version of Partitioning
    Let $k, n$ integers and $k\vert n$. Is it possible to partition the family
    into $\binom{n}{k}$ sets into pairwise disjoint perfect matchings. Perfect
@@ -1289,7 +1300,7 @@
 
     $M = \binom{n}{k}/(n/k) = \binom{n-1}{k-1}$ The number of perfect matchings needed
 
-    Given an integer $1\ le l \le n$ a $m$ partition of $[l]$ is a multi-set $r
+    Given an integer $1\le l \le n$ a $m$ partition of $[l]$ is a multi-set $r
     = \{A_1, \cdots, A_m\}$ consisting of pairwise disjoint sets whose union is
     $[l]$. ([fn:35])
 *** Remark
@@ -1317,12 +1328,462 @@
     When $s$ is the empty set. Then $S$ should occur $\binom{n-1}{k-0} =
     \binom{n-1}(k}$. Count: $M(m-1) = \binom{n-1}{k-1}(n/k - 1)$ this is true as
     well. I missed the rest of the proof.
+* Lecture 13 <2018-11-27 Tue>
+** Colorings of graphs
+*** Example
+    100 employees and $6$ projects. They have meetings. The company tries to
+    schedule the meetings. Some employees are in different projects. So you
+    cannot schedule them at the same time.
+
+    The projects: $A_1, A_2, \cdots, A_6 \subset S$
+
+    Schedule: $A_i \cap A_j \neq \emptyset \implies$, meeting times are
+    different from $A_j$. Minimize the number of hours your teams spend with
+    meetings. 
+
+    We form a graph with $A_i$ and form edges when $A_i \cap A_j \neq
+    \emptyset$. We want to color the graphs so that the adjacent vertices have
+    different color.
+** Definition
+   $X \colon V(G)\rightarrow [s]$ is a proper vertex colouring of $G$ if
+   $\forall uv \in E(G)$, $X(u) \neq X(v)$.
+
+   $G$ is $k$ colorable if there is a $k$ coloring of it.
+
+   The chromatic number is the minimum number of colors that can make it
+   colorable.
+** Complexity
+   Is this graph $k$ colorable? A decision problem.
+
+   For $k=2$, it is equivalent to being bipartite. And is in P for this case.
+
+   For $k \ge 3$, the problem is NP-complete. It is easy to show that the
+   problem is in NP.
+
+   It is not know that the problem is in Co-NP.
+** Giving lower bounds for chromatic number
+   $X(G) \ge \omega(G)$. This is an obvious bound.
+** Proposition
+   $X(G) \ge \frac{v(G)}{\alpha(G)}$
+*** Proof
+    Was too quick
+** Tightness of $X(G)$ and $\omega(G)$
+   Cliques, Bipartite graph (and complements), perfect graphs.
+** Non-tightness $X(G) > \omega(G)$
+   A simple example is odd cycle. Also for their complements. 
+
+   [[https://en.wikipedia.org/wiki/Mycielskian][Wikipedia]]: Mycielskian construction. $\omega(G) = 2$, but $X(G) > 10^10$.
+   
+   Random graphs: $G = G(n, 1/2)$ and $\omega(G) = 2\log n$ and $X(G) = n/(2
+   \log n)$. (This wasn't proven.) The result shows that the last proposition is
+   asymptotically tight.
+** Hajos conjecture
+   [[https://en.wikipedia.org/wiki/Haj%C3%B3s_construction][Wikipedia]] There exists $K_r$ subdivisions $\Leftimplies X(G) \ge r$.
+
+   True for $r = 2, 3$. For 3, we have an odd cycle.
+** Dirac theorem
+   Hajos conjecture is true for $k=4$.
+*** Proof
+    We'll use induction on $n$, the number of vertices.
+
+    Base case: $n=4$, the smallest $n$ for which the graph is $3$ colorable.
+    $K_4$ is the only graph on $4$ vertices that is non 3 colorable.
+    
+    $n>4$, we can without loss of generality, assume that $G$ is $4$ critical.
+    Meaning that if you remove an edge or vertex will make it $3$ colorable. The
+    chromatic number $X(H) \le 3$ and $X(G) = 4$. We'll show that this will be
+    $K_4$ divisible.
+
+    Case 0: $\kappa(G) = 0$. Take a 4 chromatic component subgraph which is proper.
+
+    Case 1: $\kappa(G) = 1$. You have a cut vertex. Then $G$ is not $4$
+    critical. This is because you can color the lobes with $3$ colors and name
+    the color of $v$ in each $1$. Then the union of these colorings is a proper
+    $3$ colouring of $G$.
+
+    Case 2: $\kappa(G) = 2$. Take a cut set $S \subset V, \vert S \vert = 2$.
+    Call $S = \{x, y\}$. Color each $S$ lobe with $3$ colors, rename colors in
+    each lobe such that $x$ is colored the same in each lobe and $y$ is colored
+    the same in each lobe. But this would still have a problem. When is this
+    possible? An example is when $x$ and $y$ have an edge between them.
+
+    Case 2b: $xy \notin E(G)$ for all $S$ lobe there exists a proper $3$
+    coloring $x$ and $y$ have different colors. If there is an $S$ lobe with no
+    proper $3$ coloring with $x$ and $y$ have different color. This implies that
+    $X(H + xy) = 4$ ($\iff \forall$ 3 coloring of $H$, $X(x) = X(y)$)
+
+    There exists $K_4$ subdivisions $L \subset H + xy$ if $xy \notin E(L)$, $L
+    \subset H \subset G$ if $xy \in E(L)$. If $xy \in E(L)$, create $K_4$
+    subdivisions $L^{*}$ from $L$ by deleting and replacing it with an $x, y$
+    path in a S-lobe different from $H$.
+
+    Case 3: $K(G) \ge 3$. $G-x$ is $2$ connected, implies that there is a cycle in
+    it (Mengers theorem), A cycle is a $K_3$ subdivision. We need to somehow get
+    $K_4$ subdivision.
+
+    We add a new vertex $v$ and connect three vertices on this cycle. Now the
+    graph is $3$ connected. There are three pairwise internally disjoint paths
+    between $x$ and $v$. This can be used to construct a $K_4$ subdivision.
+
+    A lemma: If $G$ is $k$ connected and $G^{*}$ is an extra vertex plus edges
+    to $k$ vertices of $G$, then $G^{*}$ is also $k$ connected.
+** Counter examples of Hajos theorem for $k\ge 7$
+   Still open for $k = 5, 6$.
+** Hadwiger Conjecture
+   $X(G) \ge k$ implies that $K_r$ minor.
+* Lecture 14 <2018-11-27 Tue>
+** Proposition
+   For all $X(G) \le \Delta(G) + 1$
+*** Proof
+    A greedy algorithm. 
+
+    Input: ordering of the vertices, $v_1, \cdots, v_n$ of $V(G)$
+
+    We color $v_i$ with the smallest available color. Basically take the
+    element, look at the neighbours, and assign the element a color that is the
+    minimum of number that doesn't clash with neighbours.
+
+    Claim: The greedy algorithm produces a proper coloring of $G$ for every
+    ordering of $V(G)$. 
+
+    The number of colors of the greedy algorithm uses is not more than the
+    $\Delta(G) + 1$.
+*** Characterize the extremal cases
+** Theorem (Brooks)
+   $G$ is connected, then $X(G) = \Delta(G) + 1 \iff G = K_n or C_{2l+1}$
+*** Proof
+    One direction is obvious ($\Leftarrow$)
+
+    Approach: Try to Color with greedy with different orderings and conclude
+    that the only orderings we can't do it is with $\Delta$ colours is when $G =
+    K_n$ and $C_{2l+1}$.
+
+    Idea: We take a spanning tree with root $r$. From the spanning tree, create
+    an ordering $\pi_T$ of $V(G)$ such that we order from leaf to root. With the
+    property so that every vertex precedes all vertices on the unique path in
+    $T$ from $u$ to $r$.
+
+    We can see that $G$ is regular (meaning that every vertex have the same
+    number of neighbours)
+
+    run the greedy algorithm with $\pi_t$, then $\max \vert \{\cdots \}\vert \le
+    \max \{\max\{d(v_{\pi_t(i)}) - 1\}, d(v_{\pi_t(u)})\}$
+
+    For similar reason, we can say that $G$ has no cut vertex. Otherwise, if $x$
+    is a cut-vertex, then, take a spanning tree with root $x$ and look at the
+    lobes $S_1, \cdots, S_l$. Color each lobe greedily with $x$ as the root.
+    This is possible with at most $\Delta(G)$ colors, since the degree of
+    $d_s(x) \le \Delta(s) - 1$. Then put together all the colors.
+
+    So $G$ must be at least $2$ connected.
+
+    We are still in $T$ ordering. 
+
+    If there are two edges that $v_1, v_2$ doesn't have an edge and $G- \{v_1,
+    v_2\}$ is not connected. If this is a strongly connected graph, then we will
+    be able to succeed. And then order them like $v_1, v_2, v_3, \cdots, v_n$.
+    Where $v_n$ is connected to $v_1$ and $v_2$. Then we can get a contradiction
+    doing the greedy coloring.
+
+    Take a vertex $x$, $d(x) < n-1$. Take a $y\in N(x)$ such that $z \in N(y)
+    \setminus N(x)$, $K(G - x) \ge 2$. This means that $\kappa(G - x - y) \ge
+    1$. This is a contradiction.
+
+    Case 2: $\kappa(G - x) = 1$. We need a structure theorem. And we'll come
+    back to this.
+** Definition
+   Given a graph $G$, a block is a set of vertices $B \subset G$, is a maximal
+   connected subgraph of $G$ without a cut vertex. Means that $B$ itself is $2$
+   connected and for every $B'$, such that $B \subset B' \subset G$, $B'$ is not
+   $2$ connected.
+** Lemma
+   $B_1, B_2$ are blocks of $G$, then $\vert V(B_1) \cap V(B_2) \vert \le 1$.
+*** Proof
+    If $\vert V(B_1) \cap V(B_2) \ge 2$, $B_1$ and $B_2$ are $2$ connected,
+    then, $x$ and $y$ is indeed a section $V(B_1) \cap V(B_2)$, $x \neq y$. We
+    want $z_1, z_2 \in V(B_1) \cap V(B_2)$ cycle $z_1, z_2 \in C$. They are
+    disjoint (the lemma that we used yesterday.) This means that $B_1 \cap B_2$
+    are $2$ connected and we have a contradiction
+** Some structure
+   The block/cut-vertex graph of $G$ is a bipartite graph with vertex set $\{B
+   \subset G\colon B \textup{ is a block}\} \cup \{v \in V(G) \colon v \textup{
+   is a cut vertex}\}$
+
+   Block $B$ is adjacent to cut-vertex $v$ if $v \in V(B)$
+** Proposition
+   The block/cut-vertex graph of a connected graph is a tree.
+*** Proof
+    Connectedness follows from the connectedness of $G$. Every vertex is
+    contained in at least one block.
+
+    Acylicity? If there is a cycle of blocks, then take a shortest cycle and now
+    create a cycle through each of these paths and get a larger block.
+
+    Take shortest cycle $B_1 v_1 B_2v_2 \cdots B_lv_l \implies B_1 \cap \cdots
+    B_l$ is also $2$ connected, because pair of vertices are on a cycle. Now a
+    contradiction to the maximality of $B_i$.
+** Going back
+   We were doing $K(G - x) = 1$.
+
+   Now use the structure theorem to $K(G-x)$. Adding back $x$, $x$ must have a
+   neighbour in each of the leaf block that is not a cut vertex. Otherwise, $G$
+   is not $2$ connected. There exists at least $2$ leaf blocks.
+
+   We can pick $v_1, v_2$ in two different leaf block. If we remove $v_1$ and
+   $v_2$, $G-x$ should remain connected.
+
+   If $G \neq G$, $d(x) \ge 3$, so $G - v_1 - v_2$ is connected.
+* Lecture 15 <2018-12-05 Wed>
+** Formalizing a certain graph coloring
+   Given a graph $G$, an assignment of subsets (lists) to the vertices $L \colon
+   V(G) \rightarrow 2^\N = P(\N)$, then $f\colon V(G) \rightarrow \N$ is a
+   proper $L$ list coloring with respect to $L$ if for every $v \in V(G)$, the
+   color $c(v) \in L(v)$ (choose color from representative list) and $\forall xy
+   \in E(G), c(x) \neq c(y)$ (proper)
+** Remark
+   Usual proper coloring is just a list coloring with $L(v) = [k]$.
+
+   Graph $G$ is $k$ list colorable (k-choosable) if $\forall L \colon V(G)
+   \mapsto \binom\N k$, there is a proper list coloring with respect to $L$.
+
+   The parameter that we're looking for is $\chi_l(G) = \min \{k \colon G
+   \textup{is k-colorable}\}$.
+** Claim
+   $\chi_l(G) \ge \chi(G)$
+*** Proof
+    If a graph is $k$ list colorable, then it is also $k$ colorable.
+
+    We have already seen that for $\chi_l(K_{3, 3}) > \chi (K_{3, 3}) = 2$. How
+    did we prove this? We gave certain lists with $2$ elements. But $K_{3, 3}$
+    is not properly list colorable with respect to $L$.
+** Example
+   $\chi_l(K_{2, 2}) = 2 = \chi(K_{2, 2})$.
+
+   We know that it is at least $2$, by previous claim. To show the other way, we
+   need some stupid case analysis.
+** Proposition
+   $\chi_l(C) \le \Delta(G) + 1$, the proof is identical and uses greedy
+   coloring algorithm with arbitrary order.
+*** Proof
+    Take an arbitrary assignment $L \colon V(G) \rightarrow \binom\N{\Delta +
+    1}$, run the greedy algorithm. In round $i$, we color $v_i$ and look at the
+    neighbours. Since the degree is at most $\Delta(G)$, we'll be able to assign
+    a color from $\{1, \cdots, \Delta + 1\}$.
+** Complexity
+   It's not known to be in NP or in co-NP.
+** Proposition
+   For every $k, \chi_l(K_{m, m}) > k$, where $m = \binom{2k-1}{k}$
+
+   We know that the regular coloring of this should be $2$, but the list
+   coloring can be large.
+*** Proof
+    It is similar to how we did $K_{3, 3}$.
+    
+    For each vertex, we assign it a $k$ subset of $2k-1$. We can assign each $m$
+    in the top and bottom uniquely in this way.
+    
+    We look at the colors on the bottom vertices and on the top vertices.
+    Because it is a complete graph, these should be disjoint. This means that
+    one of the top or bottom should have colors of size $< k$. 
+
+    Let's say $C_x$ and $C_y$ are the top and bottom vertices.
+
+    Say $\vert C_x \vert \le k - 1$. Take a list $L(v_0) \cap C_x \neq
+    \emptyset$, but this is a contradiction. This is a contradiction.
+** 4 color theorem
+   If $P$ is a planar graph, then one can color it with $4$ colors. Proof used
+   computers.
+** 5 color theorem
+   A planar graph has 5 coloring. What about list coloring? Can planar graphs be
+   colored by $4, 5, 6$ colors?
+
+   It was discovered that there were planar graphs that were not $4$ list
+   colorable.
+
+   A Mirzakhani graph is an example of a planar graph with $\chi_l(G) \ge 5$.
+   The graph wasn't the first example, but a simple one.
+** Theorem (Thomasson)
+   Every planar graph is $5$ list colorable.
+*** Proof using induction
+    Stronger statement: If $G$ is a plane graph, with an outer face bounded by a
+    cycle $C$ and $L \colon V(G) \righatrrow 2^\N$ is a list assignment such
+    that 
+    1. $\exists v_1v_2 \in E(C)$, $\vert L(v_1) \vert = \vertL(v_2)\vert = 1$,
+       $L(v_1) \cap L(v_2) = \emptyset$.
+    2. $\forall v \in V(C) \setminus\{v_1, v_2\}$, $\vert L(v)\vert = 3$.
+    3. $\forall v \in V(G) \setminus V(C)$, $\vert L(v)\vert = 5$
+
+    Then $G$ is list colorable.
+
+    Embed $G$ into the plane without crossing and if the boundary of the outside
+    face is not a cycle, then add edges until it is.
+
+    We use induction on our stronger statement.
+
+    The base case if $V(G) = 3$. The graph would be a triangle. For $v_1$ and
+    $v_2$, we have fixed colors, and $v_3$ is a list of size $3$, and you'll
+    always have an available color.
+
+    *Case 1*: There exists a chord $xy \in E(G)$ of the cycle $C$. $x$ and $y \in
+    V(C)$ but $xy \notin E(C)$. $v(C_1) \cap v(C_2) = \{x, y\}$. Say $v_1, v_2
+    \in V(C_1)$. List color $C_1$ with respect to $L$ by induction.
+
+    There are two sides $C_1$ and $C_2$. Use induction to color $C_1$ and the
+    end vertex will have a color. Now color $C_2$ and we're done. It is
+    important that there is no edge between $C_1$ and $C_2$.
+
+    *Case 2*: There is no chord between two vertices from the top to bottom.
+     Let's add edges to make a triangulation, except the outside faces. (we can
+     do this at the beginning.)
+
+     The idea is that we'll use induction on the graph $G-\{v_3\}$. Here $v_3$
+     next to $v_2$ in the outer circle.
+
+     Let $x, y \in L(v_3) \setminus L(v_t)$, for every vertex $v_t$ that is a
+     neighbour of $v_3$, but, not on the cycle. $L^{*}(v) = L(v) \setminus\{x,
+     y\}$, and now color by induction. Extend $c(v_3)$, choosing a color $x$ or
+     $y$, which is not equal to the color of $v_{3+1}$.
+* Lecture 16 <2018-12-11 Tue>
+** Definition
+   A function $c\colon E(G) \rightarrow [k]$ is called a $k$ coloring. $f$ is
+   proper if incident edges get different colors.
+
+   A multi graph is $k$ edge colorable if there exists a proper $k$ edge
+   coloring of $G$, $\chi'(G) = \min \{k \colon G \textup{ is k edge
+   colorable}\}$.
+** Examples
+*** Clique
+    For edge, it's 1. For a triangle, it is $2$. For $K_4$, it is $3$.
+
+    For $K_5$, we can see that each coloring forms a matching. So $K_5$ can't
+    have $K' = 4$, since there are no perfect matchings.
+
+    General case, when $n$ is odd, $X'(G) = n$, and when $n$ is even it is
+    $n-1$.
+** Claim
+   $\chi'(G) \ge \Delta(G)$.
+*** Proof
+    At the vertex with max degree, there are $\Delta(G)$ number of edges, each
+    must receive a proper edge coloring.
+*** Remark
+    When $n$ is odd, $n-1$ edge coloring would form a perfect matching. But this
+    is not possible.
+
+    $K_n \subset K_{n+1}$. The inclusion is monotone.
+
+    $\chi'(K_n) \ge n$.
+
+    $\chi'(K_{n+1}) = n$.
+*** Observation
+    Any color class of a proper edge coloring is a matching. In particular, if
+    $X'(G) = d$ for a $d$ regular graph, then $d$ has a perfect matching, then
+    $G$ has a perfect matching. This is because at a vertex, all colors appear.
+    So each color class is a perfect matching. (Even more, the edge set is
+    partitioned into a perfect matching.)
+*** Peterson
+    If $X'(P) = 3$, if and only if $\exists$ a perfect matching, $M$ such that
+    $P - M$ has $X'(P-m) = 2$. Implies that $P-M$ is the disjoint union of even
+    cycles. 
+
+    What do we know about the cycles of peterson graph, the minimum size is $5$.
+    It cannot have $6 + 4$ cycle. It does not have $8+2$ cycle either.
+
+    What about $C_{10}$. It cannot have a $10$ cycle, because we know that the
+    Peterson graph has no Hamilton cycle.
+
+    The chromatic number is $4$.
+** Theorem (Konig)
+   If $G$ is a bipartite Multi-graph, then $X'(G) = \Delta(G)$.
+*** Proof
+    What do we know about regular bipartite graph? We have a perfect matching
+    (Frobenius theorem.)
+
+    If we have this, we color it and remove it, now we have a $d-1$ regular
+    graph, we again color it back.
+
+    Given a bipartite multi graph, we make it regular.
+
+    Add new vertices to the smaller part if necessary (with fewer vertices.)
+
+    Add edges to vertices with degree less than $\Delta(G)$ until there is no
+    more. This way, you create a bipartite supergraph $H \supset G$.
+
+    We cannot get stuck because, if there is a vertex in $A$ such that the
+    degree of it is less than $\Delta(G)$, then there is another one in the
+    other part with degree less than $\Delta(G)$. Why? Because the sum of the
+    degrees in one part is same as that of the sum of the degrees in the second
+    part.
+
+    Now, just color it using the regular coloring.
+** Vizing's theorem
+   For every *simple* graph, $G$, $\chi'(G) \le \Delta(G) + 1$.
+*** Remark
+    1. For most graphs, $X'(G) = \Delta(G)$.
+    2. Can we decide if a graph is $\Delta(G)$ or in the $\Delta(G) + 1$? This
+       is NP-complete.
+*** More remarks
+    The line graph is just the edge set. The edge set of the line graph is those
+    pairs of edges such that they intersect. [fn:37]
+
+    There is a one-one correspondence between a proper coloring of $L(G)$ and
+    proper edge coloring of $G$.
+
+    $\chi(G) \ge \omega(L(G)) = \Delta(L(G)) \le \Delta(L(G)) + 1 \le
+    2(\Delta(G) - 1) = 2\Delta(G) -1$ (more or less true, except for $K_3$) Here
+    $\omega$ is the clique number.
+
+    What is the maximum degree?
+
+    Any clique of $L(G)$ corresponds to a $K_{1, t}$ or a $K_3$ in $G$.
+*** Proof
+    Proof using induction. Induction on $V(G)$, $V(G) - 1$. Take a vertex $v =
+    V(G)$, there is a proper $\Delta(G) + 1$ coloring of $G-v$. Extend to $v$ to
+    form a proper $\Delta(G) + 1$ coloring.
+
+    *Stronger statement*: $\forall$ graph $G$ and any integer $k \in \N$, such
+    that
+
+    1. there is a vertex $v\in V(G)$ such that the degree of $d(v) \le k$.
+    2. And for every $u \in N(v)$, $d(u) \le k$
+    3. There exists at most one neighbour $w \in N(v)$, $d(w) = k$.
+
+    If $G-v$ is $k$ edge colorable, then $G$ is $k$ edge colorable.
+
+    For $k=1$, it can be shown.
+
+    For $k > 1$, take a $k$ edge coloring where $X_i = \{u \in N(v) \colon u
+    \textup{ is missing i} \}$. There is no edge incident to $u$ with color $i$.
+
+    Without loss of generality, there does not exists $w \in N(v), d(w) = k$ all
+    others have degree $k-1$. You add vertices to make sure the second
+    condition.
+
+    We need to look at the sum $\sum_{i=1}^{k} \vert X_i\vert$. The $w$ is in
+    exactly one of the $X_i$. So $\sum_{i=1}^{k} \vert X_i\vert = 1 +
+    2(d(v) - 1) = 2d(v) - 1$. So their average is less than $2$.
+
+    *Case 1*: There is a color $i$ such that $\vert X_i \vert = 1$.
+
+    $G' = G - w - \{xy \colon c(xy) = k\}$ and then apply induction on $G'$ and
+    $k-1$. This way you get a proper $k-1$ edge coloring of $G'$ and then color
+    remaining edges $k$.
+    
+    *Case 2*: When for every color $\vert X_i \vert = 0$ or $\ge 2$. But this
+     will lead to a contradiction to the minimality.
+
+     There exists a color $i$ such that $\vert X_i \vert = 0$, (otherwise
+     contradiction to the inequality.)
+
+     There is a color $j$ with $\vert X_j \vert \ge 3$.
+
+     $H$ is the subgraph spanned by $i$ and $j$. This is a contradiction to
+     minimality. (Sort of an involved argument.)
 * Tutorial
   [[http://discretemath.imp.fu-berlin.de/DMII-2018-19/][link]]
-** Tutorial 1
+** Tutorial 1 (Sheet 0)
 *** Problem 2
     Each step reduces the number of components by at most $4$. After $5$ steps, at least $5$ components are left. 
-** Tutorial 2
+** Tutorial 2 (Sheet 1)
 *** SAT
 **** Example of un-satisfiable instance of SAT
      $f(x_1) = x_1 \wedge \neg x_1$
@@ -1438,7 +1899,7 @@
 
      for $e$ or $e_i$, define the set $D_i = \{v\colon \{T, F\}^n \vert c_i(v) =
      false\}$. $\vert D_i \vert = 2^{n-k}$, $\sum D_i = \{v \vert f(v) = F\}$.[fn:18]
-** Tutorial 3
+** Tutorial 3 (Sheet 2)
 *** Problem 1
     We draw the graph, and remove the edges 2, 4, 8, 12. Now there are 6 odd
     number of components. There is a characterization about the maximal matching
@@ -1559,7 +2020,7 @@
 
     The maximal matching is $\{e2, e_3\}$, whereas the algorithm generates
     $\{e_1\}$.
-** Tutorial 4
+** Tutorial 4 (Sheet 3)
 *** Problem 1
     The inequality is super easy and just follows from the definition.
 
@@ -1621,7 +2082,7 @@
        Whereas, if $\delta \ge n/2$, then the graph has a hamiltonian cycle.
 *** Problem 5 (Bonus)
     An example where the bound in sharp.
-** Tutorial 5
+** Tutorial 5 (Sheet 4)
 *** Problem 4
     We can do this in cases. 
     
@@ -1629,7 +2090,7 @@
        \kappa = 3$.
     2. $\kappa = 1$, then disconnecting one vertex would disconnect the graph.
        Let $U_1$, $U_2$, $U_3$, be the at most three components that would
-** Tutorial 6
+** Tutorial 6 (Sheet 5)
 *** Problem 1
     It is easy to see that $\kappa = 2$. It is easy to see that $\kappa' \le 4$.
     We need to see how to ignore the other parts.
@@ -1673,7 +2134,84 @@
     $\val(f) = f^-(t) - f^{+}(t) = \sum_{u \in \bar{S}} (f^{-1}(w) - f^{+}(w)) =
     \sum_{u\in \bar{S}}(\sum_{v \in V} f(vu) - \sum_{v \in V} f(uv))$ some
     calculations and we are done.
+** Tutorial 7 (Sheet 6)
+*** Problem 1
+    Given a bipartite Graph $G$ with $X$ and $Y$ be two partitions. Add two
+    vertices $x$, $y$ and edges from $x$ to every element of $X$ and edges from
+    $y$ to every element of $Y$.
+
+    The theorem now follows from local Vertex Menger's theorem.
+
+    How does one prove Local Vertex Menger from Local edge menger? The other
+    side was an exercise.
+*** Problem 4
+    $I$ is the set of all spanning trees and $J$ is the set of all edge cuts.
+** Tutorial 9 (Sheet 8)
+*** Exercise 1
+    If $X(G) = 4$, then it has a subgraph $H$, that is $4$ critical. But then
+    $\delta(H) \ge 3$. This is sort of a contradiction. There will always be a
+    vertex such that $\delta(G) = 2$.
+*** Exercise 2
+    For odd, $X = 3$ and $X \le 3$. We are done.
+
+    When $n$ is even. We can assume that all lists are the same.
+*** Exercise 3
+    $F - E + V = 2$ and $4F \le 2E$. Suppose $\delta(G) \ge 4$. $4V \le \sum
+    d(v) = 2E$.
+
+    Now, $2F \le E$.
+
+    $2V \le E \implies V \le E/2$.
+
+    $V = 2 + E - F \ge 2 + E - E/2 = 2 + E/2$. A contradiction.
+
+    Now, do this by induction.
+
+    Also the notion of $0$ free planar implies $3$ colorable. Some version of
+    Brook's theorem.
+*** Exercise 4
+    Similar to how the 5 list colorability of graphs were proven in the class.
+*** About exercise 4
+    Prove that every outer plane has a vertex of degree $2$. Now one can repeat
+    the above proof.
+
+    Something about dual graph. Something about triangulation as well.
+*** Mirzakhani graph (Problem 5)
+    The idea is the following: we take a subgraph, which is the square with the
+    center element. To color this with $4$ colors, at least two elements of the
+    outer loop has to be the same. But two adjacent vertices can't have the same
+    color, hence one diagonal has to be the same color.
+
+    Let us, without loss of generality assume that $2$ and $4$ have the same
+    color. The color has to be $1$ or $3$. Now, notice that $1$ and $3$ are
+    diagonally opposite to $2$ and $4$. Regardless of what is the color for $2$
+    and $4$, these diagonals, can't be same. Hence the other diagonal has to
+    have the same color. 
+
+    For simplicity assume that the color chosen was $1$. Thus, there is a line
+    $\bar{4}, \bar{3}, \bar{2}$ which needs to have the same color. And this
+    color cannot be $1$, but $1$ is the only possibility.
+
+    To show the part (b), let us say that the color of the infinite vertex is
+    $5$, then $5$ cannot appear on the boundary of the first square. Now, it can
+    be reduced to the problem (a), that this graph can't be list colored.
+
+    The chromatic number cannot be $2$ because there is $K_3$ or a triangle in
+    the graph.
+
+    We color the outer sides with two colors $1, 2$. The interior points with
+    color $3$, and the exterior point with $3$. This is now $3$ colorable. The
+    chromatic number is $3$.
+*** New bonus
+    If you have a triangle free planar graph, it's chromatic number is at most $3$.
 * Footnotes
+
+[fn:37] Now, it should follow from the greedy vertex coloring of the graph,
+    provided we prove that $\Delta$ of the line graph is same as the original
+    graph.
+
+[fn:36] I don't understand this. Shouldn't we multiply this by some factorial?
+*Answer* the key is pairwise disjoint.
 
 [fn:35] Repetition is allowed only for $\emptyset$. Because sets are disjoint.
 
