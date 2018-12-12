@@ -1778,6 +1778,117 @@
 
      $H$ is the subgraph spanned by $i$ and $j$. This is a contradiction to
      minimality. (Sort of an involved argument.)
+* Lecture 17 <2018-12-12 Wed>
+** A general form of vizing's theorem
+   If $G$ is a multi graph, then $X'(G) \le \Delta(G) + \mu(G)$ where $\mu$ is
+   the maximum multiplicity of $G$. (Wasn't shown in the class)
+** List coloring conjecture
+   For arbitrary $G$, $X_l(G) - X(G)$ can be arbitrarily large.
+
+   The conjecture says, for every $G$, $\forall G$, $X'(G) = X'_l(G)$. The one
+   on the right is the list coloring version of edge coloring.
+
+   Reformulation, for all $G$, $X(L(G)) = X_l(L(G))$. (We proved this for
+   cycles; a cycle is a line graph)
+** Theorem (Kahn)
+   $X_l(G) = (1 + o(1))X(G)$.
+
+   This means that if we have a sequence of graphs $G_n$ with $X'(G_n)
+   \rightarrow \infty$, $X'_l(G)/X'(G) \rightarrow 1$. (Wasn't covered in the
+   lecture.)
+** Theorem (Galvin)
+   If $B$ is bipartite, then $X'_l(B) = X'(B)$
+
+   We'll prove the special case of complete bipartite graph ($K_{n, n}$)
+   (Dinitz's conjecture.)
+*** Proof
+    $X'(K_{n,n})$ it is $n$. It is a bipartite graph (we learned last time that
+    we can regularize it and then do some stuff.)
+
+    Goal: For arbitrary assignment of lists of colors of size $n$, there is a
+    selection of each color for each edge of $K_{n, n}$ from its list such that
+    incident edges receive different colors.
+
+    (Look at the definition below)
+
+    The color class $1$ in the greedy coloring with respect to some ordering of
+    a graph $G$ is a kernel of the digraph created by oriented or directing
+    edges of $G$ from right to left. (Because if there is no edge from a vertex
+    to this, this we would have colored it with $1$)
+** Definitions
+   Given a directed graph $D$, a *kernel* of $D$ is a set $S$ of the vertices 
+
+   1. that is independent.
+   2. Every vertex $v \in V\setminus S$ has a neighbour $w \in S \cap N^{+}(v)$.
+
+   A digraph is *kernel-perfect* if for all induced subdigraph, it has a kernel.
+
+   Let $f\colon V(G) \rightarrow \N$, then a graph is called $f$ choosable (or
+   list colorable) if for every family of lists, $\{L_v\}_{v\in V(G)}$ with list
+   size at lest $f(v)$ for every $v$, there is a proper coloring $c \colon V(G)
+   \rightarrow \N$, $c(v) \in L_v$.
+** Lemma
+   Let $D$ be a kernel perfect orientation of some graph $G$. Then $G$ is $f$
+   choosable with $f(v) = 1 + d^{+}_D(v)$.
+*** Proof
+    Orientation thing?
+
+    +Take a kernel of the graph, $S$, and color every vertex $v\in S$, such that
+    $c(v) \in L(v)$. It is possible since $L(v) > 1$.+
+
+    +Now, we delete this list from the graph, and in the other side, we modify
+    the lists.+
+
+    Take a color, 1, then $W$ be all vertices such that $1$ is in there. Now,
+    there is a kernel $D$ inside this subgraph. Call it $S$.
+
+    Color $c(u) = 1\forlal u \in SE$
+
+    Now, we do induction on $D - S$ such that for all $u\in W \setminus S$,
+    redefine $L_u = L_u \setminus \{1\}$, for all $u \in V \setminus W$ redefine
+    $L_u = L_u$.
+
+    Now $d^{+}_{D_s}(u) \le d^{+}_{D}(u) - 1$, for $u\in W \setminus S$. Because
+    $S$ is a kernel of $D[W], because u had an edge going into $S$ (and this
+    edge was removed with the deletion of $S$.)
+
+    This implies that $\vert L_u \vert \ge d^{+}_{D-S}(u) + 1$. This holds for
+    every $u \in V(D) \setminus S$.
+
+    From induction, there is a coloring, proper, from the list. And there is no
+    contradiction with vertices colored by $1$.
+** About Kernel perfect orientation of $L(K_{n, n})$
+   A kernel perfect orientation of $L(K_{n, n})$ with $\Delta^{+}(D) =
+   n - 1$.
+
+   If by the lemma, then $L(K_{n,n})$ is $1 + n-1 = n$ choosable.
+
+   Note that $L(K_{n, n})$ is $2(n-1) = 2n-2$ regular graph.
+*** Claim 1
+    There is an orientation $D$ of $L(K_{n,n})$ such that $\Delta^{+}(D) = n-1$
+    and for any $v \in V(K_{n, n})$, $D[\{uw \colon w \in N(v)\}]$ is
+    transitive.
+
+    What is a transitive orientation?
+*** Claim 2
+    If $D$ is an orientation from claim 1, then $D$ is kernel perfect.
+*** Remark
+    Notice that the above two claim and the lemma would give you the theorem.
+*** Proof of claim 1
+    $M = \{n_0, n_1, \cdots, m_{n-1}\}$
+
+    $W = \{w_0, w_1, \cdots, w_{n-1}\}$ are vertices of $K_{n,n}$.
+
+    The edge $m_iw_j \rightarrow m_{i'}w_j$ if $i+j > i' + j (\mod n)$. (abuse of
+    notation) (Here the $j$ is fixed.)
+
+    $m_i w_j \rightarrow m_i w_{j'}$ if $i + j < i + j' (\mod n)$, here j is
+    fixed.
+
+    This should clearly have the transitive property. An orientation is
+    transitive if $a > b, b > c$, then $a > c$. There is no cycle.
+
+    Indeed for every $m_i w_j$, the out degree $d^{+}(m_iw_j) = n-1$.   
 * Tutorial
   [[http://discretemath.imp.fu-berlin.de/DMII-2018-19/][link]]
 ** Tutorial 1 (Sheet 0)
@@ -2202,8 +2313,20 @@
     We color the outer sides with two colors $1, 2$. The interior points with
     color $3$, and the exterior point with $3$. This is now $3$ colorable. The
     chromatic number is $3$.
-*** New bonus
+*** TODO New bonus
     If you have a triangle free planar graph, it's chromatic number is at most $3$.
+*** Random stuff
+    $C_{2n}$, $v_1, \cdots, v_{2n}$.
+
+    $f_G = (x_1 -x_2)(x_2 - x_3) \cdots (x_{2n-1} - x_{2n})(x_{2n} - x_1)$.
+
+    The list is a box $L_1 \times \cdots \times L_{2n} \subset \R^{2n}$.
+
+    $G$ is list colorable if and only if $\exists x \in$ the box such that the
+    polynomial does not vanish.
+
+    The monomial $x_1x_2\cdots x_{2n}$ does not get cancelled out implies
+    Combinatorial Nullstellensatz.
 * Footnotes
 
 [fn:37] Now, it should follow from the greedy vertex coloring of the graph,
