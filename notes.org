@@ -1889,6 +1889,235 @@
     transitive if $a > b, b > c$, then $a > c$. There is no cycle.
 
     Indeed for every $m_i w_j$, the out degree $d^{+}(m_iw_j) = n-1$.   
+* Lecture 18 <2018-12-18 Tue>
+** Lemma
+   If $D$ is a kernel perfect orientation of a graph $G$, then $G$ is $f$
+   choosable with the following function $f(v) = 1 + d_D^{+}(v)$ for all $v \in
+   V$.
+
+   Goal: There exists a kernel perfect orientation $D$ of $L(K_{n, n})$ with
+   $\Delta^{+}(D) = n-1$.
+
+   We have a digraph $D = (V, E)$, $K \subset V(D)$ is a *kernel*
+   if $K$ is independent and $\forall v \in V \setminus K, \exists w \in K, uw
+   \in E$
+
+   $D$ is *kernel* perfect if for all induced subgraph has a kernel.
+** Remark
+   Any ordering of vertices of graph $G$ from right to left is kernel perfect.
+** Observation
+   An orientation of a complete graph is kernel perfect if and only if it is
+   transitive.
+
+   If $D$ is a kernel perfect orientation of the line graph $L(k_{n, n})$, then
+   $\forall v \in V(K_{n, n})$, the clique $\{vw\colon w \in N(u)\}$ must be
+   transitively oriented.
+
+   *Claim*: There exists orientation $D$ of $L(K_{n, n})$ such that
+    $\Delta^{+}(D) = u-1$.
+
+    *Claim*: If $D$ is an orientation of $L(K_{n, n})$ such that for every $v
+     \in V(K_{n, n})$, the restriction of $D$ on $\{vw \colon w \in N(v)\}$ is
+     transitive, then it implies that $D$ is Kernel perfect.[fn:38]
+** About stable matchings
+   We have two sets $M = \{m_1, \cdots, m_n\}$ and $W = \{w_1, \cdots, w_n\}$.
+   Each vertex has a preference of the other gender (a permutation of the other
+   list, $\pi \in S_n$)
+*** Theorem (Gale-Shapley)
+    For any preference lists of $n$ man and $n$ women, there exists a stable
+    matching $S$.
+
+    A stable matching is a perfect matching of $K$ and $N$ with no unstable
+    pair. A vertex $w$ and a vertex $m$ forms an unstable pair if $wm \notin S$,
+    $w$ prefers $m$ to her pair and $m$ prefers $w$ to his pair in $S$.
+*** Proposal algorithm
+     *Input*: Preference ranking by men and women.
+
+     *Iteration*: in each iteration step, each man proposes to the women highest
+     on the list who has not previously rejected.
+
+     If each women receives one proposal, then STOP and return the resulting
+     matching.
+
+     Otherwise, every women receiving at least one proposal says, maybe to the
+     one highest on their list and rejects the others if there are more than
+     one.
+*** Theorem about Proposal algorithm
+    The proposal algorithm produces a stable matching.
+**** Proof
+     Algorithm terminates:
+
+     1. Combined length of lists of men decreases in each iteration.
+     2. No list of a man ever becomes empty. (So proposals can be made.) (If a
+        women rejects a man, she will keep receiving proposals from that point
+        on. So if a man is rejected by $n$ women, then, all these women must
+        have proposals at the time of the last rejection. But these come from a
+        set of only $n-1$ men, and this is a contradiction, since no man
+        proposes to more than one women in one round.)
+
+     *Observation 1*: Men propose to women in a decreasing order of preference
+     on his list and does not skip anyone.
+
+     *Observation 2*: A women says maybe to a man in an increasing order of
+     preference.
+
+     So the algorithm terminates.
+
+     Output is a matching $S$. Why is it stable?
+
+     Let $wm \notin S$, let $w_m$ and $m$ be matched. and $w and m_w$ be
+     matched. Suppose $m$ prefers w$ to $w_m$. Then why are they not married? At
+     some point in the algorithm, $m$ proposed to $w_m$, but had to be rejected
+     eventually. Why? $w_m$ rejects a man who is proposing only if there was a
+     better man $m'$ who is higher on the $w_m$'s list than $m$. In particular,
+     $m_w$ is higher than $m$ in $w$'s list. Thus this cannot be an unstable
+     pair.
+** Claim
+   If $D$ is an orientation of $L(K_{n, n})$, such that $\forall v \in V(K_{n,
+   n})$, the set $\{vw \colon w \in N(v) \}$ is oriented transitively, then $D$
+   is kernel perfect.
+*** Proof
+    Define appropriate preferences for the vertices such that any stable
+    matching $K \subset E(K_{n, n}) = v(D)$, $K \cap I$ is a kernel. The kernel
+    is a vertex set of the line graph and hence a vertex set of the original
+    graph.
+
+    Men $m_i \in M$ prefers women $w_j$ to $w_j'$ if $m_i w_j \in I, m_iw_j' \in
+    I$ and $m_iw_j \leftarrow m_iw_j$.
+
+    If $m_i w_j \in I$, $m_i w_j' \notin I$, $m_i w_j$, $m_iw_j \notin I$ ($m_i
+    w_j \leftarrow m_i w_j$)
+
+    Women $w_j$ prefers man $m_i$ to $m_i'$ if $m_i w_j$, $m_i'w_j \in I$ and
+    $m_i w_j \rightarrow m_i w_j$ or $m_i w_j \in I$, $m_iw_j \notin I$ ($m_iw_j
+    \leftarrow m_i' w_j$)
+
+    Claim: $K \cap I$ is a kernel of $D[I]$.
+
+    Firstly, $K$ is an independent set, indeed, since $K$ is a matching in
+    $K_{n, n}$.
+
+    Secondly, suppose you have a pair $m_iw_j \in I \setminus K$, but has no out
+    neighbours in $K \cap I$. We should be able to find an unstable pair. (There
+    is some issue with this part.)
+
+    Suppose $w_j$ prefers $m$ to $m_i$, then if $mw_j \in I$, then $mw_i
+    \rightarrow m_i w_j$. This cannot occur?
+* Lecture 19 <2018-12-19 Wed>
+** About network flows
+   $(D, s, +, E)$ and $D = (V, E)$ and $s, t \in V$ and $c \colon E \rightarrow
+   \R_{\ge 0}$.
+
+   Want certain constraints: a flow $f\colon E \rightarrow \R$. Capacity
+   constraints: $0 \le f(e) \le c(e)$.
+
+   The second type of conservation constraints: $\sum_{v \in N^{-1}(v)} (f(uv))
+   = \sum_{w \in N^{+}(v)$ for all $v \in V \setminus\{s, t\}$.
+
+   The $\max \sum_{u \in N^{-1}(t)} f(ut) - \sum_{w \in N^{+}(t)} f(tw)$.
+
+   $f \in \R^{\vert E \vert}$. There is a vector $d \in \R^{\vert E \vert}$
+   ($\{0, 1, -1\}^{\vert E \vert}$)
+
+   Maximize $d \cdot f$ subject to $\bar{0} \le f \le c$. The bar means it's a
+   vector of zeros. One vector is less than or equal to the other one if
+   coordinate wise they are the same.
+
+   For every $v \in V \setminus \{s, t\}$, $f \cdot e_v = 0$, $e_v \in \R^{\vert
+   E \vert}$
+
+   What we want is $f \in \R^{\vert E \vert}$
+
+   This is the framework of linear programming.
+** Linear programming
+   In linear programming, we search for a maximum or a minimum of a linear
+   objective function, $c^T \cdot x$, $c$ is a constant vector subject to linear
+   constraints $x$, where $x \in \R^n$
+
+   $A x \ge b_i$ or $A_x \le b_i$ or $A_x = b_i$.
+** Types of problems
+*** Word problems
+    LP's were developed by Dantzig. And also by Kantorovich.
+*** $n = 2$
+    Maximize $x_1 + x_2$.
+
+    Subject to $-x1 + x_2 \ge -2$, $-3x_2 + 2x_2 \le 2$, $x_1 + 2x_2 \le 4$,
+    $x_1, x_2 \ge 0, x_2 - x_1 = -2$.
+
+    A graph was drawn with the constraints and feasible region was identified.
+
+    Maximize $x_1 + x_2$ such that $-x_1 + x_2 \ge 2$ $-3x_1 + 2x_2 \le 2$
+    $x_1 + 2x_2 \le 4$ $x_1, x_2 \ge 0$, the feasible region has no solution.
+
+    We can also have unbounded optimal solution.
+
+    If the feasible region is bounded, then there is definitely an optimum.
+*** Book
+    Some book by springer.
+** Uniformization of the setup
+   Maximize or minimize a linear function subject to linear constraints.
+
+   Objective function:
+
+   Given a vector $c \in \R^n$, $c^{T}\cdot x = c_1 x_1 + \cdots + c_nx_n$.
+   $\min c^{T} \cdot x = \max (-c^T)\cdot x$.
+
+   We may assume that we have a maximization problem.
+
+   Also we can represent $\le, \ge$ into $\le$.
+
+   From equality you can go to $\le$, by introducing two constraints, both $\le$
+   and $\ge$. Then transform the $\ge$ further.
+
+   We can end up with $Ax \le b$, $A \in \R^{m \times n}$ and $b \in \R^m$.
+** A dietary example
+   
+  | Ingredients          | Requirement | Carrot | White Cabbage | Pickle |
+  |----------------------+-------------+--------+---------------+--------|
+  | Vitamin A (mg/kg)    | 0.5mg       |    0.5 |           0.5 |    0.5 |
+  | Vitamin C (mg/kg)    | 15mg        |    300 |           300 |     10 |
+  | Dietary Fiber (g/kg) | 4g          |     30 |            20 |     10 |
+  |----------------------+-------------+--------+---------------+--------|
+  | Cost                 |             |   0.75 |          0.5  | 0.15   |
+
+  Minimize the cost. $x_c, x_k, x_p$ are the kilograms of Carrow, White cabbage,
+  and pickle in one Kebab.
+
+  Minimize $0.75 x_c + 0.5 x_w + 0.15 x_p$ (the price of the pickle.)
+
+  Constraints:
+
+  (Vitamin A) $35 x_c + 0.5 x_w + 0.5 x_p \ge 0.5$
+
+  There is also non-negativity constraints. $x_c, x_w, x_p \ge 0$.
+  
+  Similar constrains for Vitamin C and Fiber.
+
+  The optimal solution $0.009 kg$ of carrot, $x_w = 0.038 kg$ of white cabbage.
+  From the pickle $0.290 kg$.
+** Another example
+   We have a data and want to find correlation.
+
+   Here it would be average rating and amount of chocolate offered to students.
+
+   We want $a, b \in \R$. Then we have $\sum (ax_i + b - y_i)^2$. Outliers would
+   come very much into this calculation. We can take $\sum \vert ax_i + b -
+   y_i\vert$ and minimize this instead. You want $a$ and $b$.
+
+   The function is not a linear function, it contains the absolute value.
+
+   We need to get rid of the absolute value.
+
+   Here we introduce new variables $e_i$ and subject to the constraints.
+   
+   $e_i = \vert ax_i + b - y_i\vert \iff e_i \ge ax_i + b - y_i, e_i \ge y_i -
+   ax_i - b$.
+
+   Input $(x_i, y_i)$ and we have variables $a, b, e_i$. What you're interested
+   is in $a$ and $b$.
+
+   For the minimum, for all i, at least one is equality. For this reason, $e_i$
+   indeed expresses, the absolute value.   
 * Tutorial
   [[http://discretemath.imp.fu-berlin.de/DMII-2018-19/][link]]
 ** Tutorial 1 (Sheet 0)
@@ -2327,7 +2556,34 @@
 
     The monomial $x_1x_2\cdots x_{2n}$ does not get cancelled out implies
     Combinatorial Nullstellensatz.
+** Tutorial 10 (Sheet 9)
+*** Problem 1
+**** Part 1
+     $C(x_i, y_j) = j - i (\mod n)$
+**** Part 2
+     $G$ be broken down into two components $X$ and $Y$
+
+     We make a network by adding $s$ and $t$. Now from $X$, add $\Delta(G) -
+     \deg x$ and from $X$ to $Y$ it should be $1$.
+
+     Similarly for $\Delta - \deg y$ to the sink.
+
+     Minimum capacity is $\sum \Delta - \deg x$.
+**** Part 2
+     We double the graph. The graph $\tilde{G}$, then $\Delta(\tilde G) =
+     \Delta(G)$ and $\delta(\tilde{G}) = \delta(G) + 1$. We keep repeating the
+     construction.
+
+     Basically, we add edges between vertices that are not saturated.
+     
+     This would lead to an exponentially large graph.
+**** Bonus
+     What is the best bound on size of the new graph.
+*** Problem 3
+    
 * Footnotes
+
+[fn:38] We've not done the full proof of this claim, I think.
 
 [fn:37] Now, it should follow from the greedy vertex coloring of the graph,
     provided we prove that $\Delta$ of the line graph is same as the original
