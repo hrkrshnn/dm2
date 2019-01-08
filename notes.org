@@ -2118,6 +2118,155 @@
 
    For the minimum, for all i, at least one is equality. For this reason, $e_i$
    indeed expresses, the absolute value.   
+* Lecture 20 <2019-01-08 Tue>
+** Linear programming (LP)
+   Given $c \in \R^n$ and $A \in \R^{m \times n}$. We want to maximize, $c^{T}
+   \cdot x$ subject to $Ax \le b$.
+
+   LP is in P. Simplex algorithm is an algorithm.
+** A machine learning application
+   We need to device a trap for Rabbits. There could be other animals that fall
+   into the trap, we need to separate Rabbits from Weasels. We have a 2
+   dimensional vector corresponding to each animal.
+
+   We try to separate them by a line.
+
+   $a, b \in \R$ such that $a x(R_i) + b < y(R_i) \forall i = 1, \cdots, k$.
+   and $a x(w_j) + b > y(w_j)$
+
+   This looks like a linear program, except the inequalities are not strict.
+
+   We do a trick to avoid this situation. We'll have variables $x, b, \delta$.
+   The goal will be to maximize $\delta$.
+
+   $\max \delta$, subject to $a x(R_i) + b + \delta \le y(R_i)$ for all $i = 1,
+   \cdots, k$.
+
+   $a x(W_j) + b - \delta \ge y(W_j) \forall j = 1, \cdots, l$.
+
+   If $\delta > 0$, then there is an $a, b$ which is good, i.e., there exists a
+   separating line.
+
+   If $\delta \ge 0$, then there is no separating line. (In practise, everything
+   may be allowed.)
+** Another example
+   You are a company that sells Wrapping paper, you produce paper rolls of width
+   $300$ cm.
+
+   Order 
+
+   | Number | Width |
+   |--------+-------|
+   |     97 |   135 |
+   |    610 |   108 |
+   |    395 |    93 |
+   |    211 |    42 |
+
+   There is a waste when we cut stuff and throw them away. We need to find a way
+   to minimize the waste.
+
+   Question: What is the smallest number of rolls of 300 cm that can be cut to
+   produce this order?
+
+   How would you set this up?
+
+   Minimize the variable $x_{300}$ subject to the demand $x_{135} \ge 300$,
+   $x_{108} \ge 610$, $x_{93} \ge 395$, $x_{42} \ge 211$. This is not a good
+   linear program.
+
+   The possible ways to cut a roll of width $300$ cm. This will be a vector of
+   length $4$. How many $135, 108, 93, 42$ that you produce.
+
+   Possibilities: $P_1 \colon (2, 0, 0, 0)$, $P_2 \colon (1, 2, 0, 1)$. There
+   are eventually finitely many choices.
+
+   $P_3 \colon (1, 0, 1, 1) ,P_4 \colon (1, 0, 0, 3), P_5\colon (0, 2, 0,2), P_6
+   \colon (0, 1, 2, 0), P_7 \colon (0, 1, 1, 2), P_8 \colon (0,1, 0, 4), P_9
+   \colon (0, 0, 3, 0), P_{10} \colon (0, 0, 2, 2), P_{11} \colon (0, 0, 1, 4),
+   P_{12} \colon (0, 0, 0, 7)$.
+
+   $y_i$ is the number corresponding to $P_i$.
+
+   LP is to minimize $\sum y_i$ subject to $2y_1 + y_2 + y_3 + y_4 \ge 97$,
+   $y_{2} + 2y_5 + \cdots \ge 610$.
+
+   Optimal solution: $y_1 = 48.5, y_5 = 206.25, y_6 = 197.5$ all others are $0$.
+   When we round it above, $450$ rows of width $300$. The sum of these are
+   $452.25$, this means that $452$ is not enough.
+
+   $y_1 = 49, y_5 = 207, y_6 = 196, y_9 = 1$.
+
+   There is an integer solution with values $453$ rolls.
+
+** Integer Linear Programming
+   $\max c^{T} x$ subject to $Ax \le b$, $x \in \Z^n$
+** Max-weight matching
+   We solved this by Hungarian algorithm. We have a bipartite graph, $G$ where
+   the vertex set is $G = (A \cup B, E)$ and you have a weight function $w
+   \colon E \righatrrow \R$.
+
+   Goal is to find a matching of maximum weight $\sum_{e \in M} w(e)$. We solved
+   this problem in polynomial time.
+
+   Encode this as an Integer linear program.
+
+   Variable $x_e$, for all $e \in E$, $x_e \in \{0, 1\}$, ($x_e = 1 \iff e \in
+   M$ otherwise $x_e = 0$)
+
+   Maximize $\sum_{e \in E} w_e x_e$
+
+   Subject to the condition that $\sum_{e \in E} x_e \le 1$ for all $v \in V$.
+
+   If $x^{*} \in \{0, 1}^{\vert E \vert}$ is optimal solution if and only if
+   $\sum w_e x_e^{ *}$ is the weight of the maximal matching.
+
+   We take the LP relaxation, which is the same thing. Maximize, $\sum_{e \in E}
+   w_e x_e$ subject to $\sum_{e \in E, v \in e} x_e \le 1, \forall v \in V$.
+
+   $0 \le x_e \le 1 \forall e \in E$.
+** Proposition
+   For the max-weight problem, the LP-relaxation, has the same value as the
+   integer program. (For the complete bipartite graph.)
+*** Proof
+    Optimum to LP-relaxation is at least as large as optimum for IP.
+
+    Let $x^{*}$ be an optimal solution to LP. If $x^{ *}$ is an integer vector,
+    we are done.
+
+    Otherwise, we'll make a change to this vector which will not change the
+    value, but it will increase the number of integer coordinates without
+    changing the value.
+
+    There is an edge, call it $e_1$ such that the value of $x^{*}$ is neither
+    zero, nor one.
+
+    Let's say $e_1 = a_1b_1$. $a_1 \in A$ and $b_1 \in B$, the bipartite sets.
+
+    This implies that there is an edge $e_2$ incident to $b_1$ such that the
+    value of $0 < x^{+}_{e_2} < 1$ since $\sum x^k_e = 1$. At some point I must
+    return to the vertex. The idea is that we'll grab the cycle and change the
+    weight of the edges a bit. We'll add $\varepsilon$ and subtract
+    $-\varepsilon$ alternately.
+
+    There is a cycle $e_1, e_2, \cdots, e_{2t - 1}, e_{2t}$ (an even cycle since
+    $G$ is bipartite)
+
+    $0 < x^{*}(e_i) < 1$, we'll change $\tilde{x}(\varepsilon)_e$ is $x^{ *} +
+    \varepsilon$ if $e = e_{2i - 1}$ and $x^{ *} - \varepsilon$ when $e =
+    e_{2i}$ and $x_e^{ *}$ otherwise.
+
+    $\varepsilon$ is going to be $\min(\{1 - x_e^{*} \colon e = e_{2i - 1}\}
+    \cup \{x_e^{ *} \colon e = e_{2i}\})$.
+
+    We know that $\varepsilon_0 > 0$.
+
+    The easy claim is that $\tilde(\varepsilon_0)$ is a feasible solution for
+    the LP.
+
+    $\sum_{e \in E} w_e \cdot \tilde{x}(\varepsilon_0)_e = \sum w_e x^{*} +
+    \varepsilon_0 \sum_{j = 1}^{2} (-1)^{j+1} w_{ej} \ge \val(x^{ *})$.
+
+    There is at least one more integer coordinate.
 * Tutorial
   [[http://discretemath.imp.fu-berlin.de/DMII-2018-19/][link]]
 ** Tutorial 1 (Sheet 0)
@@ -2677,3 +2826,9 @@ whether there is a round-trip route cheaper than x") is NP-complete."-Wikipedia
 [fn:2] Otherwise you can explore the components. 
 
 [fn:1] MST would be city-side and the fastest possible way would be consumer side. 
+
+* TODO Things to study
+** TODO Proof of Kruskal
+   There was also an exercise talking about how the first $n$ edges of the
+   kruskal algorithm forms a minimum weight forest. Anurag said this was a
+   tricky problem.
