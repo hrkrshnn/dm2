@@ -2267,6 +2267,172 @@
     \varepsilon_0 \sum_{j = 1}^{2} (-1)^{j+1} w_{ej} \ge \val(x^{ *})$.
 
     There is at least one more integer coordinate.
+* Lecture 21 <2019-01-09 Wed> 
+** Repetition
+   We have an even cycle with value along with edges that is between 0 and 1.
+   And we make a modification.
+
+   $M_1 = \{e_1, \cdots, e_{2 \varespilon - 1}\}$ and $M_2 = \{e_, \cdots,
+   e_{2t}\}$. $\sum_{e \in M_1} w_e \ge \sum_{e \in M_2} w_e$ (without loss of
+   generality.)
+
+   You choose the $+\varepsilon$ in this case. The value is the same as the
+   optimum value.
+
+   $x(\varepsilon_0)$ has at least one more integer coordinate than $x^{*}$. It
+   is also an optimal solution. This way we get an algorithm that gives us,
+   integer solution.
+** Minimum vertex cover problem
+   We have a graph $G$ and $\beta(G) = \min\{ \vert C \vert \colon C \subset V,
+   \forall e \in E(G), e \cap c \neq \emptyset\}$, we know that $G$ is
+   bipartite, then $\alpha'(G) = \beta(G)$.
+
+   In general this is not true, and it is know to be NP-Hard to decide whether
+   $\beta$ is larger than $\alpha'$.
+
+   An integer linear program formulation for $\beta$.
+
+   Variables, $\forall v \in V$, variable $x_v \in \{0, 1\}$. 
+
+   We'll have a constraint, $\forall e \in E$, $\sum_{v \in e} x_v \ge 1$.
+
+   The goal is to minimize the $\sum_{v \in V} x_v$.
+
+   The claim is that the optimal solution is equal to $\beta'$.
+
+   (More general statement) Claim: $x \in \{0, 1\}^{\vert V \vert}$ is a
+   feasible solution to IP, if and only if $S_x \{v \in V \vert x_v = 1\}$ is a
+   cover. In particular, $x^{*}$ is optimal solution if and only if $S_{x^{
+   * }}$, hence $\sum x^{ * }_v = \beta(G)$.
+*** Proof
+    Let's prove that $S_x$ is a cover.
+
+    Take arbitrarily edges $e$. We need to show that $S_x \cap e \neq
+    \emptyset$.
+
+    Since $x$ is feasible, $\sum_{v \in e} x_v \ge 1 \implies x_{z_1}$ or
+    $x_{z_2} \ge 1 \implies$, $z_1 \in S_x$ or $z_2 \in S_x$, $e \cap S_x \neq
+    \emptyset$.
+** LP relaxation of the problem
+   $\min \sum x_v$ subject to 
+
+   $\sum_{v \in e} x_v \ge 1$ and $0 \le x_v \le 1$. This is the LP relaxation.
+
+   One could solve it.
+
+   If the linear program could give integer solution, then we could, solve an NP
+   hard problem in P, which would mean more.
+
+   But we can use the LP to form an approximation algorithm to the problem.
+
+   Let $x^{*} \in [0, 1]^{\vert V \vert}$ an optimal solution to the LP.
+   $S_{x^{ * }}$
+
+   $S_x = \{v \in V \colon x_v \ge 1/2\}$
+   
+   Claim: $S_x$ is a cover.
+
+   Take $e \in E$, $x$ is feasible, implies $x_{z_1} + x_{z_2} \ge 1$, implies
+   that $x_{z_1}$ or $x_{z_2}$, $\ge 1/2$ implies $z_1$ or $z_2 \in S_x$.
+
+   Take $x^{ * }$ be optimum, then $\vert S_{x^{ * }} \vert = \sum_{v, x_v \ge
+   1/2} 1 \le 2\sum x^{ * }_v \le 2 \vert_{v \in V} x^{*}_{v} \le 2 \beta(G)$
+
+   Where $\beta(G)$ is the optimal solution to the integer program.
+
+   Here we are using the that optimal solution to the LP is $\le$ the optimum
+   for the IP.
+** Remark
+   If you take a Maximal matching $M$, then the set of vertices $S = \{v \in
+   V\colon v \textup{ is saturated by M}\}$ is a cover of size $2n$.
+
+   $2 \vert M \vert \le 2 \beta(G)$. This is a trivial observation. We can find
+   this using a greedy algorithm.
+
+   Finding a 1/2 approximation is not a big deal.
+** Max incl set problem
+   Given $G$, What is $\alpha(G)$? This is $\max \{ \vert I \vert \colon I
+   \subset V \forall e, e \notin I\}$
+
+   ILP: $\forall v \in V$, there is a variable $x_v \in \{0, 1\}$, $e \in E$,
+   constraint $\sum_{v \in e} x_v \le 1$.
+
+   The maximum $\sum_{v \in V} x_v$.
+*** Claim
+    $x$ is a feasible solution to the problem if and only if $I_x = \{v \in
+    V\colon x_v = 1\}$ is included. In particular, the implies that optimum
+    problem $= \alpha(G)$.
+
+    The claim wasn't proven.
+** LP relaxation
+   $x \in [0, 1]^{\vert V \vert}$.
+
+   Can we learn something about $\alpha(G)$ from the optimum value of the
+   objection from the LP relaxation.
+
+   For a clique, $G = K_n, \alpha(K_n) = 1$. (The independence number.)
+
+   The vector $x = 1/2$ is a feasible solution for any graph. And $\sum x_v =
+   n/2$. This means that, the LP relaxation is useless.
+
+   We know that $I$ is independent if and only if $V \setminus I$ is a vertex
+   cover. Even though that we know about a $1/2$ approximation for the vertex
+   cover.
+*** A result by Hastead.
+    NP-complete to approximate $\alpha(G)$ upto the factor $n^{0.99999}$
+** LP in general
+   We'll first get rid of the inequalities make it into an equation form.
+
+   Every LP is equivalent to an LP of the following form:
+
+   Max $cx$ subject to the constraint $Ax = b$ and $x \ge 0$. $A$ is a matrix,
+   $c$ and $b$ are vectors.
+
+   $a_{11}x_1 + \cdots + a_{1n}x \le b_i$, then we have a new variable, slack
+   variable, $z_i \ge 0$, and replace constraint with $a_{i1}x_ + \cdots +
+   a_{in}x_n + z_i = b_i$.
+
+   New variables, $y_1, y_i', \forall i 1, \cdots, n$ and $z_j, \forall j = 1,
+   \cdots, m$.
+
+   $y_i = \max\{0, x_i\}$ and $y'_i = \max\{0, -x_i\}$.
+
+   The number of variables is $n$ and the number of constrains is $m$.
+*** Some assumptions
+    1. $Ax = b$ has a solution. (We can do Gauss-elimination to decide it fast),
+       if not the LP has no feasible solution.
+    2. $\rank(A) = m$. Because if not, we can delete the row. The assumption
+       says that the rows are linearly independent.
+
+    With the assumption, the typical solution space would look like a simplex.
+** About the linear system
+   $Ax = b$
+
+   $A_B$ is the matrix is the matrix where columns of $A$ indexed by $[n]
+   \setminus B$ are indexed. Choose values arbitrarily, it gives you a solution
+   to $Ax = b$. We have a solution space which is the right size.
+** Definition
+   $B \subset [n]$ is called a basis if rank $A_B = m$. In fact, columns of $A_B
+   are a basis in column space of $A$.
+** Definition
+   A feasible solution to $*$ is called a basic feasible solution for a basis $B
+   \subset \binom{[n]}{m}$ if $x_i = 0$ for every $i \in [i] \setminus B$.
+** Lemma
+   For every basis $B$, corresponds to at most $1$ basic feasible solution.
+*** Proof
+    If $x$ is a feasible feasible solution for $B$, then $Ax = A_Bx_B + A_N
+    x_n = A_B x_B$.
+
+    We denote the complement of $B$ by $N$.
+
+    Now $A_B$ is an invertible matrix, because it is a basis. This means that
+    $x_B = A_B^{-1} b$ is determined (and of course $x_N = 0$)
+
+    (Next week we'll show that if we have a bounded linear program, then it will
+    have a basic feasible solution that is optimal. This means that to find the
+    $x_B$ for each $m$ element subset, check if it a non-negative vector, go
+    through them and calculate the maximum value. For each $B$, calculate $c
+    x_B$. Look at all of them find the maximum.)    
 * Tutorial
   [[http://discretemath.imp.fu-berlin.de/DMII-2018-19/][link]]
 ** Tutorial 1 (Sheet 0)
