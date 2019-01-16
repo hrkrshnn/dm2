@@ -1,4 +1,4 @@
-#+TITLE: Discrete Math II 
+#+TITLE: Discrete Math II
 #+author: Hari
 #+LATEX_HEADER: \usepackage[left=2cm, right=2cm, bottom=2cm, top=2cm]{geometry}
 #+LATEX_HEADER: \usepackage{parskip}
@@ -167,11 +167,11 @@
 **** The end
      Output $F$.
 *** Theorem: Kruskal's algorithm returns the min-weight spanning tree.
-    Proved in discrete Math 1. 
+    Proved in discrete Math 1.
 *** Running time of Kruskal
     The first step involves sorting. This can be done in $O(|E| \log|E|)$.
 
-    There is $O(m)$ and $O(n^2)$. 
+    There is $O(m)$ and $O(n^2)$.
 
     If $G$ is dense, then $O(m\log m)$ and if $G$ is sparse, then $O(n^2)$.
 * Lecture 3 <2018-10-23 Tue>
@@ -179,11 +179,11 @@
    Another perspective: get to one place to another in the fastest way possible.
    Versus the minimum spanning tree. [fn:1]
 ** Problem
-   Given graph $G=(V, E)$, a distance for $d\colon E \rightarrow \mathbb{R}_{\ge 0}$. 
+   Given graph $G=(V, E)$, a distance for $d\colon E \rightarrow \mathbb{R}_{\ge 0}$.
 
-   *Goal*: Given a vertex $u\in V$, find the shortest path to any vertex $v \in V$. 
+   *Goal*: Given a vertex $u\in V$, find the shortest path to any vertex $v \in V$.
 
-   The brute force way is to find all the path and find the minimu. 
+   The brute force way is to find all the path and find the minimu.
 ** Idea
    Maintain a set of vertices to where a shortest path from $u$ was found. And
    in each step we add one vertex to $W$.
@@ -201,30 +201,30 @@
     *Initialization*: dist[u] = 0
 
     For every other vertex $v$, I set $d[v] = \infty$. $prev[v] =
-    \textup{null}$. Maintain the set $W = \emptyset$. 
+    \textup{null}$. Maintain the set $W = \emptyset$.
 
     *Iteration*: Choose a vertex $v_0 = \min\{\dist[v]\colon v  \in V \setminus W\}$
 
     Update $W = W \cap \{v_0\}$.
 
     $\forall v \in V \setminus W$ if $\dist[v] > \dist[v_0] + d(v_0, v)$
-    then $\dist[v] = \dist[v_0] + d(v_0, v)$ and $\prev[v] = v_0$. 
+    then $\dist[v] = \dist[v_0] + d(v_0, v)$ and $\prev[v] = v_0$.
 
     *Termination*: If $W = V$, then STOP and output $\dist[v]$ search head of
     $\prev$ for a $uv$ path.
 
-    An example was done. [[https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm][Wikipedia]]. 
-*** Analysis 
-**** Correctness 
+    An example was done. [[https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm][Wikipedia]].
+*** Analysis
+**** Correctness
      *Claim*: At the time $v_0$ is put into $W$, $\dist[v_0]$ is the distance of
-      $v_0$ to $u$. 
+      $v_0$ to $u$.
 
       (This would prove the correctness, because $dist$ does not change after
       vertex is in $W$.)
 
       Proof: Induction on $\vert W\vert$.
 
-      Because $\vert w \vert = 0$ $u$ is put into $W$, $\dist[u] = 0 = d(uu)$. 
+      Because $\vert w \vert = 0$ $u$ is put into $W$, $\dist[u] = 0 = d(uu)$.
 
       Suppose $\vert W \vert \ge 1$, we put $v_0$ into $W$. If this is the case,
       then $\dist[v_0] = \min\{\dist[v_0]\colon v \in V \setminus W\}$.
@@ -239,15 +239,15 @@
       shortest.)
 
       When we are updating after putting $v_p$ into $W$, we consider $v_f$ and
-      we will put it in $W$. This is a contradiction. 
+      we will put it in $W$. This is a contradiction.
 **** Termination
      In each iterating step, one vertex is put into $W$ and stays there and then
-     in $n$ iterations, we are done. 
+     in $n$ iterations, we are done.
 **** Cost
      Finding $v_0$, then $O(\vert V \vert)$.
 
      Adding $v_0$ to $W$ is $O(1)$
-     
+
      Updating $\dist$,  $O(\vert V\vert)$.
 
      With better data structure $O(\vert E\vert + \vert V \vert log \vert V \vert)$.
@@ -262,7 +262,7 @@
     Given graph $G = (V, E)$ and $w\colon E \rightarrow \R_{\ge 0}$. A cycle
     that does not repeat.
 ** Complexity classes
-   $\P$, polynomial time running problem. 
+   $\P$, polynomial time running problem.
 
    |    $n$ | $1000n$  | $1000n\log n$ | $10n^2$    | $2^n$           | $n!$            |
    |--------+----------+---------------+------------+-----------------+-----------------|
@@ -274,11 +274,11 @@
    Problems that output yes or no
 *** Example
     - Is there a spanning tree of weight $\le 42$. (Kruskal algorithm.)
-    - Is there a path of weight $\le 405$ from $u$ to $v$? (Djistra's algorithm.)    
+    - Is there a path of weight $\le 405$ from $u$ to $v$? (Djistra's algorithm.)
 ** Class P
-   The set of all decision problems with a polynomial time algorithm. 
+   The set of all decision problems with a polynomial time algorithm.
 ** Traveling salesman problem
-   We don't know if the problem is in $\P$. 
+   We don't know if the problem is in $\P$.
 
    As a decision problem: There is a graph $G = (V, E)$ and $w\colon E
    \rightarrow \R_{\ge 0}$., You ask what is the smallest weight Hamiltonian cycle. [fn:3]
@@ -290,7 +290,7 @@
     Triangle inequality: the weight function satisfies the triangle inequality
     if every two vertices of the graph, the weight $w(xy) \le w(xz) + w(zy)$.
 
-    Examples: The usual Euclidean distance satisfies this. 
+    Examples: The usual Euclidean distance satisfies this.
     A non-example is Airfare cost.
 ** Approximation algorithm for TSP
 *** Algorithm
@@ -304,10 +304,10 @@
     2. From the spanning tree, we create a closed walk spanning all vertices by
        traversing each edge of $T$ twice in both directions.
     3. Traverse $W$, when hitting a vertex that was used before, we do a short
-       cut. (Go instead to next vertex $W$) Do this iteratively. 
-    4 *Termination*: when all vertices are traversed, output $C$. 
+       cut. (Go instead to next vertex $W$) Do this iteratively.
+    4 *Termination*: when all vertices are traversed, output $C$.
 
-    We know that $w(W) = 2w(T)$ and $w(C) \ge w(W)$. 
+    We know that $w(W) = 2w(T)$ and $w(C) \ge w(W)$.
 
     $C^{*}$ is a minimum weight Hamilton cycle. How does this compare to the
     weight of the spanning tree. We know that $w(C^{*}) \ge w(T)$. and thus
@@ -315,7 +315,7 @@
 *** Running time
     1. Kruskal: $O(n^2\log n)$
     2. Closed walk $W$, $O(n)$.
-    3. short cutting: $O(n)$. 
+    3. short cutting: $O(n)$.
 ** Hall's theorem
    If $G = (A \cap B, E)$ a bipartite graph, then $G$ has a matching $A$ if and
    only if for every subset $S \subset A$, $\vert N(S) \vert \ge \vert S \vert$.
@@ -335,7 +335,7 @@
    Means that the problem is in $NP$ and the negation of the problem is also in
    $NP$.
 ** About Hamilton path
-   The Hamilton path problem is in $NP$. 
+   The Hamilton path problem is in $NP$.
 
    But the negation of the HAM is not known to be in $NP$. In other words, we
    don't know if HAM is $\coNP$.[fn:6]
@@ -350,7 +350,7 @@
 
    If furthermore, the problem is in $\NP$, then we call it $\NP$ complete.
 
-   Example: 3-SAT is $\NP$ hard and also $\NP$ complete. 
+   Example: 3-SAT is $\NP$ hard and also $\NP$ complete.
 
    Karp came up with $21$ natural $\NP$ complete problems, all of them are $\NP$
    complete.
@@ -361,7 +361,7 @@
 *** Examples
     1. Does the bipartite graph have a perfect matching.
     2. Does the bipartite graph have no perfect matching.
-    3. Does the graph have a Hamiltonian-cycle? 
+    3. Does the graph have a Hamiltonian-cycle?
     4. *Don't know* Whether a problem have no hamiltonian cycle.
 ** P class
    A yes/no decision problem is in P if the answer can be found in polynomial
@@ -371,7 +371,7 @@
    efficiently. Again trivially, $P \subset NP \cap no-NP$.
 *** Example of NP intersection co-NP
     1. Perfect matching problem in bipartite graph is in the intersection.
-    2. Is this graph 2-colorable. 
+    2. Is this graph 2-colorable.
     3. Is this graph Eulerian?[fn:7] Verify that the degree of each vertex is even.
        (polynomial time algorithm.) Another answer: The yes answer is the list
        of edges in an Eulerian edges. For the NO answer, we will be given a
@@ -399,7 +399,7 @@
    \vert$ and for every $S \subset B$.
 ** Necessary conditions for Hamiltonianity
    Dirac's theorem $d(G) \ge n/2 \implies G$ is hamiltonian. [[https://en.wikipedia.org/wiki/Hamiltonian_path#Bondy%E2%80%93Chv%C3%A1tal_theorem][Wikipedia]] (This is
-   a sufficient condition.) For a cycle, this fails.   
+   a sufficient condition.) For a cycle, this fails.
 
    Proposition: If a graph $G$ is hamiltonian then $\forall S \subset V(G)$,
    $C(G\setminus S) \subset \vert S \vert$. (This is a necessary condition.)[fn:9] [fn:10]
@@ -410,7 +410,7 @@
    \vert$. For peterson graph $t = 4/3$. There is a conjecture on if we can talk
    about a value of $t$ and do stuff.
 ** Does a graph have a perfect matching? Tutte's theorem
-   The question is whether this is in NP intersection co-NP. 
+   The question is whether this is in NP intersection co-NP.
 
    The hall's theorem was for bipartite graph.
 
@@ -443,7 +443,7 @@
      Basically do a case analysis and it checks out.
 
    $U = \{v \in V(G) \colon d(v) = n- 1\}$
-   
+
    Case 1. $G \setminus U$ is the disjoint union of cliques. There are even
    cliques and odd cliques. Even cliques can be matching within themselves. In
    odd cliques, you match everything but one, but we can match the extra vertex
@@ -455,32 +455,32 @@
 
    Case 2. $G \setminus U$ is not a disjoint union of cliques. The idea is from
    two almost perfect matching of $G$, create a perfect matching of $G$ and two
-   more edges, create a perfect matching. This leads to a contradiction. 
+   more edges, create a perfect matching. This leads to a contradiction.
 
    Claim: In $G, \exists x, u, v, w$ such that $xu, xv, \in E$, $uv, vw \notin
    V(G)$. $w$ is anything that is not in the neighbourhod of $x$ which is non
    empty.[fn:16]
 
    #+BEGIN_SRC artist
-  
+
                         x .--------------------------- w
                          /.
-                        /  -\                           
-                      -/     \                          
-                     /        -\                        
-                    /           -\                      
-                  -/              \                     
-                 /                 -\                   
-                /                    \                  
-               /                      -\                
-             -/                         \               
-            /                            -\             
-           /                               -\           
-         -/                                  \          
-        /                                     -\        
+                        /  -\
+                      -/     \
+                     /        -\
+                    /           -\
+                  -/              \
+                 /                 -\
+                /                    \
+               /                      -\
+             -/                         \
+            /                            -\
+           /                               -\
+         -/                                  \
+        /                                     -\
      u .----------------------------------------. v
-                     
-                     
+
+
    #+END_SRC
 * Lecture 6 <2018-10-31 Wed>
 ** TODO Tutte's theorem proof
@@ -492,7 +492,7 @@
     $U = \{v \colon deg(v) = n-1\}$ and $n=\vert V(G)\vert$.
 
     Case 1: $G \setminus U$ is the union of cliques. We are done, we use Tutte's
-    condition for empty set. 
+    condition for empty set.
 
     Case 2: Otherwise, there exists the diagram that I already drew. Our claim
     implies that there exists a perfect matching $M_1$ in $G + xw$ and also
@@ -512,7 +512,7 @@
     There was a diagram and the proof involved doing stuff on the diagrams. I
     don't understand what he did.
 
-    The proof in the class was from bondy and murthy. [[http://www.zib.de/groetschel/teaching/WS1314/BondyMurtyGTWA.pdf][Bondy and murthy]] page 76. 
+    The proof in the class was from bondy and murthy. [[http://www.zib.de/groetschel/teaching/WS1314/BondyMurtyGTWA.pdf][Bondy and murthy]] page 76.
 
     The wikipedia link seems to have the same proof.
 ** Perfect matching is in NP intersection co-NP
@@ -524,15 +524,15 @@
 ** Corollary to hall theorem (Theorem of Frobenius)
    A $k$ regular bipartite graph has perfect matching.[fn:20] (1-factor)
 
-   A $k$ factor is a spanning $k$ regular subgraph. 
+   A $k$ factor is a spanning $k$ regular subgraph.
 
    This is not true for general graphs. Example: odd cycles, they are $2$
    regular and 1-factor. Are there examples with even number of vertices.
    (3-regular graph with no $1$ factor.)
-   
-   
+
+
 ** Theorem (peterson)
-   A $2k$ regular subgraph has a $2$ factor. 
+   A $2k$ regular subgraph has a $2$ factor.
 ** Theorem (another peterson theorem)
    Every $3$ regular graph without cut edges[fn:21] has a perfect matching. (Theorem in
    Bondy and Murthy) [fn:22]
@@ -550,9 +550,9 @@
     from $C$.
 
     Proof:
-    1. $0$ edges is not possible because connected. 
+    1. $0$ edges is not possible because connected.
     2. $1$ edge is
-       not possible, because it would be a cut edge. 
+       not possible, because it would be a cut edge.
     3. $2$ edges are not possible
        because the sum of the degrees of the vertices inside the component -2,
        $\sum d(v) - 2 = 2 \cdot e(C)$. Now this is just a handshake lemma.[fn:23]
@@ -568,7 +568,7 @@
    In the decision problem formulation. Is there a matching of size $k$ in the
    graph on $n$ vertices.
 
-   Is this problem in NP intersection co-NP? The problem is obviously in NP. 
+   Is this problem in NP intersection co-NP? The problem is obviously in NP.
 
    For Bipartite graphs, we can provide the other verification by Konig's
    theorem.
@@ -630,7 +630,7 @@
 
    #+END_SRC
 * Lecture 7 <2018-11-06 Tue>
-** Maximum matching is in P 
+** Maximum matching is in P
 *** Proposition
     $M \subset E(G)$ is a matching in $G$.
 
@@ -706,13 +706,13 @@
 ** Hungarian algorithm
    Input: A matrix $w_{i, j}$ of weights of the edges of $K_{n, n}$ with points
    $X = \{x_1, \cdots, x_n\}$, $Y=\{y_1, \cdots, y_n\}$.
-   
+
    Idea: Iteratively adjust a cover $(u, v)$ until $G_{u, v}$ has a perfect
    matching.
 
    if $G_{u, v}$ has a perfect matching, then $(u, v)$ and $M$ are both optimal.
    Initial $u_i = \max \{W_{i, j}\colon j=\{1, \cdots, n\}\}$ and $v_i =0$. Note
-   that this is a cover and $u_i + v_j \ge w_{i, j}$ for all $i, j$. 
+   that this is a cover and $u_i + v_j \ge w_{i, j}$ for all $i, j$.
 
    Iteration: Create $G_{u, v}$, using APA and find a maximal matching $M$ and a
    minimum vertex cover $Q$ and $Q$ will be equal to $T \cup R$ (where $T = Y
@@ -746,7 +746,7 @@
 
    *Iteration*: For $m$, $G_{u, v}$, $V(G_{u, v} = V(K_{n, n}), E(G_{u, v}) =
     \{x_iy_j \colon w_ij = u_i + v_j\}$
-    
+
     Find a maximal matching $M \subset G_{u, v}$ and min vertex case $Q = T \cup
     R$.
 
@@ -762,7 +762,7 @@
      $C$, implies cover of $w_{ij}$, $w_{i, j} \le u_i + v_j$. True since if
      $w_{i, j} = 1$ then $x_iy_j \in E(G)$, then $x_i$ or $y_j \in C$, then
      $u_i$ or $v_j =1$.
-     
+
    | x | 0 | 0 | 0 | 0 | 0 |
    |---+---+---+---+---+---|
    | 5 | 1 | 2 | 3 | 4 | 5 |
@@ -914,7 +914,7 @@
     Notice that two adjacent vertices in $C$ cannot have an edge to $H$,
     otherwise, we can extend $C$ by entering $H$ and coming back. We call
     $v_{i}^{+}$ denote the vertices that are the vertices that follows $v_i$ on
-    the cycle. We now know that all off $v_{i}^{+}$ is distinct from $v_i$. 
+    the cycle. We now know that all off $v_{i}^{+}$ is distinct from $v_i$.
 
     We can see that there cannot be two edges between $v_{i}^{+}$ and
     $v_{j}^{+}$, one can see this by drawing an easy diagram, for one can form a
@@ -947,7 +947,7 @@
 ** Bounds
    1. Initial bound, $k'(G) \le \delta(G)$.
    2. $\kappa'(G) > \kappa(G)$ is true for simple graphs.
-      
+
       *Proof*: The proof is easy. Try to show that there is a vertex cut of size
       $\kappa'(G)$ whose removal disconnects $G$.
 
@@ -975,7 +975,7 @@
    and, we'll be able find it in polynomial time.
 
    But is it in $NP$?
-   
+
    $1$ connectedness if in $P$.
 
    But $2$ connectedness is in $P$. There are only a $n^2$ number of vertices.
@@ -1001,7 +1001,7 @@
 *** Proof of ($\Leftarrow$) VMT
     Suppose for a contradiction that there are $k$ internally disjoint vertices
     between every vertices, and $\kappa(G) \le k-1$. Let $S$ be a such a
-    separating set. 
+    separating set.
 
     Let $S$ be such a separating set which separates $x$ from $y$, then every
     $xy$ path passes through $S$, and pigeon-hole implies that two halfs share a
@@ -1023,7 +1023,7 @@
      If $y\in C$, we are done. If not, there exits a $xy$ path $Q$ in
      $G\setminus \{v\}$ as $G$ is $2$ connected. Now, it's easy to construct a
      cycle from $x$ to $y$.
-     
+
      Let $z$ be the last $v_x$ of $C$ on $Q$ if it exits. Let $D$ be $C\setminus
      [z, v]$ such that $x \in D$. Now $C' = D \cup Q\vert[x, y] \cup \{xy\}$
      cycle containing $x$ and $y$.
@@ -1037,7 +1037,7 @@
     1. A set $S \subset V(G)$ is an $xy$ separating set if $x$ and $y$ are in
        different connected components of $G\setminus S$.
     2. $\kappa(x, y) = \min\{\vert s \vert \colon S \textup{ is a xy separating set}\}$
-    3. $\lambda(x,y) = \max$ size of a family of pairwise disjoint $xy$ paths. 
+    3. $\lambda(x,y) = \max$ size of a family of pairwise disjoint $xy$ paths.
 *** Local version of theorem
     For all graphs $G$ and $x, y \in G$, we require that $x$ and $y$ are not
     adjacent edges.
@@ -1064,7 +1064,7 @@
        path.
 ** Flow networks
 *** Example
-    A graph was drawn. 
+    A graph was drawn.
 *** Definition
     A network is a quadruple $(D, s, t, c)$ where $D$ is a directed (multi)
     graph. $s \in V(D)$ is the source vertex and $t$ is the sink vertex. $c
@@ -1148,7 +1148,7 @@
     augmenting path from $s$ to $t$, then $f$ is not maximum, but we know that
     $f$ is maximum, a contradiction.[fn:33]
 
-    $t\in \bar{S}$, $s\in S$, 
+    $t\in \bar{S}$, $s\in S$,
     1. $[S, \bar{S}]$ is a source/sink cut.
     2. $(u, v) \in [S, \bar{S}]$, $f(u,v) = c(u, v)$. $(u, v) \in [\bar{S}, S]$
        implies that $f(u, v) = 0$. Because if not, we can add them to $S$.
@@ -1159,7 +1159,7 @@
 ** Augmenting path
    An $s, t$ path $s = v_0e_1v_1e_2v_2 \cdots v_{k-1}e_k v_{k} = t$ in the
    underlying undirected graph $G$ of a network $D$. This is called an
-   $f$-augmenting path if for every $i$, 
+   $f$-augmenting path if for every $i$,
    1. $f(e_i) < c(e_i)$ is true if $e_i$ is a "forward" edge.
    2. or $f(e_i) > 0$ if $e_i$ is a backward edge.
 
@@ -1180,7 +1180,7 @@
     Capacity constraints hold by the definition of $z$.
 
     Conservation constraints holds because: if we have a vertex $v\in V(P)$,
-    then. 
+    then.
 
     We had four cases and four diagrams. Basically given a vertex, there is one
     vertex leaves the vertex and one vertex that comes to $z$. We can argue for
@@ -1295,7 +1295,7 @@
    matching is a set of $n/k$ pairwise disjoint edges.
 
    The answer is yes for every $k$.
-*** Definition 
+*** Definition
     $m = n/k$ is the number of sets in the perfect matching.
 
     $M = \binom{n}{k}/(n/k) = \binom{n-1}{k-1}$ The number of perfect matchings needed
@@ -1339,7 +1339,7 @@
 
     Schedule: $A_i \cap A_j \neq \emptyset \implies$, meeting times are
     different from $A_j$. Minimize the number of hours your teams spend with
-    meetings. 
+    meetings.
 
     We form a graph with $A_i$ and form edges when $A_i \cap A_j \neq
     \emptyset$. We want to color the graphs so that the adjacent vertices have
@@ -1370,10 +1370,10 @@
 ** Tightness of $X(G)$ and $\omega(G)$
    Cliques, Bipartite graph (and complements), perfect graphs.
 ** Non-tightness $X(G) > \omega(G)$
-   A simple example is odd cycle. Also for their complements. 
+   A simple example is odd cycle. Also for their complements.
 
    [[https://en.wikipedia.org/wiki/Mycielskian][Wikipedia]]: Mycielskian construction. $\omega(G) = 2$, but $X(G) > 10^10$.
-   
+
    Random graphs: $G = G(n, 1/2)$ and $\omega(G) = 2\log n$ and $X(G) = n/(2
    \log n)$. (This wasn't proven.) The result shows that the last proposition is
    asymptotically tight.
@@ -1388,7 +1388,7 @@
 
     Base case: $n=4$, the smallest $n$ for which the graph is $3$ colorable.
     $K_4$ is the only graph on $4$ vertices that is non 3 colorable.
-    
+
     $n>4$, we can without loss of generality, assume that $G$ is $4$ critical.
     Meaning that if you remove an edge or vertex will make it $3$ colorable. The
     chromatic number $X(H) \le 3$ and $X(G) = 4$. We'll show that this will be
@@ -1435,7 +1435,7 @@
 ** Proposition
    For all $X(G) \le \Delta(G) + 1$
 *** Proof
-    A greedy algorithm. 
+    A greedy algorithm.
 
     Input: ordering of the vertices, $v_1, \cdots, v_n$ of $V(G)$
 
@@ -1444,7 +1444,7 @@
     minimum of number that doesn't clash with neighbours.
 
     Claim: The greedy algorithm produces a proper coloring of $G$ for every
-    ordering of $V(G)$. 
+    ordering of $V(G)$.
 
     The number of colors of the greedy algorithm uses is not more than the
     $\Delta(G) + 1$.
@@ -1477,7 +1477,7 @@
 
     So $G$ must be at least $2$ connected.
 
-    We are still in $T$ ordering. 
+    We are still in $T$ ordering.
 
     If there are two edges that $v_1, v_2$ doesn't have an edge and $G- \{v_1,
     v_2\}$ is not connected. If this is a strongly connected graph, then we will
@@ -1578,13 +1578,13 @@
    coloring can be large.
 *** Proof
     It is similar to how we did $K_{3, 3}$.
-    
+
     For each vertex, we assign it a $k$ subset of $2k-1$. We can assign each $m$
     in the top and bottom uniquely in this way.
-    
+
     We look at the colors on the bottom vertices and on the top vertices.
     Because it is a complete graph, these should be disjoint. This means that
-    one of the top or bottom should have colors of size $< k$. 
+    one of the top or bottom should have colors of size $< k$.
 
     Let's say $C_x$ and $C_y$ are the top and bottom vertices.
 
@@ -1607,7 +1607,7 @@
 *** Proof using induction
     Stronger statement: If $G$ is a plane graph, with an outer face bounded by a
     cycle $C$ and $L \colon V(G) \righatrrow 2^\N$ is a list assignment such
-    that 
+    that
     1. $\exists v_1v_2 \in E(C)$, $\vert L(v_1) \vert = \vertL(v_2)\vert = 1$,
        $L(v_1) \cap L(v_2) = \emptyset$.
     2. $\forall v \in V(C) \setminus\{v_1, v_2\}$, $\vert L(v)\vert = 3$.
@@ -1683,7 +1683,7 @@
 *** Peterson
     If $X'(P) = 3$, if and only if $\exists$ a perfect matching, $M$ such that
     $P - M$ has $X'(P-m) = 2$. Implies that $P-M$ is the disjoint union of even
-    cycles. 
+    cycles.
 
     What do we know about the cycles of peterson graph, the minimum size is $5$.
     It cannot have $6 + 4$ cycle. It does not have $8+2$ cycle either.
@@ -1767,7 +1767,7 @@
     $G' = G - w - \{xy \colon c(xy) = k\}$ and then apply induction on $G'$ and
     $k-1$. This way you get a proper $k-1$ edge coloring of $G'$ and then color
     remaining edges $k$.
-    
+
     *Case 2*: When for every color $\vert X_i \vert = 0$ or $\ge 2$. But this
      will lead to a contradiction to the minimality.
 
@@ -1816,7 +1816,7 @@
     edges of $G$ from right to left. (Because if there is no edge from a vertex
     to this, this we would have colored it with $1$)
 ** Definitions
-   Given a directed graph $D$, a *kernel* of $D$ is a set $S$ of the vertices 
+   Given a directed graph $D$, a *kernel* of $D$ is a set $S$ of the vertices
 
    1. that is independent.
    2. Every vertex $v \in V\setminus S$ has a neighbour $w \in S \cap N^{+}(v)$.
@@ -1888,7 +1888,7 @@
     This should clearly have the transitive property. An orientation is
     transitive if $a > b, b > c$, then $a > c$. There is no cycle.
 
-    Indeed for every $m_i w_j$, the out degree $d^{+}(m_iw_j) = n-1$.   
+    Indeed for every $m_i w_j$, the out degree $d^{+}(m_iw_j) = n-1$.
 * Lecture 18 <2018-12-18 Tue>
 ** Lemma
    If $D$ is a kernel perfect orientation of a graph $G$, then $G$ is $f$
@@ -2071,7 +2071,7 @@
 
    We can end up with $Ax \le b$, $A \in \R^{m \times n}$ and $b \in \R^m$.
 ** A dietary example
-   
+
   | Ingredients          | Requirement | Carrot | White Cabbage | Pickle |
   |----------------------+-------------+--------+---------------+--------|
   | Vitamin A (mg/kg)    | 0.5mg       |    0.5 |           0.5 |    0.5 |
@@ -2090,7 +2090,7 @@
   (Vitamin A) $35 x_c + 0.5 x_w + 0.5 x_p \ge 0.5$
 
   There is also non-negativity constraints. $x_c, x_w, x_p \ge 0$.
-  
+
   Similar constrains for Vitamin C and Fiber.
 
   The optimal solution $0.009 kg$ of carrot, $x_w = 0.038 kg$ of white cabbage.
@@ -2109,7 +2109,7 @@
    We need to get rid of the absolute value.
 
    Here we introduce new variables $e_i$ and subject to the constraints.
-   
+
    $e_i = \vert ax_i + b - y_i\vert \iff e_i \ge ax_i + b - y_i, e_i \ge y_i -
    ax_i - b$.
 
@@ -2117,7 +2117,7 @@
    is in $a$ and $b$.
 
    For the minimum, for all i, at least one is equality. For this reason, $e_i$
-   indeed expresses, the absolute value.   
+   indeed expresses, the absolute value.
 * Lecture 20 <2019-01-08 Tue>
 ** Linear programming (LP)
    Given $c \in \R^n$ and $A \in \R^{m \times n}$. We want to maximize, $c^{T}
@@ -2153,7 +2153,7 @@
    You are a company that sells Wrapping paper, you produce paper rolls of width
    $300$ cm.
 
-   Order 
+   Order
 
    | Number | Width |
    |--------+-------|
@@ -2267,12 +2267,12 @@
     \varepsilon_0 \sum_{j = 1}^{2} (-1)^{j+1} w_{ej} \ge \val(x^{ *})$.
 
     There is at least one more integer coordinate.
-* Lecture 21 <2019-01-09 Wed> 
+* Lecture 21 <2019-01-09 Wed>
 ** Repetition
    We have an even cycle with value along with edges that is between 0 and 1.
    And we make a modification.
 
-   $M_1 = \{e_1, \cdots, e_{2 \varespilon - 1}\}$ and $M_2 = \{e_, \cdots,
+   $M_1 = \{e_1, \cdots, e_{2 t - 1}\}$ and $M_2 = \{e_2, \cdots,
    e_{2t}\}$. $\sum_{e \in M_1} w_e \ge \sum_{e \in M_2} w_e$ (without loss of
    generality.)
 
@@ -2292,7 +2292,7 @@
 
    An integer linear program formulation for $\beta$.
 
-   Variables, $\forall v \in V$, variable $x_v \in \{0, 1\}$. 
+   Variables, $\forall v \in V$, variable $x_v \in \{0, 1\}$.
 
    We'll have a constraint, $\forall e \in E$, $\sum_{v \in e} x_v \ge 1$.
 
@@ -2314,7 +2314,7 @@
     $x_{z_2} \ge 1 \implies$, $z_1 \in S_x$ or $z_2 \in S_x$, $e \cap S_x \neq
     \emptyset$.
 ** LP relaxation of the problem
-   $\min \sum x_v$ subject to 
+   $\min \sum x_v$ subject to
 
    $\sum_{v \in e} x_v \ge 1$ and $0 \le x_v \le 1$. This is the LP relaxation.
 
@@ -2329,7 +2329,7 @@
    $S_{x^{ * }}$
 
    $S_x = \{v \in V \colon x_v \ge 1/2\}$
-   
+
    Claim: $S_x$ is a cover.
 
    Take $e \in E$, $x$ is feasible, implies $x_{z_1} + x_{z_2} \ge 1$, implies
@@ -2432,20 +2432,172 @@
     have a basic feasible solution that is optimal. This means that to find the
     $x_B$ for each $m$ element subset, check if it a non-negative vector, go
     through them and calculate the maximum value. For each $B$, calculate $c
-    x_B$. Look at all of them find the maximum.)    
+    x_B$. Look at all of them find the maximum.)
+* Lecture 22 Skipped
+* Lecture 23
+** A review of simplex method
+   Given $A \subset \R^{m\times n}, b\in \R^m, c \in \R^n$. An LP in equational
+   form. LP: $\max c^{T} x$ subject to $Ax = b, x \ge 0$.
+
+   *Step 0*: Check whether $Ax = b$ has a solution. Make sure that
+   $\operatorname{rank}A = m$. You can assume this two things.
+
+   If we have a basis, then we know how to create a basic feasible solution.
+** How to find a basis
+   Add extra variables $w_1, \cdots, w_n$. Your new system will look like
+   $a_{i1}x_1 + \cdots + a_{in}x_n = b_i$. Make sure $b_i \ge 0$. New
+   constraint, $i = 1, \cdots, m$, $a_{i1}x_1 + \cdots + a_{in} x_n + w_i =
+   b_i$.
+
+   The objective function is to maximize the new variables. $\max -w_1 - w_2 -
+   \cdots - w_m$.
+
+   Matrix
+
+   #+BEGIN_SRC artist
+          +-------------------+----------+
+          |                   |          |
+          |                   |          |
+          |       A           |   I_n    |
+          |                   |          |
+          |                   |          |
+          |                   |          |
+          +-------------------+----------+
+   #+END_SRC
+
+   Solve auxiliary LP with Simplex.
+*** Claim
+    Value of auxiliary LP $=0$ if and only if the original LP is feasible.
+
+    This claim is easy to see.
+
+    If you get a solution, then we got a solution, which end with a basis.
+
+    In the second case, the basis would be $I_m$.
+** Step 1 of Simplex
+   If there is an obvious feasible solution from the slack variables when
+   original $b > 0$, then take it. Otherwise, solve the Auxiliary LP and if the
+   maximum is $< 0$, then stop and return infeasible and if h
+** Step 2 (Simplex tableau)
+   Compute a simplex tableau. Belongs to a feasible basis.
+
+   $x_B = P + Q \times x_N$. $(\iff Ax = b)$
+
+   The last row was the objective function, $z = z_0 + r^{T} x_N$ ($\iff z =
+   c^{T}x$)
+
+   $P \in \R^m, Q \in \R^{m \times (n-m)}$ and $r \in \R^{n + m}$ and $z_0 \in
+   \R$ are all expressed from $A, b, c$.
+** Step 3 (Check for optimality)
+   If the whole vector $r \le 0$, then we stop and return the current basic
+   feasible as optimal. (We proved this last time.)
+
+   Otherwise
+** Step 4
+   Select index $i \in N$ entering the basis among $\{i \in N \colon r_i > 0\}$.
+
+   How? pivot Rule.
+** Step 5
+   $j \in B$ and $x_j = P_j + \sum_{i \in \N} q_{jl}x_l$ if $a_{ji} \ge 0$, then
+   there is no restriction.
+
+   If $a_{ji} < 0$, then there is a restriction. Because you don't want $x_j$ to
+   go below $0$. Then $0 \le x_j \le p_j + q_{ji}x_i$. (Was done yesterday)
+
+   First we test for unboundedness. If for every $j \in B$, $q_{ji} \ge 0$,
+   then, stop and return that the LP is unbounded. Because $x_i$ can be
+   increased indefinitely.
+** Step 6
+   Otherwise, select variable $j \in B$ for which these restrictions are the
+   strictest. $j \in B - \frac{p_j}{q_{ji}} = \min \{ - \frac{p_l}{q_{jl}} \vert
+   \colon l \in B q_{l, i} < 0\}$ to leave the basis.
+
+   How? Pivot rule.
+** Step 7 (The last step)
+   Perform the pivot, move to a new basis $B' = B \setminus (\{j\} \cup \{i \})$
+
+   Update the Tableau. Go back to step $2$ and do it again.
+
+   Use equation to replace to replace $x_i$ with $x_j$ everywhere else on the
+   RHS. Apparently all these were done yesterday.
+** Pivot Rules
+*** The largest coefficient rule
+    Take the $\operatorname{argmax} \{r_i \colon r_j > 0 \}$
+*** Largest increase
+    For a pair $i, j$, what is the one with largest increase. This can be expensive.
+*** Steepest edge
+    Great in practise.
+*** Bland's rule
+    The entering variable, the smallest index is entering among $r_i > 0$, $i
+    \in \N$. It has no concern in the value of $r_i$. The leaving variable is
+    picked as the smallest for which $-p_{i}{q_{j,i}} = \min \{ \cdots \}$.
+*** Random edge
+    Take a random.
+** Theorem
+   The simplex algorithm with Bland's rule will terminate in finitely many step.
+** Proof
+   If the algorithm does not terminate, then it follows that there is a sequence
+   of basis. $B_1, B_2, \cdots, B_s = B_1$ following each other.
+
+   Let $F = \{x_i \colon \cup_{d = 1}^{s} B_d\}$, these are the variables
+   participating in a basis of the cycle. These are called "fickle" variables.
+   These are the variables which are entering and leaving the basis.
+
+   All $B_i$ have the same basic feasible solution and all fickle variables stay
+   $0$ throughout. (This should be clear, is it so clear?)
+
+   Because we're in a cycle, the value cannot improve because the value is the
+   same at the end and at the beginning. Thus the value cannot improve in
+   between.
+
+   We'll identify the $x_\beta \in F$, where $\beta$ is the largest and now
+   we'll look at $x_\beta$ enters and when it left. $B$ is the basis just before
+   $\beta$ enters and $B'$ is the basis just before $\beta$ leaves. Doesn't
+   matter if it repeats, pick any two.
+
+   Now, we apply the Bland's rule. The first deduction is that in the simplex
+   tableau. $x_B = p + Q x_N$.
+
+   $z = z_0 + r x_N$. In the simplex Tableau, $r_\beta > 0$. On the other hand,
+   for every $i \in F \setminus \{beta\} \cap N, \gamma_\beta = 0$.
+
+   The second deduction is that in the simplex tableau corresponding to
+   $\tau(\beta')$, $\beta'$
+
+   $x_B = P + Q x_N$ and $z = z_0 + r x_N$ and $q_{\beta, \alpha} < 0$. This
+   should be true, furthermore, $q_{i, \alpha} \ge 0, \forall i \in B' \cap F
+   \setminus \{\beta\}$
+
+   We write down an Auxiliary linear program (it looks very similar to the
+   previous one.)
+
+   $Ax = b$, $x_B \le 0$, $x_{F \setminus \{\beta\}} \ge 0$ and $x_{N \setminus
+   F} = 0$.
+
+   Let $x^{ * }$ be the basic feasible solution corresponding to the $B$ and $B'$
+   and everybody else. Then, Deduction 1 implies that $x^{ * }$ is an optimal
+   solution to the Auxiliary LP. (Because of the fact that $\beta$ was the largest)
+
+   The deduction $2$ will imply the value of $x^{ * }(t)$ is $t$ if $i =
+   \alpha$, $0$ if $i \in N \setminus \{\alpha\}$ and $x_{i}^{ * } + q_{\alpha}$
+   if $i \in B'$.
+
+   $x^{*}(t)$ is feasible for all $t > 0$. $c^{t} \colon x^{ * }(t) \righatrrow
+   \infty$. This would end up implying that the LP is unbounded, which is a
+   contradiction.
 * Tutorial
   [[http://discretemath.imp.fu-berlin.de/DMII-2018-19/][link]]
 ** Tutorial 1 (Sheet 0)
 *** Problem 2
-    Each step reduces the number of components by at most $4$. After $5$ steps, at least $5$ components are left. 
+    Each step reduces the number of components by at most $4$. After $5$ steps, at least $5$ components are left.
 ** Tutorial 2 (Sheet 1)
 *** SAT
 **** Example of un-satisfiable instance of SAT
      $f(x_1) = x_1 \wedge \neg x_1$
-     
-     No matter what the instance is, this will evaluate to zero. 
+
+     No matter what the instance is, this will evaluate to zero.
 **** About $2^k$ clauses
-     We start by proving that the statement is true for exactly $k$ variables. 
+     We start by proving that the statement is true for exactly $k$ variables.
 
      Now we induct on the number of variables, starting from $n$. If it is true
      for $m$, then it is also true for $m+1$ because we can replace the $m+1$th
@@ -2468,9 +2620,9 @@
 *** Problem 3 Greedy algorithm can fail
 **** part a
      Algorithm: Sort the edges according to the weight in ascending order. $E =
-     \emptyset$. 
-     1. No vertex of degree $3$ 
-     2. No cycle of length $<$ n. 
+     \emptyset$.
+     1. No vertex of degree $3$
+     2. No cycle of length $<$ n.
 
      #+BEGIN_SRC artist
                                      1
@@ -2489,7 +2641,7 @@
      Another algorithm: start with an edge, something like a lightest edge. It's
      vague.
 
-     
+
 **** part b
 *** TODO Problem 2
     The first $m$ edges are the smallest weight forest.
@@ -2497,7 +2649,7 @@
     Induction: First edge is true. Assume it's true for $m-1$ edges are minimal
     weight forest. Now kruskal adds an edge (it is the edge with smallest
     weight). It does not make a cycle. We still have a forest. Now, the weight
-    the new is smaller than or equal to every other $e_i$. 
+    the new is smaller than or equal to every other $e_i$.
 
     Apparently it doesn't work.
 
@@ -2523,12 +2675,12 @@
                                        /     \
                                       /       -\
                                      /          \
-                                  1 /            -\  1       
-                                    |              \        
-                                   /                -\      
-                                  /                   \     
-                                 /                     \    
-                                /        -2             -\  
+                                  1 /            -\  1
+                                    |              \
+                                   /                -\
+                                  /                   \
+                                 /                     \
+                                /        -2             -\
                               b---------------------------\c
      #+END_SRC
 **** TODO Algorithm
@@ -2550,7 +2702,7 @@
 **** Part b
      Write $f(x_1, \dots, x_m) = c_1 \wedge c_2 \cdots c_m$, $m < 2^k$.
 
-     $c_i = \tilde{x_{i_1}} \and \tilde{x_{i_2}} \cdots$  
+     $c_i = \tilde{x_{i_1}} \and \tilde{x_{i_2}} \cdots$
 
      for $e$ or $e_i$, define the set $D_i = \{v\colon \{T, F\}^n \vert c_i(v) =
      false\}$. $\vert D_i \vert = 2^{n-k}$, $\sum D_i = \{v \vert f(v) = F\}$.[fn:18]
@@ -2584,8 +2736,8 @@
      as well.) There is a maximal matching. We need to show that in the maximal
      matching contains no edge in the clique. Now, we can arrive at a matching
      on the original graph $G$ and things should be okay?
-     
-     I've omitted details in the steps. 
+
+     I've omitted details in the steps.
 **** part b (alternate solution)
      Observation:
      1. For all even components, there is a matching
@@ -2605,7 +2757,7 @@
 *** Problem 3
 **** Part a
      This is kinda similar to the proof of the theorem about $3$ regular graph
-     without any cut edges having a perfect matching. 
+     without any cut edges having a perfect matching.
 
      First notice that every three regular graph must have even number of
      vertices.
@@ -2618,20 +2770,20 @@
      If it is $2$ exactly 0 times, there are no cut edges and we are done (the
      idea is that the sum of the degrees of each vertex have to be even, but the
      degrees are either 1 or 3, so there has to be an even number of vertices.)
-     
+
      If it is $2$ exactly 1 times, then there can be at most $1$ odd component,
      and $\vert S\vert > 0$, now, Tutte's theorem!
 
      If it is $2$ exactly $2$ times, then we know that $\vert S \vert -
      o(G\setminus S)$ has to have parity same as $\vert V\vert$, but this means
      that $\vert S\vert$ is a non-zero multiple of $2$, and $o(G \setminus S)$
-     is exactly equal to $2$. Now, Tutte's theorem.     
+     is exactly equal to $2$. Now, Tutte's theorem.
 **** Part b
      The graph from the graph theory book
 **** part c
      If $k$ is even, we can think about a clique on $k+1$ vertices.
 
-     If $k$ is odd, then we can do a similar construction as $b$. 
+     If $k$ is odd, then we can do a similar construction as $b$.
 *** Problem 4
     Induction on the number of vertices of the tree.
 
@@ -2642,7 +2794,7 @@
     the perfect matching. We delete the vertex right next to the edge. And on
     each of the even component, we can use the induction argument? We need to
     prove that if we delete a vertex inside the even component, there has to be
-    exactly one component is odd. 
+    exactly one component is odd.
 
     $\vert T' \vert = \vert T' \cap C \vert (\mod 2)$
 
@@ -2670,7 +2822,7 @@
     Strictness: Consider the following graph and ordering of vertices:
     #+BEGIN_SRC artist
       o----------------o----------------o----------------o
-             e2              e1                 e3       
+             e2              e1                 e3
     #+END_SRC
 
     The maximal matching is $\{e2, e_3\}$, whereas the algorithm generates
@@ -2700,7 +2852,7 @@
 
     Indeed at each step, the cost function decreases by some number.
 
-    Why does the algorithm terminate? 
+    Why does the algorithm terminate?
 
     $w_{ij} = \frac{p_{ij}}{q_{ij}}$, and $q = LCM(p_{ij}, q_{ij})$, then
     $\epsilon \ge 1/\varepsilon$, then we can always finish the algorithm.
@@ -2708,7 +2860,7 @@
     Or we can make all the weights as integers. The rational case follows
     easily.
 *** Problem 4
-    Questions: 
+    Questions:
     1. Is this the unique extremal examples? The answer is yes.
     2. What are the extremal examples?
     3. Hypergraphs: $k$ uniform Hypergraphs. We can define the notion of perfect
@@ -2719,7 +2871,7 @@
     the sum on the RHS evaluates to $k -1/2$, since $k$ is an integer,
     $\delta(G)$ has to be at least $k$.
 *** Problem 5 (proof)
-    What is the definition of $k$ connected? 
+    What is the definition of $k$ connected?
 
     $\kappa(G) \ge k \iff G$ is $k$ connected.
 
@@ -2727,7 +2879,7 @@
     that if we subtract a set of size $k-1$, then the graph is connected.
     $G[V(G)\setminus S]$ are either neighbours (in this case it's trivial.)
 
-    $u, v \in V(G')$. 
+    $u, v \in V(G')$.
 
     1. $u \in N(v)$, then we are done.
     2. $N(v) \cap N(u) \neq \empty$. Suppose $N_G'(v) \cap N_G'(u) = \emptyset$.
@@ -2739,8 +2891,8 @@
     An example where the bound in sharp.
 ** Tutorial 5 (Sheet 4)
 *** Problem 4
-    We can do this in cases. 
-    
+    We can do this in cases.
+
     1. $\kappa(G) = 3$, then because $\kappa \le \kappa' \le 3$, $\kappa' =
        \kappa = 3$.
     2. $\kappa = 1$, then disconnecting one vertex would disconnect the graph.
@@ -2749,7 +2901,7 @@
 *** Problem 1
     It is easy to see that $\kappa = 2$. It is easy to see that $\kappa' \le 4$.
     We need to see how to ignore the other parts.
-    
+
     We find two hamiltonian cycles and then two of the edges have to be on the
     hamiltonian cycle. And the third edge cannot really disconnect the graph.
     Remove the Hamiltonian cycles, then graph still has $\kappa' 2$. Thus the
@@ -2841,7 +2993,7 @@
     color. The color has to be $1$ or $3$. Now, notice that $1$ and $3$ are
     diagonally opposite to $2$ and $4$. Regardless of what is the color for $2$
     and $4$, these diagonals, can't be same. Hence the other diagonal has to
-    have the same color. 
+    have the same color.
 
     For simplicity assume that the color chosen was $1$. Thus, there is a line
     $\bar{4}, \bar{3}, \bar{2}$ which needs to have the same color. And this
@@ -2870,7 +3022,7 @@
     polynomial does not vanish.
 
     The monomial $x_1x_2\cdots x_{2n}$ does not get cancelled out implies
-    Combinatorial Nullstellensatz.
+    Combinatorial Constellation.
 ** Tutorial 10 (Sheet 9)
 *** Problem 1
 **** Part 1
@@ -2890,12 +3042,110 @@
      construction.
 
      Basically, we add edges between vertices that are not saturated.
-     
+
      This would lead to an exponentially large graph.
 **** Bonus
      What is the best bound on size of the new graph.
 *** Problem 3
-    
+** Tutorial 11 (Sheet 10)
+*** TODO Exercise 1
+*** Exercise 2
+    Preference
+
+    |   | 1 | 2 | 3 | 4 |
+    |---+---+---+---+---|
+    | 1 | x | 2 | 1 | 3 |
+    | 2 | 3 | x | 2 | 1 |
+    | 3 | 3 | 2 | x | 1 |
+    | 4 | 2 | 1 | 3 | x |
+
+    | Matching    | Unstable pair | Reason           |
+    |-------------+---------------+------------------|
+    | (1,2) (3,4) | (2,3)         | 34 < 32; 21 < 23 |
+    | (1,3) (2,4) | (4,3)         | 24 < 21; 13 < 12 |
+    | (1,4) (2,3) | (4,2)         | 23 < 24; 41 < 42 |
+
+
+    $ab < ac$ means a prefers $c$ over $a$. Here the numbers means ranking,
+
+    smaller rank is preferred over a larger rank.
+
+    |   | 1 | 2 | 3 | 4 |
+    |---+---+---+---+---|
+    | 1 | x | 1 | 2 | 3 |
+    | 2 | 2 | x | 1 | 3 |
+    | 3 | 1 | 2 | x | 3 |
+    | 4 | 1 | 2 | 3 | x |
+
+    | Matching    | Unstable pair | Reason                                 |
+    |-------------+---------------+----------------------------------------|
+    | (1,2) (3,4) | (2,3)         | 2 prefers 3 over 1; 3 prefers 2 over 4 |
+    | (1,3) (2,4) | (2,1)         | 2 prefers 1 over 4; 1 prefers 2 over 3 |
+    | (1,4) (2,3) | (1, 3)        | 1 prefers 3 over 4; 3 prefers 1 over 2 |
+
+
+
+
+
+*** Exercise 3
+    The weights be $w_1, \cdots, w_n$ and for each student, $S_i$, let $e_{1,i},
+    \cdots, e_{12,i}$ be their grade in a homework, now the average for the
+    student is $w_1e_{1, i} + \cdots + w_ne_{n, i}$ and $0 \le w_i \le 1$.
+
+    For the students, that he wants to fail, it'll be $w_1e_{1, i} + \cdots +
+    w_ne_{n, i} \le 12$, and for the ones he has to pass, $w_1e_{1, i} +
+    \cdots + w_ne_{n, i}$. We also have a constraint $w_1 + \cdots + w_n$.
+
+    We don't really have to minimize a cost function here, or do we? We could
+    just say $\min w_1$, just to make it an LP. But in fact, all we need to know
+    is if there is a solution inside the feasible region.
+
+
+    There might be another way to formulate the problem.
+
+    The cost function will be the sum of $12 - (w_1 e_{1, i} + \cdots ) + (w_1
+    e_{1, j} + \cdots + w_{12} e_{12, j})$. We maximize this, under the
+    constraint $w_1 + \cdots + w_n = 1$. and $0 \le w_i \le 1$.
+
+    This would ensure that the most number of people the teacher hate will fail
+    (kinda) and the maximum number of people that the teacher like will pass.
+*** TODO Exercise 4
+    This is an example from the book.
+*** Exercise 5
+    What does it mean by decision version of a problem?
+
+    Given a IP with $n$ variables and $m$ equations, (Can we assume $n \ge m$)
+    given value $x$, is there a solution such that $\max c^t x \le k$?
+
+    Here $k$ should also be part of the problem. The decision version is clearly
+    in NP. This is because if we know such a solution exist, you can verify it
+    in polynomial time.
+**** Reduction of 3 sat to Decision-IP
+     If there is a clause like $(x_1 \wedge x_2 \wedge x_3)$, then we can form
+     the equation $x_1 + x_2 + x_3 \ge 1$. Similarly for each of the clauses.
+
+     Also add extra clauses $x_1 + \bar{x_1} = 1$ for each symbol. Here $x_i \in \{0, 1\}$
+
+     What should be the maximization or minimization problem?
+
+     We know that it is decidable if there exists a solution to the problem. So
+     we can kinda pick an arbitrary, equation to maximize or minimize.
+**** Decision version
+     I saw this question in CS Stackexchange about what is the decision version
+     of the IP. One answer said the decision version of any problem is that "is
+     there a solution", I found it a bit weird because, in our case, it would
+     just mean whether the feasible region is empty or not, and we're not
+     concerned about maximizing or minimizing a function.
+
+     But for the reduction for $3$ sat to Decision IP, we just care about this,
+     again.
+*** TODO Exercise 6
+    $x_i$ should correspond to vertices.
+
+    $y_{ij}$ should correspond to edges, but it is not known if an edge actually
+    exist.
+
+    The value of $x_k$ means if a vertex is picked or not.
 * Footnotes
 
 [fn:38] We've not done the full proof of this claim, I think.
@@ -2939,7 +3189,7 @@ this graph was what lead to the definition of $P$.
 [fn:24] If the graph satisfies tutt's condition, then $\alpha$ should evaluate
 to $n/2$.
 
-[fn:23] What is a handshake lemma? 
+[fn:23] What is a handshake lemma?
 
 [fn:22] An example of such a graph is Peterson graph.
 
@@ -2966,7 +3216,7 @@ makes sense.
 
 [fn:13] [[https://en.wikipedia.org/wiki/Tutte_theorem][Tutte's theorem]]
 
-[fn:12] My condition 
+[fn:12] My condition
 
 [fn:11] Here $o$ is the number of components of odd size.
 
@@ -2982,16 +3232,16 @@ only if it has no cycle.
 
 [fn:6] The belief is that this is not true. This is one of the Millennium problems.
 
-[fn:5] Input is a graph $G$ and the question is whether there is a perfect matching. 
+[fn:5] Input is a graph $G$ and the question is whether there is a perfect matching.
 
 [fn:4] In general we don't know how to approximate the TSP, but we can do it with some extra conditions
 
 [fn:3] "and the decision problem version ("given the costs and a number x, decide
 whether there is a round-trip route cheaper than x") is NP-complete."-Wikipedia
 
-[fn:2] Otherwise you can explore the components. 
+[fn:2] Otherwise you can explore the components.
 
-[fn:1] MST would be city-side and the fastest possible way would be consumer side. 
+[fn:1] MST would be city-side and the fastest possible way would be consumer side.
 
 * TODO Things to study
 ** TODO Proof of Kruskal
