@@ -19,7 +19,6 @@
 #+OPTIONS: tex:dvipng
 
 * Lecture 2<2018-10-17 Wed>
-
 ** Review
 *** Random stuff about algorithms
     Algorithm A
@@ -52,13 +51,13 @@
      The algorithm runs on the permutations on the set of $n$ numbers. Define
      $\forall \kappa \in \N$ blah blah.
 
-     $S_n \subset S_n{\alpha, \kappa} = \{\pi \in S_n \colon \textup{where A
-     receives input $\pi$ there, it receives $\alpha$ as the sequence of the
-     list of first $k$ answerers}\}$
+     $S_n \subset S_n(\alpha, \kappa) =$ $\{\pi \in S_n \colon \textup{where A
+     receives input} \pi$ $\textup{ there, it receives } \alpha \textup{ as the sequence of
+     the list of first k answerers}\}$
 **** Observation
      Everything is determined if we run it.
 
-     $S^n_(\alpha, k) \cap S^n_{\beta, k} = \emptyset \forall \alpha \neq \beta$
+     $S^n_{\alpha, k} \cap S^n_{\beta, k} = \emptyset \forall \alpha \neq \beta$
 
      $\cap S^{n}_{\alpha, k} = S_n$
 
@@ -2585,6 +2584,146 @@
    $x^{*}(t)$ is feasible for all $t > 0$. $c^{t} \colon x^{ * }(t) \righatrrow
    \infty$. This would end up implying that the LP is unbounded, which is a
    contradiction.
+* Lecture 24 <2019-01-22 Tue>
+** Example
+   The example from the beginning of 6th chapter.
+** Weak duality
+   Other examples: Matching, flows, covers.
+** Corollary of weak duality
+   1. If both $P$ and $D$ are feasible and bounded, then optimum of $P$ is less
+      than the optimum of $D$.
+   2. For every feasible $x^{*} \in \R^n$ of $P$ and feasible $y \in \R^n$ of
+      $D$, then $c^{t} x^{ * } = b^t y^{ * } \implies$, $x^{ * }$ and $y^{ * }$
+      are optimal for $P$ and $D$ respectively
+
+      The strong duality theorem tells that the $\Leftarrow$ is also true.
+   3. If $P$ is unbounded from the above then $D$ is infeasible. If $D$ is
+      unbounded from below, then $P$ is infeasible.
+** Definition of Primal-Dual for general LP
+   Suppose that $P$ is a an LP with LP with $n$ variables $x_1, \cdots, x_n$ and
+   $m$ constrains.
+** Proposition
+   If $P$ is feasible and bounded, then $D$ is feasible and bounded and the
+   respective optimum exists and are equal.
+
+   (The main part of the proof of the strong duality theorem.)
+*** Proof
+    (I think this is from section 6.3)
+
+    If $D$ is feasible, then it is bounded by weak duality.
+
+    Want: $D$ is feasible
+
+    $P$, $\max c^{t}x$ subject to $Ax \le b$ and $x \ge 0$.
+
+    $P'$ introduces slack variable, maximize $c^{t}x$ subject to $Ax = b$, $x
+    \ge 0$.
+    
+    Simplex terminates on $P'$ with a basic feasible solution $x^{*} \in \R^{n
+    \times m}$ corresponding to a feasible basis $B \subset [n + m]$.
+
+    Implies that the vector $(x_1^{ * }, \cdots, x_n^{ * } = x^{*} \in \R^n$ is
+    an optimal solution of $P$.
+
+    We know that $x^{*}$ multiplied by $c$ is the same the original one.
+
+    The final tableau looks like 
+
+    $\bar{x}_B = P + Q \bar{x}_N$
+    $z =z_0 + r^{T}\bar{x}_N$.
+
+    Where $r \in \R^n$ and $r \le 0$. (This is when the simplex algorithm halts.)
+
+    We can use this information. 
+** Claim
+   The vector $y^{*} = (\bar{c}_B^{T} \bar{A}_B^{-1})^T$ is a feasible set of
+   $D$ and $c^{T}x^{ * } = b^{ * }$
+*** Proof
+    $D$ is minimize $b^{T} y$ subject to $A^{T}x \ge c$ and $y \ge 0$.
+
+    $c^{T}x^{ * } = \bar{c}^T \bar{x}^{ * } = \bar{c}_B^T \bar{x}_B^{*} =
+    \bar{c}_B^T (A_B^{-1} b) = (\bar{c}_B^{T} \bar{A}_B^{-1}) b$.
+
+    What we want: $y^{*}$ is feasible for $D$.
+
+    $A^{T}y^{ * } \ge c$ and $y^{ * } \ge 0$.
+
+    If and only if
+
+    #+BEGIN_SRC artist
+             +--------------+
+             |              |
+             |     A^T      |
+             |              | (y^{*}) \ge \bar{c}
+             |              |
+             +--------------+
+             |1             |
+             | 1            |
+             |           1  |
+             +--------------+
+    #+END_SRC
+
+    Szabo's proof looked much longer than the proof in the book. Maybe he did
+    something different?
+* Lecture 25
+** Duality recipe
+   Page 85 of the book or section 8.2
+** Maximum matching problem
+   $G = (V, E)$, with variables $x_e$ for all edge $e \in E$, $x_e \in \Z$.
+
+   Constraints: $\forall v$, $\sum_{e \in v} x_e \le 1$.
+
+   Sign-constrains: $\forall e \in E, x_e \ge 0$.
+
+   We have shown that the maximum of the objective function: $\sum_{e \in E} x_e
+   = \alpha'(G)$
+
+   We'll try to dualize this problem.
+
+   In dual variable $y_v$, for all $v \in V$.
+
+   Constrains $\forall e$, $\min \sum_{v \in V} y_v \le \beta(G)$.
+
+   If $y \in \Z^n$, then $\le$ becomes $=$.
+
+   For Bipartite graphs, we will show that the LP becomes IP. This and the
+   duality leads to Konig's theorem
+** Konig's theorem
+   We can use Linear programming to show Konig's thoerem.
+   
+   If $G$ is bipartite, then $\alpha'(G) = \beta(G)$
+** Plan
+   1. Prove that $G$ is bipartite, then the optimal solution of $P$ are integers,
+   hence $\max x_e = \alpha'(G)$.
+   2. Optimal solution for $D$ (LP) is also integers, hence $\min y_v = \beta(G)$
+
+   Now, using Duality theorem, $\alpha'(G) = \max x_e = \min y_v = \beta(G)$.
+** Proposition
+   For LP, max $c^{t} x$, subject to $Ax \le b$ and $x \ge 0$.
+
+   This is from chapter 8. Section 2.
+* Lecture 26
+** Zero sum two player games
+*** Payoff matrix
+*** Strategy
+*** Mixed strategy
+*** Definition of $\beta$
+*** Mixed Nash equilibrium
+*** Remarks on mixed Nash Equlibrium
+    1. They are the best possible responses against each other.
+    2. Neither player can do better by switching strategies.
+*** Question?
+    1. Do we always have a mixed Nash equilibrium?
+    2. Which one are the best? 
+    3. How do we find them?
+    4. For the rock paper scissors, the Nash equilibrium is $(1/3, 1/3, 1/3)$.
+       The expected payoff will be $0$. But if we change, then the opponent will
+       have a better strategy (provided they know about your distribution.)
+* Lecture 27
+** Helly's theorem
+   Section 8.6
+
+   He proved helly's theorem for 1 dimension.
 * Tutorial
   [[http://discretemath.imp.fu-berlin.de/DMII-2018-19/][link]]
 ** Tutorial 1 (Sheet 0)
@@ -2953,6 +3092,68 @@
     side was an exercise.
 *** Problem 4
     $I$ is the set of all spanning trees and $J$ is the set of all edge cuts.
+** TODO Tutorial 8 (Sheet 7)
+*** Exercise 3
+    $G$ be a graph with the property that every two odd cycles share a vertex.
+    Then prove that the chromatic number of the graph is at most $5$
+
+    Proof is from a math stackexchange answer
+
+    Consider the smallest odd cycle of the graph. There are no chords in the odd
+    cycle, since if there were, we could take a detour and make a smaller odd
+    cycle. Thus we can color this cycle $C$ with $3$ colors.
+    
+    Consider the cycle $G \setminus C$. This graph has no odd cycles, this is
+    because if $G \setminus C$ has an odd cycle, then it is also an odd cycle in
+    $G$, but is disjoint from $C$. Thus $G \setminus C$ is bipartite. Thus we
+    can color this with $2$ colors. Thus we can color the whole with thing with
+    at most $5$ colors.
+
+    Also I'm not completely sure about the framing of the question. Do they mean
+    that every odd cycle intersect in exactly one point or at least one point? I
+    guess the proof will work in both cases. There was a math stackexchange
+    answer saying we can do even better by saying that the chromatic number is
+    at most $4$, but it doesn't work when $K_5$ is used.
+*** Exercise 4
+    Chromatic number $k$ means that at least ${k \choose 2}$ edges.
+
+    My proof to this was wrong. My mistake was that I ended up assuming that
+    every coloring should come from a greedy coloring. Is this true? Probably
+    not.
+
+    [[https://math.stackexchange.com/questions/1135688/prove-that-every-k-chromatic-graph-has-size-m-geq-binom-k2][Math.SE]] question.
+
+    Consider the colors $1, \cdots, k$. For each colors, there should be at
+    least one edge from the color $i$ to $j$, where $i \le j$. If not, we could
+    just remove one of the color class to get a $k-1$ coloring of the graph.
+
+    This means that there are at least $0 + 1 + 2 + \cdots + k - 1 =
+    \binom{k}{2}$ edges.
+*** Exercise 5
+    For triangle free graphs, the trivial upper bound $\chi(G) \le \Delta + 1$
+    can be strengthened into
+
+    $$\chi(G) \le \frac{3}{4} \left\lceil \frac{\Delta(G) + 1}{4}\right\rceil$$
+
+    There is a solution [[http://www-sop.inria.fr/members/Frederic.Havet/Cours/coloration.pdf][This pdf]] proposition 8.16 pp. 119 (7 in pdf)
+
+    *Proof* let $k = \left\lceil \frac{\Delta(G) + 1}{4}\right\rceil$, then let
+     $V_1, \cdots, V_k$ be a partition of the vertices such that the sum of
+     internal vertices for each $V_i$ is minimum (the minimum exists, although
+     this computation may not be possible in polynomial time.)
+
+     Now the idea is that each component $V_i$ can be colored with at most $3$
+     colors. We first not that for the subgraph $V_i$, $\Delta \le 3$. This is
+     because if there is a vertex $v$ in $V_1$ (WLOG) that has degree $4$ or
+     more, then there must be another partition where it's degree is $3$, if
+     not, there will be $4k \ge \Delta + 1$ edges.
+
+     Now, from brook's theorem each $V_i$ can be colored in $\le 3$ colors,
+     since there are no cliques of size $3$ and odd cycles can anyway be colored
+     in $3$ colors.
+
+     Thus each components can be colored in $3$ colors and hence the whole thing
+     can be colored in $3k$ colors.
 ** Tutorial 9 (Sheet 8)
 *** Exercise 1
     If $X(G) = 4$, then it has a subgraph $H$, that is $4$ critical. But then
@@ -3146,6 +3347,272 @@
     exist.
 
     The value of $x_k$ means if a vertex is picked or not.
+** Tutorial 12 (Sheet 11)
+*** Problem 1
+    The following code does the calculation
+
+    #+BEGIN_SRC R :results output
+      x1 <- matrix(c(1, 2), nrow=2)
+      x2 <- matrix(c(-1, 2), nrow=2)
+      x3 <- matrix(c(-3, 1), nrow=2)
+      x4 <- matrix(c(1, -2), nrow=2)
+
+      b <- matrix(c(5, 4), nrow=2)
+
+      ls <- list(x1, x2, x3, x4)
+
+      for(i in 1:3)
+      {
+          for(j in (i+1):4)
+          {
+              print(c(i, j))
+              xb <- tryCatch({solve(matrix(c(ls[[i]], ls[[j]]), nrow=2), b)},
+                             error=function(e){return(c(NaN, NaN))})
+
+              print(xb)
+          }
+      }
+
+      print(matrix(c(x1, x2, x3, x4), nrow=2))
+    #+END_SRC
+
+    #+RESULTS:
+    #+begin_example
+    [1] 1 2
+         [,1]
+    [1,]  3.5
+    [2,] -1.5
+    [1] 1 3
+               [,1]
+    [1,]  2.4285714
+    [2,] -0.8571429
+    [1] 1 4
+         [,1]
+    [1,]  3.5
+    [2,]  1.5
+    [1] 2 3
+         [,1]
+    [1,]  3.4
+    [2,] -2.8
+    [1] 2 4
+    [1] NaN NaN
+    [1] 3 4
+         [,1]
+    [1,] -2.8
+    [2,] -3.4
+         [,1] [,2] [,3] [,4]
+    [1,]    1   -1   -3    1
+    [2,]    2    2    1   -2
+    #+end_example
+
+    There is only one feasible basis $(1, 4)$ and $x_B = (3.5, 1.5)$. The
+    maximum value is $3.5 + 1.5 = 5$.
+*** Problem 2
+    #+BEGIN_SRC R :results output :session problem2
+      x2 <- matrix(c(-2, 1), nrow=2)
+      y1 <- matrix(c(1, 0), nrow=2)
+      y2 <- matrix(c(0, 1), nrow=2)
+      y3 <- matrix(c(2, 2), nrow=2)
+      y4 <- matrix(c(-2, -2), nrow=2)
+
+      ls <- list(x2, y1, y2, y3, y4)
+      b <- matrix(c(-2, 2), nrow=2)
+
+      for(i in 1:4)
+      {
+          for(j in (i + 1):5)
+          {
+              print(c(i, j))
+              xb <- tryCatch({solve(matrix(c(ls[[i]], ls[[j]]), nrow=2), b)},
+                             error=function(e){return(c(NaN, NaN))})
+              print(xb)
+          }
+      }
+    #+END_SRC
+
+    #+RESULTS:
+    #+begin_example
+    [1] 1 2
+         [,1]
+    [1,]    2
+    [2,]    2
+    [1] 1 3
+         [,1]
+    [1,]    1
+    [2,]    1
+    [1] 1 4
+              [,1]
+    [1,] 1.3333333
+    [2,] 0.3333333
+    [1] 1 5
+               [,1]
+    [1,]  1.3333333
+    [2,] -0.3333333
+    [1] 2 3
+         [,1]
+    [1,]   -2
+    [2,]    2
+    [1] 2 4
+         [,1]
+    [1,]   -4
+    [2,]    1
+    [1] 2 5
+         [,1]
+    [1,]   -4
+    [2,]   -1
+    [1] 3 4
+         [,1]
+    [1,]    4
+    [2,]   -1
+    [1] 3 5
+         [,1]
+    [1,]    4
+    [2,]    1
+    [1] 4 5
+    [1] NaN NaN
+    #+end_example
+    
+    Simplex, $A_B^{-1}A_N$
+
+    #+BEGIN_SRC R :results output :session problem2
+      AB <- matrix(c(-2, 1, 1, 0), nrow = 2)
+
+      AN <- matrix(c(0, 1, 2, 2, -2, -2), nrow = 2)
+
+      xb <- matrix(c(2, 2), nrow=1)
+
+      print(solve(AB) %*% AN)
+
+      cb <- matrix(c(2, 0), nrow=2)
+
+      ## Calculation of r
+      matrix(c(0, 1, -1), nrow=3) -  t(t(cb) %*% solve(AB) %*% AN)
+    #+END_SRC
+
+    #+RESULTS:
+    :      [,1] [,2] [,3]
+    : [1,]    1    2   -2
+    : [2,]    2    6   -6
+    :      [,1]
+    : [1,]   -2
+    : [2,]   -3
+    : [3,]    3
+    
+    After a pivot we'll see that the problem is unbounded. This can be seen by
+    plugging in $x_1 = t$ and $x_2 = t +1$ and $t \rightarrow \infty$.
+*** Problem 3
+    #+BEGIN_SRC R :session problem3
+    cn <- matrix(c(46, 43, -271, 8))
+    #+END_SRC
+
+    #+RESULTS:
+    |   46 |
+    |   43 |
+    | -271 |
+    |    8 |
+
+    Basis z1, z2
+    |  x1 |  x2 |  x3 | x4 | z1 | z2 | b |
+    |-----+-----+-----+----+----+----+---|
+    |   2 |   1 |  -7 | -1 |  1 |  0 | 0 |
+    | -39 |  -7 |  39 |  2 |  0 |  1 | 0 |
+    |-----+-----+-----+----+----+----+---|
+    | -46 | -43 | 271 | -8 |  0 |  0 | 0 |
+
+    Basis x1, z2
+    | x1 |    x2 |   x3 |   x4 |   z1 | z2 | b |
+    |----+-------+------+------+------+----+---|
+    |  1 |   0.5 | -3.5 | -0.5 |  0.5 |  0 | 0 |
+    |  0 | -12.5 | 19.5 | 21.5 | 19.5 |  1 | 0 |
+    |  0 |   -20 |  110 |  -15 |   23 | 0  | 0 |
+
+
+    
+*** Problem 4
+    This is a section from the book. I also solved this for the tutorial
+*** Problem 5
+    From the last equation it is clear that $x_n \le 5^n$. 
+
+    The last equation can be rewritten as $2(obj) \le x^n + 5^n$. Thus the
+    objective value is bounded above by $5^n$. Clearly $(0, \cdot, 5^n)$ is an
+    optimal solution.
+** Tutorial 13 (Sheet 12)
+*** Problem 1
+    #+BEGIN_SRC R :session problem1 :results output
+      x1 <- matrix(c(15, -1, -3), nrow=3)
+      x2 <- matrix(c(-1, 1, -1), nrow=3)
+      x3 <- matrix(c(-1, 0, 0), nrow=3)
+      x4 <- matrix(c(0, -1, 0), nrow=3)
+      x5 <- matrix(c(0, 0, -1), nrow=3)
+
+      ls <- list(x1, x2, x3, x4, x5)
+      b <- matrix(c(4, 100, 120), nrow=3)
+
+      for(i in 1:3)
+      {
+          for(j in (i+1):4)
+          {
+              for(k in (j+1):5)
+              {
+                  xb <- solve(matrix(c(ls[[i]], ls[[j]], ls[[k]]), nrow=3), b)
+                  if(all(xb >= 0))
+                  {
+                      print(c(i, j, k))
+                      print(xb)
+                  }
+              }
+          }
+      }
+    #+END_SRC
+
+    #+RESULTS:
+
+    Turns out that the feasible region of the problem is empty.
+
+    Thus the original problem must be unbounded.
+*** Problem 2
+    Optimum Optimum. Primal: maximize $x$ subject to $x \le 1$ and $x \ge 0$.
+    Dual: minimize $y$ subject to $y \ge 1$ and $y \ge 0$.
+
+    Unbounded, infeasible. Primal: maximize $x$ subject to $-x \le 1$ and $x \ge
+    0$. Dual: minimize $x$ subject to $-x \ge 1$ and $x \ge 0$.
+
+    Infeasible, unbounded. Use the above problem again.
+
+    Infeasible infeasible. Primal maximize $x + y$ subject to $-x \le 1$ and $y
+    \le -1$ and $x, y \ge 0$ Dual: minimize $x - y$ subject to $-z \ge 1$, $a
+    \ge 1$ and $z, a \ge 0$.
+*** Exercise 6
+    Given a arbitrary linear program, construct another linear program $P'$ such
+    that $P$ has an optimal solution if and only if $P'$ has a feasible solution.
+
+    Our new optimal solution is the following:
+    
+    Minimize (doesn't matter)
+    
+    Subject to 
+    
+    | A^t |  0 | . | y | >= | c  |
+    |   0 | -A | . | x | >= | -b |
+
+    greater than or equal to
+
+    and $y \ge 0$, $x \ge 0$.
+
+    *Proof* Notice that the dual of the original program is $\min c^t y$
+    subject to $A^t \ge c$ and $y \ge 0$. The dual of this program is the
+    original program.
+
+    If the program is optimal, both the dual and the dual of the dual is optimal
+    and hence also feasible. Thus $A^t y \ge c$ and $-A^tx \ge -b$. Thus the new
+    program is feasible.
+
+    If the new program is feasible, this means that both the dual of the
+    original program and the original program is feasible. Assume that the
+    program is not optimal, then it has to be either unbounded or infeasible. It
+    cannot be unbounded because the dual of the program is feasible. It cannot
+    be infeasible, because we already know it is feasible. Thus the problem has
+    to have an optimal solution.
 * Footnotes
 
 [fn:38] We've not done the full proof of this claim, I think.
@@ -3248,3 +3715,26 @@ whether there is a round-trip route cheaper than x") is NP-complete."-Wikipedia
    There was also an exercise talking about how the first $n$ edges of the
    kruskal algorithm forms a minimum weight forest. Anurag said this was a
    tricky problem.
+*** TODO Problem in proof about complexity
+    In the second step, there is this argument on if $C_u = C_w$ takes $O(n^2)$.
+    Shouldn't it be $O(mn)$?
+** TODO Proof of lower bound for sorting
+** TODO What is the lightest network that remains connected after the breakdown of any edge?
+   What does lightest mean here? 
+
+   In a clique, you really have to remove a lot of edges to make it disconnected.
+
+   Perhaps, he's talking about a graph on $n$ vertices with minimum number of
+   edges that will remain connected, even after removing any edge from it.
+** TODO Proof of Hall's theorem
+   He didn't do this in current course. But was done in the previous course.
+   West has a proof.
+** TODO Finish learning the proof of Tutte's theorem
+** TODO Minimum number of edges in a k connected graph?
+** TODO Study Baryani theorem
+** TODO For edge coloring consider when we are working with multigraphs
+   And when we are not.
+
+   For example, for Vizing's theorem, we are working with simple graphs.
+** TODO Learn some properties of Peterson graph
+** TODO Matchings

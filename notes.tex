@@ -1,4 +1,4 @@
-% Created 2019-01-15 Tue 10:47
+% Created 2019-02-01 Fri 18:06
 % Intended LaTeX compiler: pdflatex
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
@@ -47,12 +47,11 @@
 
 
 \section{Lecture 2\textit{<2018-10-17 Wed>}}
-\label{sec:orgc5740bb}
-
+\label{sec:orgfe44e15}
 \subsection{Review}
-\label{sec:orgba65796}
+\label{sec:org1803f38}
 \subsubsection{Random stuff about algorithms}
-\label{sec:orgf53e51d}
+\label{sec:org3c3fccc}
 Algorithm A
 
 Input class I
@@ -65,7 +64,7 @@ The worst case complexity of \(I = \min_{A} T_A(n) = T_{I}(n)\). A function that
 
 Average case complexity \(\mathbb{E}(T(A, I))\).
 \subsubsection{Sorting}
-\label{sec:org9444278}
+\label{sec:org73b93a5}
 Sorting algorithm \(A\), \(T(A, \pi) =\) number of comparisons that \(A\) makes to find \$\(\pi\).\$
 
 Yesterday, we proved that for insertion sort (the stupid algorithm), the
@@ -75,7 +74,7 @@ Binary insertion:  \(T(n) \le n log_2{n}\).
 
 Merges sort: \$T\(_{\text{M}}\)(n) =le n\(\log_{\text{2}}\)\{n\}.\$
 \subsubsection{Theorem about lower-bound of sorting}
-\label{sec:org33e6f47}
+\label{sec:orgdafaf14}
 If \(A\) is a sorting algorithm (correctly sort \(n\) numbers)
 
 Then \(T_A(n) \ge \log_2(n!)\).
@@ -83,18 +82,18 @@ Then \(T_A(n) \ge \log_2(n!)\).
 In particular, using the stirling's formula, \(T_A(n) \ge n\log_n\).
 \begin{enumerate}
 \item Proof
-\label{sec:org43685d3}
+\label{sec:org4377409}
 The algorithm runs on the permutations on the set of \(n\) numbers. Define
 \(\forall \kappa \in \N\) blah blah.
 
-\$S\(_{\text{n}}\) \(\subset\) S\(_{\text{n}}\)\{\(\alpha\), \(\kappa\)\} = $\backslash${\(\pi\) \(\in\) S\(_{\text{n}}\) \(\colon\) \textup\{where A
-receives input \(\pi\) there, it receives \(\alpha\) as the sequence of the
-list of first \(k\) answerers\}$\backslash$}\$
+\(S_n \subset S_n(\alpha, \kappa) =\) \(\{\pi \in S_n \colon \textup{where A
+     receives input} \pi\) \(\textup{ there, it receives } \alpha \textup{ as the sequence of
+     the list of first k answerers}\}\)
 \item Observation
-\label{sec:orgac10bb3}
+\label{sec:org4e00701}
 Everything is determined if we run it.
 
-\(S^n_(\alpha, k) \cap S^n_{\beta, k} = \emptyset \forall \alpha \neq \beta\)
+\(S^n_{\alpha, k} \cap S^n_{\beta, k} = \emptyset \forall \alpha \neq \beta\)
 
 \(\cap S^{n}_{\alpha, k} = S_n\)
 
@@ -119,9 +118,9 @@ Called the \textbf{information theoretical lower bound}.
 \end{itemize}
 \end{enumerate}
 \subsection{Graph algorithms}
-\label{sec:org5128617}
+\label{sec:org9725dd4}
 \subsubsection{Connectedness of graph}
-\label{sec:orgf7dbbbf}
+\label{sec:org4627a7b}
 A graph \(G\) is connected if for every two vertices \(u\) and \(v\), there exists
 a \(uv\) path in \(G\).
 
@@ -131,7 +130,7 @@ which are called the \textbf{connected components} of \(G\).
 
 Observation: There is no edge between different connected components.
 \subsubsection{How do you decide whether a graph is connected?}
-\label{sec:org0db913e}
+\label{sec:org93753c0}
 Take a vertex \(v\). We maintain a list of all vertices that are visited. We
 redo the same thing for every other vertex. We repeat this until we saw all
 the vertices in the graph.
@@ -148,7 +147,7 @@ IF Q = \(\empty\), STOP and return \(W\) as the connected component of \(v\).\\
 else go to step i+1\\
 \end{verse}
 \subsubsection{Theorem: Comp(v) returns \(C_G(v)\)}
-\label{sec:orgf264a6f}
+\label{sec:org0a1fa3a}
 Suppose \(u \in C_G(v) \cap W_{out}\).
 
 Let \(P\) be a vu path in \(G\).
@@ -161,12 +160,12 @@ Other direction: \(u\in W_{out}\). Before \(u\) became part of \(W\), \(u\) was 
 \(Q\). Why? Because there is a \(u_1 \in Q\), \(u \in N(u_1) \setminus W\).
 (More things, I skipped.)
 \subsubsection{Spanning tree}
-\label{sec:org6494516}
+\label{sec:org4ae5ee0}
 Suppose we run Comp(v) on a connected graph, where a vertex \(w\) is put into
 \(Q\), then there is a unique edge coming with it that attaches it to \(v\).
 (the vertex that is moved from \(Q\) to \(W\) at the same time.)
 \subsubsection{Theorem about spanning tree}
-\label{sec:orgd540a50}
+\label{sec:org562a9a5}
 The following are equivalent: for an \(n\) vertex graph.
 
 \begin{enumerate}
@@ -178,11 +177,11 @@ path.
 \end{enumerate}
 \begin{enumerate}
 \item Definition (spanning tree)
-\label{sec:org9685019}
+\label{sec:org15e3405}
 \(T \subset G\) is a spanning tree if \(T\) is a tree and \(V(T) = V(G)\).
 \end{enumerate}
 \subsubsection{Special spanning trees}
-\label{sec:org21acdbb}
+\label{sec:org6c01d22}
 Let \(G\) be connected and run Comp(v) (don't forget the edges.)
 
 \emph{What if} we always put \(N(v_i) \setminus W\) to the top of \(Q\). (We call
@@ -194,7 +193,7 @@ long (?)
 
 A diagram that I ignored.
 \subsection{Minimal spanning tree}
-\label{sec:org7f0238a}
+\label{sec:org73f7099}
 Given a graph \(G\). (can be a complete or arbitrary graph.)
 
 We have a weight function that is assumed on the edge set to \(\mathbb{R}\).
@@ -202,54 +201,54 @@ What we want is a spanning tree \(T\subset G\) such that the cost of the sum of
 weights on the edges is minimum (i.e., for any other spanning tree, the sum
 of the weights on the edges would be more than the current one.)
 \subsubsection{Naive algorithm}
-\label{sec:org2aadd4b}
+\label{sec:org6acaf33}
 There is at most \(n^{n-2}\) (Cayley's theorem.) spanning trees on \(n\) vertices. Let's look at all
 of them and calculate the weights and output the minimum.
 \subsubsection{Kruskal's algorithm}
-\label{sec:org7b779db}
+\label{sec:org9840800}
 \begin{enumerate}
 \item Step 1
-\label{sec:orga59ced4}
+\label{sec:orgb1fef90}
 Sort edges in increasing order of weights \(e_1, \cdots e_m\) such that
 \(w(e_1) \le w(e_n) \le \cdots, \le w(e_n)\).
 
 Start with an empty forest \(E(F) \neq \emptyset\) for all \(v \in V\), \(c_v = v\).
 \item Step 2
-\label{sec:org26c9c94}
+\label{sec:orgd5af87a}
 For each edge \(e_i = uv\). For \(\forall i \ge 1\), if the forest plus the new
 edge has a cycle, then \(C_v\) remains the same.
 
 If there is no cycle, we have a new forest, i.e., the bigger forest with
 the extra edge added to it.
 \item The end
-\label{sec:orgf0fea27}
+\label{sec:org302af3b}
 Output \(F\).
 \end{enumerate}
 \subsubsection{Theorem: Kruskal's algorithm returns the min-weight spanning tree.}
-\label{sec:orgde419cf}
-Proved in discrete Math 1. 
+\label{sec:org55eed70}
+Proved in discrete Math 1.
 \subsubsection{Running time of Kruskal}
-\label{sec:orgb7abe78}
+\label{sec:org1926a87}
 The first step involves sorting. This can be done in \(O(|E| \log|E|)\).
 
-There is \(O(m)\) and \(O(n^2)\). 
+There is \(O(m)\) and \(O(n^2)\).
 
 If \(G\) is dense, then \(O(m\log m)\) and if \(G\) is sparse, then \(O(n^2)\).
 \section{Lecture 3 \textit{<2018-10-23 Tue>}}
-\label{sec:org2b1816e}
+\label{sec:orgc00b157}
 \subsection{Spanning trees}
-\label{sec:org30a2129}
+\label{sec:org8d245cc}
 Another perspective: get to one place to another in the fastest way possible.
 Versus the minimum spanning tree. \footnote{MST would be city-side and the fastest possible way would be consumer side.}
 \subsection{Problem}
-\label{sec:org22fe9d9}
-Given graph \(G=(V, E)\), a distance for \(d\colon E \rightarrow \mathbb{R}_{\ge 0}\). 
+\label{sec:org387dabe}
+Given graph \(G=(V, E)\), a distance for \(d\colon E \rightarrow \mathbb{R}_{\ge 0}\).
 
-\textbf{Goal}: Given a vertex \(u\in V\), find the shortest path to any vertex \(v \in V\). 
+\textbf{Goal}: Given a vertex \(u\in V\), find the shortest path to any vertex \(v \in V\).
 
-The brute force way is to find all the path and find the minimu. 
+The brute force way is to find all the path and find the minimu.
 \subsection{Idea}
-\label{sec:orga2e906e}
+\label{sec:orgdbf8bf3}
 Maintain a set of vertices to where a shortest path from \(u\) was found. And
 in each step we add one vertex to \(W\).
 
@@ -257,44 +256,44 @@ in each step we add one vertex to \(W\).
  path, \(P[u, w]\), this is also the shortest path. (\(P[u, w]\) represents the
  path from \(u\) to \(w\) through \(P\).)
 \subsection{Dijkstra's algorithm}
-\label{sec:org82a0ace}
+\label{sec:org3e95c8c}
 \textbf{Input} is a graph \(G = (V, E)\) which is connected. \footnote{Otherwise you can explore the components.} We have a distance
 \(d\colon E \rightarrow \mathbb{R}_{\ge 0}\).
 
 \textbf{Output}: For every vertex \(u \in V\), the distance from \(u\) and also a
 shortest path.
 \subsubsection{Algorithm}
-\label{sec:org21b9416}
+\label{sec:org476414b}
 \textbf{Initialization}: dist[u] = 0
 
 For every other vertex \(v\), I set \(d[v] = \infty\). \(prev[v] =
-    \textup{null}\). Maintain the set \(W = \emptyset\). 
+    \textup{null}\). Maintain the set \(W = \emptyset\).
 
 \textbf{Iteration}: Choose a vertex \(v_0 = \min\{\dist[v]\colon v  \in V \setminus W\}\)
 
 Update \(W = W \cap \{v_0\}\).
 
 \(\forall v \in V \setminus W\) if \(\dist[v] > \dist[v_0] + d(v_0, v)\)
-then \(\dist[v] = \dist[v_0] + d(v_0, v)\) and \(\prev[v] = v_0\). 
+then \(\dist[v] = \dist[v_0] + d(v_0, v)\) and \(\prev[v] = v_0\).
 
 \textbf{Termination}: If \(W = V\), then STOP and output \(\dist[v]\) search head of
 \(\prev\) for a \(uv\) path.
 
-An example was done. \href{https://en.wikipedia.org/wiki/Dijkstra\%27s\_algorithm}{Wikipedia}. 
+An example was done. \href{https://en.wikipedia.org/wiki/Dijkstra\%27s\_algorithm}{Wikipedia}.
 \subsubsection{Analysis}
-\label{sec:org43419ac}
+\label{sec:orgf7444d5}
 \begin{enumerate}
 \item Correctness
-\label{sec:org22b472a}
+\label{sec:org6502360}
 \textbf{Claim}: At the time \(v_0\) is put into \(W\), \(\dist[v_0]\) is the distance of
- \(v_0\) to \(u\). 
+ \(v_0\) to \(u\).
 
 (This would prove the correctness, because \(dist\) does not change after
 vertex is in \(W\).)
 
 Proof: Induction on \(\vert W\vert\).
 
-Because \(\vert w \vert = 0\) \(u\) is put into \(W\), \(\dist[u] = 0 = d(uu)\). 
+Because \(\vert w \vert = 0\) \(u\) is put into \(W\), \(\dist[u] = 0 = d(uu)\).
 
 Suppose \(\vert W \vert \ge 1\), we put \(v_0\) into \(W\). If this is the case,
 then \(\dist[v_0] = \min\{\dist[v_0]\colon v \in V \setminus W\}\).
@@ -309,13 +308,13 @@ in \(W\), call it \(v_f\) and \(v_p\) be its predecessor. \(\dist[v_0] > s(uv_0)
 shortest.)
 
 When we are updating after putting \(v_p\) into \(W\), we consider \(v_f\) and
-we will put it in \(W\). This is a contradiction. 
+we will put it in \(W\). This is a contradiction.
 \item Termination
-\label{sec:org28100d2}
+\label{sec:org8cf6fe7}
 In each iterating step, one vertex is put into \(W\) and stays there and then
-in \(n\) iterations, we are done. 
+in \(n\) iterations, we are done.
 \item Cost
-\label{sec:org223a225}
+\label{sec:org83e8641}
 Finding \(v_0\), then \(O(\vert V \vert)\).
 
 Adding \(v_0\) to \(W\) is \(O(1)\)
@@ -325,7 +324,7 @@ Updating \(\dist\),  \(O(\vert V\vert)\).
 With better data structure \(O(\vert E\vert + \vert V \vert log \vert V \vert)\).
 \end{enumerate}
 \subsection{Euro 2020 or Travelling Salesman Problem}
-\label{sec:orgc833eac}
+\label{sec:org42417fe}
 Watch a game in every one of \(13\) cities. We want to visit all \(13\) but as
 cheap as possible. The English football fans cannot return to the same
 country. A \(13\) vertex graph, between any two vertices, there is a price of
@@ -336,8 +335,8 @@ We are looking for a Hamilton cycle.
 Given graph \(G = (V, E)\) and \(w\colon E \rightarrow \R_{\ge 0}\). A cycle
 that does not repeat.
 \subsection{Complexity classes}
-\label{sec:orgac3f935}
-\(\P\), polynomial time running problem. 
+\label{sec:org0725bf3}
+\(\P\), polynomial time running problem.
 
 \begin{center}
 \begin{tabular}{rlllll}
@@ -349,42 +348,42 @@ that does not repeat.
 \end{tabular}
 \end{center}
 \section{Lecture 4 \textit{<2018-10-24 Wed>}}
-\label{sec:orgf394f90}
+\label{sec:orge283852}
 \subsection{Decision problems}
-\label{sec:org828b441}
+\label{sec:org5a2f9c7}
 Problems that output yes or no
 \subsubsection{Example}
-\label{sec:org57ecb50}
+\label{sec:orgf413b92}
 \begin{itemize}
 \item Is there a spanning tree of weight \(\le 42\). (Kruskal algorithm.)
 \item Is there a path of weight \(\le 405\) from \(u\) to \(v\)? (Djistra's algorithm.)
 \end{itemize}
 \subsection{Class P}
-\label{sec:org2d8ac1f}
-The set of all decision problems with a polynomial time algorithm. 
+\label{sec:orgf779cd1}
+The set of all decision problems with a polynomial time algorithm.
 \subsection{Traveling salesman problem}
-\label{sec:org577d4a5}
-We don't know if the problem is in \(\P\). 
+\label{sec:org5986dba}
+We don't know if the problem is in \(\P\).
 
 As a decision problem: There is a graph \(G = (V, E)\) and \(w\colon E
    \rightarrow \R_{\ge 0}\)., You ask what is the smallest weight Hamiltonian cycle. \footnote{"and the decision problem version ("given the costs and a number x, decide
 whether there is a round-trip route cheaper than x") is NP-complete."-Wikipedia}
 \subsubsection{Approximation algorithm}
-\label{sec:org09dd7fd}
+\label{sec:org60e4089}
 \textbf{Definition}: An \(\alpha\) approximation of TSP is an algorithm that turns a
  Hamiltonian cycle whose weight is within \(\alpha\) fraction of the min
  weight Hamiltonian cycle.\footnote{In general we don't know how to approximate the TSP, but we can do it with some extra conditions}
 \subsubsection{Extra conditions}
-\label{sec:org9c92d19}
+\label{sec:orgf64e8c3}
 Triangle inequality: the weight function satisfies the triangle inequality
 if every two vertices of the graph, the weight \(w(xy) \le w(xz) + w(zy)\).
 
-Examples: The usual Euclidean distance satisfies this. 
+Examples: The usual Euclidean distance satisfies this.
 A non-example is Airfare cost.
 \subsection{Approximation algorithm for TSP}
-\label{sec:orgd0854f5}
+\label{sec:orgcc81284}
 \subsubsection{Algorithm}
-\label{sec:org5e2f1ef}
+\label{sec:org3a03bfc}
 \textbf{Input}: a weight function \(w\colon E(K_n) \rightarrow \R_{\ge 0}\) with
 triangle inequality. (We assume that it is a complete graph.)
 
@@ -398,29 +397,29 @@ traversing each edge of \(T\) twice in both directions.
 \item Traverse \(W\), when hitting a vertex that was used before, we do a short
 cut. (Go instead to next vertex \(W\)) Do this iteratively.
 \end{enumerate}
-4 \textbf{Termination}: when all vertices are traversed, output \(C\). 
+4 \textbf{Termination}: when all vertices are traversed, output \(C\).
 
-We know that \(w(W) = 2w(T)\) and \(w(C) \ge w(W)\). 
+We know that \(w(W) = 2w(T)\) and \(w(C) \ge w(W)\).
 
 \(C^{*}\) is a minimum weight Hamilton cycle. How does this compare to the
 weight of the spanning tree. We know that \(w(C^{*}) \ge w(T)\). and thus
 \(w(C) \le 2 w(C^{*})\).
 \subsubsection{Running time}
-\label{sec:org59ea761}
+\label{sec:orga4c5be5}
 \begin{enumerate}
 \item Kruskal: \(O(n^2\log n)\)
 \item Closed walk \(W\), \(O(n)\).
 \item short cutting: \(O(n)\).
 \end{enumerate}
 \subsection{Hall's theorem}
-\label{sec:orgb102693}
+\label{sec:org6d56b59}
 If \(G = (A \cap B, E)\) a bipartite graph, then \(G\) has a matching \(A\) if and
 only if for every subset \(S \subset A\), \(\vert N(S) \vert \ge \vert S \vert\).
 
 The non-trivial direction implies that when there is no matching saturating
 \(A\), then there is an \(S \subset A\), \(\vert N(S) \vert < \vert S \vert\).
 \subsection{Class \(\NP\)}
-\label{sec:org1bba086}
+\label{sec:org77314c4}
 A decision problem is in class \(\NP\) if the YES answer can be verified
 efficiently (within time that is polynomial in variable size.) (In other
 words, there is a polynomial size certificate.)
@@ -430,17 +429,17 @@ The perfect matching problem is in NP. \footnote{Input is a graph \(G\) and the 
 Opposite of perfect matching: Does \(G\) has a \(PM\)? We can use Hall's
 condition as a certificate. Hence the problem is in NP.
 \subsection{Class \(\coNP\)}
-\label{sec:org54df82b}
+\label{sec:org6354587}
 Means that the problem is in \(NP\) and the negation of the problem is also in
 \(NP\).
 \subsection{About Hamilton path}
-\label{sec:org4b5a58e}
-The Hamilton path problem is in \(NP\). 
+\label{sec:org7b8a46b}
+The Hamilton path problem is in \(NP\).
 
 But the negation of the HAM is not known to be in \(NP\). In other words, we
 don't know if HAM is \(\coNP\).\footnote{The belief is that this is not true. This is one of the Millennium problems.}
 \subsection{Problem reduction}
-\label{sec:orgf600b69}
+\label{sec:orgfdaef04}
 Maximum weight spanning tree problem can be reduced to a minimum weight
 spanning tree. (You can solve the minimum weight spanning tree problem by
 inverting the sign of the edges.) Furthermore, it is a polynomial time
@@ -451,18 +450,18 @@ by the problem.
 
 If furthermore, the problem is in \(\NP\), then we call it \(\NP\) complete.
 
-Example: 3-SAT is \(\NP\) hard and also \(\NP\) complete. 
+Example: 3-SAT is \(\NP\) hard and also \(\NP\) complete.
 
 Karp came up with \(21\) natural \(\NP\) complete problems, all of them are \(\NP\)
 complete.
 \section{Lecture 5 \textit{<2018-10-30 Tue>}}
-\label{sec:org0245f3e}
+\label{sec:org33fd76c}
 \subsection{NP class}
-\label{sec:orgb7e03ea}
+\label{sec:orga43eec5}
 A yes/no problem is in class NP if the answer yes can be verified
 efficiently.
 \subsubsection{Examples}
-\label{sec:org91fe254}
+\label{sec:orgd50e3fe}
 \begin{enumerate}
 \item Does the bipartite graph have a perfect matching.
 \item Does the bipartite graph have no perfect matching.
@@ -470,15 +469,15 @@ efficiently.
 \item \textbf{Don't know} Whether a problem have no hamiltonian cycle.
 \end{enumerate}
 \subsection{P class}
-\label{sec:org3510bdc}
+\label{sec:org2c8719c}
 A yes/no decision problem is in P if the answer can be found in polynomial
 time. It is obviously true that \(P \subset NP\).
 \subsection{Co-NP}
-\label{sec:orgef10d28}
+\label{sec:org1a806ae}
 A yes/no problem is in the class Co-NP if the no-answer can be verified
 efficiently. Again trivially, \(P \subset NP \cap no-NP\).
 \subsubsection{Example of NP intersection co-NP}
-\label{sec:orgfbece7d}
+\label{sec:org0494265}
 \begin{enumerate}
 \item Perfect matching problem in bipartite graph is in the intersection.
 \item Is this graph 2-colorable.
@@ -488,9 +487,9 @@ of edges in an Eulerian edges. For the NO answer, we will be given a
 vertex of odd-degree.
 \end{enumerate}
 \subsection{Conjecture P \(\neq\) NP}
-\label{sec:orgdbfc111}
+\label{sec:org2e5fb4e}
 \subsection{Stronger conjecture of \(P \neq\) \(NP\) intersection \(co-NP\)}
-\label{sec:org7ad2f1c}
+\label{sec:org0ed4b21}
 Is there a factor of \(n < k\). This problem is in the intersection of NP and
 co-NP.
 
@@ -500,7 +499,7 @@ true. (The input size is in \(\log n\).)
 A problem in \(NP\) and co-NP and then trying to find a good characterization
 and then solving the problem.
 \subsection{NP completeness}
-\label{sec:org482aa0e}
+\label{sec:org29c8221}
 Subtle difference between easy and hard problem.
 \begin{enumerate}
 \item The graph is 2-colorable? is in P\footnote{Apparently there is a characterization that a graph is 2 colorable if and
@@ -511,14 +510,14 @@ only if it has no cycle.}
 The answer is always yes.
 \end{enumerate}
 \subsection{Hall's theorem}
-\label{sec:org74c14d6}
+\label{sec:org82585c2}
 If you have a graph \(G\) that is bipartite, then \(G\) has a perfect matching if
 and only if for every \(S\) inside \(A\), the \(\vert N(S) \vert \ge \vert S
    \vert\) and for every \(S \subset B\).
 \subsection{Necessary conditions for Hamiltonianity}
-\label{sec:org84a1457}
+\label{sec:orgaf87137}
 Dirac's theorem \(d(G) \ge n/2 \implies G\) is hamiltonian. \href{https://en.wikipedia.org/wiki/Hamiltonian\_path\#Bondy\%E2\%80\%93Chv\%C3\%A1tal\_theorem}{Wikipedia} (This is
-a sufficient condition.) For a cycle, this fails.   
+a sufficient condition.) For a cycle, this fails.
 
 Proposition: If a graph \(G\) is hamiltonian then \(\forall S \subset V(G)\),
 \(C(G\setminus S) \subset \vert S \vert\). (This is a necessary condition.)\footnote{Here \(C\) is the number of connected components in the graph.} \textsuperscript{,}\,\footnote{Peterson graphs can be used to make a lot of counter examples. This was
@@ -530,8 +529,8 @@ We can try to frame something like if \(t C(G\setminus S) \subset \vert S
    \vert\). For peterson graph \(t = 4/3\). There is a conjecture on if we can talk
 about a value of \(t\) and do stuff.
 \subsection{Does a graph have a perfect matching? Tutte's theorem}
-\label{sec:org3768b70}
-The question is whether this is in NP intersection co-NP. 
+\label{sec:orgcd6ed46}
+The question is whether this is in NP intersection co-NP.
 
 The hall's theorem was for bipartite graph.
 
@@ -548,7 +547,7 @@ cycle to the matching problem and arriving at a necessary condition (and suffici
 is at least one edge \(e_L \in M\) which has one vertex in \(b\) and the other in
 \(S\). These edge \(e_L\) are disjoint \(\implies\) \footnote{My condition} \textsuperscript{,}\,\footnote{\href{https://en.wikipedia.org/wiki/Tutte\_theorem}{Tutte's theorem}}
 \subsection{Proof of Tutte's theorem}
-\label{sec:org76011fe}
+\label{sec:org4d97a0d}
 Let \(G\) be a counter example with maximum number of edges.\footnote{Why can we do this? We fix the number of vertices, so this it actually
 makes sense.}
 
@@ -582,7 +581,7 @@ contradiction.)
 
 Case 2. \(G \setminus U\) is not a disjoint union of cliques. The idea is from
 two almost perfect matching of \(G\), create a perfect matching of \(G\) and two
-more edges, create a perfect matching. This leads to a contradiction. 
+more edges, create a perfect matching. This leads to a contradiction.
 
 Claim: In \(G, \exists x, u, v, w\) such that \(xu, xv, \in E\), \(uv, vw \notin
    V(G)\). \(w\) is anything that is not in the neighbourhod of \(x\) which is non
@@ -592,27 +591,27 @@ empty.\footnote{I think I missed some parts to the explanation.}
 
                    x .--------------------------- w
                     /.
-                   /  -\                           
-                 -/     \                          
-                /        -\                        
-               /           -\                      
-             -/              \                     
-            /                 -\                   
-           /                    \                  
-          /                      -\                
-        -/                         \               
-       /                            -\             
-      /                               -\           
-    -/                                  \          
-   /                                     -\        
+                   /  -\
+                 -/     \
+                /        -\
+               /           -\
+             -/              \
+            /                 -\
+           /                    \
+          /                      -\
+        -/                         \
+       /                            -\
+      /                               -\
+    -/                                  \
+   /                                     -\
 u .----------------------------------------. v
 
 
 \end{verbatim}
 \section{Lecture 6 \textit{<2018-10-31 Wed>}}
-\label{sec:org1993851}
+\label{sec:org6a4e572}
 \subsection{{\bfseries\sffamily TODO} Tutte's theorem proof}
-\label{sec:orgf14440b}
+\label{sec:org03fbb20}
 \(\Leftarrow\): G\$, a counter example with maximum number of edges.
 
 \textbf{Claim}: \(G+xy\) has a p.m. \(xy\in E(G)\), \(G\) has no p.m., \(\forall S \in
@@ -621,7 +620,7 @@ u .----------------------------------------. v
 \(U = \{v \colon deg(v) = n-1\}\) and \(n=\vert V(G)\vert\).
 
 Case 1: \(G \setminus U\) is the union of cliques. We are done, we use Tutte's
-condition for empty set. 
+condition for empty set.
 
 Case 2: Otherwise, there exists the diagram that I already drew. Our claim
 implies that there exists a perfect matching \(M_1\) in \(G + xw\) and also
@@ -641,21 +640,21 @@ If it is \(2\) \(\implies\) vertex participates in a cycle component.
 There was a diagram and the proof involved doing stuff on the diagrams. I
 don't understand what he did.
 
-The proof in the class was from bondy and murthy. \href{http://www.zib.de/groetschel/teaching/WS1314/BondyMurtyGTWA.pdf}{Bondy and murthy} page 76. 
+The proof in the class was from bondy and murthy. \href{http://www.zib.de/groetschel/teaching/WS1314/BondyMurtyGTWA.pdf}{Bondy and murthy} page 76.
 
 The wikipedia link seems to have the same proof.
 \subsection{Perfect matching is in NP intersection co-NP}
-\label{sec:orgd7fb2f7}
+\label{sec:org5cef359}
 Tutte's theorem tells us that the problem is in the intersection of NP and
 co-NP. The certificate for the yes case is a matching and for the No case is
 a case where the Tutte's theorem is false.
 
 The problem is also in P.
 \subsection{Corollary to hall theorem (Theorem of Frobenius)}
-\label{sec:org8770563}
+\label{sec:orgb4faa89}
 A \(k\) regular bipartite graph has perfect matching.\footnote{What is regular graph? Every vertex has the same number of neighbours.} (1-factor)
 
-A \(k\) factor is a spanning \(k\) regular subgraph. 
+A \(k\) factor is a spanning \(k\) regular subgraph.
 
 This is not true for general graphs. Example: odd cycles, they are \(2\)
 regular and 1-factor. Are there examples with even number of vertices.
@@ -663,15 +662,15 @@ regular and 1-factor. Are there examples with even number of vertices.
 
 
 \subsection{Theorem (peterson)}
-\label{sec:org864275c}
-A \(2k\) regular subgraph has a \(2\) factor. 
+\label{sec:org2e92fc3}
+A \(2k\) regular subgraph has a \(2\) factor.
 \subsection{Theorem (another peterson theorem)}
-\label{sec:org119c626}
+\label{sec:org057fc05}
 Every \(3\) regular graph without cut edges\footnote{What is a cut edge? A cut edge should mean that you remove an edge and
 the graph gets disconnected.} has a perfect matching. (Theorem in
 Bondy and Murthy) \footnote{An example of such a graph is Peterson graph.}
 \subsubsection{Proof}
-\label{sec:org0098fe7}
+\label{sec:org22b2810}
 The proof is component wise. Now we assume that \(G\) is connected.
 
 We will check that Tutte's condition holds. Then Tutte's theorem tells us
@@ -702,28 +701,28 @@ $$ 3\cdot o(G \setminus S) \le \textup{number of edges between odd components an
 
 Thus \(\cdot o(G \setminus S) \le \vert S \vert\)
 \subsection{Maximum matching problem}
-\label{sec:org2b85871}
+\label{sec:orgfab1dcb}
 In the decision problem formulation. Is there a matching of size \(k\) in the
 graph on \(n\) vertices.
 
-Is this problem in NP intersection co-NP? The problem is obviously in NP. 
+Is this problem in NP intersection co-NP? The problem is obviously in NP.
 
 For Bipartite graphs, we can provide the other verification by Konig's
 theorem.
 \subsection{Konig's theorem}
-\label{sec:orgfa5d5d4}
+\label{sec:org8d69dee}
 \(G\) is bipartite, then \(\alpha(G)=\beta(G)\). Here \(\alpha\) is the size of the
 largest matching and \(\beta\) is the size of smallest vertex cover.
 
 \(C \subset V(G)\), the vertex cover if \(\forall e \in E(G)\), \(e\cap C \neq
    \emptyset\).
 \subsection{Konigs on Maximal matching problem}
-\label{sec:orgd2779e3}
+\label{sec:org968f6bd}
 Suppose \(\alpha(G) = 88\), then konig gives a certificate to show that there
 exists a vertex cover of size \(88\). So this means that there are no matching
 of size more than \(89\).
 \subsection{Homework: a corollary of Tutt due to Berge}
-\label{sec:orgb7fc709}
+\label{sec:org8b81f90}
 If \(G\) is a arbitrary graph, then it is true that \(2\alpha'(G)\) is equal to
 the minimum of the following sum of quantities: \(\min \{ n - o(G\setminus
    S) + \vert S \vert \colon S \subset V(G) \}\).\footnote{If the graph satisfies tutt's condition, then \(\alpha\) should evaluate
@@ -733,9 +732,9 @@ It is easy to show one direction. But this is the maximum size, which is the hom
 
 This example would put the problem of maximum matching into the intersection.
 \subsection{How to find maximum matchings in polynomial time?}
-\label{sec:org84788cc}
+\label{sec:org2a96cf7}
 \subsection{Proposition about maximum matching}
-\label{sec:org294cc0b}
+\label{sec:org4757be4}
 IF \(M \subset E(G)\) is a maximum matching of \(G\), \(\iff\) there is no
 \(M\) augmenting path.
 
@@ -743,13 +742,13 @@ IF \(M \subset E(G)\) is a maximum matching of \(G\), \(\iff\) there is no
 other alternatively. One direction is easy. If \(M\) is a maximum matching,
 then there is no \(M\) augmenting path.
 \subsection{A M alternating path}
-\label{sec:org8ecc883}
+\label{sec:orgad1d31e}
 A path of \(G\) where edges of \(M\) alternate with non-edges of \(m\).
 
 An \(M\) alternating path that starts and ends in an unsaturated vertex is
 called \(M\) augmenting. \href{https://en.wikipedia.org/wiki/Saturation\_(graph\_theory)}{Wikipedia}
 \subsection{Using the characterization for Bipartite graph}
-\label{sec:orge0681b4}
+\label{sec:orgba6c745}
 \footnote{Apparently the problem for general graph is also in P. The algorithm for
 this graph was what lead to the definition of \(P\).} You have a matchin and then unsaturated vertices. The idea is to
 somehow extend the matching to the unsaturated edges.
@@ -777,17 +776,17 @@ somehow extend the matching to the unsaturated edges.
 
 \end{verbatim}
 \section{Lecture 7 \textit{<2018-11-06 Tue>}}
-\label{sec:org63b2659}
+\label{sec:org703f3bb}
 \subsection{Maximum matching is in P}
-\label{sec:orgc3add2b}
+\label{sec:org336b1c8}
 \subsubsection{Proposition}
-\label{sec:orgf6c9012}
+\label{sec:org2692696}
 \(M \subset E(G)\) is a matching in \(G\).
 
 \(M\) is a maximum \(\iff\) there is no \(M\) augmenting path in \(G\). (is
 \(M\) alternating if it starts and ends at an unsaturated vertex.)
 \subsubsection{Augmenting path algorithm}
-\label{sec:org26ea9ef}
+\label{sec:org009c358}
 Input: Bipartite graph \(G = (X \cap Y, E)\), a matching \(M \subset E\).
 Output: Either an \(M\) augmenting path or a cover of size \(\vert M \vert\).
 
@@ -800,13 +799,13 @@ then stop return a \(M\) augmenting path from \(U\) to \(y\). Else \(\exists w \
     X\), \(yw \in M\) update, \(T = T \cap \{y\}\) and \(S = S \cup \{w\}\). Update \(Q
     = Q \cup \{x\}\). \footnote{I missed a lot of details here.}
 \subsubsection{Proposition}
-\label{sec:orgcecd4b0}
+\label{sec:org0b502ee}
 \(G\) graph, \(M \subset E(G)\) is a matching. \(C \subset V(G) \implies \vert M
     \vert \le \vert C \vert\). Here \(C\) is the cover.
 
 The idea is that every cover has to be bigger than the matching.
 \subsubsection{{\bfseries\sffamily TODO} Proof of correctness}
-\label{sec:org9b34981}
+\label{sec:org2defa53}
 Stopping the algorithm: The algorithm can either stop with a \(M\) augmenting
 path or it can stop with a maximum matching or a cover.
 
@@ -820,24 +819,24 @@ If there is an edge from \(S\) to an unsaturated vertex \(y \in T\), then we
 would have immediately put this vertex into \(T\). These two cases are not
 possible.
 \subsubsection{Comments}
-\label{sec:org4a48c5c}
+\label{sec:org706c4ce}
 \(\vert M \vert = \vert T \vert + \vert X \setminus S\vert\). By the selection
 of \(S\) and \(T\), vertices of \(T\) are put into \(T\) where their \(M\) partner is
 put into \(S\).
 
 \(\implies\), \(S = U \cap M\) partners of vertices in \(T\).
 \subsubsection{Internet reference}
-\label{sec:org72945ca}
+\label{sec:org7e2eb4c}
 \url{http://www.columbia.edu/\~cs2035/courses/ieor8100.F12/lec4.pdf}
 \subsection{Theorem}
-\label{sec:org02b01aa}
+\label{sec:org808a5a7}
 Repeatedly applying APA to bipartite graph produces a maximal matching and
 minimal cover. The running time is \(O(V(G) \cdot e(G))\)
 
 If we repeat APA \(\le n/2\) times. One running of APA considers each edge
 \(\le 1\), implies \(O(e(G))\).
 \subsection{Matching with weights}
-\label{sec:orga99db70}
+\label{sec:org912607b}
 We have a weight function on the edges. \(w\colon E(K_{n, n}) \rightarrow \R\).
 
 The goal is to find a perfect matching \(M\) such that the weight of the
@@ -852,21 +851,21 @@ cover problem} is to find a cover of minimum weight.)
 
 The interesting part is that these two problems can be solved together.
 \subsection{Duality lemma}
-\label{sec:orgb65d6d4}
+\label{sec:org8fc63b3}
 For all perfect matching \(M\) and cover \((u, v)\) in a weighted bipartite graph
 \(G\), \(C(u, v) \ge w(M)\) (\textbf{Home work})
 
 \subsubsection{Corollary}
-\label{sec:org02d93e1}
+\label{sec:orgf8d4afa}
 If \(C(u, v) = w(M)\), then \((u, v)\) is a min-cost cover and \(M\) is a maximum
 weight matching.
 \subsection{Algorithm for Maximal weighted matching}
-\label{sec:orga9cbd0e}
+\label{sec:orgf5da67d}
 Equality: Subgraph \(G_{u, v} \subset K_{n, n}\), a spanning subgraph which has
 the same vertex set and the edges at those \(x\) and \(y\) where \(w_{i, j} =
    u_i+u_j\).
 \subsection{Hungarian algorithm}
-\label{sec:orgfbc13db}
+\label{sec:org3b574ed}
 Input: A matrix \(w_{i, j}\) of weights of the edges of \(K_{n, n}\) with points
 \(X = \{x_1, \cdots, x_n\}\), \(Y=\{y_1, \cdots, y_n\}\).
 
@@ -875,7 +874,7 @@ matching.
 
 if \(G_{u, v}\) has a perfect matching, then \((u, v)\) and \(M\) are both optimal.
 Initial \(u_i = \max \{W_{i, j}\colon j=\{1, \cdots, n\}\}\) and \(v_i =0\). Note
-that this is a cover and \(u_i + v_j \ge w_{i, j}\) for all \(i, j\). 
+that this is a cover and \(u_i + v_j \ge w_{i, j}\) for all \(i, j\).
 
 Iteration: Create \(G_{u, v}\), using APA and find a maximal matching \(M\) and a
 minimum vertex cover \(Q\) and \(Q\) will be equal to \(T \cup R\) (where \(T = Y
@@ -904,7 +903,7 @@ is okay.
       j}\).
 \end{enumerate}
 \section{Lecture 8 \textit{<2018-10-31 Wed>}}
-\label{sec:org4e75ca5}
+\label{sec:org0a8187c}
 \textbf{Input}: \((w_{i, j})_{i, j =1}^n\) weights or \(E(K_{n, n})\), \(X = \{x, \cdots,
    y_n\}\), \(Y = \{y, \cdots, y_n\}\)
 
@@ -999,7 +998,7 @@ The above table represents the cover in the original graph.
 Perfect matching of weight \(5 + 7 + 8 + 4= 28\) and \(C(u, v) = 3 + 7 + 3 + 6 +
    3+ 1 + 1 + 2 + 2 = 28\).
 \subsection{Proof}
-\label{sec:org287db82}
+\label{sec:org0dbc265}
 If we add edges at every step in the graph from which we get the matching, we
 would be done. But we are not exactly doing it.
 
@@ -1030,27 +1029,27 @@ This means that after \(\le \frac{n}{2}\) iterations, or \(M\) unsaturated \(y\i
 growing, and the matching can grow at most \(n/2\). Thus after \(\frac{n^2}{4}\)
 iterations.
 \subsection{Connectivity problem}
-\label{sec:org52204bb}
+\label{sec:orgb282c9f}
 \subsubsection{Definition (Vertex cut)}
-\label{sec:org2274cbd}
+\label{sec:org66c6026}
 A vertex cut of a graph \(G\) is a set of vertices such that \(G-S\) is
 disconnected.\footnote{In a good connected graph, you don't want a vertex set to be small.}
 \subsubsection{Definition (Connectivity of G)}
-\label{sec:org163a64b}
+\label{sec:org3174268}
 Connectivity of \(G\), denoted by \(\kappa\), is the minimum size of the vertex
 cut. If your graph is disconnected to begin with, then this is zero.
 
 By definition, for a clique, \(K(K_n) = n-1\). The empty graph is "considered"
 to be disconnected.
 \subsubsection{Examples}
-\label{sec:org1ddc9c5}
+\label{sec:orgf27dd49}
 \(K(K_{n, m})= \min\{n, m\}\). Proof: \(\le\), Given a vertex cut of size
 \(\min\{m, n\}\), smaller side
 
 \(\ge\) Now we remove \(\{m, n\} - 1\), vertices of \(S\), \(K_\{n, m\} - S\), and
 through them everybody else can be reached.
 \subsubsection{Proposition}
-\label{sec:org7828af5}
+\label{sec:orge5c20e9}
 For all \(G\), \(K(G) \le n-1\). The clique is \(K(G) = n-1 \iff G = K_n\).
 
 \(K(G) \le \delta(G)\), here \(\delta\) is the min degree. This is kinda clear,
@@ -1065,33 +1064,33 @@ From the proposition, the minimum degree is \(d\).
 I didn't write the rest of the argument. But doesn't look so hard. The proof
 was by induction.
 \section{Lecture 9 \textit{<2018-11-07 Wed>}}
-\label{sec:org8f59f39}
+\label{sec:orgbd2bd49}
 \subsection{Connectivity of graph}
-\label{sec:org58e3125}
+\label{sec:org79697e8}
 \(G \neq K_n\), then \(K(G) = \min \{ \vert S \vert \colon G - S \textup{ is not
    connected } \}\).
 
 \(G = K_n\), \(K(G) = n-1\).
 \subsection{Proposition}
-\label{sec:org9465b99}
+\label{sec:orgb067812}
 \(K(G) \le v(G) - 1\) and \(K(G) \le \delta(G)\).
 \subsection{Extremal questions}
-\label{sec:org819ce88}
+\label{sec:orgfc48581}
 Given \(n\) and \(k\), what is the smallest number \(e\) of edges that there exists
 as \(n\) vertex \(k\) connected  graph with \(e\) edges.
 \subsection{Proposition}
-\label{sec:orgbc12306}
+\label{sec:org9c44399}
 For all \(k \ge 2\), there exists a \(k\) connected graph on \(n\) vertices with
 the ceil of \((n-k)/2\) edges.
 \subsection{Theorem (Chvatal-Erdos)}
-\label{sec:org597794f}
+\label{sec:org5b50068}
 If \(G \neq K_2\) and its connectivity \(K(G) \ge \alpha(G)\). \(\alpha(G)\) is the
 size of the largest independent set of vertices. And \(\alpha'\) is the size of
 the largest matching \footnote{We use the convention that the prime is the corresponding to edges.}
 
 Then \(G\) is hamiltonian.
 \subsubsection{Proof}
-\label{sec:orgc820072}
+\label{sec:org6a738b0}
 Take a cycle in \(C \subset G\) which is the longest. If the length of \(C\) is
 \(n\), we are done. So we can assume the length of \(C\) is less than \(n\).
 
@@ -1113,7 +1112,7 @@ the deletion of strictly less than \(k\) vertices, which is a contradiction.)
 Notice that two adjacent vertices in \(C\) cannot have an edge to \(H\),
 otherwise, we can extend \(C\) by entering \(H\) and coming back. We call
 \(v_{i}^{+}\) denote the vertices that are the vertices that follows \(v_i\) on
-the cycle. We now know that all off \(v_{i}^{+}\) is distinct from \(v_i\). 
+the cycle. We now know that all off \(v_{i}^{+}\) is distinct from \(v_i\).
 
 We can see that there cannot be two edges between \(v_{i}^{+}\) and
 \(v_{j}^{+}\), one can see this by drawing an easy diagram, for one can form a
@@ -1123,7 +1122,7 @@ This implies that \(\{v_i^+, \cdots, v_k^+\}\) is an independent set of size
 \(k\). This union with any vertex in \(H\) is an independent set. This is a
 contradiction because \(\alpha(G) \ge k+1\), which is not what we assumed.
 \subsection{Definition (Disconnecting set of edges)}
-\label{sec:org02a580f}
+\label{sec:org17d9e4f}
 \(F\) is a disconnecting set of edges if its removal makes the graph
 disconnected, i.e., \(G-F\) is disconnected.
 
@@ -1133,22 +1132,22 @@ disconnected, i.e., \(G-F\) is disconnected.
 This is the \textbf{edge connectivity} of \(G\). \(G\) is called \(k\) edge connected,
 \(k'(G) \ge k\).
 \subsection{Definition}
-\label{sec:org52af10d}
+\label{sec:org729686f}
 A subset \(S \subset V(G)\), then an edge-cut of the Multi-Graph is an edge-set
 of the form \([S, \bar{S}] = \{xy \colon x = S, y \in \bar{S}\}\). For some
 subset \(S, \emptyset \neq S \neq V(G)\). Here \(\bar{S} = V(G)\setminus S\), the
 set theoretic complement.
 \subsection{Observation}
-\label{sec:org6901ea5}
+\label{sec:org318246d}
 \(K'(G) = \min\{[S, \bar{S}] colon S\subset V(G), S\neq \emptyset, S \neq V(G)
    \}\)
 \subsubsection{Proof}
-\label{sec:orgc48bb15}
+\label{sec:orge9743fd}
 If \(F \subset E(G)\) is a disconnecting set of edges with \(\vert F \vert
     \subset K'(G)\), then let \(S\) be a components of \(G - F\), then \([S, \bar{S}]
     \subset F\). Since \(F\) is minimal, this implies that \(F = [S, \bar{S}]\).
 \subsection{Bounds}
-\label{sec:orgfdcc897}
+\label{sec:org6e84784}
 \begin{enumerate}
 \item Initial bound, \(k'(G) \le \delta(G)\).
 \item \(\kappa'(G) > \kappa(G)\) is true for simple graphs.
@@ -1177,7 +1176,7 @@ left set to the other one, given by if \(w\in T_1, take xw\). \(w\in T_2
 Note \(S\) is just one side that is separate from the other side.
 \end{enumerate}
 \subsection{Is graph \(G\) \(k\) connected?}
-\label{sec:orga9b4ab9}
+\label{sec:org4d03e8b}
 It's definitely in co-NP. If it's not \(k\) connected, we get a set a vertices,
 and, we'll be able find it in polynomial time.
 
@@ -1190,7 +1189,7 @@ Hence polynomial.
 
 But we want to know about \(k\) connectivity, when \(k\) is the function of \(n\).
 \subsection{Theorem (A characterization of \(2\) connectivity)}
-\label{sec:org6e2508a}
+\label{sec:orgf00a43a}
 \(G\) is \(2\) connected if and only if for all \(x, y \in V(G)\), they are on a
 cycle.\footnote{It is true that for \(k\) connectedness, any \(k\) vertices are on a cycle,
 but the other direction is not true.}
@@ -1198,13 +1197,13 @@ but the other direction is not true.}
 \(G\) is \(2\) connected if and only if for all \(x, y \in V(G)\) if there exist
 \(2\) internally disjoint \(x, y\) paths. \footnote{This can be generalized in a very straightforward way.}
 \section{Lecture 10 \textit{<2018-11-14 Wed>}}
-\label{sec:orgfcd9e64}
+\label{sec:orgb723afb}
 \subsection{Menger's theorem (VMT)}
-\label{sec:orge205eb3}
+\label{sec:org96d5489}
 A graph \(G\) is \(k\) connected if and only if for all pairs of vertices \(x, y
    \in V(G)\), there exits \(K\) pairwise internally disjoint paths.
 \subsubsection{Remarks}
-\label{sec:org05207f1}
+\label{sec:org322140e}
 \begin{enumerate}
 \item This implies that \(k\) connectivity is in \(NP\) intersection co-NP. It
 takes \(O(kn)\) to check that they are internally disjoint. There are
@@ -1213,16 +1212,16 @@ takes \(O(kn)\) to check that they are internally disjoint. There are
 every \(x, y \in U(G)\) is a cycle.
 \end{enumerate}
 \subsubsection{Proof of (\(\Leftarrow\)) VMT}
-\label{sec:org75b8114}
+\label{sec:org2c45380}
 Suppose for a contradiction that there are \(k\) internally disjoint vertices
 between every vertices, and \(\kappa(G) \le k-1\). Let \(S\) be a such a
-separating set. 
+separating set.
 
 Let \(S\) be such a separating set which separates \(x\) from \(y\), then every
 \(xy\) path passes through \(S\), and pigeon-hole implies that two halfs share a
 vertex of \(S\). This is a contradiction.
 \subsubsection{Proof of \(\implies\) of VMT for \(k=2\)}
-\label{sec:org8e2b716}
+\label{sec:orgb26884b}
 Assume \(K(G) \ge 2\), need a cycle containing \(x, y \forall\) pairs \(x, y \in
     V(G)\).
 
@@ -1246,13 +1245,13 @@ cycle containing \(x\) and \(y\).
 
 If no such \(z\) exists, then it's straightforward to construct a cycle.
 \subsection{Edge Menger's theorem}
-\label{sec:orgf133deb}
+\label{sec:org255a70e}
 A graph \(G\) is \(k\) connected if \(\kappa'(G) \ge k\) if and only if for all \(x,
    y \in V(G)\), there exists pairwise edge disjoint \(x-y\) paths.
 \subsection{Local version of Menger's theorem}
-\label{sec:org587462b}
+\label{sec:org781bfbd}
 \subsubsection{Separating set}
-\label{sec:orgb08692a}
+\label{sec:org89caf90}
 \begin{enumerate}
 \item A set \(S \subset V(G)\) is an \(xy\) separating set if \(x\) and \(y\) are in
 different connected components of \(G\setminus S\).
@@ -1260,7 +1259,7 @@ different connected components of \(G\setminus S\).
 \item \(\lambda(x,y) = \max\) size of a family of pairwise disjoint \(xy\) paths.
 \end{enumerate}
 \subsubsection{Local version of theorem}
-\label{sec:orgaaafe46}
+\label{sec:orgef32ec8}
 For all graphs \(G\) and \(x, y \in G\), we require that \(x\) and \(y\) are not
 adjacent edges.
 
@@ -1268,7 +1267,7 @@ For all \(x, y\), \(\kappa'(x, y) = \lambda'(x, y) = \max\) size of family of
 pid \(xy\) paths. Here \(\kappa'\) is the minimum \(\vert F \vert\) such that \(x\)
 and \(y\) are in different components of \(G\setminus F\).
 \subsubsection{Local theorem implies Global}
-\label{sec:org7cc399e}
+\label{sec:org1a7f887}
 What we need to do is that for all \(x, y \in G\), \(\exists \ge k = \kappa(G)\)
 pid paths.
 \begin{enumerate}
@@ -1288,12 +1287,12 @@ then 1 implies that \(k-1\) pid \(xy\) paths in \(G-e\) and \(e=xy\) adds anothe
 path.
 \end{enumerate}
 \subsection{Flow networks}
-\label{sec:org8b939f3}
+\label{sec:orgfa9abdc}
 \subsubsection{Example}
-\label{sec:org88d9276}
-A graph was drawn. 
+\label{sec:org88a940a}
+A graph was drawn.
 \subsubsection{Definition}
-\label{sec:orgaded950}
+\label{sec:org91ae0a4}
 A network is a quadruple \((D, s, t, c)\) where \(D\) is a directed (multi)
 graph. \(s \in V(D)\) is the source vertex and \(t\) is the sink vertex. \(c
     \colon E(D) \rightarrow \R^{+}\) is the capacity.
@@ -1313,38 +1312,38 @@ The \textbf{value} of of a flow is the net flow into the sink, \(f^{-1}(t) -
 
 A \textbf{max flow} is a feasible flow with maximum \(\val(f)\).
 \subsubsection{Problem}
-\label{sec:orgb02aff4}
+\label{sec:orgd958ed5}
 Given a network flow, we need to find a max value and if possible find a max
 flow.
 \subsubsection{Homework}
-\label{sec:orgc2c75fa}
+\label{sec:orge93a0ce}
 For any \(Q \subset V(D)\), with \(s\in Q\) and \(t\in \bar{Q} = V(D) \setminus
     Q\), \(\val(f) = \sum_{e\in [Q, \bar{Q}]} f(e) - \sum_{e\in [\bar{Q}, Q]}
     f(e)\)
 \subsubsection{Definition}
-\label{sec:org391c633}
+\label{sec:org54deab1}
 Given \(Q \subset V(D)\), \(\bar{Q} = V \setminus Q\), with \(s\in Q, t\in
     \bar{Q}\), the capacity of the cut is capacity \(\cap[Q, \bar{Q}] = \sum_{e\in
     [Q, \bar{Q}] c(e)}\)
 \subsubsection{Lemma}
-\label{sec:org5bd02b7}
+\label{sec:orged5b090}
 Weak duality: If \(f\) is a feasible flow and \([Q, \bar{Q}]\) a source/sink
 cut, then the value of the flow \(\val(f) \le \cap([Q, \bar{Q}])\)
 \begin{enumerate}
 \item Proof
-\label{sec:org48308a3}
+\label{sec:orgc8f0e9b}
 Fix \(f\) and \([Q, \bar{Q}]\). \(\val(f) = \sum_{[Q, \bar{Q}]} f(e) -
      \sum_{[\bar{Q}, Q]} f(e) \le \sum_{[Q, \bar{Q}]} c(e) - 0 = \cap([Q,
      \bar{Q}])\)
 \end{enumerate}
 \subsection{Theorem (Ford-Fulkerson) (Max-flow min-cut theorem)}
-\label{sec:orgefb2a4f}
+\label{sec:org8c9db2c}
 Let \(f\) be a flow of max value and \([Q, \bar{Q}]\) a source-sink cut of
 minimum capacity, then the \(\val(f) = \cap([Q, \bar{Q}])\).
 \section{Lecture 11 \textit{<2018-11-20 Tue>}}
-\label{sec:org51a4d02}
+\label{sec:orged5ce24}
 \subsection{Network}
-\label{sec:org7178bc8}
+\label{sec:org307a260}
 \(D\) is a directed multigraph. \(s = V(D)\), the source vertex and \(t \in V(D)\)
 the sink vertex and \(c\colon E(D) \rightarrow \R_{\ge 0}\) capacity
 function.
@@ -1361,7 +1360,7 @@ whatever goes into the sink \(\val(f) = f^{-}(t) - f^{+}(t)\).
 
 The \textbf{maximum flow} is a feasible flow of maximum value.
 \subsection{Weak duality}
-\label{sec:org4be890f}
+\label{sec:org4e4216d}
 For every feasible flow \(f\) and source sink cut \([S, \bar{S}]\), the value of
 the \(f \le \cap(S, \bar{S})\), in particular, the equality happens if \(f\) is a
 maximum flow and \([S, \bar{S}]\) is a min-cut.
@@ -1372,14 +1371,14 @@ source sink cut if \(s\in S\) and \(t\in \bar{S}\).
 \([S, \bar{S}]\) is a min cut if its capacity \(\cap(S, \bar{S}) = \sum_{u \in
    S, v \in \bar{S}} c(u, v)\) is minimum among source/sink cut.
 \subsection{Max Flow Min cut theorem (Ford-Fulkerson, 1956)}
-\label{sec:org5bbd087}
+\label{sec:org3b4780e}
 Let \((D, s, t, c)\) be a network. Let \(f_{\max}\) be a max flow on \(D\) and
 \([S_{\min}, \bar{S}_{\min}]\) a min cut, then \(\val(f) = \cap (S_{\min},
    \bar{S}_{\min})\).
 
 \href{https://en.wikipedia.org/wiki/Ford\%E2\%80\%93Fulkerson\_algorithm}{Wikipedia}
 \subsubsection{Proof}
-\label{sec:org2c1219f}
+\label{sec:org245b760}
 \(\le\) direction is just the weak duality.
 
 \(\ge\) direction. We will find a source sink cut such that the capacity of
@@ -1395,7 +1394,7 @@ augmenting path from \(s\) to \(t\), then \(f\) is not maximum, but we know that
 definition here means the same definition except that the end vertex need not be
 the sink.}
 
-\(t\in \bar{S}\), \(s\in S\), 
+\(t\in \bar{S}\), \(s\in S\),
 \begin{enumerate}
 \item \([S, \bar{S}]\) is a source/sink cut.
 \item \((u, v) \in [S, \bar{S}]\), \(f(u,v) = c(u, v)\). \((u, v) \in [\bar{S}, S]\)
@@ -1406,10 +1405,10 @@ Now we see that the capacity of the cut \(\cap(S, \bar{S}) = \sum c(u, v) =
     \sum_{(u, v) \in [S, \bar{S}] f(u, v) - \sum_{(u, v) \in [\bar{S}, S]} f(u,
     v) = \val(f_\max)\) the last statement is a homework problem.
 \subsection{Augmenting path}
-\label{sec:orga85f1a3}
+\label{sec:orgf5b0368}
 An \(s, t\) path \(s = v_0e_1v_1e_2v_2 \cdots v_{k-1}e_k v_{k} = t\) in the
 underlying undirected graph \(G\) of a network \(D\). This is called an
-\$f\$-augmenting path if for every \(i\), 
+\$f\$-augmenting path if for every \(i\),
 \begin{enumerate}
 \item \(f(e_i) < c(e_i)\) is true if \(e_i\) is a "forward" edge.
 \item or \(f(e_i) > 0\) if \(e_i\) is a backward edge.
@@ -1422,7 +1421,7 @@ forwards and \(f(e)\) when \(e\) is backward.
 If we define a \(f\) augmenting path, we can improve the value of the path. You
 can improve the value of the path by the tolerance of the path.
 \subsection{Lemma}
-\label{sec:orgfca617e}
+\label{sec:orgbffab44}
 Take a feasible flow and an \(f\) augmenting path with tolerance \(z\), then we
 define a new flow \(f'\) on the edges such that \(f'(e) = f(e) + z\) if \(e\) is
 forward in \(P\) and \(f(e) - z\) if \(e\) is a backward edge. And if the edge is
@@ -1430,25 +1429,25 @@ not on the path, you do nothing.
 
 Then \(f'\) is feasible and the \(\val(f') = \val(f) + z\).
 \subsubsection{Proof}
-\label{sec:org7ca32a3}
+\label{sec:org502b4ad}
 Capacity constraints hold by the definition of \(z\).
 
 Conservation constraints holds because: if we have a vertex \(v\in V(P)\),
-then. 
+then.
 
 We had four cases and four diagrams. Basically given a vertex, there is one
 vertex leaves the vertex and one vertex that comes to \(z\). We can argue for
 each of these cases.
 \subsection{Corollary}
-\label{sec:org70435ea}
+\label{sec:orgc5a096b}
 If there exits an \(f\) augmenting path implies that \(f\) is not maximum.
 \subsection{Local Vertex Menger's theorem}
-\label{sec:org677bbf3}
+\label{sec:org11163fb}
 For all \(x, y \in V(G)\), \(xy\notin E(G)\), \(\kappa(x, y) = \lambda(x, y) =
    \max\{\vert P \vert \colon P\) is a set of pairwise internally disjoint \(x, y\)
 path \(\}\).
 \subsubsection{Proof}
-\label{sec:org41a8994}
+\label{sec:orgdb65177}
 The idea is to build a network so that the Ford-Fulkerson theorem implies
 it.
 
@@ -1488,9 +1487,9 @@ Actually this part is kinda obvious. We need to come up with an algorithm
 that produces internally disjoint paths for max capacity. We can get this
 from the Ford-Fulkerson algorithm.
 \section{Lecture 12 \textit{<2018-11-21 Wed>}}
-\label{sec:org1664e64}
+\label{sec:org8ac228d}
 \subsection{LMVT proof}
-\label{sec:org765239e}
+\label{sec:org7d60e05}
 \(V(D) = \{u^{+}, u^{-}, u \in V(D)\}\)
 
 \(E(D) = \{u^{+}, v^{-1}, uv \in E(G)\} \cup \{(v^{-1}, v^{+}\colon v\in
@@ -1505,7 +1504,7 @@ from the Ford-Fulkerson algorithm.
 The maximum value of a feasible flow is the minimum capacity \((S, \bar{S}) =
    \kappa(x, y)\).
 \subsection{Ford Fulkerson algorithm}
-\label{sec:org47ec6a1}
+\label{sec:org191392a}
 \textbf{Initialization}: Network \((D, s, t, c)\). Choose an initial flow \(f \eq 0\).
 
 \textbf{Iteration}: Look for augmenting paths to improve the algorithm. Explore
@@ -1522,12 +1521,12 @@ else return \(f\) as max flow and \([S, \bar{S}]\) as min cut with \(\val(t) =
     \cap(S, \bar{S}\)
 
 \subsubsection{Integrability theorem}
-\label{sec:org35743ec}
+\label{sec:orgcb74b97}
 If \(c\) is a function from the edges to the natural numbers, then the
 Ford-Fulkerson algorithm terminates with a flow with integer values.
 \begin{enumerate}
 \item Proof
-\label{sec:org74085ec}
+\label{sec:org71e0964}
 Proof is by induction on the number of times the flow has been improved.
 And noting that the tolerance of any \(f\) augmenting path is integer since
 both are integers and hence the improved flow will also be an integer.
@@ -1535,12 +1534,12 @@ both are integers and hence the improved flow will also be an integer.
 The algorithm hence terminates in at most maximum of the capacity steps.
 \end{enumerate}
 \subsubsection{Corollary}
-\label{sec:org91902f3}
+\label{sec:org7c1f138}
 If the capacities are integers, then there exists a maximum flow that can be
 represented as the flow of \(\val(f)\) many unit flows \(f = g_1 + g_2 +
     \cdots + g_\val(f)\) with \(\val g_i = 1\).
 \subsubsection{Continuation}
-\label{sec:org4b859bf}
+\label{sec:org44aed23}
 By the IT theorem there exist flows \(g_1, \cdots, g_k\) from \(x^+\) to \(y^-\)
 each of these are the form \(x^+v_{i,1}^-v_{i,1}^+v_{i, 2}^+, \cdots,
     v_{i1,l_1}^-v_{i1,l_1}^+y^-\)
@@ -1548,7 +1547,7 @@ each of these are the form \(x^+v_{i,1}^-v_{i,1}^+v_{i, 2}^+, \cdots,
 Hence the \(xy\) path \(xv_{i, 1}v_{i, 2} \cdots v_{i, e_1}y\) in \(G\) are
 pairwise internally disjoint paths.
 \subsection{Partitioning triples}
-\label{sec:org560de12}
+\label{sec:orgf11e213}
 We want to partition \(\binom{n}{3}\) triples into "perfect matchings" that are
 pairwise disjoint. You need to have \(3 \vert n\)
 
@@ -1558,14 +1557,14 @@ For \(6\) vertices, we could take the set and the complement. Which is just
 \(\binom63\).\footnote{I don't understand this. Shouldn't we multiply this by some factorial?
 \textbf{Answer} the key is pairwise disjoint.}
 \subsection{General version of Partitioning}
-\label{sec:org912c2f8}
+\label{sec:org99b062a}
 Let \(k, n\) integers and \(k\vert n\). Is it possible to partition the family
 into \(\binom{n}{k}\) sets into pairwise disjoint perfect matchings. Perfect
 matching is a set of \(n/k\) pairwise disjoint edges.
 
 The answer is yes for every \(k\).
 \subsubsection{Definition}
-\label{sec:orgf577499}
+\label{sec:org731eb37}
 \(m = n/k\) is the number of sets in the perfect matching.
 
 \(M = \binom{n}{k}/(n/k) = \binom{n-1}{k-1}\) The number of perfect matchings needed
@@ -1574,16 +1573,16 @@ Given an integer \(1\le l \le n\) a \(m\) partition of \([l]\) is a multi-set \(
     = \{A_1, \cdots, A_m\}\) consisting of pairwise disjoint sets whose union is
 \([l]\). (\footnote{Repetition is allowed only for \(\emptyset\). Because sets are disjoint.})
 \subsubsection{Remark}
-\label{sec:org816ebf3}
+\label{sec:orgb441286}
 Restriction of a perfect matching to \([l]\) is a \(m\) partition.
 \subsubsection{Proposition}
-\label{sec:org00b6fcd}
+\label{sec:orgd66f0d9}
 For every \(l\) there exists \(M\), \(m\) partitions of \([l]\), called \(A_1,
     \cdots, A_2, \cdots, A_M\) such that for every subset of \([l]\), occurs in
 exactly \(\binom{n-l}{k-\vert S\vert}\) of the \(m\) partitions. (The empty set is always
 counted with multiplicity)
 \subsubsection{Remarks}
-\label{sec:org9d8e504}
+\label{sec:orgd2c34e9}
 \begin{enumerate}
 \item If \(\vert S \vert > k\), the statement says it occurs \(0\) times. Only \(\vert
        S \vert \le k\) occurs.
@@ -1594,7 +1593,7 @@ are perfect matchings consisting of \(k\) sets that partition
 \(\binom{n}{k}\). Thus the theorem is proved.
 \end{enumerate}
 \subsubsection{Proof of Proposition}
-\label{sec:org729d738}
+\label{sec:orgafcecda}
 When \(l = 1\), \(A_i = \{\{1\}, \emptyset, \emptyset, \cdots, \emptyset\}\)
 (the empty set occurs for \(m-1\) number of times.)
 
@@ -1605,11 +1604,11 @@ When \(s\) is the empty set. Then \(S\) should occur \(\binom{n-1}{k-0} =
     \binom{n-1}(k}\). Count: \(M(m-1) = \binom{n-1}{k-1}(n/k - 1)\) this is true as
 well. I missed the rest of the proof.
 \section{Lecture 13 \textit{<2018-11-27 Tue>}}
-\label{sec:org8087efe}
+\label{sec:org6e080e5}
 \subsection{Colorings of graphs}
-\label{sec:org10426ab}
+\label{sec:org0c72a9b}
 \subsubsection{Example}
-\label{sec:orga78b97c}
+\label{sec:orgd3fe683}
 100 employees and \(6\) projects. They have meetings. The company tries to
 schedule the meetings. Some employees are in different projects. So you
 cannot schedule them at the same time.
@@ -1618,13 +1617,13 @@ The projects: \(A_1, A_2, \cdots, A_6 \subset S\)
 
 Schedule: \(A_i \cap A_j \neq \emptyset \implies\), meeting times are
 different from \(A_j\). Minimize the number of hours your teams spend with
-meetings. 
+meetings.
 
 We form a graph with \(A_i\) and form edges when \(A_i \cap A_j \neq
     \emptyset\). We want to color the graphs so that the adjacent vertices have
 different color.
 \subsection{Definition}
-\label{sec:orgd271ea8}
+\label{sec:org2e57c6c}
 \(X \colon V(G)\rightarrow [s]\) is a proper vertex colouring of \(G\) if
 \(\forall uv \in E(G)\), \(X(u) \neq X(v)\).
 
@@ -1633,7 +1632,7 @@ different color.
 The chromatic number is the minimum number of colors that can make it
 colorable.
 \subsection{Complexity}
-\label{sec:org603f7d3}
+\label{sec:org50c68dd}
 Is this graph \(k\) colorable? A decision problem.
 
 For \(k=2\), it is equivalent to being bipartite. And is in P for this case.
@@ -1643,20 +1642,20 @@ problem is in NP.
 
 It is not know that the problem is in Co-NP.
 \subsection{Giving lower bounds for chromatic number}
-\label{sec:org443e507}
+\label{sec:orgd61a036}
 \(X(G) \ge \omega(G)\). This is an obvious bound.
 \subsection{Proposition}
-\label{sec:org4f81a05}
+\label{sec:org916619c}
 \(X(G) \ge \frac{v(G)}{\alpha(G)}\)
 \subsubsection{Proof}
-\label{sec:org6d2a4b3}
+\label{sec:orged7f9e2}
 Was too quick
 \subsection{Tightness of \(X(G)\) and \(\omega(G)\)}
-\label{sec:org654bb50}
+\label{sec:orgb9f1daf}
 Cliques, Bipartite graph (and complements), perfect graphs.
 \subsection{Non-tightness \(X(G) > \omega(G)\)}
-\label{sec:org29ec043}
-A simple example is odd cycle. Also for their complements. 
+\label{sec:orgc516bc4}
+A simple example is odd cycle. Also for their complements.
 
 \href{https://en.wikipedia.org/wiki/Mycielskian}{Wikipedia}: Mycielskian construction. \(\omega(G) = 2\), but \(X(G) > 10^10\).
 
@@ -1664,15 +1663,15 @@ Random graphs: \(G = G(n, 1/2)\) and \(\omega(G) = 2\log n\) and \(X(G) = n/(2
    \log n)\). (This wasn't proven.) The result shows that the last proposition is
 asymptotically tight.
 \subsection{Hajos conjecture}
-\label{sec:orgf5a044d}
+\label{sec:org2d34c67}
 \href{https://en.wikipedia.org/wiki/Haj\%C3\%B3s\_construction}{Wikipedia} There exists \(K_r\) subdivisions \(\Leftimplies X(G) \ge r\).
 
 True for \(r = 2, 3\). For 3, we have an odd cycle.
 \subsection{Dirac theorem}
-\label{sec:org12ab171}
+\label{sec:orgb2d40cf}
 Hajos conjecture is true for \(k=4\).
 \subsubsection{Proof}
-\label{sec:org7499ae4}
+\label{sec:orgdb9f130}
 We'll use induction on \(n\), the number of vertices.
 
 Base case: \(n=4\), the smallest \(n\) for which the graph is \(3\) colorable.
@@ -1717,19 +1716,19 @@ between \(x\) and \(v\). This can be used to construct a \(K_4\) subdivision.
 A lemma: If \(G\) is \(k\) connected and \(G^{*}\) is an extra vertex plus edges
 to \(k\) vertices of \(G\), then \(G^{*}\) is also \(k\) connected.
 \subsection{Counter examples of Hajos theorem for \(k\ge 7\)}
-\label{sec:orgd3d8672}
+\label{sec:orgf59c29b}
 Still open for \(k = 5, 6\).
 \subsection{Hadwiger Conjecture}
-\label{sec:org474b089}
+\label{sec:orgb7f1a31}
 \(X(G) \ge k\) implies that \(K_r\) minor.
 \section{Lecture 14 \textit{<2018-11-27 Tue>}}
-\label{sec:org8200bc0}
+\label{sec:org378987c}
 \subsection{Proposition}
-\label{sec:org5ce1c00}
+\label{sec:org72a1325}
 For all \(X(G) \le \Delta(G) + 1\)
 \subsubsection{Proof}
-\label{sec:orgcd16612}
-A greedy algorithm. 
+\label{sec:org15bd27b}
+A greedy algorithm.
 
 Input: ordering of the vertices, \(v_1, \cdots, v_n\) of \(V(G)\)
 
@@ -1738,17 +1737,17 @@ element, look at the neighbours, and assign the element a color that is the
 minimum of number that doesn't clash with neighbours.
 
 Claim: The greedy algorithm produces a proper coloring of \(G\) for every
-ordering of \(V(G)\). 
+ordering of \(V(G)\).
 
 The number of colors of the greedy algorithm uses is not more than the
 \(\Delta(G) + 1\).
 \subsubsection{Characterize the extremal cases}
-\label{sec:orgb92fad6}
+\label{sec:orgc0bf18b}
 \subsection{Theorem (Brooks)}
-\label{sec:orgde36c36}
+\label{sec:orga5f6a8b}
 \(G\) is connected, then \(X(G) = \Delta(G) + 1 \iff G = K_n or C_{2l+1}\)
 \subsubsection{Proof}
-\label{sec:org8028c8e}
+\label{sec:org9b1d981}
 One direction is obvious (\(\Leftarrow\))
 
 Approach: Try to Color with greedy with different orderings and conclude
@@ -1774,7 +1773,7 @@ This is possible with at most \(\Delta(G)\) colors, since the degree of
 
 So \(G\) must be at least \(2\) connected.
 
-We are still in \(T\) ordering. 
+We are still in \(T\) ordering.
 
 If there are two edges that \(v_1, v_2\) doesn't have an edge and \(G- \{v_1,
     v_2\}\) is not connected. If this is a strongly connected graph, then we will
@@ -1789,33 +1788,33 @@ Take a vertex \(x\), \(d(x) < n-1\). Take a \(y\in N(x)\) such that \(z \in N(y)
 Case 2: \(\kappa(G - x) = 1\). We need a structure theorem. And we'll come
 back to this.
 \subsection{Definition}
-\label{sec:org3c696c1}
+\label{sec:org4d42f24}
 Given a graph \(G\), a block is a set of vertices \(B \subset G\), is a maximal
 connected subgraph of \(G\) without a cut vertex. Means that \(B\) itself is \(2\)
 connected and for every \(B'\), such that \(B \subset B' \subset G\), \(B'\) is not
 \(2\) connected.
 \subsection{Lemma}
-\label{sec:org197628b}
+\label{sec:org3b217c4}
 \(B_1, B_2\) are blocks of \(G\), then \(\vert V(B_1) \cap V(B_2) \vert \le 1\).
 \subsubsection{Proof}
-\label{sec:org9208911}
+\label{sec:orgad89859}
 If \(\vert V(B_1) \cap V(B_2) \ge 2\), \(B_1\) and \(B_2\) are \(2\) connected,
 then, \(x\) and \(y\) is indeed a section \(V(B_1) \cap V(B_2)\), \(x \neq y\). We
 want \(z_1, z_2 \in V(B_1) \cap V(B_2)\) cycle \(z_1, z_2 \in C\). They are
 disjoint (the lemma that we used yesterday.) This means that \(B_1 \cap B_2\)
 are \(2\) connected and we have a contradiction
 \subsection{Some structure}
-\label{sec:orgcecc571}
+\label{sec:orgc54acea}
 The block/cut-vertex graph of \(G\) is a bipartite graph with vertex set \(\{B
    \subset G\colon B \textup{ is a block}\} \cup \{v \in V(G) \colon v \textup{
    is a cut vertex}\}\)
 
 Block \(B\) is adjacent to cut-vertex \(v\) if \(v \in V(B)\)
 \subsection{Proposition}
-\label{sec:orge33f6de}
+\label{sec:org60bd60d}
 The block/cut-vertex graph of a connected graph is a tree.
 \subsubsection{Proof}
-\label{sec:orgfe49b8d}
+\label{sec:org31b496d}
 Connectedness follows from the connectedness of \(G\). Every vertex is
 contained in at least one block.
 
@@ -1826,7 +1825,7 @@ Take shortest cycle \(B_1 v_1 B_2v_2 \cdots B_lv_l \implies B_1 \cap \cdots
     B_l\) is also \(2\) connected, because pair of vertices are on a cycle. Now a
 contradiction to the maximality of \(B_i\).
 \subsection{Going back}
-\label{sec:org741b915}
+\label{sec:orge7d694f}
 We were doing \(K(G - x) = 1\).
 
 Now use the structure theorem to \(K(G-x)\). Adding back \(x\), \(x\) must have a
@@ -1838,16 +1837,16 @@ We can pick \(v_1, v_2\) in two different leaf block. If we remove \(v_1\) and
 
 If \(G \neq G\), \(d(x) \ge 3\), so \(G - v_1 - v_2\) is connected.
 \section{Lecture 15 \textit{<2018-12-05 Wed>}}
-\label{sec:org2bb418f}
+\label{sec:org979c212}
 \subsection{Formalizing a certain graph coloring}
-\label{sec:orgc95ae20}
+\label{sec:org25385b6}
 Given a graph \(G\), an assignment of subsets (lists) to the vertices \(L \colon
    V(G) \rightarrow 2^\N = P(\N)\), then \(f\colon V(G) \rightarrow \N\) is a
 proper \(L\) list coloring with respect to \(L\) if for every \(v \in V(G)\), the
 color \(c(v) \in L(v)\) (choose color from representative list) and \(\forall xy
    \in E(G), c(x) \neq c(y)\) (proper)
 \subsection{Remark}
-\label{sec:orge6cda46}
+\label{sec:orged3bade}
 Usual proper coloring is just a list coloring with \(L(v) = [k]\).
 
 Graph \(G\) is \(k\) list colorable (k-choosable) if \(\forall L \colon V(G)
@@ -1856,42 +1855,42 @@ Graph \(G\) is \(k\) list colorable (k-choosable) if \(\forall L \colon V(G)
 The parameter that we're looking for is \(\chi_l(G) = \min \{k \colon G
    \textup{is k-colorable}\}\).
 \subsection{Claim}
-\label{sec:orgbe6f021}
+\label{sec:org72fdea4}
 \(\chi_l(G) \ge \chi(G)\)
 \subsubsection{Proof}
-\label{sec:orgd81ed0b}
+\label{sec:org539fb6e}
 If a graph is \(k\) list colorable, then it is also \(k\) colorable.
 
 We have already seen that for \(\chi_l(K_{3, 3}) > \chi (K_{3, 3}) = 2\). How
 did we prove this? We gave certain lists with \(2\) elements. But \(K_{3, 3}\)
 is not properly list colorable with respect to \(L\).
 \subsection{Example}
-\label{sec:org7a68f7c}
+\label{sec:org1c577fb}
 \(\chi_l(K_{2, 2}) = 2 = \chi(K_{2, 2})\).
 
 We know that it is at least \(2\), by previous claim. To show the other way, we
 need some stupid case analysis.
 \subsection{Proposition}
-\label{sec:orgc87c4ee}
+\label{sec:org7ae3215}
 \(\chi_l(C) \le \Delta(G) + 1\), the proof is identical and uses greedy
 coloring algorithm with arbitrary order.
 \subsubsection{Proof}
-\label{sec:org1c6a746}
+\label{sec:org4fcae26}
 Take an arbitrary assignment \(L \colon V(G) \rightarrow \binom\N{\Delta +
     1}\), run the greedy algorithm. In round \(i\), we color \(v_i\) and look at the
 neighbours. Since the degree is at most \(\Delta(G)\), we'll be able to assign
 a color from \(\{1, \cdots, \Delta + 1\}\).
 \subsection{Complexity}
-\label{sec:orgdf5943a}
+\label{sec:orgea3eb77}
 It's not known to be in NP or in co-NP.
 \subsection{Proposition}
-\label{sec:org9f9e1d2}
+\label{sec:orgc0ec12b}
 For every \(k, \chi_l(K_{m, m}) > k\), where \(m = \binom{2k-1}{k}\)
 
 We know that the regular coloring of this should be \(2\), but the list
 coloring can be large.
 \subsubsection{Proof}
-\label{sec:org636994a}
+\label{sec:org86872cb}
 It is similar to how we did \(K_{3, 3}\).
 
 For each vertex, we assign it a \(k\) subset of \(2k-1\). We can assign each \(m\)
@@ -1899,18 +1898,18 @@ in the top and bottom uniquely in this way.
 
 We look at the colors on the bottom vertices and on the top vertices.
 Because it is a complete graph, these should be disjoint. This means that
-one of the top or bottom should have colors of size \(< k\). 
+one of the top or bottom should have colors of size \(< k\).
 
 Let's say \(C_x\) and \(C_y\) are the top and bottom vertices.
 
 Say \(\vert C_x \vert \le k - 1\). Take a list \(L(v_0) \cap C_x \neq
     \emptyset\), but this is a contradiction. This is a contradiction.
 \subsection{4 color theorem}
-\label{sec:orgc50c12e}
+\label{sec:orgbac725e}
 If \(P\) is a planar graph, then one can color it with \(4\) colors. Proof used
 computers.
 \subsection{5 color theorem}
-\label{sec:orgb2d48a6}
+\label{sec:org4d8216b}
 A planar graph has 5 coloring. What about list coloring? Can planar graphs be
 colored by \(4, 5, 6\) colors?
 
@@ -1920,13 +1919,13 @@ colorable.
 A Mirzakhani graph is an example of a planar graph with \(\chi_l(G) \ge 5\).
 The graph wasn't the first example, but a simple one.
 \subsection{Theorem (Thomasson)}
-\label{sec:org6a224fa}
+\label{sec:org66f5b61}
 Every planar graph is \(5\) list colorable.
 \subsubsection{Proof using induction}
-\label{sec:org51ad696}
+\label{sec:org23007dd}
 Stronger statement: If \(G\) is a plane graph, with an outer face bounded by a
 cycle \(C\) and \(L \colon V(G) \righatrrow 2^\N\) is a list assignment such
-that 
+that
 \begin{enumerate}
 \item \(\exists v_1v_2 \in E(C)\), \(\vert L(v_1) \vert = \vertL(v_2)\vert = 1\),
 \(L(v_1) \cap L(v_2) = \emptyset\).
@@ -1965,9 +1964,9 @@ neighbour of \(v_3\), but, not on the cycle. \(L^{*}(v) = L(v) \setminus\{x,
      y\}\), and now color by induction. Extend \(c(v_3)\), choosing a color \(x\) or
 \(y\), which is not equal to the color of \(v_{3+1}\).
 \section{Lecture 16 \textit{<2018-12-11 Tue>}}
-\label{sec:orgaf3ce26}
+\label{sec:orgebdcbec}
 \subsection{Definition}
-\label{sec:orgc6ffa54}
+\label{sec:orge0ed91c}
 A function \(c\colon E(G) \rightarrow [k]\) is called a \(k\) coloring. \(f\) is
 proper if incident edges get different colors.
 
@@ -1975,9 +1974,9 @@ A multi graph is \(k\) edge colorable if there exists a proper \(k\) edge
 coloring of \(G\), \(\chi'(G) = \min \{k \colon G \textup{ is k edge
    colorable}\}\).
 \subsection{Examples}
-\label{sec:org4ad52ab}
+\label{sec:orgf956cb6}
 \subsubsection{Clique}
-\label{sec:org426959e}
+\label{sec:orgd2d8127}
 For edge, it's 1. For a triangle, it is \(2\). For \(K_4\), it is \(3\).
 
 For \(K_5\), we can see that each coloring forms a matching. So \(K_5\) can't
@@ -1986,14 +1985,14 @@ have \(K' = 4\), since there are no perfect matchings.
 General case, when \(n\) is odd, \(X'(G) = n\), and when \(n\) is even it is
 \(n-1\).
 \subsection{Claim}
-\label{sec:org90da2c1}
+\label{sec:org85bdc77}
 \(\chi'(G) \ge \Delta(G)\).
 \subsubsection{Proof}
-\label{sec:orgcd383f4}
+\label{sec:org178ea42}
 At the vertex with max degree, there are \(\Delta(G)\) number of edges, each
 must receive a proper edge coloring.
 \subsubsection{Remark}
-\label{sec:org89540ae}
+\label{sec:orgaf88427}
 When \(n\) is odd, \(n-1\) edge coloring would form a perfect matching. But this
 is not possible.
 
@@ -2003,17 +2002,17 @@ is not possible.
 
 \(\chi'(K_{n+1}) = n\).
 \subsubsection{Observation}
-\label{sec:org2c895a0}
+\label{sec:org66bb92d}
 Any color class of a proper edge coloring is a matching. In particular, if
 \(X'(G) = d\) for a \(d\) regular graph, then \(d\) has a perfect matching, then
 \(G\) has a perfect matching. This is because at a vertex, all colors appear.
 So each color class is a perfect matching. (Even more, the edge set is
 partitioned into a perfect matching.)
 \subsubsection{Peterson}
-\label{sec:org6971a36}
+\label{sec:org006e3a1}
 If \(X'(P) = 3\), if and only if \(\exists\) a perfect matching, \(M\) such that
 \(P - M\) has \(X'(P-m) = 2\). Implies that \(P-M\) is the disjoint union of even
-cycles. 
+cycles.
 
 What do we know about the cycles of peterson graph, the minimum size is \(5\).
 It cannot have \(6 + 4\) cycle. It does not have \(8+2\) cycle either.
@@ -2023,10 +2022,10 @@ Peterson graph has no Hamilton cycle.
 
 The chromatic number is \(4\).
 \subsection{Theorem (Konig)}
-\label{sec:org9d120a7}
+\label{sec:org951dc68}
 If \(G\) is a bipartite Multi-graph, then \(X'(G) = \Delta(G)\).
 \subsubsection{Proof}
-\label{sec:orgace44a1}
+\label{sec:orgc71c76f}
 What do we know about regular bipartite graph? We have a perfect matching
 (Frobenius theorem.)
 
@@ -2048,17 +2047,17 @@ part.
 
 Now, just color it using the regular coloring.
 \subsection{Vizing's theorem}
-\label{sec:orgc7f0416}
+\label{sec:orgeedd180}
 For every \textbf{simple} graph, \(G\), \(\chi'(G) \le \Delta(G) + 1\).
 \subsubsection{Remark}
-\label{sec:org11c33a2}
+\label{sec:org876790e}
 \begin{enumerate}
 \item For most graphs, \(X'(G) = \Delta(G)\).
 \item Can we decide if a graph is \(\Delta(G)\) or in the \(\Delta(G) + 1\)? This
 is NP-complete.
 \end{enumerate}
 \subsubsection{More remarks}
-\label{sec:org4732c26}
+\label{sec:org66339dc}
 The line graph is just the edge set. The edge set of the line graph is those
 pairs of edges such that they intersect. \footnote{Now, it should follow from the greedy vertex coloring of the graph,
 provided we prove that \(\Delta\) of the line graph is same as the original
@@ -2075,7 +2074,7 @@ What is the maximum degree?
 
 Any clique of \(L(G)\) corresponds to a \(K_{1, t}\) or a \(K_3\) in \(G\).
 \subsubsection{Proof}
-\label{sec:org33e0aec}
+\label{sec:org30f5b22}
 Proof using induction. Induction on \(V(G)\), \(V(G) - 1\). Take a vertex \(v =
     V(G)\), there is a proper \(\Delta(G) + 1\) coloring of \(G-v\). Extend to \(v\) to
 form a proper \(\Delta(G) + 1\) coloring.
@@ -2121,13 +2120,13 @@ There is a color \(j\) with \(\vert X_j \vert \ge 3\).
 \(H\) is the subgraph spanned by \(i\) and \(j\). This is a contradiction to
 minimality. (Sort of an involved argument.)
 \section{Lecture 17 \textit{<2018-12-12 Wed>}}
-\label{sec:org4284ee0}
+\label{sec:org1469dd0}
 \subsection{A general form of vizing's theorem}
-\label{sec:org1333830}
+\label{sec:org669e10a}
 If \(G\) is a multi graph, then \(X'(G) \le \Delta(G) + \mu(G)\) where \(\mu\) is
 the maximum multiplicity of \(G\). (Wasn't shown in the class)
 \subsection{List coloring conjecture}
-\label{sec:org59cb773}
+\label{sec:org79d3850}
 For arbitrary \(G\), \(X_l(G) - X(G)\) can be arbitrarily large.
 
 The conjecture says, for every \(G\), \(\forall G\), \(X'(G) = X'_l(G)\). The one
@@ -2136,20 +2135,20 @@ on the right is the list coloring version of edge coloring.
 Reformulation, for all \(G\), \(X(L(G)) = X_l(L(G))\). (We proved this for
 cycles; a cycle is a line graph)
 \subsection{Theorem (Kahn)}
-\label{sec:orgbb5a9fb}
+\label{sec:org4e6c254}
 \(X_l(G) = (1 + o(1))X(G)\).
 
 This means that if we have a sequence of graphs \(G_n\) with \(X'(G_n)
    \rightarrow \infty\), \(X'_l(G)/X'(G) \rightarrow 1\). (Wasn't covered in the
 lecture.)
 \subsection{Theorem (Galvin)}
-\label{sec:org8db766e}
+\label{sec:orgad26bfc}
 If \(B\) is bipartite, then \(X'_l(B) = X'(B)\)
 
 We'll prove the special case of complete bipartite graph (\(K_{n, n}\))
 (Dinitz's conjecture.)
 \subsubsection{Proof}
-\label{sec:orgf0866fd}
+\label{sec:org7262b48}
 \(X'(K_{n,n})\) it is \(n\). It is a bipartite graph (we learned last time that
 we can regularize it and then do some stuff.)
 
@@ -2164,8 +2163,8 @@ a graph \(G\) is a kernel of the digraph created by oriented or directing
 edges of \(G\) from right to left. (Because if there is no edge from a vertex
 to this, this we would have colored it with \(1\))
 \subsection{Definitions}
-\label{sec:orgab4beb2}
-Given a directed graph \(D\), a \textbf{kernel} of \(D\) is a set \(S\) of the vertices 
+\label{sec:orga8079eb}
+Given a directed graph \(D\), a \textbf{kernel} of \(D\) is a set \(S\) of the vertices
 
 \begin{enumerate}
 \item that is independent.
@@ -2179,11 +2178,11 @@ list colorable) if for every family of lists, \(\{L_v\}_{v\in V(G)}\) with list
 size at lest \(f(v)\) for every \(v\), there is a proper coloring \(c \colon V(G)
    \rightarrow \N\), \(c(v) \in L_v\).
 \subsection{Lemma}
-\label{sec:org142ee9e}
+\label{sec:org6dfbfae}
 Let \(D\) be a kernel perfect orientation of some graph \(G\). Then \(G\) is \(f\)
 choosable with \(f(v) = 1 + d^{+}_D(v)\).
 \subsubsection{Proof}
-\label{sec:orgba11c17}
+\label{sec:org8ef94c9}
 Orientation thing?
 
 \sout{Take a kernel of the graph, \(S\), and color every vertex \(v\in S\), such that
@@ -2211,7 +2210,7 @@ every \(u \in V(D) \setminus S\).
 From induction, there is a coloring, proper, from the list. And there is no
 contradiction with vertices colored by \(1\).
 \subsection{About Kernel perfect orientation of \(L(K_{n, n})\)}
-\label{sec:org1a83505}
+\label{sec:orgbee95c6}
 A kernel perfect orientation of \(L(K_{n, n})\) with \(\Delta^{+}(D) =
    n - 1\).
 
@@ -2219,20 +2218,20 @@ If by the lemma, then \(L(K_{n,n})\) is \(1 + n-1 = n\) choosable.
 
 Note that \(L(K_{n, n})\) is \(2(n-1) = 2n-2\) regular graph.
 \subsubsection{Claim 1}
-\label{sec:orgf23f194}
+\label{sec:orgcb7c826}
 There is an orientation \(D\) of \(L(K_{n,n})\) such that \(\Delta^{+}(D) = n-1\)
 and for any \(v \in V(K_{n, n})\), \(D[\{uw \colon w \in N(v)\}]\) is
 transitive.
 
 What is a transitive orientation?
 \subsubsection{Claim 2}
-\label{sec:orgc7dbcc2}
+\label{sec:org2af0622}
 If \(D\) is an orientation from claim 1, then \(D\) is kernel perfect.
 \subsubsection{Remark}
-\label{sec:orgcfeedd1}
+\label{sec:org468e209}
 Notice that the above two claim and the lemma would give you the theorem.
 \subsubsection{Proof of claim 1}
-\label{sec:org8bc1900}
+\label{sec:orge26b7f6}
 \(M = \{n_0, n_1, \cdots, m_{n-1}\}\)
 
 \(W = \{w_0, w_1, \cdots, w_{n-1}\}\) are vertices of \(K_{n,n}\).
@@ -2246,11 +2245,11 @@ fixed.
 This should clearly have the transitive property. An orientation is
 transitive if \(a > b, b > c\), then \(a > c\). There is no cycle.
 
-Indeed for every \(m_i w_j\), the out degree \(d^{+}(m_iw_j) = n-1\).   
+Indeed for every \(m_i w_j\), the out degree \(d^{+}(m_iw_j) = n-1\).
 \section{Lecture 18 \textit{<2018-12-18 Tue>}}
-\label{sec:orgaab6c54}
+\label{sec:org3ed9d87}
 \subsection{Lemma}
-\label{sec:orgd646edb}
+\label{sec:org1474879}
 If \(D\) is a kernel perfect orientation of a graph \(G\), then \(G\) is \(f\)
 choosable with the following function \(f(v) = 1 + d_D^{+}(v)\) for all \(v \in
    V\).
@@ -2264,10 +2263,10 @@ if \(K\) is independent and \(\forall v \in V \setminus K, \exists w \in K, uw
 
 \(D\) is \textbf{kernel} perfect if for all induced subgraph has a kernel.
 \subsection{Remark}
-\label{sec:orgb23bdfe}
+\label{sec:org1c22c3f}
 Any ordering of vertices of graph \(G\) from right to left is kernel perfect.
 \subsection{Observation}
-\label{sec:orgc90cd27}
+\label{sec:org10b53ab}
 An orientation of a complete graph is kernel perfect if and only if it is
 transitive.
 
@@ -2282,12 +2281,12 @@ transitively oriented.
      \in V(K_{n, n})\), the restriction of \(D\) on \(\{vw \colon w \in N(v)\}\) is
  transitive, then it implies that \(D\) is Kernel perfect.\footnote{We've not done the full proof of this claim, I think.}
 \subsection{About stable matchings}
-\label{sec:org6a57969}
+\label{sec:org32cc7c5}
 We have two sets \(M = \{m_1, \cdots, m_n\}\) and \(W = \{w_1, \cdots, w_n\}\).
 Each vertex has a preference of the other gender (a permutation of the other
 list, \(\pi \in S_n\))
 \subsubsection{Theorem (Gale-Shapley)}
-\label{sec:orgc46d11d}
+\label{sec:org24585d3}
 For any preference lists of \(n\) man and \(n\) women, there exists a stable
 matching \(S\).
 
@@ -2295,7 +2294,7 @@ A stable matching is a perfect matching of \(K\) and \(N\) with no unstable
 pair. A vertex \(w\) and a vertex \(m\) forms an unstable pair if \(wm \notin S\),
 \(w\) prefers \(m\) to her pair and \(m\) prefers \(w\) to his pair in \(S\).
 \subsubsection{Proposal algorithm}
-\label{sec:org09cbf75}
+\label{sec:org76e6809}
 \textbf{Input}: Preference ranking by men and women.
 
 \textbf{Iteration}: in each iteration step, each man proposes to the women highest
@@ -2308,11 +2307,11 @@ Otherwise, every women receiving at least one proposal says, maybe to the
 one highest on their list and rejects the others if there are more than
 one.
 \subsubsection{Theorem about Proposal algorithm}
-\label{sec:orgb4f5b89}
+\label{sec:org395b277}
 The proposal algorithm produces a stable matching.
 \begin{enumerate}
 \item Proof
-\label{sec:org4246749}
+\label{sec:org5b95ece}
 Algorithm terminates:
 
 \begin{enumerate}
@@ -2344,12 +2343,12 @@ better man \(m'\) who is higher on the \(w_m\)'s list than \(m\). In particular,
 pair.
 \end{enumerate}
 \subsection{Claim}
-\label{sec:org2f9e1b9}
+\label{sec:org1fbfe88}
 If \(D\) is an orientation of \(L(K_{n, n})\), such that \(\forall v \in V(K_{n,
    n})\), the set \(\{vw \colon w \in N(v) \}\) is oriented transitively, then \(D\)
 is kernel perfect.
 \subsubsection{Proof}
-\label{sec:orgfa164d4}
+\label{sec:org323f0b8}
 Define appropriate preferences for the vertices such that any stable
 matching \(K \subset E(K_{n, n}) = v(D)\), \(K \cap I\) is a kernel. The kernel
 is a vertex set of the line graph and hence a vertex set of the original
@@ -2377,9 +2376,9 @@ is some issue with this part.)
 Suppose \(w_j\) prefers \(m\) to \(m_i\), then if \(mw_j \in I\), then \(mw_i
     \rightarrow m_i w_j\). This cannot occur?
 \section{Lecture 19 \textit{<2018-12-19 Wed>}}
-\label{sec:orgc34ea23}
+\label{sec:orgce78722}
 \subsection{About network flows}
-\label{sec:orgcfe0549}
+\label{sec:org9e52214}
 \((D, s, +, E)\) and \(D = (V, E)\) and \(s, t \in V\) and \(c \colon E \rightarrow
    \R_{\ge 0}\).
 
@@ -2405,19 +2404,19 @@ What we want is \(f \in \R^{\vert E \vert}\)
 
 This is the framework of linear programming.
 \subsection{Linear programming}
-\label{sec:orgf4f71be}
+\label{sec:org3bda4d9}
 In linear programming, we search for a maximum or a minimum of a linear
 objective function, \(c^T \cdot x\), \(c\) is a constant vector subject to linear
 constraints \(x\), where \(x \in \R^n\)
 
 \(A x \ge b_i\) or \(A_x \le b_i\) or \(A_x = b_i\).
 \subsection{Types of problems}
-\label{sec:org6dfa188}
+\label{sec:orgf2c3ed3}
 \subsubsection{Word problems}
-\label{sec:org38a0789}
+\label{sec:org6457d79}
 LP's were developed by Dantzig. And also by Kantorovich.
 \subsubsection{\(n = 2\)}
-\label{sec:org61a9dbe}
+\label{sec:org34dba3b}
 Maximize \(x_1 + x_2\).
 
 Subject to \(-x1 + x_2 \ge -2\), \(-3x_2 + 2x_2 \le 2\), \(x_1 + 2x_2 \le 4\),
@@ -2432,10 +2431,10 @@ We can also have unbounded optimal solution.
 
 If the feasible region is bounded, then there is definitely an optimum.
 \subsubsection{Book}
-\label{sec:org98b8828}
+\label{sec:orgb1fe552}
 Some book by springer.
 \subsection{Uniformization of the setup}
-\label{sec:org0327b5e}
+\label{sec:org7b6d332}
 Maximize or minimize a linear function subject to linear constraints.
 
 Objective function:
@@ -2452,7 +2451,7 @@ and \(\ge\). Then transform the \(\ge\) further.
 
 We can end up with \(Ax \le b\), \(A \in \R^{m \times n}\) and \(b \in \R^m\).
 \subsection{A dietary example}
-\label{sec:org791193f}
+\label{sec:orgfbacf6e}
 
 \begin{center}
 \begin{tabular}{llrrr}
@@ -2482,7 +2481,7 @@ Similar constrains for Vitamin C and Fiber.
 The optimal solution \(0.009 kg\) of carrot, \(x_w = 0.038 kg\) of white cabbage.
 From the pickle \(0.290 kg\).
 \subsection{Another example}
-\label{sec:org1842105}
+\label{sec:org023c5b1}
 We have a data and want to find correlation.
 
 Here it would be average rating and amount of chocolate offered to students.
@@ -2504,17 +2503,17 @@ Input \((x_i, y_i)\) and we have variables \(a, b, e_i\). What you're interested
 is in \(a\) and \(b\).
 
 For the minimum, for all i, at least one is equality. For this reason, \(e_i\)
-indeed expresses, the absolute value.   
+indeed expresses, the absolute value.
 \section{Lecture 20 \textit{<2019-01-08 Tue>}}
-\label{sec:orgf05d7ff}
+\label{sec:orgd75d679}
 \subsection{Linear programming (LP)}
-\label{sec:org72790d5}
+\label{sec:orgabb54bc}
 Given \(c \in \R^n\) and \(A \in \R^{m \times n}\). We want to maximize, \(c^{T}
    \cdot x\) subject to \(Ax \le b\).
 
 LP is in P. Simplex algorithm is an algorithm.
 \subsection{A machine learning application}
-\label{sec:org25149b1}
+\label{sec:org5ed82b5}
 We need to device a trap for Rabbits. There could be other animals that fall
 into the trap, we need to separate Rabbits from Weasels. We have a 2
 dimensional vector corresponding to each animal.
@@ -2540,11 +2539,11 @@ separating line.
 If \(\delta \ge 0\), then there is no separating line. (In practise, everything
 may be allowed.)
 \subsection{Another example}
-\label{sec:orgf909bb5}
+\label{sec:orgbc2e4b2}
 You are a company that sells Wrapping paper, you produce paper rolls of width
 \(300\) cm.
 
-Order 
+Order
 
 \begin{center}
 \begin{tabular}{rr}
@@ -2594,10 +2593,10 @@ When we round it above, \(450\) rows of width \(300\). The sum of these are
 There is an integer solution with values \(453\) rolls.
 
 \subsection{Integer Linear Programming}
-\label{sec:org862daba}
+\label{sec:org5037c46}
 \(\max c^{T} x\) subject to \(Ax \le b\), \(x \in \Z^n\)
 \subsection{Max-weight matching}
-\label{sec:org1a6def5}
+\label{sec:org387f493}
 We solved this by Hungarian algorithm. We have a bipartite graph, \(G\) where
 the vertex set is \(G = (A \cup B, E)\) and you have a weight function \(w
    \colon E \righatrrow \R\).
@@ -2622,11 +2621,11 @@ We take the LP relaxation, which is the same thing. Maximize, \(\sum_{e \in E}
 
 \(0 \le x_e \le 1 \forall e \in E\).
 \subsection{Proposition}
-\label{sec:orgbfcfd72}
+\label{sec:org8f718a7}
 For the max-weight problem, the LP-relaxation, has the same value as the
 integer program. (For the complete bipartite graph.)
 \subsubsection{Proof}
-\label{sec:org3690ae3}
+\label{sec:org3058525}
 Optimum to LP-relaxation is at least as large as optimum for IP.
 
 Let \(x^{*}\) be an optimal solution to LP. If \(x^{ *}\) is an integer vector,
@@ -2667,9 +2666,9 @@ the LP.
 
 There is at least one more integer coordinate.
 \section{Lecture 21 \textit{<2019-01-09 Wed>}}
-\label{sec:orgaa6bf11}
+\label{sec:orgfb53c6d}
 \subsection{Repetition}
-\label{sec:org9c9db7f}
+\label{sec:org49b2bd5}
 We have an even cycle with value along with edges that is between 0 and 1.
 And we make a modification.
 
@@ -2684,7 +2683,7 @@ optimum value.
 is also an optimal solution. This way we get an algorithm that gives us,
 integer solution.
 \subsection{Minimum vertex cover problem}
-\label{sec:orged2bbdc}
+\label{sec:orgd93f21a}
 We have a graph \(G\) and \(\beta(G) = \min\{ \vert C \vert \colon C \subset V,
    \forall e \in E(G), e \cap c \neq \emptyset\}\), we know that \(G\) is
 bipartite, then \(\alpha'(G) = \beta(G)\).
@@ -2694,7 +2693,7 @@ In general this is not true, and it is know to be NP-Hard to decide whether
 
 An integer linear program formulation for \(\beta\).
 
-Variables, \(\forall v \in V\), variable \(x_v \in \{0, 1\}\). 
+Variables, \(\forall v \in V\), variable \(x_v \in \{0, 1\}\).
 
 We'll have a constraint, \(\forall e \in E\), \(\sum_{v \in e} x_v \ge 1\).
 
@@ -2709,7 +2708,7 @@ cover. In particular, \(x^{*}\) is optimal solution if and only if \$S\_\{x\^{}\
 \item \}\}\$, hence \(\sum x^{ * }_v = \beta(G)\).
 \end{itemize}
 \subsubsection{Proof}
-\label{sec:org5acbce3}
+\label{sec:org77c6471}
 Let's prove that \(S_x\) is a cover.
 
 Take arbitrarily edges \(e\). We need to show that \(S_x \cap e \neq
@@ -2719,8 +2718,8 @@ Since \(x\) is feasible, \(\sum_{v \in e} x_v \ge 1 \implies x_{z_1}\) or
 \(x_{z_2} \ge 1 \implies\), \(z_1 \in S_x\) or \(z_2 \in S_x\), \(e \cap S_x \neq
     \emptyset\).
 \subsection{LP relaxation of the problem}
-\label{sec:orgc2d6d0d}
-\(\min \sum x_v\) subject to 
+\label{sec:orgf599e4c}
+\(\min \sum x_v\) subject to
 
 \(\sum_{v \in e} x_v \ge 1\) and \(0 \le x_v \le 1\). This is the LP relaxation.
 
@@ -2749,7 +2748,7 @@ Where \(\beta(G)\) is the optimal solution to the integer program.
 Here we are using the that optimal solution to the LP is \(\le\) the optimum
 for the IP.
 \subsection{Remark}
-\label{sec:org6cef929}
+\label{sec:org8bb6249}
 If you take a Maximal matching \(M\), then the set of vertices \(S = \{v \in
    V\colon v \textup{ is saturated by M}\}\) is a cover of size \(2n\).
 
@@ -2758,7 +2757,7 @@ this using a greedy algorithm.
 
 Finding a 1/2 approximation is not a big deal.
 \subsection{Max incl set problem}
-\label{sec:orgfdf855f}
+\label{sec:org6053d5f}
 Given \(G\), What is \(\alpha(G)\)? This is \(\max \{ \vert I \vert \colon I
    \subset V \forall e, e \notin I\}\)
 
@@ -2767,14 +2766,14 @@ constraint \(\sum_{v \in e} x_v \le 1\).
 
 The maximum \(\sum_{v \in V} x_v\).
 \subsubsection{Claim}
-\label{sec:orgb510bcb}
+\label{sec:orgcd15980}
 \(x\) is a feasible solution to the problem if and only if \(I_x = \{v \in
     V\colon x_v = 1\}\) is included. In particular, the implies that optimum
 problem \(= \alpha(G)\).
 
 The claim wasn't proven.
 \subsection{LP relaxation}
-\label{sec:orgabbd4b3}
+\label{sec:org03864ae}
 \(x \in [0, 1]^{\vert V \vert}\).
 
 Can we learn something about \(\alpha(G)\) from the optimum value of the
@@ -2789,10 +2788,10 @@ We know that \(I\) is independent if and only if \(V \setminus I\) is a vertex
 cover. Even though that we know about a \(1/2\) approximation for the vertex
 cover.
 \subsubsection{A result by Hastead.}
-\label{sec:org51cab13}
+\label{sec:org4cf039c}
 NP-complete to approximate \(\alpha(G)\) upto the factor \(n^{0.99999}\)
 \subsection{LP in general}
-\label{sec:orgf980a95}
+\label{sec:org5887acc}
 We'll first get rid of the inequalities make it into an equation form.
 
 Every LP is equivalent to an LP of the following form:
@@ -2811,7 +2810,7 @@ New variables, \(y_1, y_i', \forall i 1, \cdots, n\) and \(z_j, \forall j = 1,
 
 The number of variables is \(n\) and the number of constrains is \(m\).
 \subsubsection{Some assumptions}
-\label{sec:org54e3386}
+\label{sec:org0604b86}
 \begin{enumerate}
 \item \(Ax = b\) has a solution. (We can do Gauss-elimination to decide it fast),
 if not the LP has no feasible solution.
@@ -2821,25 +2820,25 @@ says that the rows are linearly independent.
 
 With the assumption, the typical solution space would look like a simplex.
 \subsection{About the linear system}
-\label{sec:org95c8d96}
+\label{sec:org22ec072}
 \(Ax = b\)
 
 \(A_B\) is the matrix is the matrix where columns of \(A\) indexed by \([n]
    \setminus B\) are indexed. Choose values arbitrarily, it gives you a solution
 to \(Ax = b\). We have a solution space which is the right size.
 \subsection{Definition}
-\label{sec:org9affb1c}
+\label{sec:orgceb3a65}
 \(B \subset [n]\) is called a basis if rank \(A_B = m\). In fact, columns of \$A\(_{\text{B}}\)
 are a basis in column space of \(A\).
 \subsection{Definition}
-\label{sec:org8493959}
+\label{sec:org4bfbad3}
 A feasible solution to \(*\) is called a basic feasible solution for a basis \(B
    \subset \binom{[n]}{m}\) if \(x_i = 0\) for every \(i \in [i] \setminus B\).
 \subsection{Lemma}
-\label{sec:org0c1b462}
+\label{sec:orga124d21}
 For every basis \(B\), corresponds to at most \(1\) basic feasible solution.
 \subsubsection{Proof}
-\label{sec:orgf0a2021}
+\label{sec:orga23232c}
 If \(x\) is a feasible feasible solution for \(B\), then \(Ax = A_Bx_B + A_N
     x_n = A_B x_B\).
 
@@ -2852,34 +2851,382 @@ Now \(A_B\) is an invertible matrix, because it is a basis. This means that
 have a basic feasible solution that is optimal. This means that to find the
 \(x_B\) for each \(m\) element subset, check if it a non-negative vector, go
 through them and calculate the maximum value. For each \(B\), calculate \(c
-    x_B\). Look at all of them find the maximum.)    
+    x_B\). Look at all of them find the maximum.)
+\section{Lecture 22 Skipped}
+\label{sec:orgdc810e9}
+\section{Lecture 23}
+\label{sec:org6ad451a}
+\subsection{A review of simplex method}
+\label{sec:org7768789}
+Given \(A \subset \R^{m\times n}, b\in \R^m, c \in \R^n\). An LP in equational
+form. LP: \(\max c^{T} x\) subject to \(Ax = b, x \ge 0\).
+
+\textbf{Step 0}: Check whether \(Ax = b\) has a solution. Make sure that
+\(\operatorname{rank}A = m\). You can assume this two things.
+
+If we have a basis, then we know how to create a basic feasible solution.
+\subsection{How to find a basis}
+\label{sec:org6ae5337}
+Add extra variables \(w_1, \cdots, w_n\). Your new system will look like
+\(a_{i1}x_1 + \cdots + a_{in}x_n = b_i\). Make sure \(b_i \ge 0\). New
+constraint, \(i = 1, \cdots, m\), \(a_{i1}x_1 + \cdots + a_{in} x_n + w_i =
+   b_i\).
+
+The objective function is to maximize the new variables. \(\max -w_1 - w_2 -
+   \cdots - w_m\).
+
+Matrix
+
+\begin{verbatim}
++-------------------+----------+
+|                   |          |
+|                   |          |
+|       A           |   I_n    |
+|                   |          |
+|                   |          |
+|                   |          |
++-------------------+----------+
+\end{verbatim}
+
+Solve auxiliary LP with Simplex.
+\subsubsection{Claim}
+\label{sec:org652b306}
+Value of auxiliary LP \(=0\) if and only if the original LP is feasible.
+
+This claim is easy to see.
+
+If you get a solution, then we got a solution, which end with a basis.
+
+In the second case, the basis would be \(I_m\).
+\subsection{Step 1 of Simplex}
+\label{sec:org4dcf0dd}
+If there is an obvious feasible solution from the slack variables when
+original \(b > 0\), then take it. Otherwise, solve the Auxiliary LP and if the
+maximum is \(< 0\), then stop and return infeasible and if h
+\subsection{Step 2 (Simplex tableau)}
+\label{sec:orgf100c98}
+Compute a simplex tableau. Belongs to a feasible basis.
+
+\(x_B = P + Q \times x_N\). \((\iff Ax = b)\)
+
+The last row was the objective function, \(z = z_0 + r^{T} x_N\) (\(\iff z =
+   c^{T}x\))
+
+\(P \in \R^m, Q \in \R^{m \times (n-m)}\) and \(r \in \R^{n + m}\) and \(z_0 \in
+   \R\) are all expressed from \(A, b, c\).
+\subsection{Step 3 (Check for optimality)}
+\label{sec:org2f45f38}
+If the whole vector \(r \le 0\), then we stop and return the current basic
+feasible as optimal. (We proved this last time.)
+
+Otherwise
+\subsection{Step 4}
+\label{sec:orga2966fe}
+Select index \(i \in N\) entering the basis among \(\{i \in N \colon r_i > 0\}\).
+
+How? pivot Rule.
+\subsection{Step 5}
+\label{sec:orgd5e5207}
+\(j \in B\) and \(x_j = P_j + \sum_{i \in \N} q_{jl}x_l\) if \(a_{ji} \ge 0\), then
+there is no restriction.
+
+If \(a_{ji} < 0\), then there is a restriction. Because you don't want \(x_j\) to
+go below \(0\). Then \(0 \le x_j \le p_j + q_{ji}x_i\). (Was done yesterday)
+
+First we test for unboundedness. If for every \(j \in B\), \(q_{ji} \ge 0\),
+then, stop and return that the LP is unbounded. Because \(x_i\) can be
+increased indefinitely.
+\subsection{Step 6}
+\label{sec:orgcfb5f9f}
+Otherwise, select variable \(j \in B\) for which these restrictions are the
+strictest. \(j \in B - \frac{p_j}{q_{ji}} = \min \{ - \frac{p_l}{q_{jl}} \vert
+   \colon l \in B q_{l, i} < 0\}\) to leave the basis.
+
+How? Pivot rule.
+\subsection{Step 7 (The last step)}
+\label{sec:orgfd2a7e1}
+Perform the pivot, move to a new basis \(B' = B \setminus (\{j\} \cup \{i \})\)
+
+Update the Tableau. Go back to step \(2\) and do it again.
+
+Use equation to replace to replace \(x_i\) with \(x_j\) everywhere else on the
+RHS. Apparently all these were done yesterday.
+\subsection{Pivot Rules}
+\label{sec:orgebfb906}
+\subsubsection{The largest coefficient rule}
+\label{sec:org58cc5fd}
+Take the \(\operatorname{argmax} \{r_i \colon r_j > 0 \}\)
+\subsubsection{Largest increase}
+\label{sec:orgeb549ea}
+For a pair \(i, j\), what is the one with largest increase. This can be expensive.
+\subsubsection{Steepest edge}
+\label{sec:orge0616da}
+Great in practise.
+\subsubsection{Bland's rule}
+\label{sec:org3664056}
+The entering variable, the smallest index is entering among \(r_i > 0\), \(i
+    \in \N\). It has no concern in the value of \(r_i\). The leaving variable is
+picked as the smallest for which \(-p_{i}{q_{j,i}} = \min \{ \cdots \}\).
+\subsubsection{Random edge}
+\label{sec:org7438d16}
+Take a random.
+\subsection{Theorem}
+\label{sec:org3b6f8bb}
+The simplex algorithm with Bland's rule will terminate in finitely many step.
+\subsection{Proof}
+\label{sec:org215756f}
+If the algorithm does not terminate, then it follows that there is a sequence
+of basis. \(B_1, B_2, \cdots, B_s = B_1\) following each other.
+
+Let \(F = \{x_i \colon \cup_{d = 1}^{s} B_d\}\), these are the variables
+participating in a basis of the cycle. These are called "fickle" variables.
+These are the variables which are entering and leaving the basis.
+
+All \(B_i\) have the same basic feasible solution and all fickle variables stay
+\(0\) throughout. (This should be clear, is it so clear?)
+
+Because we're in a cycle, the value cannot improve because the value is the
+same at the end and at the beginning. Thus the value cannot improve in
+between.
+
+We'll identify the \(x_\beta \in F\), where \(\beta\) is the largest and now
+we'll look at \(x_\beta\) enters and when it left. \(B\) is the basis just before
+\(\beta\) enters and \(B'\) is the basis just before \(\beta\) leaves. Doesn't
+matter if it repeats, pick any two.
+
+Now, we apply the Bland's rule. The first deduction is that in the simplex
+tableau. \(x_B = p + Q x_N\).
+
+\(z = z_0 + r x_N\). In the simplex Tableau, \(r_\beta > 0\). On the other hand,
+for every \(i \in F \setminus \{beta\} \cap N, \gamma_\beta = 0\).
+
+The second deduction is that in the simplex tableau corresponding to
+\(\tau(\beta')\), \(\beta'\)
+
+\(x_B = P + Q x_N\) and \(z = z_0 + r x_N\) and \(q_{\beta, \alpha} < 0\). This
+should be true, furthermore, \(q_{i, \alpha} \ge 0, \forall i \in B' \cap F
+   \setminus \{\beta\}\)
+
+We write down an Auxiliary linear program (it looks very similar to the
+previous one.)
+
+\(Ax = b\), \(x_B \le 0\), \(x_{F \setminus \{\beta\}} \ge 0\) and \(x_{N \setminus
+   F} = 0\).
+
+Let \(x^{ * }\) be the basic feasible solution corresponding to the \(B\) and \(B'\)
+and everybody else. Then, Deduction 1 implies that \(x^{ * }\) is an optimal
+solution to the Auxiliary LP. (Because of the fact that \(\beta\) was the largest)
+
+The deduction \(2\) will imply the value of \(x^{ * }(t)\) is \(t\) if \(i =
+   \alpha\), \(0\) if \(i \in N \setminus \{\alpha\}\) and \(x_{i}^{ * } + q_{\alpha}\)
+if \(i \in B'\).
+
+\(x^{*}(t)\) is feasible for all \(t > 0\). \(c^{t} \colon x^{ * }(t) \righatrrow
+   \infty\). This would end up implying that the LP is unbounded, which is a
+contradiction.
+\section{Lecture 24 \textit{<2019-01-22 Tue>}}
+\label{sec:org7cda63f}
+\subsection{Example}
+\label{sec:orgccf69fa}
+The example from the beginning of 6th chapter.
+\subsection{Weak duality}
+\label{sec:org42fc85c}
+Other examples: Matching, flows, covers.
+\subsection{Corollary of weak duality}
+\label{sec:org448bfbf}
+\begin{enumerate}
+\item If both \(P\) and \(D\) are feasible and bounded, then optimum of \(P\) is less
+than the optimum of \(D\).
+\item For every feasible \(x^{*} \in \R^n\) of \(P\) and feasible \(y \in \R^n\) of
+\(D\), then \(c^{t} x^{ * } = b^t y^{ * } \implies\), \(x^{ * }\) and \(y^{ * }\)
+are optimal for \(P\) and \(D\) respectively
+
+The strong duality theorem tells that the \(\Leftarrow\) is also true.
+\item If \(P\) is unbounded from the above then \(D\) is infeasible. If \(D\) is
+unbounded from below, then \(P\) is infeasible.
+\end{enumerate}
+\subsection{Definition of Primal-Dual for general LP}
+\label{sec:org7eff04b}
+Suppose that \(P\) is a an LP with LP with \(n\) variables \(x_1, \cdots, x_n\) and
+\(m\) constrains.
+\subsection{Proposition}
+\label{sec:orgc0d732d}
+If \(P\) is feasible and bounded, then \(D\) is feasible and bounded and the
+respective optimum exists and are equal.
+
+(The main part of the proof of the strong duality theorem.)
+\subsubsection{Proof}
+\label{sec:org4cc5095}
+(I think this is from section 6.3)
+
+If \(D\) is feasible, then it is bounded by weak duality.
+
+Want: \(D\) is feasible
+
+\(P\), \(\max c^{t}x\) subject to \(Ax \le b\) and \(x \ge 0\).
+
+\(P'\) introduces slack variable, maximize \(c^{t}x\) subject to \(Ax = b\), \(x
+    \ge 0\).
+
+Simplex terminates on \(P'\) with a basic feasible solution \(x^{*} \in \R^{n
+    \times m}\) corresponding to a feasible basis \(B \subset [n + m]\).
+
+Implies that the vector \((x_1^{ * }, \cdots, x_n^{ * } = x^{*} \in \R^n\) is
+an optimal solution of \(P\).
+
+We know that \(x^{*}\) multiplied by \(c\) is the same the original one.
+
+The final tableau looks like 
+
+\(\bar{x}_B = P + Q \bar{x}_N\)
+\(z =z_0 + r^{T}\bar{x}_N\).
+
+Where \(r \in \R^n\) and \(r \le 0\). (This is when the simplex algorithm halts.)
+
+We can use this information. 
+\subsection{Claim}
+\label{sec:org4190a82}
+The vector \(y^{*} = (\bar{c}_B^{T} \bar{A}_B^{-1})^T\) is a feasible set of
+\(D\) and \(c^{T}x^{ * } = b^{ * }\)
+\subsubsection{Proof}
+\label{sec:org30132ec}
+\(D\) is minimize \(b^{T} y\) subject to \(A^{T}x \ge c\) and \(y \ge 0\).
+
+\(c^{T}x^{ * } = \bar{c}^T \bar{x}^{ * } = \bar{c}_B^T \bar{x}_B^{*} =
+    \bar{c}_B^T (A_B^{-1} b) = (\bar{c}_B^{T} \bar{A}_B^{-1}) b\).
+
+What we want: \(y^{*}\) is feasible for \(D\).
+
+\(A^{T}y^{ * } \ge c\) and \(y^{ * } \ge 0\).
+
+If and only if
+
+\begin{verbatim}
++--------------+
+|              |
+|     A^T      |
+|              | (y^{*}) \ge \bar{c}
+|              |
++--------------+
+|1             |
+| 1            |
+|           1  |
++--------------+
+\end{verbatim}
+
+Szabo's proof looked much longer than the proof in the book. Maybe he did
+something different?
+\section{Lecture 25}
+\label{sec:orgae06c0e}
+\subsection{Duality recipe}
+\label{sec:orgba1329c}
+Page 85 of the book or section 8.2
+\subsection{Maximum matching problem}
+\label{sec:org4a1eb1a}
+\(G = (V, E)\), with variables \(x_e\) for all edge \(e \in E\), \(x_e \in \Z\).
+
+Constraints: \(\forall v\), \(\sum_{e \in v} x_e \le 1\).
+
+Sign-constrains: \(\forall e \in E, x_e \ge 0\).
+
+We have shown that the maximum of the objective function: \(\sum_{e \in E} x_e
+   = \alpha'(G)\)
+
+We'll try to dualize this problem.
+
+In dual variable \(y_v\), for all \(v \in V\).
+
+Constrains \(\forall e\), \(\min \sum_{v \in V} y_v \le \beta(G)\).
+
+If \(y \in \Z^n\), then \(\le\) becomes \(=\).
+
+For Bipartite graphs, we will show that the LP becomes IP. This and the
+duality leads to Konig's theorem
+\subsection{Konig's theorem}
+\label{sec:org9908afd}
+We can use Linear programming to show Konig's thoerem.
+
+If \(G\) is bipartite, then \(\alpha'(G) = \beta(G)\)
+\subsection{Plan}
+\label{sec:org1bf46a2}
+\begin{enumerate}
+\item Prove that \(G\) is bipartite, then the optimal solution of \(P\) are integers,
+\end{enumerate}
+hence \(\max x_e = \alpha'(G)\).
+\begin{enumerate}
+\item Optimal solution for \(D\) (LP) is also integers, hence \(\min y_v = \beta(G)\)
+\end{enumerate}
+
+Now, using Duality theorem, \(\alpha'(G) = \max x_e = \min y_v = \beta(G)\).
+\subsection{Proposition}
+\label{sec:org5182066}
+For LP, max \(c^{t} x\), subject to \(Ax \le b\) and \(x \ge 0\).
+
+This is from chapter 8. Section 2.
+\section{Lecture 26}
+\label{sec:org23258e3}
+\subsection{Zero sum two player games}
+\label{sec:org09110ea}
+\subsubsection{Payoff matrix}
+\label{sec:org226ab10}
+\subsubsection{Strategy}
+\label{sec:orgba8896c}
+\subsubsection{Mixed strategy}
+\label{sec:org4a5a459}
+\subsubsection{Definition of \(\beta\)}
+\label{sec:org6aba36c}
+\subsubsection{Mixed Nash equilibrium}
+\label{sec:orge464a8f}
+\subsubsection{Remarks on mixed Nash Equlibrium}
+\label{sec:org7c31bdf}
+\begin{enumerate}
+\item They are the best possible responses against each other.
+\item Neither player can do better by switching strategies.
+\end{enumerate}
+\subsubsection{Question?}
+\label{sec:orgb1d0c1f}
+\begin{enumerate}
+\item Do we always have a mixed Nash equilibrium?
+\item Which one are the best?
+\item How do we find them?
+\item For the rock paper scissors, the Nash equilibrium is \((1/3, 1/3, 1/3)\).
+The expected payoff will be \(0\). But if we change, then the opponent will
+have a better strategy (provided they know about your distribution.)
+\end{enumerate}
+\section{Lecture 27}
+\label{sec:org1ae883a}
+\subsection{Helly's theorem}
+\label{sec:org784835a}
+Section 8.6
+
+He proved helly's theorem for 1 dimension.
 \section{Tutorial}
-\label{sec:org99aea2f}
+\label{sec:org8e87310}
 \href{http://discretemath.imp.fu-berlin.de/DMII-2018-19/}{link}
 \subsection{Tutorial 1 (Sheet 0)}
-\label{sec:org12c9d89}
+\label{sec:org646c8d2}
 \subsubsection{Problem 2}
-\label{sec:org45aac0d}
-Each step reduces the number of components by at most \(4\). After \(5\) steps, at least \(5\) components are left. 
+\label{sec:org309020e}
+Each step reduces the number of components by at most \(4\). After \(5\) steps, at least \(5\) components are left.
 \subsection{Tutorial 2 (Sheet 1)}
-\label{sec:orgd43f351}
+\label{sec:org1944439}
 \subsubsection{SAT}
-\label{sec:org29c1128}
+\label{sec:org88f2e8c}
 \begin{enumerate}
 \item Example of un-satisfiable instance of SAT
-\label{sec:orge1658cf}
+\label{sec:org40c588e}
 \(f(x_1) = x_1 \wedge \neg x_1\)
 
-No matter what the instance is, this will evaluate to zero. 
+No matter what the instance is, this will evaluate to zero.
 \item About \(2^k\) clauses
-\label{sec:orgd19b393}
-We start by proving that the statement is true for exactly \(k\) variables. 
+\label{sec:orgbf86876}
+We start by proving that the statement is true for exactly \(k\) variables.
 
 Now we induct on the number of variables, starting from \(n\). If it is true
 for \(m\), then it is also true for \(m+1\) because we can replace the \$m+1\$th
 variable by \(x_1\) and bang.
 \item Bound being strict
-\label{sec:orga9a5938}
+\label{sec:orgf57300c}
 For \(k\) literals, and for \(2^k\), we take all possible combinations of \(x_1,
      \cdots, x_k\) such that no two literals are the same. This is not
 satisfiable. (This should evaluate to \(1\) all the time.) Because no matter
@@ -2887,7 +3234,7 @@ what is the value of \(x_1, \cdots, x_k\), there is a literal where the or is
 zero and that literal is present in it.
 \end{enumerate}
 \subsubsection{Problem 1 bipartite}
-\label{sec:org38a1623}
+\label{sec:org0fd7b8d}
 We do a BFS. We have an array and it would be the distance. Now the claim is
 that \(A(u) = A(v) \mod 2\) and if there is an edge that connects these two
 vertices, then the graph is not bipartite.
@@ -2897,12 +3244,12 @@ We did prove that for BFS, the distances from the root are preserved.
 The proof was a bit complex. But it turned out to be something about
 applying BFS.
 \subsubsection{Problem 3 Greedy algorithm can fail}
-\label{sec:org80ffa52}
+\label{sec:orgf36885d}
 \begin{enumerate}
 \item part a
-\label{sec:org55e5f6f}
+\label{sec:org139a463}
 Algorithm: Sort the edges according to the weight in ascending order. \(E =
-     \emptyset\). 
+     \emptyset\).
 \begin{enumerate}
 \item No vertex of degree \(3\)
 \item No cycle of length \(<\) n.
@@ -2927,16 +3274,16 @@ vague.
 
 
 \item part b
-\label{sec:org31e4fab}
+\label{sec:org1ffef22}
 \end{enumerate}
 \subsubsection{{\bfseries\sffamily TODO} Problem 2}
-\label{sec:orgd20b8c0}
+\label{sec:org5267d54}
 The first \(m\) edges are the smallest weight forest.
 
 Induction: First edge is true. Assume it's true for \(m-1\) edges are minimal
 weight forest. Now kruskal adds an edge (it is the edge with smallest
 weight). It does not make a cycle. We still have a forest. Now, the weight
-the new is smaller than or equal to every other \(e_i\). 
+the new is smaller than or equal to every other \(e_i\).
 
 Apparently it doesn't work.
 
@@ -2952,13 +3299,13 @@ The problem is that there could be an edge that we didn't add because it
 created a cycle before. This edge can create problems later.
 \begin{enumerate}
 \item {\bfseries\sffamily TODO} Go again through the argument of Kruskal
-\label{sec:orgadbf983}
+\label{sec:orgbe1dcb3}
 \end{enumerate}
 \subsubsection{Exercise 4}
-\label{sec:orgd9db292}
+\label{sec:orge5c335e}
 \begin{enumerate}
 \item Counter example
-\label{sec:orgf9d8363}
+\label{sec:org326525f}
 Apparently any algorithm would fail on it because the shortest path does
 not make any sense.
 \begin{verbatim}
@@ -2968,16 +3315,16 @@ not make any sense.
          /     \
         /       -\
        /          \
-    1 /            -\  1       
-      |              \        
-     /                -\      
-    /                   \     
-   /                     \    
-  /        -2             -\  
+    1 /            -\  1
+      |              \
+     /                -\
+    /                   \
+   /                     \
+  /        -2             -\
 b---------------------------\c
 \end{verbatim}
 \item {\bfseries\sffamily TODO} Algorithm
-\label{sec:org6c37e20}
+\label{sec:org60825ba}
 \textbf{Claim}: Right after \(i\) th step of second part, \(i\) th step of second
  part, \(v \in V, \dist(v) \le \min \{ \vert w\vert \vert w \textup{
       contains } \le i \textup{ edges} \}\).
@@ -2996,25 +3343,25 @@ negative weighted cycle. The claim more or less does it.
 The time complexity is \(O(mn)\)
 \end{enumerate}
 \subsubsection{Exercise 5 (SAT)}
-\label{sec:org4912427}
+\label{sec:org6802c04}
 \begin{enumerate}
 \item Part a
-\label{sec:org7623d02}
+\label{sec:org2abec6c}
 It's easy
 \item Part b
-\label{sec:orgb0c92fc}
+\label{sec:org7d5e2a1}
 Write \(f(x_1, \dots, x_m) = c_1 \wedge c_2 \cdots c_m\), \(m < 2^k\).
 
-\(c_i = \tilde{x_{i_1}} \and \tilde{x_{i_2}} \cdots\)  
+\(c_i = \tilde{x_{i_1}} \and \tilde{x_{i_2}} \cdots\)
 
 for \(e\) or \(e_i\), define the set \(D_i = \{v\colon \{T, F\}^n \vert c_i(v) =
      false\}\). \(\vert D_i \vert = 2^{n-k}\), \(\sum D_i = \{v \vert f(v) = F\}\).\footnote{A lower bound for Ramsey numbers was also proved in same way. Also you
 can do a probabilistic argument.}
 \end{enumerate}
 \subsection{Tutorial 3 (Sheet 2)}
-\label{sec:orgd52c6c0}
+\label{sec:org0245b98}
 \subsubsection{Problem 1}
-\label{sec:orgb66e2c9}
+\label{sec:orgd1fe6d7}
 We draw the graph, and remove the edges 2, 4, 8, 12. Now there are 6 odd
 number of components. There is a characterization about the maximal matching
 being the minimum of \(\{n - o(G\setminus S) + \vert S\vert\colon \forall S
@@ -3025,17 +3372,17 @@ Easy solution: Show that there is no maximal matching. The number of
 vertices is 18. There cannot be a matching on 17, because odd. Thus, the
 matching on 16 has to be the maximal matching.
 \subsubsection{Problem 2}
-\label{sec:org1fe0abe}
+\label{sec:org4ff0946}
 \begin{enumerate}
 \item part a
-\label{sec:org8964b2e}
+\label{sec:orgafb6e02}
 It is clear that \(\vert V \vert = \sum \textup{vertices in even components
      of G\S} + \sum \textup{vertices in odd components of }G\setminus S + \vert S \vert\)
 
 The above sum \(\mod 2\) evaluates to \(\vert V \vert \mod 2= o(G\setminus S) +
      \vert S \vert\). This is same as \(\vert S \vert - o(G \setminus S \mod 2\).
 \item part b
-\label{sec:org177bc10}
+\label{sec:org722d331}
 The idea is something like this.
 
 For each \(S\) such that the number of odd components in the complement of
@@ -3048,9 +3395,9 @@ as well.) There is a maximal matching. We need to show that in the maximal
 matching contains no edge in the clique. Now, we can arrive at a matching
 on the original graph \(G\) and things should be okay?
 
-I've omitted details in the steps. 
+I've omitted details in the steps.
 \item part b (alternate solution)
-\label{sec:orgf62b320}
+\label{sec:org8be107a}
 Observation:
 \begin{enumerate}
 \item For all even components, there is a matching
@@ -3072,12 +3419,12 @@ theorem is satisfied inside the even components.
 \end{enumerate}
 
 \subsubsection{Problem 3}
-\label{sec:org50e5aa4}
+\label{sec:org9b85936}
 \begin{enumerate}
 \item Part a
-\label{sec:orgea7c397}
+\label{sec:org46e27cb}
 This is kinda similar to the proof of the theorem about \(3\) regular graph
-without any cut edges having a perfect matching. 
+without any cut edges having a perfect matching.
 
 First notice that every three regular graph must have even number of
 vertices.
@@ -3097,18 +3444,18 @@ and \(\vert S\vert > 0\), now, Tutte's theorem!
 If it is \(2\) exactly \(2\) times, then we know that \(\vert S \vert -
      o(G\setminus S)\) has to have parity same as \(\vert V\vert\), but this means
 that \(\vert S\vert\) is a non-zero multiple of \(2\), and \(o(G \setminus S)\)
-is exactly equal to \(2\). Now, Tutte's theorem.     
+is exactly equal to \(2\). Now, Tutte's theorem.
 \item Part b
-\label{sec:org79cc2b5}
+\label{sec:orgddfa585}
 The graph from the graph theory book
 \item part c
-\label{sec:org68837f0}
+\label{sec:orgccaaf11}
 If \(k\) is even, we can think about a clique on \(k+1\) vertices.
 
 If \(k\) is odd, then we can do a similar construction as \(b\).
 \end{enumerate}
 \subsubsection{Problem 4}
-\label{sec:orga0a2eff}
+\label{sec:org76e49f6}
 Induction on the number of vertices of the tree.
 
 For \(2\) vertices. It has a unique perfect matching.
@@ -3118,18 +3465,18 @@ is a leaf (Handshake lemma?) we picked a leaf because the edge must be in
 the perfect matching. We delete the vertex right next to the edge. And on
 each of the even component, we can use the induction argument? We need to
 prove that if we delete a vertex inside the even component, there has to be
-exactly one component is odd. 
+exactly one component is odd.
 
 \(\vert T' \vert = \vert T' \cap C \vert (\mod 2)\)
 
 We can prove this. And apply induction hypothesis.
 \subsubsection{Problem 4 (Alternate proof)}
-\label{sec:org4a89c0a}
+\label{sec:org77da203}
 \textbf{Theorem}: In any tree there exist at most \(1\) perfect matching. (the idea
  is that if there are two matching, then their symmetric difference must
  have a cycle.)
 \subsubsection{Problem 5}
-\label{sec:orgfa7bd4e}
+\label{sec:orgf532cd7}
 Let \(M\) be a maximal matching on \(G\). Let \(2\alpha\) be the number of
 vertices here. Let \(2\alpha'\) be the number of vertices that gets connected
 in \(2\alpha'\), we are supposed to show that \(\alpha' > 1/2 \alpha\).
@@ -3148,24 +3495,24 @@ end.
 Strictness: Consider the following graph and ordering of vertices:
 \begin{verbatim}
 o----------------o----------------o----------------o
-       e2              e1                 e3       
+       e2              e1                 e3
 \end{verbatim}
 
 The maximal matching is \(\{e2, e_3\}\), whereas the algorithm generates
 \(\{e_1\}\).
 \subsection{Tutorial 4 (Sheet 3)}
-\label{sec:org82cc919}
+\label{sec:org777e77d}
 \subsubsection{Problem 1}
-\label{sec:org750a5d2}
+\label{sec:org79bc8ab}
 The inequality is super easy and just follows from the definition.
 
 The proof is equality is also very easy. If no permutation satisfy the
 condition, then we can easily prove that there cannot be an equality.
 \subsubsection{Problem 2}
-\label{sec:org74593a5}
+\label{sec:orgc091283}
 We can take the negative of all weights. And apply Hungarian algorithm.
 \subsubsection{Problem 3}
-\label{sec:org10e2dc0}
+\label{sec:org72f68d0}
 Step \(i\) of the algorithm: let \(M\) be the maximum matching in the equality
 graph \(G_{u, v}\) and \(\vert r \vert < n\) and let \(Q\) be the vertex cover
 provided by the algorithm, then \(T = Q \cap Y\) and \(R = Q \cap X\) and
@@ -3182,7 +3529,7 @@ true, because if it is not true, then we have that \(n = \vert R \vert +
 
 Indeed at each step, the cost function decreases by some number.
 
-Why does the algorithm terminate? 
+Why does the algorithm terminate?
 
 \(w_{ij} = \frac{p_{ij}}{q_{ij}}\), and \(q = LCM(p_{ij}, q_{ij})\), then
 \(\epsilon \ge 1/\varepsilon\), then we can always finish the algorithm.
@@ -3190,8 +3537,8 @@ Why does the algorithm terminate?
 Or we can make all the weights as integers. The rational case follows
 easily.
 \subsubsection{Problem 4}
-\label{sec:org915a482}
-Questions: 
+\label{sec:org17aaa97}
+Questions:
 \begin{enumerate}
 \item Is this the unique extremal examples? The answer is yes.
 \item What are the extremal examples?
@@ -3200,13 +3547,13 @@ matching in Hypergraphs. What is the maximum number? A paper in 2011
 solved it.
 \end{enumerate}
 \subsubsection{Problem 5}
-\label{sec:org72eedd2}
+\label{sec:org457dba0}
 Isn't this kinda simple? Like it is trivial when \(n \ge k+2\), when \(n= k+1\),
 the sum on the RHS evaluates to \(k -1/2\), since \(k\) is an integer,
 \(\delta(G)\) has to be at least \(k\).
 \subsubsection{Problem 5 (proof)}
-\label{sec:orgd3cc308}
-What is the definition of \(k\) connected? 
+\label{sec:org000bc53}
+What is the definition of \(k\) connected?
 
 \(\kappa(G) \ge k \iff G\) is \(k\) connected.
 
@@ -3214,7 +3561,7 @@ What is the definition of \(k\) connected?
 that if we subtract a set of size \(k-1\), then the graph is connected.
 \(G[V(G)\setminus S]\) are either neighbours (in this case it's trivial.)
 
-\(u, v \in V(G')\). 
+\(u, v \in V(G')\).
 
 \begin{enumerate}
 \item \(u \in N(v)\), then we are done.
@@ -3225,13 +3572,13 @@ condition to be true. But \(G'\) has \(n-k+1\) vertices.
 Whereas, if \(\delta \ge n/2\), then the graph has a hamiltonian cycle.
 \end{enumerate}
 \subsubsection{Problem 5 (Bonus)}
-\label{sec:org319054d}
+\label{sec:org520e04f}
 An example where the bound in sharp.
 \subsection{Tutorial 5 (Sheet 4)}
-\label{sec:orgd9d5e8a}
+\label{sec:orgf4a7445}
 \subsubsection{Problem 4}
-\label{sec:orgd77c28c}
-We can do this in cases. 
+\label{sec:org6cc3bcc}
+We can do this in cases.
 
 \begin{enumerate}
 \item \(\kappa(G) = 3\), then because \(\kappa \le \kappa' \le 3\), \(\kappa' =
@@ -3240,9 +3587,9 @@ We can do this in cases.
 Let \(U_1\), \(U_2\), \(U_3\), be the at most three components that would
 \end{enumerate}
 \subsection{Tutorial 6 (Sheet 5)}
-\label{sec:org558bbcb}
+\label{sec:orgc929db0}
 \subsubsection{Problem 1}
-\label{sec:org2fff26b}
+\label{sec:org82b7ec5}
 It is easy to see that \(\kappa = 2\). It is easy to see that \(\kappa' \le 4\).
 We need to see how to ignore the other parts.
 
@@ -3255,17 +3602,17 @@ original graph has \(\kappa' = 4\).
     5\), and \(\vert \bar{S}\vert \ge 5\). Then the induced graph has to be \(K_5\). But
 there is no \(K_5\).
 \subsubsection{Problem 3}
-\label{sec:org84b1e7b}
+\label{sec:org7d1ed68}
 \(K_n\), \(n\) is a natural number that is very large. There were two \(K_n\) at
 both the end and in the center a graph of size \(k\).
 \subsubsection{Problem 3}
-\label{sec:org62e2fcb}
+\label{sec:org0824b9c}
 \begin{enumerate}
 \item \(k=d=k'\), \(K_{d+1}\) would do
 \item \(k < d\) and \(k'\) two \(K_{d+1}\) graphs and do connections between them
 \end{enumerate}
 \subsubsection{Problem 4}
-\label{sec:orgc32068b}
+\label{sec:org7f9e930}
 Something like if \(\kappa' = r\), then there are \(r\) edge disjoint paths. If
 \(\kappa < \kappa'\), then there is a point in the edge disjoint path that
 doesn't blah blah.
@@ -3279,7 +3626,7 @@ hamiltonian cycle.
 \(\vert S, \vert{S} \vert = \sum d(v) - 2e(G[S])\)\footnote{If there is an edge cut of size \(2\), then there is a triangle in the
 peterson graph.}
 \subsubsection{Problem 5}
-\label{sec:org8e6e24d}
+\label{sec:orgbf61b0f}
 You make a line graph and then argue that the \(\kappa'\) of the graph is same
 as the \(\kappa\) of the line graph. (There is an intermediate graph which
 should be formed by adding extra vertices \(u\) and \(v\), and the edge \(ux\) and
@@ -3289,14 +3636,14 @@ should be formed by adding extra vertices \(u\) and \(v\), and the edge \(ux\) a
 
 Called the Harrary graph.
 \subsubsection{Problem 6}
-\label{sec:orgad24ea6}
+\label{sec:org635730d}
 \(\val(f) = f^-(t) - f^{+}(t) = \sum_{u \in \bar{S}} (f^{-1}(w) - f^{+}(w)) =
     \sum_{u\in \bar{S}}(\sum_{v \in V} f(vu) - \sum_{v \in V} f(uv))\) some
 calculations and we are done.
 \subsection{Tutorial 7 (Sheet 6)}
-\label{sec:org50614e1}
+\label{sec:org88655f0}
 \subsubsection{Problem 1}
-\label{sec:org85c8e4a}
+\label{sec:orgf8d3a60}
 Given a bipartite Graph \(G\) with \(X\) and \(Y\) be two partitions. Add two
 vertices \(x\), \(y\) and edges from \(x\) to every element of \(X\) and edges from
 \(y\) to every element of \(Y\).
@@ -3306,22 +3653,22 @@ The theorem now follows from local Vertex Menger's theorem.
 How does one prove Local Vertex Menger from Local edge menger? The other
 side was an exercise.
 \subsubsection{Problem 4}
-\label{sec:orgf670e39}
+\label{sec:org70b3575}
 \(I\) is the set of all spanning trees and \(J\) is the set of all edge cuts.
 \subsection{Tutorial 9 (Sheet 8)}
-\label{sec:org4468f29}
+\label{sec:org5c9a489}
 \subsubsection{Exercise 1}
-\label{sec:org2aee7d2}
+\label{sec:orgb32d2c8}
 If \(X(G) = 4\), then it has a subgraph \(H\), that is \(4\) critical. But then
 \(\delta(H) \ge 3\). This is sort of a contradiction. There will always be a
 vertex such that \(\delta(G) = 2\).
 \subsubsection{Exercise 2}
-\label{sec:org4c603ff}
+\label{sec:org01c460b}
 For odd, \(X = 3\) and \(X \le 3\). We are done.
 
 When \(n\) is even. We can assume that all lists are the same.
 \subsubsection{Exercise 3}
-\label{sec:org108be58}
+\label{sec:org093d4e6}
 \(F - E + V = 2\) and \(4F \le 2E\). Suppose \(\delta(G) \ge 4\). \(4V \le \sum
     d(v) = 2E\).
 
@@ -3336,16 +3683,16 @@ Now, do this by induction.
 Also the notion of \(0\) free planar implies \(3\) colorable. Some version of
 Brook's theorem.
 \subsubsection{Exercise 4}
-\label{sec:org9272941}
+\label{sec:orgeb22ad4}
 Similar to how the 5 list colorability of graphs were proven in the class.
 \subsubsection{About exercise 4}
-\label{sec:org79e06b8}
+\label{sec:org814b153}
 Prove that every outer plane has a vertex of degree \(2\). Now one can repeat
 the above proof.
 
 Something about dual graph. Something about triangulation as well.
 \subsubsection{Mirzakhani graph (Problem 5)}
-\label{sec:orge93dc02}
+\label{sec:orgdc08262}
 The idea is the following: we take a subgraph, which is the square with the
 center element. To color this with \(4\) colors, at least two elements of the
 outer loop has to be the same. But two adjacent vertices can't have the same
@@ -3355,7 +3702,7 @@ Let us, without loss of generality assume that \(2\) and \(4\) have the same
 color. The color has to be \(1\) or \(3\). Now, notice that \(1\) and \(3\) are
 diagonally opposite to \(2\) and \(4\). Regardless of what is the color for \(2\)
 and \(4\), these diagonals, can't be same. Hence the other diagonal has to
-have the same color. 
+have the same color.
 
 For simplicity assume that the color chosen was \(1\). Thus, there is a line
 \(\bar{4}, \bar{3}, \bar{2}\) which needs to have the same color. And this
@@ -3372,10 +3719,10 @@ We color the outer sides with two colors \(1, 2\). The interior points with
 color \(3\), and the exterior point with \(3\). This is now \(3\) colorable. The
 chromatic number is \(3\).
 \subsubsection{{\bfseries\sffamily TODO} New bonus}
-\label{sec:orgab56166}
+\label{sec:orgc96b6ef}
 If you have a triangle free planar graph, it's chromatic number is at most \(3\).
 \subsubsection{Random stuff}
-\label{sec:org7f13ce6}
+\label{sec:orga2ba08d}
 \(C_{2n}\), \(v_1, \cdots, v_{2n}\).
 
 \(f_G = (x_1 -x_2)(x_2 - x_3) \cdots (x_{2n-1} - x_{2n})(x_{2n} - x_1)\).
@@ -3388,15 +3735,15 @@ polynomial does not vanish.
 The monomial \(x_1x_2\cdots x_{2n}\) does not get cancelled out implies
 Combinatorial Constellation.
 \subsection{Tutorial 10 (Sheet 9)}
-\label{sec:orgff9d017}
+\label{sec:org9bdd1bb}
 \subsubsection{Problem 1}
-\label{sec:org49192b4}
+\label{sec:org3c1dc6c}
 \begin{enumerate}
 \item Part 1
-\label{sec:org8e2c44e}
+\label{sec:org11f4946}
 \(C(x_i, y_j) = j - i (\mod n)\)
 \item Part 2
-\label{sec:org8168860}
+\label{sec:orgad53fb0}
 \(G\) be broken down into two components \(X\) and \(Y\)
 
 We make a network by adding \(s\) and \(t\). Now from \(X\), add \(\Delta(G) -
@@ -3406,7 +3753,7 @@ Similarly for \(\Delta - \deg y\) to the sink.
 
 Minimum capacity is \(\sum \Delta - \deg x\).
 \item Part 2
-\label{sec:org30fc343}
+\label{sec:org6a70f9f}
 We double the graph. The graph \(\tilde{G}\), then \(\Delta(\tilde G) =
      \Delta(G)\) and \(\delta(\tilde{G}) = \delta(G) + 1\). We keep repeating the
 construction.
@@ -3415,17 +3762,17 @@ Basically, we add edges between vertices that are not saturated.
 
 This would lead to an exponentially large graph.
 \item Bonus
-\label{sec:orgcaab346}
+\label{sec:org8d08830}
 What is the best bound on size of the new graph.
 \end{enumerate}
 \subsubsection{Problem 3}
-\label{sec:orged95e7f}
+\label{sec:org217f8df}
 \subsection{Tutorial 11 (Sheet 10)}
-\label{sec:org58bb4bb}
+\label{sec:org2113778}
 \subsubsection{{\bfseries\sffamily TODO} Exercise 1}
-\label{sec:orge469e04}
+\label{sec:orgd0ed465}
 \subsubsection{Exercise 2}
-\label{sec:org51d9b48}
+\label{sec:orgd888327}
 Preference
 
 \begin{center}
@@ -3480,7 +3827,7 @@ Matching & Unstable pair & Reason\\
 
 
 \subsubsection{Exercise 3}
-\label{sec:org49cfc89}
+\label{sec:org3304f41}
 The weights be \(w_1, \cdots, w_n\) and for each student, \(S_i\), let \(e_{1,i},
     \cdots, e_{12,i}\) be their grade in a homework, now the average for the
 student is \(w_1e_{1, i} + \cdots + w_ne_{n, i}\) and \(0 \le w_i \le 1\).
@@ -3503,10 +3850,10 @@ constraint \(w_1 + \cdots + w_n = 1\). and \(0 \le w_i \le 1\).
 This would ensure that the most number of people the teacher hate will fail
 (kinda) and the maximum number of people that the teacher like will pass.
 \subsubsection{{\bfseries\sffamily TODO} Exercise 4}
-\label{sec:orgb4bd08f}
+\label{sec:org94a9b1e}
 This is an example from the book.
 \subsubsection{Exercise 5}
-\label{sec:orge76bbab}
+\label{sec:org43519d3}
 What does it mean by decision version of a problem?
 
 Given a IP with \(n\) variables and \(m\) equations, (Can we assume \(n \ge m\))
@@ -3517,7 +3864,7 @@ in NP. This is because if we know such a solution exist, you can verify it
 in polynomial time.
 \begin{enumerate}
 \item Reduction of 3 sat to Decision-IP
-\label{sec:org73e28b8}
+\label{sec:orgf3fe8ae}
 If there is a clause like \((x_1 \wedge x_2 \wedge x_3)\), then we can form
 the equation \(x_1 + x_2 + x_3 \ge 1\). Similarly for each of the clauses.
 
@@ -3528,7 +3875,7 @@ What should be the maximization or minimization problem?
 We know that it is decidable if there exists a solution to the problem. So
 we can kinda pick an arbitrary, equation to maximize or minimize.
 \item Decision version
-\label{sec:org8d37d99}
+\label{sec:org4a56f70}
 I saw this question in CS Stackexchange about what is the decision version
 of the IP. One answer said the decision version of any problem is that "is
 there a solution", I found it a bit weird because, in our case, it would
@@ -3539,18 +3886,251 @@ But for the reduction for \(3\) sat to Decision IP, we just care about this,
 again.
 \end{enumerate}
 \subsubsection{{\bfseries\sffamily TODO} Exercise 6}
-\label{sec:org97c359c}
+\label{sec:org89b9e97}
 \(x_i\) should correspond to vertices.
 
 \(y_{ij}\) should correspond to edges, but it is not known if an edge actually
 exist.
 
-The value of \(x_k\) means if a vertex is picked or not. 
+The value of \(x_k\) means if a vertex is picked or not.
+\subsection{Tutorial 12 (Sheet 11)}
+\label{sec:orgc4f1a9b}
+\subsubsection{Problem 1}
+\label{sec:orga03fd7e}
+The following code does the calculation
+
+\begin{verbatim}
+x1 <- matrix(c(1, 2), nrow=2)
+x2 <- matrix(c(-1, 2), nrow=2)
+x3 <- matrix(c(-3, 1), nrow=2)
+x4 <- matrix(c(1, -2), nrow=2)
+
+b <- matrix(c(5, 4), nrow=2)
+
+ls <- list(x1, x2, x3, x4)
+
+for(i in 1:3)
+{
+    for(j in (i+1):4)
+    {
+        print(c(i, j))
+        xb <- tryCatch({solve(matrix(c(ls[[i]], ls[[j]]), nrow=2), b)},
+                       error=function(e){return(c(NaN, NaN))})
+
+        print(xb)
+    }
+}
+
+print(matrix(c(x1, x2, x3, x4), nrow=2))
+\end{verbatim}
+
+There is only one feasible basis \((1, 4)\) and \(x_B = (3.5, 1.5)\). The
+maximum value is \(3.5 + 1.5 = 5\).
+\subsubsection{Problem 2}
+\label{sec:org3355c50}
+\begin{verbatim}
+x2 <- matrix(c(-2, 1), nrow=2)
+y1 <- matrix(c(1, 0), nrow=2)
+y2 <- matrix(c(0, 1), nrow=2)
+y3 <- matrix(c(2, 2), nrow=2)
+y4 <- matrix(c(-2, -2), nrow=2)
+
+ls <- list(x2, y1, y2, y3, y4)
+b <- matrix(c(-2, 2), nrow=2)
+
+for(i in 1:4)
+{
+    for(j in (i + 1):5)
+    {
+        print(c(i, j))
+        xb <- tryCatch({solve(matrix(c(ls[[i]], ls[[j]]), nrow=2), b)},
+                       error=function(e){return(c(NaN, NaN))})
+        print(xb)
+    }
+}
+\end{verbatim}
+
+Simplex, \(A_B^{-1}A_N\)
+
+\begin{verbatim}
+AB <- matrix(c(-2, 1, 1, 0), nrow = 2)
+
+AN <- matrix(c(0, 1, 2, 2, -2, -2), nrow = 2)
+
+xb <- matrix(c(2, 2), nrow=1)
+
+print(solve(AB) %*% AN)
+
+cb <- matrix(c(2, 0), nrow=2)
+
+## Calculation of r
+matrix(c(0, 1, -1), nrow=3) -  t(t(cb) %*% solve(AB) %*% AN)
+\end{verbatim}
+
+After a pivot we'll see that the problem is unbounded. This can be seen by
+plugging in \(x_1 = t\) and \(x_2 = t +1\) and \(t \rightarrow \infty\).
+\subsubsection{Problem 3}
+\label{sec:org1e9ce99}
+\begin{verbatim}
+cn <- matrix(c(46, 43, -271, 8))
+\end{verbatim}
+
+Basis z1, z2
+\begin{center}
+\begin{tabular}{rrrrrrr}
+x1 & x2 & x3 & x4 & z1 & z2 & b\\
+\hline
+2 & 1 & -7 & -1 & 1 & 0 & 0\\
+-39 & -7 & 39 & 2 & 0 & 1 & 0\\
+\hline
+-46 & -43 & 271 & -8 & 0 & 0 & 0\\
+\end{tabular}
+\end{center}
+
+Basis x1, z2
+\begin{center}
+\begin{tabular}{rrrrrrr}
+x1 & x2 & x3 & x4 & z1 & z2 & b\\
+\hline
+1 & 0.5 & -3.5 & -0.5 & 0.5 & 0 & 0\\
+0 & -12.5 & 19.5 & 21.5 & 19.5 & 1 & 0\\
+0 & -20 & 110 & -15 & 23 & 0 & 0\\
+\end{tabular}
+\end{center}
+
+
+
+\subsubsection{Problem 4}
+\label{sec:orge00e2bb}
+This is a section from the book. I also solved this for the tutorial
+\subsubsection{Problem 5}
+\label{sec:org7e179d6}
+From the last equation it is clear that \(x_n \le 5^n\). 
+
+The last equation can be rewritten as \(2(obj) \le x^n + 5^n\). Thus the
+objective value is bounded above by \(5^n\). Clearly \((0, \cdot, 5^n)\) is an
+optimal solution.
+\subsection{Tutorial 13 (Sheet 12)}
+\label{sec:orgbdc60c0}
+\subsubsection{Problem 1}
+\label{sec:org63d89aa}
+\begin{verbatim}
+x1 <- matrix(c(15, -1, -3), nrow=3)
+x2 <- matrix(c(-1, 1, -1), nrow=3)
+x3 <- matrix(c(-1, 0, 0), nrow=3)
+x4 <- matrix(c(0, -1, 0), nrow=3)
+x5 <- matrix(c(0, 0, -1), nrow=3)
+
+ls <- list(x1, x2, x3, x4, x5)
+b <- matrix(c(4, 100, 120), nrow=3)
+
+for(i in 1:3)
+{
+    for(j in (i+1):4)
+    {
+        for(k in (j+1):5)
+        {
+            xb <- solve(matrix(c(ls[[i]], ls[[j]], ls[[k]]), nrow=3), b)
+            if(all(xb >= 0))
+            {
+                print(c(i, j, k))
+                print(xb)
+            }
+        }
+    }
+}
+\end{verbatim}
+
+Turns out that the feasible region of the problem is empty.
+
+Thus the original problem must be unbounded.
+\subsubsection{Problem 2}
+\label{sec:org444af90}
+Optimum Optimum. Primal: maximize \(x\) subject to \(x \le 1\) and \(x \ge 0\).
+Dual: minimize \(y\) subject to \(y \ge 1\) and \(y \ge 0\).
+
+Unbounded, infeasible. Primal: maximize \(x\) subject to \(-x \le 1\) and \(x \ge
+    0\). Dual: minimize \(x\) subject to \(-x \ge 1\) and \(x \ge 0\).
+
+Infeasible, unbounded. Use the above problem again.
+
+Infeasible infeasible. Primal maximize \(x + y\) subject to \(-x \le 1\) and \(y
+    \le -1\) and \(x, y \ge 0\) Dual: minimize \(x - y\) subject to \(-z \ge 1\), \(a
+    \ge 1\) and \(z, a \ge 0\).
+\subsubsection{Exercise 6}
+\label{sec:orge907d64}
+Given a arbitrary linear program, construct another linear program \(P'\) such
+that \(P\) has an optimal solution if and only if \(P'\) has a feasible solution.
+
+Our new optimal solution is the following:
+
+Minimize (doesn't matter)
+
+Subject to 
+
+\begin{center}
+\begin{tabular}{rrllll}
+A\(^{\text{t}}\) & 0 & . & y & >= & c\\
+0 & -A & . & x & >= & -b\\
+\end{tabular}
+\end{center}
+
+greater than or equal to
+
+and \(y \ge 0\), \(x \ge 0\).
+
+\textbf{Proof} Notice that the dual of the original program is \(\min c^t y\)
+subject to \(A^t \ge c\) and \(y \ge 0\). The dual of this program is the
+original program.
+
+If the program is optimal, both the dual and the dual of the dual is optimal
+and hence also feasible. Thus \(A^t y \ge c\) and \(-A^tx \ge -b\). Thus the new
+program is feasible.
+
+If the new program is feasible, this means that both the dual of the
+original program and the original program is feasible. Assume that the
+program is not optimal, then it has to be either unbounded or infeasible. It
+cannot be unbounded because the dual of the program is feasible. It cannot
+be infeasible, because we already know it is feasible. Thus the problem has
+to have an optimal solution.
 \section{{\bfseries\sffamily TODO} Things to study}
-\label{sec:org839b634}
+\label{sec:org8d93405}
 \subsection{{\bfseries\sffamily TODO} Proof of Kruskal}
-\label{sec:orgc619682}
+\label{sec:org4cf9d37}
 There was also an exercise talking about how the first \(n\) edges of the
 kruskal algorithm forms a minimum weight forest. Anurag said this was a
 tricky problem.
+\subsubsection{{\bfseries\sffamily TODO} Problem in proof about complexity}
+\label{sec:orgeb2df04}
+In the second step, there is this argument on if \(C_u = C_w\) takes \(O(n^2)\).
+Shouldn't it be \(O(mn)\)?
+\subsection{{\bfseries\sffamily TODO} Proof of lower bound for sorting}
+\label{sec:org4d0096f}
+\subsection{{\bfseries\sffamily TODO} What is the lightest network that remains connected after the breakdown of any edge?}
+\label{sec:org9acbf7d}
+What does lightest mean here? 
+
+In a clique, you really have to remove a lot of edges to make it disconnected.
+
+Perhaps, he's talking about a graph on \(n\) vertices with minimum number of
+edges that will remain connected, even after removing any edge from it.
+\subsection{{\bfseries\sffamily TODO} Proof of Hall's theorem}
+\label{sec:org7f68e0e}
+He didn't do this in current course. But was done in the previous course.
+West has a proof.
+\subsection{{\bfseries\sffamily TODO} Finish learning the proof of Tutte's theorem}
+\label{sec:org949edcc}
+\subsection{{\bfseries\sffamily TODO} Minimum number of edges in a k connected graph?}
+\label{sec:org46d3708}
+\subsection{{\bfseries\sffamily TODO} Study Baryani theorem}
+\label{sec:org21281ad}
+\subsection{{\bfseries\sffamily TODO} For edge coloring consider when we are working with multigraphs}
+\label{sec:orgf3879d6}
+And when we are not.
+
+For example, for Vizing's theorem, we are working with simple graphs.
+\subsection{{\bfseries\sffamily TODO} Learn some properties of Peterson graph}
+\label{sec:orgd610d14}
+\subsection{{\bfseries\sffamily TODO} Matchings}
+\label{sec:org621d462}
 \end{document}
