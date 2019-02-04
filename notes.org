@@ -3582,6 +3582,61 @@
     Infeasible infeasible. Primal maximize $x + y$ subject to $-x \le 1$ and $y
     \le -1$ and $x, y \ge 0$ Dual: minimize $x - y$ subject to $-z \ge 1$, $a
     \ge 1$ and $z, a \ge 0$.
+*** Problem 4
+    I solved this for the grade.
+
+    One can solve this directly exactly as we proved the theorem for optimal
+    solution. One can also solve it using the fact that basic feasible solution
+    of a linear program is a vertex of the polyhedra. So there exists a linear
+    program which has a unique optimum equal to the basic feasible solution, but
+    we know that unique optimal solution has integer coordinates. Thus, the
+    basic feasible solution has integer coordinates.
+*** Exercise 5
+    The primal solution is the following:
+
+    maximize $\sum e_i - sum \tilde{e}_i$. Where $e_i$ is the set of vertices
+    entering $t$ and $\tilde{e}_i$ is the set of vertices that leave $t$.
+
+    Subject to: $\sum e_i - \sum \tilde{e}_i = 0$ for each vertex $v$ that is
+    not $s$ or $t$. $e_i$ and $\tide{e}_i$ have the same meaning. This is the
+    conservation constraint.
+
+    Also subject to $e_i \le f(e_i)$ (this is the capacity constraint; some
+    abuse of notation)
+
+    And $e_i \ge 0$.
+
+    The dual of the program is the following:
+
+    $\minimize \sum f(e_i) e_i$ subject to
+
+    $x_j + e_i - x_j \ge 0$ where $e_i \ge 0$ and $x_i \in \R$.
+
+    Meaning of the variables. $e_j$ should denote a value that means that it is
+    an edge between the cut. $e_j$ should be $1$ if it is between the cut. Now
+    the value of $x_j$ means that it should be $1$ if it in the cut with $s$.
+    Now if $x_j$ and $x_i$ have the same value, $e_j$ can be anything, either
+    $0$ or $1$, but then, because of the minimization problem $e_j$ will be
+    zero hence the equations represent the problem for min-cut.
+    
+    *About the matrix being totally unimodular*.
+    
+    Notice that we don't need to consider the bottom $I_n$ matrix, because of
+    the lemma that adding a canonical basis won't change the unimodularity.
+    
+    We prove this by induction of $\vert V \Vert$. For $\vert V \vert = 1$, we
+    are done. Let us assume that it is true till $\vert V \vert \le n$. For
+    $n+1$, we think about the matrix in terms of the columns.
+
+    Suppose there is a column with all zeros, we are done. Suppose there is a
+    column with exactly one non-zero, we are again done.
+
+    Notice that each column can have at most two nonzeros. So the only case left
+    if the case where every column has exactly two nonzeros. On the other hand,
+    there can only be at most one $1$ and at most one $-1$. In this case the
+    matrix is singular since we can just add all the rows and get the row $(0,
+    0, \cdots, 0)$ Thus it is unimodular in every case. By induction, we are
+    done.
 *** Exercise 6
     Given a arbitrary linear program, construct another linear program $P'$ such
     that $P$ has an optimal solution if and only if $P'$ has a feasible solution.
