@@ -2724,12 +2724,244 @@
    Section 8.6
 
    He proved helly's theorem for 1 dimension.
+* Lecture 28 <2019-02-05 Tue>
+** Randomized algorithms
+   Decision problems, problems with answers yes or no.
+
+   Two types of randomized algorithms.
+
+  | Las Vegas                       | Monte Carlo                 |
+  |---------------------------------+-----------------------------|
+  | "House always wins"             | Usually correct             |
+  | Always correct                  | Always fast                 |
+  | Usually fast                    |                             |
+  | running time is random variable | solution is random variable |
+** Monte Carlo: types of errors
+   1. False positive (algorithm says yes, answer is no)
+   2. False negative (algorithm says no, answer is yes)
+
+   *Goal*: Bound the probability of an incorrect answer.
+
+   Sometimes we can ask for algorithms with one-sided errors, for example, never
+   give a false negative. In this case, we can repeat the test several times, if
+   we ever see a NO, the answer is NO. If we only see Yes, return Yes. Notice
+   that if the algorithm is repeated $k$ different times, then
+   $P(\textup{error}) = P(\textup{false positive})^k \rightarrow 0$.
+** Example (Matrix multiplication verification)
+   Problem: Given two $n\times m$ matrices, $A, B$ our matrix multiplying.
+   Machine claims $C = A \times B$.
+
+   Question how can we verify this?
+
+   If we compute $AB$ ourselves classically we need $\Omega(n^3)$ operations.
+*** Randomized verification
+    Pick a random entry $C$, compute what it should be. If the answers agree,
+    then accept $C$, else reject. To compute a single entry it take linear time.
+    
+    No false negative.
+
+    $P(\textup{false positive}) \le 1 - \frac{1}{n^2}$.
+*** A more precise verification
+    Question $AB = C$.
+
+    Reformulate the question: is $AB - C = 0$.
+
+    So the general question is the matrix $M = 0$.
+
+    *Problem* we don't have access to the entries. Instead we can multiply $M$
+    by vectors.
+
+    $Mx = (AB - C)x = (AB)x - Cx$. We can compute $Cx$.
+
+    $ABx = A(Bx)$ This requires quadratic operations.
+
+    *Key observation* $M = 0 \iff Mx = 0 \forall x$.
+*** Randomized algorithm
+    1. Choose a random $x \in \{0, 1\}^n$
+    2. Compute $Mx$ if $\neq 0$, return $M \neq 0$. If $= 0$, return $M = 0$.
+
+    We never get a false negative.
+*** Claim
+    If $M \neq 0$, and $x \in \{0, 1\}^n$ uniformly random then $P(Mx = 0) \le
+    \frac{1}{2}$, i.e., the probability of false positive is $\le \frac12$.
+**** Proof
+     Without loss of generality let us say that $M_{11} \neq 0$.
+
+     Consider $(Mx) = \sum_{i=1}^{n} M_{1i} x_i = M_{11} x_1 + \sum_{i=2}^{n}
+     M_{1i}x_i$.
+
+     For every choice of $x_2, x_3, \cdots, x_n$. So the choice is zero for at
+     most one choice of $x_1$.
+
+     Therefore $P(Mx = 0) \le P((Mx)_1 = 0) \le \frac{1}{2}$.
+*** About the algorithm
+    Repeat the algorithm $k$ times and get that the probability of error $\le
+    \frac{1}{2^k}$.
+** Definition
+   $\omega$ exponent for matrix multiplication, i.e., two matrices can be
+   multiplied in $\theta(n^\omega)$ time.
+** Bounds
+   $2 \le \omega \le 2.3728629$.
+** Conjecture
+   $\omega = 2 + o(1)$.
+* Lecture 29 <2019-02-07 Thu>
+  Didn't have charge in my laptop. Did stuff about matching etc.
+* Lecture 29 <2019-02-12 Tue>
+** Hypergraphs
+   A pair $(V, \mathscr{F})$, where $V$ is a set of vertices and $\mathscr{F}$
+   is a family of subsets. $F \subset 2^V = \{X \subset V\}$ set family
+   (elements are called Hyperedges)
+
+   Hypergraph is $k$ uniform.
+
+   If $\forall F \subset \mathscr{F}$, $\vert F \vert = k$.
+
+   Example: $2$ uniform Hypergraph $\iff$ graph.
+
+   A $3$ uniform hypergraph Fano Plane. $7$ vertices and $7$ hyperedges.
+
+   #+BEGIN_SRC artist
+                                           |
+                                          /|\
+                                         / | \
+                                        /  |  \
+                                       /   |   \
+                                     /-----+----\-
+                                    /-/    |    \/-
+                                   //---   | /--- \\
+                                  /(    \--+-      )\
+                                 /  \/---  | \--- /  \
+                                //----\    |    /\----\
+                               ------------+----------\--
+   #+END_SRC
+
+   Finite Geometry. We talked about Hypergrpahs in Baranyai's theorem. A
+   complete $k$ uniform on $n$ edges. This can be partitioned into a Perfect
+   matching if $k \vert m$.
+
+   Hypergraph $(v, \mathscr{F})$ is called $2$ colorable if $\exists c \colon V
+   \rightarrow \{R, B\}$ that $\forall F \in \mathscr{F}$, $\vert c(F) \vert =
+   2$
+   
+   It can be shown that the Fano plane is not $2$ colorable.
+** Problem
+   $m(k)$ is the minimum $\min \{ \vert \mathscr{F} \vert \textup{non 2
+   colorable k uniform hypergraph \}$.
+
+   $m(2) = 3$. For $2$ edges, it is definitely two colorable.
+
+   $m(3) = 7$
+
+   Geometric rate of $m(k)$ as $k \rightarrow \infty$.
+
+   *Upper bound on m(k)*
+
+   $\binom{[2k-1]}{k} = K^k_{2k-1}$ is not $2$ colorable. For any two coloring
+   you color the vertices with $\{R, B\}$, the bigger color class has at least
+   $k$ vertices. But in our hypergraph, every $k$ edge is present. Thus inside
+   this edge there is a monochromatic hyperedge.
+
+   $m(k) \le \binom{2k-1}{k}\approx 4^k$
+** Lower bound
+   If every $k$ uniform hypergraph with $f$ hyperedges can be $2$ colored.
+** Erdos
+   $m(k) \ge 2^{k-1}$
+*** Proof
+    Let $F$ be $k$ uniform and $\vert F \vert < 2^{k-1}$, we need to $2$ color
+    $F$. 
+
+    Strategy $2$ color $V$ randomly and prove that with non-zero probability
+    that there is no monochromatic hyperedge. What we have shown is that there
+    exists a proper $2$ coloring.
+
+    Color each $v$ red with probability $\frac{1}{2}$ blue with the same
+    probability. Choices of vertices are uniformly independent.
+
+    For $F \in \mathscr{F}$, let $E_F$ be event that $F$ is m.c. $Pr(E_r) =
+    \frac{2}{2^k} = \frac{1}{2^{k-1}}$.
+
+    $P(\exists F \in \mathscr{F}, F \textup{is m.c.}) \le \sum P(E) <
+    2^{k-1}\frac{1}{2^{k-1} = 1$ Weird proof.
+*** Next winter
+    In Extremal combinatorics, $\frac{2}{\log k} 2^s \le m(k) < k^2 2^k$.
+** Algorithm
+   From the Erdos's proof, we get a Monte Carlo algorithm. Then a random
+   coloring succeeds in finding a proper $2$ coloring with a probability
+   $\ge 1 - \frac{1}{2} \ge \frac12$.
+
+   This means that we can repeat the algorithm several times to get a result. At
+   the end we produce a proper $2$ coloring $\frac{1}{2^i}$.
+** Goal
+   *Derandomization* get rid of the randomization.
+** Positional games
+   A game Bridge-It
+** Theorem
+   Player 2 does not have a winning strategy.
+*** Proof
+    Suppose player $2$ has a winning strategy $S$. Player $1$ has access to this
+    strategy, player 1 plays an arbitrary edge $e_1$, then follows $S$. Ignoring
+    $e_1$. If $S$ calls for $e_1$, take another arbitrary $e_2$ etc. At the end,
+    we claim that Player 1 wins since, he always owns the moves according to $S$
+    plus one more. At the end you win because $S$ is a winning strategy. But
+    player $2$ plays according to $S$, so they cannot win.
+
+    The proof doesn't really use the game.
+
+    This doesn't show that player 1 doesn't have a winning strategy. We need to
+    show that the game cannot end in a draw.
+** Winning strategy
+   How to win?
+
+   #+BEGIN_SRC artist
+
+                            -+---------+--------+-------+-
+                          -/ |         |        |       | \--
+                       --/   |         |        |       |    \--
+                    --/      |         |        |       |       \-
+                  -/   ------+---------+--------+-------+-----    \--
+             x --\\---/      |         |        |       |     \---------
+                  -\--\      |         |        |       |            /--/- y
+                    -\ ---\  |         |        |       |    /-------/--
+                      -\   --+---------+--------+-------+----    /---
+                        -\   |         |        |       |     /--
+                          -\ |         |        |       |  /--
+                            -+---------+--------+-------+--
+   #+END_SRC
+
+   $P_1$ and $P_2$ color edges red and blue. Player wins if and only if $x$ and
+   $y$ are colored in the red group
+** Theorem (Lehmann)
+   If connected and disconnected occupying edges of a graph $G$ (alternatively)
+   the connector is able to occupy a spanning tree of $G$ provided $G$ provided
+   $G$ contains two spanning tree (edge-disjoint)
+*** Proof
+    We assume that $E(G) = E(T_1^{ * }) \cup E(T_2^{ * })$ in the beginning. In the
+    algorithm, the connector maintains two spanning trees $T_1$ and $T_2$ such
+    that the following properties hold.
+
+    1. $E(T_1) \cap E(T_2)$ is the edges of the connector.
+    2. $E(T_1) \triangle E(T_2)$ is the unclaimed edges.
+
+    If succeeds then after $n-1$ moves $\vert E(T_1) \cap E(T_2) \vert = n -1$
+    and $T_1 = T_2$ is a spanning tree occupied by connector.
+
+    Start: $T_1 = T^{ * }$, $T_2 = T_2^{ * }$
+
+    Now, after $i$ moves, we have $T_1$ and $T_2$. In the next move, the
+    disconnector takes an edge $e \in E(T_1) \triangle E(T_2)$. Without loss of
+    generality, $e \in E(T_1) \setminus E(T_2)$. This disconnects $T_1$ into two
+    components $U_1$ and $U_2$. $T_2$ is connected, so $\exists$ an edge $e^{**}
+    \in E(T_2)$ between $U_1$ and $U_2$. $e^{ *} \notin E(T_1)$ otherwise $U_1$
+    will be connected in $U_2$ in $T_1 - e$.
+
+    So connector takes $e^{*} \in E(T_2) \setminus E(T_1)$ and updates $T_2 =
+    T_1$ and $T_1$ will be losing the edge $e$ and adding the edge $e^{ * }$.
 * Tutorial
   [[http://discretemath.imp.fu-berlin.de/DMII-2018-19/][link]]
-** Tutorial 1 (Sheet 0)
+** Tutorial 1 (Sheet 1)
 *** Problem 2
     Each step reduces the number of components by at most $4$. After $5$ steps, at least $5$ components are left.
-** Tutorial 2 (Sheet 1)
+** Tutorial 2 (Sheet 2)
 *** SAT
 **** Example of un-satisfiable instance of SAT
      $f(x_1) = x_1 \wedge \neg x_1$
@@ -2845,7 +3077,7 @@
 
      for $e$ or $e_i$, define the set $D_i = \{v\colon \{T, F\}^n \vert c_i(v) =
      false\}$. $\vert D_i \vert = 2^{n-k}$, $\sum D_i = \{v \vert f(v) = F\}$.[fn:18]
-** Tutorial 3 (Sheet 2)
+** Tutorial 3 (Sheet 3)
 *** Problem 1
     We draw the graph, and remove the edges 2, 4, 8, 12. Now there are 6 odd
     number of components. There is a characterization about the maximal matching
@@ -2966,7 +3198,7 @@
 
     The maximal matching is $\{e2, e_3\}$, whereas the algorithm generates
     $\{e_1\}$.
-** Tutorial 4 (Sheet 3)
+** Tutorial 4 (Sheet 4?)
 *** Problem 1
     The inequality is super easy and just follows from the definition.
 
@@ -2974,6 +3206,15 @@
     condition, then we can easily prove that there cannot be an equality.
 *** Problem 2
     We can take the negative of all weights. And apply Hungarian algorithm.
+*** TODO Problem 2
+    I've not completed this.
+
+    I was wondering if the values in the equality matrix can increase. In one of
+    my iteration, the value increased.
+
+    Also I messed up since the problem talks about minimal matching. I computed
+    the maximal instead. So the first step should have been to negate the
+    matrix.
 *** Problem 3
     Step $i$ of the algorithm: let $M$ be the maximum matching in the equality
     graph $G_{u, v}$ and $\vert r \vert < n$ and let $Q$ be the vertex cover
@@ -3021,13 +3262,21 @@
     $u, v \in V(G')$.
 
     1. $u \in N(v)$, then we are done.
-    2. $N(v) \cap N(u) \neq \empty$. Suppose $N_G'(v) \cap N_G'(u) = \emptyset$.
+    2. $N(v) \cap N(u) \neq \emptyset$. Suppose $N_G'(v) \cap N_G'(u) = \emptyset$.
        $n+k-2 - 2(k-1) = n-k$, we should have so much vertices in $G'$ for the
        condition to be true. But $G'$ has $n-k+1$ vertices.
     3. Remark: $\delta \ge (n-1)/2$, then the graph is 1-connected or connected.
        Whereas, if $\delta \ge n/2$, then the graph has a hamiltonian cycle.
 *** Problem 5 (Bonus)
     An example where the bound in sharp.
+*** Problem 5 (my solution)
+    I had a proof that counted the number or edges and arrived at a
+    contradiction. I forgot how it worked. It was something like if the degree
+    of each edge is $\frac{n+k-2}{2}$, then we have a lower bound on the number
+    of edges because of handshake lemma. But the if we assume that there is a
+    $k-1$ set that disconnects it, we can end up with an upper bound on the
+    number of edges. Turns our that this upper bound is lower than the lower
+    bound and hence the contradiction.
 ** Tutorial 5 (Sheet 4)
 *** Problem 4
     We can do this in cases.
@@ -3090,6 +3339,11 @@
 
     How does one prove Local Vertex Menger from Local edge menger? The other
     side was an exercise.
+*** Problem 1 (after LP)
+    This is a consequence of duality. We already know that Ford Fulkerson is a
+    consequence of duality. Not surprising.
+*** Problem 2
+    I think I proved this for the grade. I think this was from the book.
 *** Problem 4
     $I$ is the set of all spanning trees and $J$ is the set of all edge cuts.
 ** TODO Tutorial 8 (Sheet 7)
@@ -3638,6 +3892,8 @@
     0, \cdots, 0)$ Thus it is unimodular in every case. By induction, we are
     done.
 *** Exercise 6
+    Original problem: $Ax \le c$ subject to $x \ge 0$.
+    
     Given a arbitrary linear program, construct another linear program $P'$ such
     that $P$ has an optimal solution if and only if $P'$ has a feasible solution.
 
@@ -3668,6 +3924,68 @@
     cannot be unbounded because the dual of the program is feasible. It cannot
     be infeasible, because we already know it is feasible. Thus the problem has
     to have an optimal solution.
+** Tutorial 14 (Sheet 13)
+*** Problem 1
+    | F\D     | Rock | Paper |
+    |---------+------+-------|
+    | Rock    |    0 |    -1 |
+    | Paper   |    1 |     0 |
+    | Scissor |   -1 |     1 |
+
+    When they tell me to analyse the strategy, I'm not sure what exactly should
+    be done.
+
+    For the father, the row with paper has no losses. The father probably
+    shouldn't pick Rock, Scissor is even. For the Daughter both the columns
+    seems to do okay on average, but she should pick paper, since the father is
+    more likely to pick paper.
+*** Problem 2
+    | A\B |  1 |  2 | 3 |
+    |-----+----+----+---|
+    |   1 |  1 | -1 | 1 |
+    |   2 | -1 |  1 | 1 |
+    |   3 |  1 | -1 | 1 |
+
+    Let $(x_1, x_2, x_3)$ and $(y_1, y_2, y_3)$ be probabilities, then $x^t M y
+    = (1-2y_2)(1-2x_2)$.
+
+    $\beta(x) = \min_{y} x^{t} M y$ and $\alpha(y) = \max_{x} x^{t} M y$.
+
+    $\beta(x)$ is if $1 - 2x_2 > 0$, $-(1-2x_2)$ for $y_2 = 1$ and if $1 - 2x_2
+    < 0$ is $-1(1-2x_2)$ for $y_2 = -1$ and is zero when $1-2x_2 = 0$
+
+    $\alpha(y)$ is if $1-2y_2 > 0$ then $1-2y_2$ for $x_2 = 0$ and if $1-2y_2 <
+    0$ is $-(1-2y_2)$ for $x_2= 1$.
+
+    The mixed equilibrium should be for $x_2 = y_2 = 1/2$ and the choice of
+    $x_1$ and $x_2$ are the same.
+
+    The value of the game should be $0$.
+
+    *Problem 2* If B plays $(1/3, 1/3, 1/3)$, then $x^{t} M y^{t} =
+    (1-2x_2)(1/3)$ For $x_2 = 0$, this becomes $1/3$. It jumps from $0$ to
+    $1/3$.
+
+    *Problem 3* It seems that the number of ways to win doesn't really matter
+    in the general case. This is just the intuition.
+
+    So if B is playing uniformly, then there is a way for A to make profit.
+
+    $x^t M x$ will turn out to be $6x_1 -12x_2 + 6x_3$. Now, $(1, 0, 0)$ will be
+    a good strategy for A. So A should accept it.
+*** Problem 5
+    I only verified the first one. I hope the rest is true.
+
+    We can get the following relation. If $T(k)$ denotes the number of
+    operations. Then there are a total of $18$ addition and $7$ multiplications
+    of size $T(k-1)$.
+
+    $T(k) = 7T(k-1) + 18 2^{k-1}$ and $T(0) = 1$.
+
+    Now, $T(k) = 7^k + 18/13 (14^k - 1)$.
+
+    For general matrices, we can make it a matrix on $2^k$ by padding it with
+    zeros. It is similar to how we compute the complexity of the merge sort.
 * Footnotes
 
 [fn:38] We've not done the full proof of this claim, I think.
@@ -3793,3 +4111,22 @@ whether there is a round-trip route cheaper than x") is NP-complete."-Wikipedia
    For example, for Vizing's theorem, we are working with simple graphs.
 ** TODO Learn some properties of Peterson graph
 ** TODO Matchings
+** TODO I don't understand the deal about M augmenting path and maximal matchings
+   
+   #+BEGIN_SRC artist
+                      +-----
+                      |     \---------
+                      |               \---------
+                      |                         X-------------------
+                      |                  /------
+                      |           /------
+                      |    /------
+                      |----
+   #+END_SRC
+
+   Consider the above graph, A triangle and a protruding edge. Consider my
+   matching which only consists of the protruding edge, it is clearly not a
+   maximal matching, but I can't seem to find any m augmenting paths
+** TODO Study the proof of Hungarian algorithm
+   One can model this using linear programming, the argument for the matrix $A$
+   being unimodular follows from a theorem similar to
