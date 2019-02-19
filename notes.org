@@ -1,8 +1,9 @@
 #+TITLE: Discrete Math II
 #+author: Hari
-#+LATEX_HEADER: \usepackage[left=2cm, right=2cm, bottom=2cm, top=2cm]{geometry}
+#+LATEX_HEADER: \usepackage[left=1cm, right=1cm, bottom=2cm, top=1cm]{geometry}
 #+LATEX_HEADER: \usepackage{parskip}
 #+LATEX_HEADER: \usepackage{amsmath}
+#+LATEX_HEADER: \usepackage{mathrsfs}
 #+LATEX_HEADER: \usepackage{amssymb}
 #+LATEX_HEADER: \def\R{\mathbb{R}}
 #+LATEX_HEADER: \def\Z{\mathbb{Z}}
@@ -906,7 +907,7 @@
     \delta(G) + 1$.
 
     Back to $H$. Let name the vertices which have an edge to $H$ as $v_i$. There
-    exits at least $k$ vertices on $C$ which have an edge to $H$ (this is
+    exist at least $k$ vertices on $C$ which have an edge to $H$ (this is
     because of $k$ connectedness; otherwise we could separate $C$ from $H$ by
     the deletion of strictly less than $k$ vertices, which is a contradiction.)
 
@@ -990,7 +991,7 @@
 * Lecture 10 <2018-11-14 Wed>
 ** Menger's theorem (VMT)
    A graph $G$ is $k$ connected if and only if for all pairs of vertices $x, y
-   \in V(G)$, there exits $K$ pairwise internally disjoint paths.
+   \in V(G)$, there exist $K$ pairwise internally disjoint paths.
 *** Remarks
     1. This implies that $k$ connectivity is in $NP$ intersection co-NP. It
        takes $O(kn)$ to check that they are internally disjoint. There are
@@ -1019,11 +1020,11 @@
      the last vertex before $y$ on $P$. Induction says that some $C$ containing
      $x$ and $v$.
 
-     If $y\in C$, we are done. If not, there exits a $xy$ path $Q$ in
+     If $y\in C$, we are done. If not, there exist a $xy$ path $Q$ in
      $G\setminus \{v\}$ as $G$ is $2$ connected. Now, it's easy to construct a
      cycle from $x$ to $y$.
 
-     Let $z$ be the last $v_x$ of $C$ on $Q$ if it exits. Let $D$ be $C\setminus
+     Let $z$ be the last $v_x$ of $C$ on $Q$ if it exist. Let $D$ be $C\setminus
      [z, v]$ such that $x \in D$. Now $C' = D \cup Q\vert[x, y] \cup \{xy\}$
      cycle containing $x$ and $y$.
 
@@ -1047,7 +1048,7 @@
 *** Local theorem implies Global
     What we need to do is that for all $x, y \in G$, $\exists \ge k = \kappa(G)$
     pid paths.
-    1. $x$ and $y$ are not adjacent (xy \neq E(G)) implies $\kappa(G) \le
+    1. $x$ and $y$ are not adjacent $(xy \neq E(G))$ implies $\kappa(G) \le
        \kappa(x, y)\le \lambda(x, y)$. The local theorem says that the last term
        is at least $\lambda(x, y)$, implies $\ge k$ pid $xy$ paths.
     2. For $xy = e$, $\kappa(G-e) \ge K(G) - 1$. Suppose for a contradiction
@@ -1101,7 +1102,7 @@
      \bar{Q}])$
 ** Theorem (Ford-Fulkerson) (Max-flow min-cut theorem)
    Let $f$ be a flow of max value and $[Q, \bar{Q}]$ a source-sink cut of
-   minimum capacity, then the $\val(f) = \cap([Q, \bar{Q}])$.
+   minimum capacity, then the $\val(f) = \operatorname{cap}([Q, \bar{Q}])$.
 * Lecture 11 <2018-11-20 Tue>
 ** Network
    $D$ is a directed multigraph. $s = V(D)$, the source vertex and $t \in V(D)$
@@ -1119,17 +1120,17 @@
    The *maximum flow* is a feasible flow of maximum value.
 ** Weak duality
    For every feasible flow $f$ and source sink cut $[S, \bar{S}]$, the value of
-   the $f \le \cap(S, \bar{S})$, in particular, the equality happens if $f$ is a
+   the $f \le \operatorname{cap}(S, \bar{S})$, in particular, the equality happens if $f$ is a
    maximum flow and $[S, \bar{S}]$ is a min-cut.
 
    $[S, \bar{S}] = \{(u, v) \in E(D) \colon u \in S, v \in \bar{S}\}$ is a
    source sink cut if $s\in S$ and $t\in \bar{S}$.
 
-   $[S, \bar{S}]$ is a min cut if its capacity $\cap(S, \bar{S}) = \sum_{u \in
+   $[S, \bar{S}]$ is a min cut if its capacity $\operatorname{cap}(S, \bar{S}) = \sum_{u \in
    S, v \in \bar{S}} c(u, v)$ is minimum among source/sink cut.
 ** Max Flow Min cut theorem (Ford-Fulkerson, 1956)
    Let $(D, s, t, c)$ be a network. Let $f_{\max}$ be a max flow on $D$ and
-   $[S_{\min}, \bar{S}_{\min}]$ a min cut, then $\val(f) = \cap (S_{\min},
+   $[S_{\min}, \bar{S}_{\min}]$ a min cut, then $\val(f) = \operatorname{cap} (S_{\min},
    \bar{S}_{\min})$.
 
    [[https://en.wikipedia.org/wiki/Ford%E2%80%93Fulkerson_algorithm][Wikipedia]]
@@ -1139,9 +1140,9 @@
     $\ge$ direction. We will find a source sink cut such that the capacity of
     the source sink cut is equal to the value of the maximal flow.
 
-    That is, $\cap(S, \bar{S}) = \val(f_\max)$.
+    That is, $\operatorname{cap}(S, \bar{S}) = \val(f_\max)$.
 
-    $S = \{v \in V(D) \colon \exits f \textup{augmenting path from s to v}\}$
+    $S = \{v \in V(D) \colon \exist f \textup{augmenting path from s to v}\}$
 
     Observation $t \in \bar{S}$ and $s \in S$. This is because if there is a $f$
     augmenting path from $s$ to $t$, then $f$ is not maximum, but we know that
@@ -1152,7 +1153,7 @@
     2. $(u, v) \in [S, \bar{S}]$, $f(u,v) = c(u, v)$. $(u, v) \in [\bar{S}, S]$
        implies that $f(u, v) = 0$. Because if not, we can add them to $S$.
 
-    Now we see that the capacity of the cut $\cap(S, \bar{S}) = \sum c(u, v) =
+    Now we see that the capacity of the cut $\operatorname{cap}(S, \bar{S}) = \sum c(u, v) =
     \sum_{(u, v) \in [S, \bar{S}] f(u, v) - \sum_{(u, v) \in [\bar{S}, S]} f(u,
     v) = \val(f_\max)$ the last statement is a homework problem.
 ** Augmenting path
@@ -1185,7 +1186,7 @@
     vertex leaves the vertex and one vertex that comes to $z$. We can argue for
     each of these cases.
 ** Corollary
-   If there exits an $f$ augmenting path implies that $f$ is not maximum.
+   If there exist an $f$ augmenting path implies that $f$ is not maximum.
 ** Local Vertex Menger's theorem
    For all $x, y \in V(G)$, $xy\notin E(G)$, $\kappa(x, y) = \lambda(x, y) =
    \max\{\vert P \vert \colon P$ is a set of pairwise internally disjoint $x, y$
@@ -1198,7 +1199,7 @@
 
     $V(D) = \{v^{-1}, v^{+}, v\in V(G)\}$,
 
-    $E(D) =\{(u^{+}, v^{-} \colon uv \in E(G)\} \cap \{(v^{-1}, v^{+} \colon v
+    $E(D) =\{(u^{+}, v^{-} \colon uv \in E(G)\} \operatorname{cap} \{(v^{-1}, v^{+} \colon v
     \in V(G)\}$.
 
     $c(v^{-}, v^{+}) = 1$ for all $v \in V(G)$, and $c(u^{+}, v^{-}) = \infty$.
@@ -1208,9 +1209,9 @@
     $\bar{C}$ contains $y$. We'll first show that the value of minimum cut is
     exactly equal to $\kappa(x, y)$.
 
-    $s = \{v^-, v^{+}, v\in Q\} \cap \{u^{-1}\colon u \in C\} \subset V(D)$ and
-    $\operatorname{cap} (S, \bar{S}) = \vert C \vert$. If $v \in S$, there exits no
-    $v^{+}w^{-}$ edge to $w \notin S \cap Q$.
+    $s = \{v^-, v^{+}, v\in Q\} \operatorname{cap} \{u^{-1}\colon u \in C\} \subset V(D)$ and
+    $\operatorname{cap} (S, \bar{S}) = \vert C \vert$. If $v \in S$, there exist no
+    $v^{+}w^{-}$ edge to $w \notin S \operatorname{cap} Q$.
 
     Minimum cut $[S, \bar{S}] \le K(x, y)$
 
@@ -1258,7 +1259,7 @@
     If $t\in S$, return augmenting path and an improved flow.
 
     else return $f$ as max flow and $[S, \bar{S}]$ as min cut with $\val(t) =
-    \cap(S, \bar{S}$
+    \operatorname{cap}(S, \bar{S}$
 
 *** Integrability theorem
     If $c$ is a function from the edges to the natural numbers, then the
@@ -1605,7 +1606,7 @@
    Every planar graph is $5$ list colorable.
 *** Proof using induction
     Stronger statement: If $G$ is a plane graph, with an outer face bounded by a
-    cycle $C$ and $L \colon V(G) \righatrrow 2^\N$ is a list assignment such
+    cycle $C$ and $L \colon V(G) \rightarrow 2^\N$ is a list assignment such
     that
     1. $\exists v_1v_2 \in E(C)$, $\vert L(v_1) \vert = \vertL(v_2)\vert = 1$,
        $L(v_1) \cap L(v_2) = \emptyset$.
@@ -2202,7 +2203,7 @@
 ** Max-weight matching
    We solved this by Hungarian algorithm. We have a bipartite graph, $G$ where
    the vertex set is $G = (A \cup B, E)$ and you have a weight function $w
-   \colon E \righatrrow \R$.
+   \colon E \rightarrow \R$.
 
    Goal is to find a matching of maximum weight $\sum_{e \in M} w(e)$. We solved
    this problem in polynomial time.
@@ -2581,7 +2582,7 @@
    \alpha$, $0$ if $i \in N \setminus \{\alpha\}$ and $x_{i}^{ * } + q_{\alpha}$
    if $i \in B'$.
 
-   $x^{*}(t)$ is feasible for all $t > 0$. $c^{t} \colon x^{ * }(t) \righatrrow
+   $x^{*}(t)$ is feasible for all $t > 0$. $c^{t} \colon x^{ * }(t) \rightarrow
    \infty$. This would end up implying that the LP is unbounded, which is a
    contradiction.
 * Lecture 24 <2019-01-22 Tue>
@@ -2846,7 +2847,7 @@
    It can be shown that the Fano plane is not $2$ colorable.
 ** Problem
    $m(k)$ is the minimum $\min \{ \vert \mathscr{F} \vert \textup{non 2
-   colorable k uniform hypergraph \}$.
+   colorable k uniform hypergraph} \}$.
 
    $m(2) = 3$. For $2$ edges, it is definitely two colorable.
 
@@ -2881,7 +2882,7 @@
     \frac{2}{2^k} = \frac{1}{2^{k-1}}$.
 
     $P(\exists F \in \mathscr{F}, F \textup{is m.c.}) \le \sum P(E) <
-    2^{k-1}\frac{1}{2^{k-1} = 1$ Weird proof.
+    2^{k-1}\frac{1}{2^{k-1}} = 1$ Weird proof.
 *** Next winter
     In Extremal combinatorics, $\frac{2}{\log k} 2^s \le m(k) < k^2 2^k$.
 ** Algorithm
@@ -3347,6 +3348,9 @@
 *** Problem 4
     $I$ is the set of all spanning trees and $J$ is the set of all edge cuts.
 ** TODO Tutorial 8 (Sheet 7)
+*** TODO Exercise 1 (About Baryani)   
+*** Exercise 2
+    I think this is straightforward to prove.
 *** Exercise 3
     $G$ be a graph with the property that every two odd cycles share a vertex.
     Then prove that the chromatic number of the graph is at most $5$
@@ -3408,6 +3412,7 @@
 
      Thus each components can be colored in $3$ colors and hence the whole thing
      can be colored in $3k$ colors.
+*** TODO Exercise 6
 ** Tutorial 9 (Sheet 8)
 *** Exercise 1
     If $X(G) = 4$, then it has a subgraph $H$, that is $4$ critical. But then
@@ -3418,6 +3423,8 @@
 
     When $n$ is even. We can assume that all lists are the same.
 *** Exercise 3
+ The following is the proof by Yugin.
+
     $F - E + V = 2$ and $4F \le 2E$. Suppose $\delta(G) \ge 4$. $4V \le \sum
     d(v) = 2E$.
 
@@ -3431,6 +3438,8 @@
 
     Also the notion of $0$ free planar implies $3$ colorable. Some version of
     Brook's theorem.
+*** Exercise 3
+    [[https://math.stackexchange.com/questions/454353/show-that-triangle-free-planar-graphs-are-four-colorable][Math SO]]
 *** Exercise 4
     Similar to how the 5 list colorability of graphs were proven in the class.
 *** About exercise 4
@@ -4136,7 +4145,9 @@ whether there is a round-trip route cheaper than x") is NP-complete."-Wikipedia
    He didn't do this in current course. But was done in the previous course.
    West has a proof.
 ** TODO Finish learning the proof of Tutte's theorem
-** TODO Minimum number of edges in a k connected graph?
+** DONE Minimum number of edges in a k connected graph?
+   CLOSED: [2019-02-15 Fri 16:05]
+   This was an exercise and I read a proof that this is $\binom{k}{2}$
 ** TODO Study Baryani theorem
 ** TODO For edge coloring consider when we are working with multigraphs
    And when we are not.
@@ -4163,3 +4174,102 @@ whether there is a round-trip route cheaper than x") is NP-complete."-Wikipedia
 ** TODO Study the proof of Hungarian algorithm
    One can model this using linear programming, the argument for the matrix $A$
    being unimodular follows from a theorem similar to
+** TODO Proof of Vizing's theorem
+** Theorems in the classs
+   1. [ ] Proof of lower bound of sorting.
+   2. [ ] Proof of Djistra's algorithm
+   3. [ ] Tutte's Theorem and it's complicated proof
+   4. [X] 3 regular graph without cut edges does not have perfect matching.
+   5. [ ] $k$ regular bipartite matching has a perfect matching.
+   6. [ ] Konig's theorem. The IP/LP proof is nice.
+   7. [ ] The value of $2\alpha'(G)$ is the minimum of $\min\{n - o(G\setminus
+      S) + \vert S \vert\}$. This was an exercise too.
+   8. [ ] Algorithm to find maximal matching in a Bipartite graph. Later in the
+      course a randomized algorithm was also done.
+   9. [ ] Augmenting path algorithm.
+   10. [ ] Regular bipartite Graph has a perfect matching <2019-02-17 Sun> (*Frobenius theorem*)
+   11. [ ] Hungarian algorithm and it's dual. (Maximum weighted matching and
+       minimum weighted cover problem.)
+   12. [ ] Proposition 8.4. For all $k \ge 2$, there exists a $k$ connected graph
+       with $\lceil (n-k)/2 \rceil$ edges.<2019-02-15 Fri>
+   13. [X] *Theorem (Chvtal-Erdos)* 8.5. I feel like this might be a question
+       for the exam. <2019-02-15 Fri> It's about a condition that makes the
+       graph Hamiltonian. If $\kappa \ge \beta$ where $\beta$ is the maximal
+       independent set.
+       
+       The proof used the following facts: take a maximal cycle. It has to have
+       at least $\delta + 1$ edges. Now $\delta \le \kappa$. If this cycle
+       disconnects $G$, then take $v_1 \cdots v_i$ to be the edges on the cycle
+       that has edges to a disconnected component. There has to be at least $k$
+       of them. Take vertices next to each $v_i$. Prove that they form an
+       independent set. Now add a random vertex form $H$ to form a larger
+       independent set.
+   14. [X] Menger's theorem. Vertex menger, Edge menger etc. I feel like this
+       might show up for the exam.<2019-02-16 Sat>
+   15. [ ] *TODO* Study the proof of local implies global. Case 2.
+   16. [X] Ford Fulkerson and it's proof. This might come for the exam. But I
+       don't know.<2019-02-16 Sat>
+   17. [ ] Study the various correspondence between local version of menger's
+       theorem. For example local vertex menger if and only if local edge
+       menger. <2019-02-17 Sun>
+   18. [X] Proof of vertex Menger using network flows. <2019-02-17 Sun>
+   19. [X] Integrability theorem.
+
+       The proof was kinda simple? Maybe I didn't write all the details. The
+       argument what that $\varepsilon$ is an integer. Now, at each iteration,
+       the flow value increases and the 
+   20. [X] Partitioning triplets and the deal about Baryani's theorem
+
+       The ending of Baryani's theorem is too tricky.
+   21. [ ] Proposition about $X(G) \ge \frac{v(G)}{\alpha(G)}$ I don't even know
+       if the statement is true. I don't have a proof in my lecture.
+   22. [X] Hajos conjecture. and Proof for $n = 4$. I feel like this can be a
+       possible theorem for the exam. (Dirac theorem)
+
+       I haven't looked at the exercise related to the problem though.
+   23. [X] Proof of $X \le \Delta + 1$. I think I need to really study the
+       Greedy coloring. I made some mistakes about it in the tutorial.
+   24. [X] Brook's theorem and proof. There were a couple of exercises that used
+       Brook's theorem to prove stuff. The proof was a bit lengthy and even
+       required some structure theorem. Probably this one's not coming. <2019-02-18 Mon>
+
+       I probably need to reread the proof of this theorem.
+   25. [X] 5 list color theorem. This was already asked in the mock exam. *Reread*
+   26. [X] $X_l(G) \ge X(G)$ <2019-02-17 Sun> The proof is obvious
+   27. [X] For Bipartite multigraph. $X'(G) = \Delta(G)$. This is a relatively
+       simple proof. Might actally come up for exam.
+   28. [ ] *Vizing's theorem* Might come in the exam. Proof not too hard. *Reread*
+   29. [ ] $X_l(G) = X'(G)$ for Bipartite graphs. We proved it for $K_{n,n}$.
+       Proof not too hard. Might end up in the exam. Okay no. I think the proof
+       is really lengthy. *Galvin's theorem*
+   30. [ ] Study about Kernels.
+   31. [X] *Proposal algorithm* and Galey Shapely. He might ask this for the
+       exam. Proof uses Kernel perfect stuff. <2019-02-16 Sat>
+
+       What's the deal with kernel perfect here?
+   32. [ ] *Linear Programming*.
+   33. [ ] Randomized algorithm for Matching. Especially the example.
+   34. [ ] Algorithm 
+   35. [ ] Write down all definitions clearly.
+   36. [ ] The proof of Gallai's theorem for $N = 7$.
+   37. [X] The proof of existence of mixed Nash equilibrium. *Recall the
+       definitions of $\beta$ and $\alpha$* I think I'm very likely to mess this
+       up.
+   38. [X] Min-max theorem for zero sum games.
+   39. [X] Tutte's theorem. *Reread*
+   40. [ ] Reread the proof of if there is an optimum for the LP, then there is
+       a basic feasible solution that attains the optimum.
+   41. [ ] Proof of duality.
+   42. [ ] Proof of Hall's condition.
+** Questions
+   1. [ ] What is the difference between an independent set and vertex cover.
+** TODO Why are 3 critical graphs an odd cycle?
+** TODO Definitions
+   1. [ ] Mixed nash equilibrium, mixed strategy, best response etc.
+   2. [ ] List coloring
+   3. [ ] Chromatic number, list chromatic number.
+   4. [ ] Connectivity. Vertex-connectivity and edge connectivity.
+** TODO Algorithms to study
+   1. [ ] Djistra
+   2. [ ] Kruskal
+   3. [ ] 
